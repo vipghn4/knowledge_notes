@@ -1,13 +1,14 @@
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-- [Table of Contents](#table-of-contents)
-- [Convention for writing notes](#convention-for-writing-notes)
-  - [Directory convention](#directory-convention)
-    - [Directory structure](#directory-structure)
-    - [Main directories](#main-directories)
-  - [Note convention](#note-convention)
-    - [Header](#header)
-    - [Body](#body)
-    - [Footer](#footer)
+* [Convention for writing notes](#convention-for-writing-notes)
+  * [Directory convention](#directory-convention)
+    * [Directory structure](#directory-structure)
+    * [Main directories](#main-directories)
+  * [Note convention](#note-convention)
+    * [Header](#header)
+    * [Body](#body)
+    * [Footer](#footer)
+<!-- /TOC -->
 
 # Convention for writing notes
 ## Directory convention

@@ -3,8 +3,17 @@ title: Raw image
 tags: Computer vision
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Raw image format](#raw-image-format)
+  * [Introduction](#introduction)
+  * [Color sensing](#color-sensing)
+  * [File contents](#file-contents)
+  * [Raw image processing](#raw-image-processing)
+* [Appendix](#appendix)
+  * [Usecases](#usecases)
+  * [Concepts](#concepts)
+<!-- /TOC -->
 
 # Raw image format
 ## Introduction
@@ -74,7 +83,7 @@ tags: Computer vision
 
 * *Problems*. Valuable raw photos captured recently may someday become inaccessible
     * *Explain*. Computer OSes and software programs become obsolete and abandoned raw formats are dropped in new software
-    * *Solutions*. 
+    * *Solutions*.
         * High-quality open source software for decoding raw image formats
         * Public documentation of RAW formats
         * Adoption of a universal RAW format
@@ -100,31 +109,31 @@ tags: Computer vision
     * Increasing visual acuity by unsharp marking
     * Dynamic range compression, i.e. lighten shadow regions without blowing out highlight regions
 * *Illustration*.
-    * *Linearization and normalization*. 
+    * *Linearization and normalization*.
         * *Linearization*. The camera may apply a non-linear transformation to the sensor data for storage purpose. Thus, we need to invert or somehow approximate the original sensor data
         * *Normalization*. Scale the pixels to 0 and 1
-        
+
         <div style="text-align:center">
             <img src="/media/RKR5mnJ.png">
             <figcaption>Linearized and normalized image</figcaption>
         </div>
-    
+
     * *White balancing then debayering*.
 
         <div style="text-align:center">
             <img src="/media/u1fsRBv.png">
             <figcaption>White balanced and debayered image</figcaption>
         </div>
-    
+
     * *Color space correction*.
 
         <div style="text-align:center">
             <img src="/media/kvd59jV.png">
             <figcaption>Color corrected image</figcaption>
         </div>
-        
+
     * *Brightness and  gamma correction*.
-    
+
         <div style="text-align:center">
             <img src="/media/rSnMy2e.png">
             <figcaption>Brightness and gamma corrected image</figcaption>
@@ -150,8 +159,8 @@ tags: Computer vision
         #define CONV_CALCULATE_PIXEL_UINT(pSrcBuff, srcPitch, x, y, xOffset, yOffset) \
                     pSrcBuff[srcPitch*(y + yOffset) + 2*(x + xOffset) + 1]
         ```
-    
-    * *Green*. 
+
+    * *Green*.
 
         ```c
         *pTmp = ((CONV_CALCULATE_PIXEL(pSrcBuff, srcPitch, x, y, xOffsets[GREEN1], yOffsets[GREEN1])) +

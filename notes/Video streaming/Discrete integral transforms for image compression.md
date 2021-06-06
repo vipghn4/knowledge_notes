@@ -3,8 +3,18 @@ title: Discrete integral transforms for image compression
 tags: Video streaming
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Discrete integral transforms for image compression](#discrete-integral-transforms-for-image-compression)
+  * [Integral transforms](#integral-transforms)
+  * [Fourier sine and cosine transform](#fourier-sine-and-cosine-transform)
+  * [Discrete sine and cosine transform](#discrete-sine-and-cosine-transform)
+  * [Data compression with integral transform](#data-compression-with-integral-transform)
+  * [Amplitude distribution of the DCT coefficients](#amplitude-distribution-of-the-dct-coefficients)
+  * [Derivation of DCT from KLT](#derivation-of-dct-from-klt)
+* [Appendix](#appendix)
+  * [Concetps](#concetps)
+<!-- /TOC -->
 
 # Discrete integral transforms for image compression
 ## Integral transforms
@@ -49,7 +59,7 @@ tags: Video streaming
         f(t)&=\int_{-\infty}^\infty \hat{f}^c(\nu) \cos(2\pi \nu t) d\nu + \int_{-\infty}^\infty \hat{f}^s(\nu) \sin(2\pi\nu t) d\nu\\
         &=\int_{-\infty}^\infty \int_{-\infty}^\infty f(x)\cos(2\pi\nu(x-t))dxd\nu
         \end{aligned}$$
-    * *Derivation*. 
+    * *Derivation*.
 
         $$\begin{aligned}
         f(t)&=\int_{-\infty}^\infty \hat{f}(\nu) e^{2\pi it\nu} d\nu\\
@@ -86,7 +96,7 @@ tags: Video streaming
 * *Cosine transform*. $\hat{f}^c(\nu) = {\cal{F}}_c(f)(\nu) = \sqrt{\frac{2}{\pi}} \int_{0}^{\infty} f(t) \cos(2\pi\nu t) dt$
 
 ## Discrete sine and cosine transform
-**Discrete Fourier transform (recall)**. 
+**Discrete Fourier transform (recall)**.
 
 $$\begin{aligned}
 X_k &= \sum_{n=0}^{N-1} x_n e^{-\frac{i2\pi kn}{N}}\\
@@ -112,26 +122,26 @@ $\to$ DST (or DCT) is equivalent to an $N\times N$ matrix
         * *Purpose*. Make the DCT-I matrix orthogonal, if one further multiplies by an overall scale factor of $\sqrt{\frac{2}{N-1}}$
         * *Drawbacks*. Break the direct correspondence with a real-even DFT
     * *Correspondence to DFT*. DCT-I is exactly equivalent to DFT of $2N-2$ real numbers with even symmetry
-    
+
         >**NOTE**. DCT-I is not defined for $N < 2$
-    
+
     * *Boundary conditions*.
         * *x_n* is even around $n=0$ and even around $n=N-1$
         * *X_n* is even around $n=0$ and even around $n=N-1$
 
 **DST-II and DCT-II**.
 * *DST*. $X_k = \sum_{n=0}^{N-1} x_n \sin \frac{\pi (n+1/2) (k+1)}{N}$ for $k=0,\dots,N-1$
-    * *Orthogonality of DST-II matrix*. Some authors multiply $X_{N-1}$ by $\frac{1}{\sqrt{2}}$ 
+    * *Orthogonality of DST-II matrix*. Some authors multiply $X_{N-1}$ by $\frac{1}{\sqrt{2}}$
 
         $\to$ This results in DST-III
         * *Purpose*. Make the DST-II matrix orthogonal, up to a scale factor
-        * *Drawback*. Breaks the correspondence with a real-odd DFT of half-shifted input 
+        * *Drawback*. Breaks the correspondence with a real-odd DFT of half-shifted input
     * *Boundary conditions*.
         * $x_n$ is odd around $n=-1/2$ and odd around $n=N-1/2$
         * $X_k$ is odd around $k=-1$ and even around $k=N-1$
 * *DCT*. $X_k=\sum_{n=0}^{N-1} x_n \cos \frac{\pi (n+1/2) k}{N}$ for $k=0,\dots,N-1$
     * *Orthogonality of DCT-II matrix*. Some authors multiply $X_0$ by $\frac{1}{\sqrt{2}}$ and multiply the resulting matrix by an overall scale factor of $\sqrt{\frac{2}{N}}$
-    
+
         $\to$ This results in DCT-III
         * *Purpose*. Make the DCT-II matrix orthogonal
         * *Drawbacks*. Break the direct correspondence with a real-even DFT of half-shifted input
@@ -139,7 +149,7 @@ $\to$ DST (or DCT) is equivalent to an $N\times N$ matrix
         * $x_n$ is even around $n=-1/2$ and even around $n=N-1/2$
         * $X_k$ is even around $k=0$ and odd around $k=N$
 
-**DST-III and DCT-III**. 
+**DST-III and DCT-III**.
 * *DST*. $X_k=\frac{(-1)^k}{2}x_{N-1} + \sum_{n=0}^{N-2} x_n\sin\frac{\pi(n+1)(k+1/2)}{N}$ for $k=0,\dots,N-1$
 * *DCT*. $X_k=\frac{1}{2}x_0+\sum_{n=1}^{N-1} x_n \cos \frac{\pi n (k+1/2)}{M}$ for $k=0,\dots,N-1$
 
@@ -165,7 +175,7 @@ $\to$ DST (or DCT) is equivalent to an $N\times N$ matrix
     * *Speech coding*. AAC-LD, Siren, Opus, et.c
 * *Boundary conditions and data compression*. To transform a sequence, we need first extend the sequence according to the boundary conditions of the underlying transform
 
-    $\to$ Discontinuities may occur between boundary points between cycles of extension 
+    $\to$ Discontinuities may occur between boundary points between cycles of extension
     * *Discontinuity implies lower convergence rate*. Discontinuities in a function reduce the convergence rate of the Fourier series
 
         $\to$ More sinusoids are required to represent the function with a given accuracy
@@ -218,7 +228,7 @@ $\to$ Nasir Ahmed focused on determining whether it would be possible to come up
     T_k(m)&=\sqrt{\frac{2}{N}} \cos \frac{(2m-1)k\pi}{2N} & k=1,2,\dots,N
     \end{aligned}$$
 
-* *Observation*. 
+* *Observation*.
     * For a range of values of the correlation coefficients $\rho$ in the covariance matrix
 
         $\to$ The cosine functions above closely resembled KLT basis functions
@@ -253,11 +263,11 @@ $\to$ Nasir Ahmed focused on determining whether it would be possible to come up
 
             $$\tan (N\omega_k) = \frac{(1-\rho^2) \sin \omega_k}{\cos \omega_k - 2\rho + \rho^2 \cos \omega_k}$$
     * *Theorem*. KLE Can be expressed in closed form as
-    
+
         $$x(m)=\sum_{k=0}^{N-1} a(k) K_x(k) \sin \bigg[ \omega_k \big( m - \frac{N-1}{2} \big) + (k+1) \frac{\pi}{2}\bigg],\quad 0\leq m,k \leq N-1g$$
 
         where $K_x(k)$ is the $k$th KLT coefficient
-        
+
         * *Orthogonal KLT basis functions*. $b(m,k)=\sin \bigg[ \omega_k \big( m - \frac{N-1}{2} \big) + (k+1) \frac{\pi}{2}\bigg]$
         * *Normalization factors*. $a(k)=\sqrt{\frac{2}{N+\lambda_k}}$ for $k\in[0,N-1]$ where
 
@@ -271,10 +281,10 @@ $\to$ Nasir Ahmed focused on determining whether it would be possible to come up
 
     $\to$ We can always expect the results of the DCT transform to be close to KLT
 
-**Fast computation of DCT-II**. 
+**Fast computation of DCT-II**.
 * *Theorem*. All the $M$ DCT-II coefficients can be computed using a $2M$-point fast Fourier trasnform (FFT)
     * *Proof*.
-* *Consequences*. 
+* *Consequences*.
     * Since DCT-II and IDCT-II are of the same form
 
         $\to$ FFT can be used to compute both DCT-II and IDCT-II
@@ -283,7 +293,7 @@ $\to$ Nasir Ahmed focused on determining whether it would be possible to come up
 # Appendix
 ## Concetps
 **Convention with $\frac{1}{\sqrt{2\pi}}$**. $\hat{f}(\nu) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(x) e^{i\omega x} dx$
-* *Explain*. 
+* *Explain*.
     * Compared to $\hat{f}(\nu) = \int_{-\infty}^\infty f(x) e^{i\omega x} dx$
 
         $\to$ $\frac{1}{\sqrt{2\pi}}$ factor is there to insure symmetry between the Fourier transform and its inverse
@@ -318,7 +328,7 @@ $\to$ The length of the run is sent, instead of sending all the zero values indi
     3. After run-level parsing, the remaining coefficients and associated runs of zeros are
 
         $$\text{34 | 87 | 16 | 0 0 54 | 0 0 0 0 0 0 12 | 0 0 3 | 0 0 0 }\dots$$
-    
+
     4. The sequence is then coded as
 
         $$(0,34),(0,87),(0,16),(2,54),(6, 12), (2, 3), \dots$$

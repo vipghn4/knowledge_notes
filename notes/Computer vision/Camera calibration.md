@@ -3,8 +3,17 @@ title: Camera calibration
 tags: Computer vision
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Definitions](#definitions)
+* [Camera models](#camera-models)
+  * [Pinhole cameras](#pinhole-cameras)
+  * [Cameras and lens](#cameras-and-lens)
+* [Projection matrix](#projection-matrix)
+* [Camera calibration](#camera-calibration)
+* [Appendix](#appendix)
+* [References](#references)
+<!-- /TOC -->
 
 ## Definitions
 **Camera resectioning**. Determine which incoming light is associated with each pixel on the resulting image
@@ -109,7 +118,7 @@ $\to$ Lenses have a specific distance, for which objects are in focus
     <figcaption>Lens projection model</figcaption>
 </div>
 
-* *Assumptions*. 
+* *Assumptions*.
     * $P=(x,y,z)$ is a point on some 3D object visible to the pinhole camera
     * $z'=f$ (in pinhole model) and $z'=f+z_0$ (in camera lens model)
 * *Image formation*. $P$ is mapped or projected onto the image plane $\Pi'$
@@ -137,7 +146,7 @@ where $M = K \begin{bmatrix}R  & T\end{bmatrix}$
 **Intrinsic parameters**. $K=\begin{bmatrix}\alpha_x & \gamma & u_0 & 0\\0 & \alpha_y & v_0 & 0\\0 & 0 & 1 & 0\end{bmatrix}$
 * *Usage*. Derive pixel coordinates from camera coordinates
 * *Notations*.
-    * *Focal length*. 
+    * *Focal length*.
         * *Focal length in terms of pixels*. $\alpha_x = f \cdot m_x$ and $\alpha_y = f \cdot m_y$
         * *Focal length in terms of distance*. $f$
         * *Width and height of a pixel on the projection plane*. $m_x$, $m_y$
@@ -163,7 +172,7 @@ where $M = K \begin{bmatrix}R  & T\end{bmatrix}$
         * The pre-scale pixel coordinates are given as
 
             $$z_c u=\alpha x_c -\alpha\cdot\cot\theta y_c + u_0 z_c,\quad z_c v=\frac{\beta}{\sin\theta} y_c + v_0 z_c$$
-        
+
         * The final pixel coordinates are then
 
             $$u=\alpha \frac{x_c}{z_c} -\alpha\cdot\cot\theta \frac{y_c}{z_c} + u_0,\quad v=\frac{\beta}{\sin\theta} \frac{y_c}{z_c} + v_0$$
@@ -178,20 +187,20 @@ where $M = K \begin{bmatrix}R  & T\end{bmatrix}$
 * *Usage*. Derive camera coordinates from world coordinates
 
 **Feugeras's theorem**.
-* *Statement*. Let 
+* *Statement*. Let
 
     $$M=K\begin{bmatrix}R & T\end{bmatrix} = \begin{bmatrix}KR & KT\end{bmatrix}=\begin{bmatrix}A & b\end{bmatrix}$$
 
     where $A=\begin{bmatrix}\mathbf{a}_1 & \mathbf{a}_2 & \mathbf{a}_3\end{bmatrix}$ then
 
-    * A necessary and sufficient condition for $M$ to be a perspective projection matrix is 
-    
+    * A necessary and sufficient condition for $M$ to be a perspective projection matrix is
+
         $$\det A \neq 0$$
-    
+
     * A necessary and sufficient condition for $M$ to be a zero-skew perspective projection matrix is
 
         $$\det A \neq 0,\quad (\mathbf{a}_1\times \mathbf{a}_3) \cdot (\mathbf{a}_2 \times \mathbf{a}_3) = 0$$
-    
+
     * A necessary and sufficient condition for $M$ to be a perspective projection matrix with zero skew and unit aspect-ratio is
 
         $$\det A \neq 0,\quad \begin{cases}(\mathbf{a}_1\times \mathbf{a}_3) \cdot (\mathbf{a}_2 \times \mathbf{a}_3)=0\\\|\mathbf{a}_1\times \mathbf{a}_3\|_2^2 = \|\mathbf{a}_2\times \mathbf{a}_3\|_2^2\end{cases}$$

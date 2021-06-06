@@ -3,8 +3,15 @@ title: gRPC
 tags: Networking
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Protocol buffers](#protocol-buffers)
+  * [Introduction](#introduction)
+  * [Discussion](#discussion)
+* [Google Remote procedure call (gRPC)](#google-remote-procedure-call-grpc)
+  * [Introduction](#introduction)
+  * [Discussion](#discussion)
+<!-- /TOC -->
 
 # Protocol buffers
 ## Introduction
@@ -27,12 +34,12 @@ message SearchRequest {
     ```proto=
     {field rule} {field type} {field name}
     ```
-    
+
 * *Field number*. Each field in a message definition has a unique number
     * *Usage*. Identify the fields in the message binary format
 
         >**NOTE**. Field number should not be changed once our message type is in use
-    
+
     * *Valid field numbers*. $\{1,\dots,2^{29}-1\} / \{19000,\dots,19999\}$
         * *Explain*. $\{19000,\dots,19999\}$ are reserved for the PB implementation
 * *Field rule*.
@@ -50,7 +57,7 @@ message SearchRequest {
     * *Cons*.
         * JSON is textual, its integers and floats can be slow to encode and decode
         * Parsing JSON strings, arrays, and objects requires a sequential scan
-        * 
+        *
 * *Protocol buffers*. PB uses binary message format
     * *Pros*.
         * Relatively smaller size

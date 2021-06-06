@@ -3,8 +3,10 @@ title: Regular expression
 tags: Misc
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Regular expression](#regular-expression)
+<!-- /TOC -->
 
 # Regular expression
 **Regular expression**. A sequence of symbols, which specifies a set of text strings following some pattern, which match the regular expression
@@ -63,5 +65,5 @@ tags: Misc
     | `\<` | Begin of words |
     | `\>` | End of words |
     | `\b` (boundary) | Either the beginning or the ending of a word |
-    
+
     >**NOTE**. Some special tokens, e.g. `^` and `$`, have different meanings across different regex syntax, e.g. JS and C+

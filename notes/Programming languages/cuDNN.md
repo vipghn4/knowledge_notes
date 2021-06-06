@@ -3,7 +3,15 @@ title: cuDNN
 tags: Programming languages
 ---
 
-[toc]
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+# Table of Contents
+* [Overview](#overview)
+* [Programming model](#programming-model)
+  * [Tensor descriptor](#tensor-descriptor)
+  * [Tensor core operations](#tensor-core-operations)
+* [Example code](#example-code)
+* [References](#references)
+<!-- /TOC -->
 
 ## Overview
 **cuDNN**. A GPU-accelerated library of primitives for deep neural networks
@@ -28,7 +36,7 @@ tags: Programming languages
 
 ### Tensor descriptor
 **cuDNN n-D tensor**.
-* *Parameters*. 
+* *Parameters*.
     * A tensor dimension `nbDims` (from 3 to 8)
     * A data type
     * `dimA` integer array defining the size of each dimension
@@ -37,7 +45,7 @@ tags: Programming languages
     * *First dimension*. Batch size `n`
     * *Second dimension*. The number of feature maps `c`
 * *Overlapping dimensions*. We can have some dimensions overlapping each other within the same tensor by having the stride of one dimension smaller than the product of the dimension and the stride of the next dimension
-    * *Overlapping dimension for I/O tensors*. 
+    * *Overlapping dimension for I/O tensors*.
         * *Input tensor*. All routines will support tensors with overlapping dimensions for forward-pass input tensors
         * *Output tensor*. Dimensions of the output tensors cannot overlap
 
@@ -52,7 +60,7 @@ tags: Programming languages
 * *5D tensor descriptor*. Define the format of the batch of 3D images with 5 letters `N`, `C`, `D`, `H`, `W`
     * *Commonly used formats*. `NCDHW`, `NDHWC`, `CDHWN`
 
-**Fully-packed tensors**. 
+**Fully-packed tensors**.
 * *Fully-packed tensors*. A tensor is `XYZ-fully-packed` if and only if
     * The number of tensor dimensions is equal to the number of letters preceding the `fully-packed` suffix
     * The stride of the `i`-th dimension is equal to the product of the `(i+1)`-th dimension by the `(i+1)`-th stride
@@ -69,7 +77,7 @@ tags: Programming languages
 **Tensor core operations**. Perform parallel floating-point accumulation of multiple floating-point product terms
 * *Set up Tensor core operations*. Set the math mode to `CUDNN_TENSOR_OP_MATH` via `cudnnMathType_t` enumerator
     * *Default math mode*. `CUDNN_DEFAULT_MATH`, i.e. vaoid Tensor Core operations
-* *Notes*. 
+* *Notes*.
     * Two math modes may generate different but still very close results
     * cuDNN library treats both modes of operation as functionally indistinguishable
 

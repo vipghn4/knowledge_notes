@@ -3,12 +3,23 @@ title: Camera processing pipeline
 tags: Video streaming
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Camera processing pipeline](#camera-processing-pipeline)
+  * [Imaging without optics](#imaging-without-optics)
+  * [Implementation of lens camera](#implementation-of-lens-camera)
+  * [Image sensor](#image-sensor)
+  * [Image processing](#image-processing)
+  * [3A - Automated selection of key camera control values](#3a---automated-selection-of-key-camera-control-values)
+  * [Camera data flow architecture](#camera-data-flow-architecture)
+* [Appendix](#appendix)
+  * [Concepts](#concepts)
+  * [References](#references)
+<!-- /TOC -->
 
 # Camera processing pipeline
 ## Imaging without optics
-**Pinhole camera and conventional camera**. 
+**Pinhole camera and conventional camera**.
 
 <div style="text-align:center">
     <img src="/media/OkkFlHF.png">
@@ -171,10 +182,10 @@ $\to$ This results in different focal lengths
         * *Cons*. Fail at sharp edges
     * *Option 2*. Bilateral filtering
         * *Pros*. Take edges into account, i.e. avoid interpolating across edges
-* *Denoising*. 
+* *Denoising*.
     * *Option 1*. Use non-local means
     * *Option 2*. Use block matching 3D (BM3D)
-* *Color spaces for conversion*. 
+* *Color spaces for conversion*.
     * *Lab*. Good for image processing
     * *YUV, YCbCr*. Good for video encoding, i.e. computationally cheap and similar to human vision
 
@@ -182,7 +193,7 @@ $\to$ This results in different focal lengths
 **Gamma encoding**.
 * *Human contrast sensitivity*. About 1%
     * *Explain*. Like black is 1 and white is 100
-* *Linear coding*. 
+* *Linear coding*.
     * *Small step size*. Lead to wasted bits
     * *Large step size*. Lose detail in some range of intensity
 * *Gamma coding*. Provide adaptive step size for ranges of intensity
@@ -196,7 +207,7 @@ $\to$ This results in different focal lengths
     * *ITU*. $0.2125 \cdot R + 0.7154 \cdot G + 0.0721 \cdot B$
 * *Simplified formula*. $1/4 \cdot R + 5/8 \cdot G + 1/8 \cdot B$
 
-**Camera use sRGB**. 
+**Camera use sRGB**.
 * *sRGB*. A standard RGB color space since 1996
     * *Color components*. Use the same primaries as used in studio monitors and HDTV, and a gamma curve typical of CRTs
     * *Benefits*. Allow direct display
@@ -219,7 +230,7 @@ $\to$ This results in different focal lengths
 * *Explain*. While one frame exposing, the next one is being prepared, and the previous one is being read out
 
 **Camera running modes**.
-* *View-finding*. 
+* *View-finding*.
     * Pipelined, high frame rate
     * Settings changes take effect sometime later
 * *Still capture mode*.
@@ -239,11 +250,11 @@ $\to$ This results in different focal lengths
         * *Stateless*. There is no global state, i.e.
             * State travels in the request through the pipeline
             * All parameters are packed into the requests
-    * *Image signal processor (ISP)*. 
+    * *Image signal processor (ISP)*.
         * Receive sensor data and optionally transform it
 
             >**NOTE**. Untransformed raw data must also be available
-        
+
         * Compute helpful statistics, e.g. histograms, sharpness maps, etc.
     * *Devices*. Schedule actions to be triggered at a given time into an exposure, and tag returned images with metadata
         * *Example*. Lens, flash, etc.

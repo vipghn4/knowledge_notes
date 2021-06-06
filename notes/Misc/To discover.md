@@ -7,4 +7,4 @@ tags: Misc
 
 `gf` to go to file
 
-Cross compilatio
+Cross compilation

@@ -3,12 +3,16 @@ title: Appendix
 tags: Computer architecture
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Hardware specs understanding](#hardware-specs-understanding)
+  * [CPU](#cpu)
+  * [Other specs](#other-specs)
+<!-- /TOC -->
 
 ## Hardware specs understanding
 ### CPU
-**CPU core and threads**. 
+**CPU core and threads**.
 * *CPU core*. A complete microprocessor on a silicon die
 
     $\to$ This term dates from the introduction of multicore processors in early 2000s
@@ -23,7 +27,7 @@ tags: Computer architecture
     * *Example*. If a CPU specification says it has 16 cores and 32 threads
 
         $\to$ There are 16 independent physical processors on the CPU die, and each of which has two pipelines
-    
+
     >**NOTE**. Threads are officially defined as the virtual components or codes, which divide the physical core of a CPU into virtual multiple cores
 
 **CPU base frequency and max turbo frequency**.

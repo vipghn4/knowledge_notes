@@ -5,8 +5,29 @@ tags: Master note
 
 [![hackmd-github-sync-badge](https://hackmd.io/J83nKamqTE2kooPfuoR04Q/badge)](https://hackmd.io/J83nKamqTE2kooPfuoR04Q)
 
-
-[toc]
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+# Table of Contents
+* [Personal](#personal)
+  * [Plans](#plans)
+* [Software engineering](#software-engineering)
+  * [Software engineer manners](#software-engineer-manners)
+  * [Software architecture](#software-architecture)
+  * [Operating system](#operating-system)
+  * [Programming languages](#programming-languages)
+    * [C++](#c)
+    * [Web development](#web-development)
+  * [Systems](#systems)
+    * [Computer architecture](#computer-architecture)
+  * [Misc](#misc)
+    * [Editors](#editors)
+* [Machine learning](#machine-learning)
+  * [Mathematics](#mathematics)
+    * [Advices](#advices)
+  * [Computer vision](#computer-vision)
+  * [Machine learning projects](#machine-learning-projects)
+    * [Overview](#overview)
+* [Others](#others)
+<!-- /TOC -->
 
 # Personal
 ## Plans

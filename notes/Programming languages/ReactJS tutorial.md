@@ -3,8 +3,22 @@ title: ReactJS tutorial
 tags: Programming languages
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [ReactJS tutorial](#reactjs-tutorial)
+  * [Introduction](#introduction)
+  * [Overview](#overview)
+    * [Passing data through props](#passing-data-through-props)
+    * [Making an interactive component](#making-an-interactive-component)
+    * [Changing data in React](#changing-data-in-react)
+    * [Function components](#function-components)
+    * [Key in react](#key-in-react)
+* [Appendix](#appendix)
+  * [References](#references)
+  * [React terminologies](#react-terminologies)
+  * [Tricks and advice](#tricks-and-advice)
+  * [React libraries](#react-libraries)
+<!-- /TOC -->
 
 # ReactJS tutorial
 ## Introduction
@@ -105,11 +119,11 @@ class Square extends React.Component {
                 value: null,
             };
         }
-        
+
         render() {
             return (
-                <button 
-                    className="square" 
+                <button
+                    className="square"
                     onClick={() => this.setState({value: "X"})}
                 >
                     {this.props.value}
@@ -143,7 +157,7 @@ class Square extends React.Component {
     var newPlayer = Object.assign({}, player, {score: 2});
     ```
 
-    * *Advantages*. 
+    * *Advantages*.
         * Make complex features much easier to implement
             * *Explain*. Avoiding direct data mutation lets us keep previous versions of the game's history intact, and reuse them later
         * Detecting changes in mutable objects is difficult since they are modified directly
@@ -186,7 +200,7 @@ class Square extends React.Component {
 ### Key in react
 **Key**. Each child in an array or iterator should have a unique `key` prop
 
-**Key and list**. 
+**Key and list**.
 * *Example*. Consider `<li key={user.id}> {user.name}: {user.taskCount} tasks left</li>`
     * *When we render a list*. React stores some information about each rendered list item
     * *When we update a list*. React needs to determine what has changed, e.g. we could have added, removed, re-arranged, or updated the list’s items
@@ -222,7 +236,7 @@ class Square extends React.Component {
 * JS:
     * https://developer.mozilla.org/en-US/docs/Web/JavaScript
     * https://javascript.info/
-* React GUI: 
+* React GUI:
     * https://material-ui.com/?fbclid=IwAR3CQmqOdFVlf6McdozElyophEyMnNWBe0R6DkPuoAXNwU64fMdnbLUtcsQ
     * https://ant.design/docs/react/introduce?fbclid=IwAR34a1R4dB_lWHsw_R2mfj_ggEbG5WCJbp4ub6kpGYNTHfgLfYQj76akstc
 
@@ -244,7 +258,7 @@ class Square extends React.Component {
     const numbers = [1, 2, 3];
     const doubled = numbers.map(x => x * 2); // [2, 4, 6]
     ```
-    
+
     * Example code 2:
 
     ```js

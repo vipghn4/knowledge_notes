@@ -3,8 +3,14 @@ title: Key notes on object detection
 tags: Computer vision
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Key notes on object detection](#key-notes-on-object-detection)
+  * [Bounding box encoding and decoding](#bounding-box-encoding-and-decoding)
+  * [Prediction - target matching strateiges and loss contribution of predictions](#prediction---target-matching-strateiges-and-loss-contribution-of-predictions)
+* [Appendix](#appendix)
+  * [Concepts](#concepts)
+<!-- /TOC -->
 
 # Key notes on object detection
 ## Bounding box encoding and decoding
@@ -34,7 +40,7 @@ tags: Computer vision
         * $(x,y)$ is the center of the box relative to the bounds of the grid-cell
         * $(w,h)$ is the width and height of the box, relative to the whole image
 * *SSD*. Similar to Faster RCNN
-* *YOLOv3*. 
+* *YOLOv3*.
     * *Assumptions*.
         * $(c_x,c_y)$ is the top-left corner of the cell
         * $(p_w,p_h)$ is the width and height of the prior box
@@ -66,7 +72,7 @@ tags: Computer vision
         * If $t_i$ appears in cell $j$, then the cell is regressed towards the corresponding object class
         * If $(t_i,p_j)$ is a match, then $p_j$ is regressed towards $t_i$ in terms of location and objectness
 * *Faster RCNN*.
-    * *Matching strategy*. 
+    * *Matching strategy*.
         * $(t_i,p_j)$ is a match, and $p_j$ is hence positive, if
             * $p_j = p_i^*$, or
             * $\text{IoU}(t_i, p_j) \geq 0.7$ and $t_i = t^*_j$
@@ -74,14 +80,14 @@ tags: Computer vision
     * *Loss computation*. Smooth L1 for localization and cross entropy for classification
     * *Imbalance class handling*. Only consider very negative examples, i.e. max IoU to all target boxes is below $0.3$
 * *SSD*.
-    * *Matching strategy*. 
+    * *Matching strategy*.
         * $(t_i,p_j)$ is a match, and $p_j$ is hence positive, if
             * $p_j = p_i^*$, or
             * $\text{IoU}(t_i, p_j) \geq 0.5$ and $t_i = t^*_j$
         * $p_j$ is negative if it is not positive
     * *Loss computation*. Smooth L1 for localization and cross entropy for classification
         * *Localization loss*. Matched predicted boxes are regressed towards their target boxes
-        * *Classification loss*. 
+        * *Classification loss*.
             * Positive predicted boxes are regressed towards their target boxes' classes
             * Negative predicted boxes are regressed towards background class
     * *Imbalance class handling*. Use hard negative mining
@@ -104,7 +110,7 @@ tags: Computer vision
 * Prediction-groundtruth matching when training
 * Prediction-groundtruth matching when evaluation
 
-**Other notable points**. 
+**Other notable points**.
 * Multi-scale training
 * Anchor boxes, i.e. how to remove anchor boxes (Centernet has done this)
 * Smoothed target confidence score, i.e. $\text{conf\_t} = \text{Pr}(\text{objectness}) \cdot \text{IOU}(\text{truth}, \text{pred})

@@ -3,9 +3,50 @@ title: Practical VIM
 tags: Editor
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-
-[toc]
+* [Introduction](#introduction)
+  * [Philosophy of Vim - Repeat!](#philosophy-of-vim---repeat)
+* [Modes](#modes)
+  * [Normal mode](#normal-mode)
+    * [Changes](#changes)
+  * [Insert mode](#insert-mode)
+    * [Best practice for correction in Insert mode](#best-practice-for-correction-in-insert-mode)
+    * [Best practice for getting back to Normal mode](#best-practice-for-getting-back-to-normal-mode)
+    * [Replace mode](#replace-mode)
+    * [Pasting from a register without leaving Insert mode](#pasting-from-a-register-without-leaving-insert-mode)
+  * [Visual mode](#visual-mode)
+  * [Command mode](#command-mode)
+    * [Introduction](#introduction)
+    * [Execute a command on one or more consecutive lines](#execute-a-command-on-one-or-more-consecutive-lines)
+    * [Duplicate or move lines using `:t` and `:m` commands](#duplicate-or-move-lines-using-t-and-m-commands)
+    * [Run Normal mode commands across a range](#run-normal-mode-commands-across-a-range)
+    * [Repeat the last Ex command](#repeat-the-last-ex-command)
+    * [Tab-complete the Ex commands](#tab-complete-the-ex-commands)
+    * [Insert the current word at the command prompt](#insert-the-current-word-at-the-command-prompt)
+    * [Run commands in the shell](#run-commands-in-the-shell)
+* [Getting around faster](#getting-around-faster)
+  * [Navigate inside files with motions](#navigate-inside-files-with-motions)
+    * [Keep our fingers on the Home row](#keep-our-fingers-on-the-home-row)
+    * [Distinguish between real lines and display lines](#distinguish-between-real-lines-and-display-lines)
+    * [Move word-wise](#move-word-wise)
+    * [Find by character](#find-by-character)
+    * [Search to navigate](#search-to-navigate)
+    * [Trace our selection with precision text objects](#trace-our-selection-with-precision-text-objects)
+    * [Delete around, or change inside](#delete-around-or-change-inside)
+    * [Mark our place and snap back to it](#mark-our-place-and-snap-back-to-it)
+* [Files](#files)
+  * [Manage multiple files](#manage-multiple-files)
+    * [Track open files with the buffer list](#track-open-files-with-the-buffer-list)
+    * [Group buffers into a collection with argument list](#group-buffers-into-a-collection-with-argument-list)
+    * [Manage hidden files](#manage-hidden-files)
+    * [Other techniques](#other-techniques)
+* [Appendix](#appendix)
+  * [Quick commands](#quick-commands)
+    * [Normal mode](#normal-mode)
+  * [Discussions](#discussions)
+* [References](#references)
+<!-- /TOC -->
 
 # Introduction
 ## Philosophy of Vim - Repeat!
@@ -33,7 +74,7 @@ tags: Editor
 | Substitution | `:s/target/replacement` | `&` | `u` |
 
 # Modes
-**Vim modes**. 
+**Vim modes**.
 * *Insert mode* (hot key `i`). To enter / edit text
 * *Command line mode* (hot key `:`). To enter commands
 * *Visual mode* (hot key `v`). Visually select text and run commands upon
@@ -183,7 +224,7 @@ tags: Editor
 * `<C-u>` (delete backward to start of line)
 * `<C-r>{register}` (insert contents of a register to command)
 
-**Normal mode vs Command-line mode**. Ex commands are long range and have the capacity to modify many lines in a single move 
+**Normal mode vs Command-line mode**. Ex commands are long range and have the capacity to modify many lines in a single move
 * It can sometimes be quicker to use an Ex command than to get the same job done with Vim's Normal commands
 * The greatest feature, which distinguishes Ex commands is their ability to be executed across many lines at the same time
 
@@ -279,9 +320,9 @@ $\to$ We can combine expressive nature of Vim's Normal mode commands with the ra
         $\to$ We are wasting keystrokes if we press `h` more than two times in a row
 * *Bad practice*. To avoid reaching for `h` with index finger
     * *Description*. `hjkl` are each covered by a finger
-* *Tricks*. 
+* *Tricks*.
     * Use `h` and `l` for off-by-one errors, when we narrowly miss our target
-        
+
         $\to$ Otherwise, we should rarely touch them
     * Use character search commands often, i.e. `f{character}`
 
@@ -289,7 +330,7 @@ $\to$ We can combine expressive nature of Vim's Normal mode commands with the ra
 **Moving based on display lines**. Use `g` prefix
 
 **Basic moves between real lines and display lines**.
-* *Moving up and down* 
+* *Moving up and down*
     * *Between real lines*. `jk`
     * *Between display lines*, `g{move}` where `{move}` can be `jk`
 * *Moving to start and end of lines*.
@@ -361,7 +402,7 @@ $\to$ We should choose less common characters for use with `f{char}`
 * *Explain*. Each opening `{` character is balanced by a closing `}` character. This is the same for `[`, `<`
 
 **Vim for text objects**. Vim understands the structure of the well-formed patterns and it allows us to operate on the regions of text which they delimit
-* *Syntax*. 
+* *Syntax*.
     * `{operator}i{closing_char}` to choose text within the text object, i.e. `i` is *inside*
         * `{operator}` are VIM operators, e.g. `d`, `c`, `v`, etc.
         * `closing_char` is the closing character of the text object
@@ -378,7 +419,7 @@ $\to$ We should choose less common characters for use with `f{char}`
 **Principle**. We can use keystrokes to choose a word or a sentence or a paragraph, i.e.
 
 * *Bounded text objects*.
-    
+
     | Keystrokes | Buffer contents |
     | --- | --- |
     | `w` | Current word |
@@ -424,7 +465,7 @@ $\to$ We should choose less common characters for use with `f{char}`
 
 $\to$ We are editting an in-memory representation of a file, i.e. a buffer in Vim's terminology
 * *Locations*. Files are stored on disk, whereas buffers exist in memory
-* *How a file is editted in Vim*. 
+* *How a file is editted in Vim*.
     1. When we open a file in Vim
 
         $\to$ Its contents are read into a buffer taking the same name as the file
@@ -434,7 +475,7 @@ $\to$ We are editting an in-memory representation of a file, i.e. a buffer in Vi
     3. If we decide to keep our changes
 
         $\to$ We can write the contents of the buffer back into the file
-    
+
     >**NOTE**. Most Vim commands operate on buffers, but a few operate on files
 
 **Buffer list**. Vim allows us to work on multiple buffers simultaneously
@@ -475,7 +516,7 @@ $\to$ We can run an Ex command on each item in the argument list using `:argdo` 
 >**NOTE**. We can change the contents of argument list anytime we want
 >$\to$ `:args` listing does not necessarily reflect the values passed to `vim` when we launched the editor
 
-**Populate the argument list**. 
+**Populate the argument list**.
 * *`:args`*. List files which was passed as an argument when we ran the `vim` command
 
 >**NOTE**. `[ ]` indicating which of the files in the argument list is active
@@ -490,7 +531,7 @@ $\to$ We can run an Ex command on each item in the argument list using `:argdo` 
 **Use argument list**.
 * *Traverse files in argument list*. `:next` and `:prev`
 * *Execute the same command on each buffer in the set*. `:argdo {cmd}` where `cmd` is any Ex command
-    
+
     >**NOTE**. We can use `:bufdo {cmd}` to do the same thing to buffer list
 
 **Argument list and buffer**.
@@ -536,7 +577,7 @@ We can use tabs and windows in combination with buffers and arguments
 * *Delete current word*. `daw` (delete a word)
 
     >**NOTE**. This command is single-step, thus very nice to be combined with `.`
-    
+
     >**NOTE**. `daw` (delete a word) and `diw` (delete inside word) is that `diw` only deletes the word, but `daw` also deletes the space surrounding the word
 * *Convert selected text to upper case*. `U`
 
@@ -556,10 +597,10 @@ We can use tabs and windows in combination with buffers and arguments
     * Delete the current character
     * Place the cursor at the place of the removed character
     * Enter insert mode
-* `c` (change) 
+* `c` (change)
     * Take a vi/vim motion (such as w, j, b, etc.)
     * Delete the characters from the current cursor position up to the end of the movement
-    
+
     >**NOTE**. `s` is equivalent to `cl`
 * `r` (replace) never enters insert mode at all. Instead, it expects another character, which it will then use to replace the character currently under the cursor
 
@@ -580,7 +621,7 @@ We can use tabs and windows in combination with buffers and arguments
 
     $\to$ Buffers are for files
 * *Windows*. Used when we need to compare two files, or work in one part of the current buffer while keeping an1other as reference
-    
+
     $\to$ Windows are for visually comparing information
 * *Tabs*. Used when we need to work for a while on a separate part of the project, without messing with their current view
 

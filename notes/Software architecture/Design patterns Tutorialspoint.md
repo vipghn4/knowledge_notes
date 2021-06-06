@@ -3,8 +3,16 @@ title: Design patterns Tutorialspoint
 tags: Software architecture
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Design pattern Tutorialspoint](#design-pattern-tutorialspoint)
+  * [Creational patterns](#creational-patterns)
+  * [Structural patterns](#structural-patterns)
+  * [Behavioral patterns](#behavioral-patterns)
+  * [J2EE patterns](#j2ee-patterns)
+* [Appendix](#appendix)
+  * [Discussion](#discussion)
+<!-- /TOC -->
 
 # Design pattern Tutorialspoint
 **Types of design patterns**.
@@ -20,7 +28,7 @@ tags: Software architecture
 
 ## Creational patterns
 **Factory pattern**. One of the most used design patterns
-* *Idea*. 
+* *Idea*.
     * Create object without exposing the creation logic to the client
     * Refer to newly created object using a common interface
 * *Implementation*.
@@ -29,21 +37,21 @@ tags: Software architecture
     public interface Shape{
         void draw();
     }
-    
+
     public class Rectangle implements Shape{
         @Override
         public void draw(){
             System.out.println("Rectangle");
         }
     }
-    
+
     public class Square implements Shape{
         @Override
         public void draw(){
             System.out.println("Square");
         }
     }
-    
+
     public class ShapeFactory{
         public Shape getShape(String shapeType){
             if(shapeType.equalsIgnoreCase("Rectangle"))
@@ -53,7 +61,7 @@ tags: Software architecture
             else return null;
         }
     }
-    
+
     public class Demo{
         public static void main(String[] args){
             ShapeFactory shapeFactory = new ShapeFactory();
@@ -77,7 +85,7 @@ tags: Software architecture
             }
         }
         ```
-        
+
     * When the construction needs a dependency, which we do not want to expose, i.e.
 
         ```javascript=
@@ -92,14 +100,14 @@ tags: Software architecture
             }
         }
         ```
-    
+
     * When we have several constructors with the same parameter type but with different behavior
 
 **Abstract factory pattern**. One of the best ways to create an object
 * *Idea*. Work around a super-factory, which create other factories
 * *Implementation*.
     * *Interfaces and classes*.
-    
+
         ```java=
         public interface Shape{
             void draw();
@@ -133,7 +141,7 @@ tags: Software architecture
             }
         }
         ```
-    
+
     * *Factories*.
         ```java=
         public abstract class AbstractFactory{
@@ -161,17 +169,17 @@ tags: Software architecture
                 else return null;
             }
         }
-        
+
         public class FactoryProducer{
             public static AbstractFactory getFactory(boolean rounded){
-                if(rounded) 
+                if(rounded)
                     return new RoundedShapeFactory();
                 else
                     return new ShapeFactory();
             }
         }
         ```
-    
+
     * *Demo*.
         ```java=
         public class Demo{
@@ -191,7 +199,7 @@ tags: Software architecture
             <img src="/media/77fEMJB.png">
             <figcaption>Example of creating themes with abstract factory</figcaption>
         </div>
-    
+
     * Configure a system with one of multiple families of products
 
         $\to$ The pattern ensures that only one of the subset of families of products will be used at any time
@@ -199,27 +207,27 @@ tags: Software architecture
 
             $\to$ But our system should only be used with one of these at any given time
     * Make the system have independence between creation, composition, and representation of its products
-        
+
         $\to$ The pattern provides this by decoupling the implementation of each of these operations
     * Hide implementation of our products, only revealing the required interface to provide access to their use
 
 **Singleton pattern**. One of the simplest design patterns
-* *Idea*. 
+* *Idea*.
     * Create an object while making sure that only single object gets created
     * Provide a way to access its only object directly, without the needs of instantiate the object of the singleton class
 * *Implementation*.
-    
+
     ```java=
     public class SingleObject{
         private static SingleObject instance = new SingleObject();
-        
+
         private SingleObject(){}
-        
+
         public static SingleObject getInstance(){
             return instance;
         }
     }
-    
+
     public class Demo{
         public static void main(String[] args){
             SingleObject object = SingleObject.getInstance();
@@ -231,11 +239,11 @@ tags: Software architecture
     * Used for global configuration, e.g. `Database`, `LoggingManager`, etc.
 
         >**NOTE**. Logging is a specific example of an "acceptable" Singleton, since it does not affect the execution of our code
-    
+
     * Used to manage a shared resource, i.e. database connection
 
     >**NOTE**. Be careful of using singletons to control business logic
-    
+
 * *Bad sides*.
     * Singleton objects are generally used as a global instance
     * Singleton pattern violates the single responsiblity principle
@@ -253,7 +261,7 @@ tags: Software architecture
     $\to$ We should extract the object construction code out of its own class, and move it to separate objects called *builders*
 
 * *Implementation*.
-    
+
     ```java=
     public class HouseBuilder{
         public House getResult(){
@@ -264,25 +272,25 @@ tags: Software architecture
             house = this.buildRoof(house);
             return house;
         }
-        
+
         private House buildWalls(House house){...};
-        
+
         private House buildDoors(House house){...};
-        
+
         private House buildWindows(House house){...};
-        
+
         private House buildRoof(House house){...};
     }
     ```
 
 * *Variations*.
     * We can create several different builder classes implementing the same set of building steps, but in a different manner
-        
+
         $\to$ We can use these builders in the construction process to produce different kings of objects
     * *Director*. We can extract a series of calls to the builder steps we use to construct a product into a seprate class called *director*
 
         $\to$ The directory class defines the order, in which to execute the building steps, while the builder provides the implementation of the steps
-        * *Pros*. 
+        * *Pros*.
             * Good place to put various construction routines so we can use them across our program
             * Completely hides the details of product construction from the client code, i.e. we only need to associate a builder with a directory
 * *Pros and cons*.
@@ -338,7 +346,7 @@ tags: Software architecture
             }
         }
         ```
-    
+
     * *Classes*.
 
         ```java=
@@ -352,7 +360,7 @@ tags: Software architecture
                 System.out.println("Inside Rectangle::draw() method.");
             }
         }
-        
+
         public class Square extends Shape {
             public Square(){
                 type = "Square";
@@ -364,7 +372,7 @@ tags: Software architecture
             }
         }
         ```
-    
+
     * *Cache class*.
 
         ```java=
@@ -373,7 +381,7 @@ tags: Software architecture
         public class ShapeCache {
 
             private static Hashtable<String, Shape> shapeMap  = new Hashtable<String, Shape>();
-            
+
             public static Shape getShape(String shapeId) {
                 Shape cachedShape = shapeMap.get(shapeId);
                 return (Shape) cachedShape.clone();
@@ -390,14 +398,14 @@ tags: Software architecture
             }
         }
         ```
-    
+
     * *Demo*.
 
         ```java=
         public class Demo {
             public static void main(String[] args) {
                 ShapeCache.loadCache();
-                
+
                 Shape clonedShape2 = (Shape) ShapeCache.getShape("2");
                 System.out.println("Shape : " + clonedShape2.getType());		
 
@@ -406,7 +414,7 @@ tags: Software architecture
             }
         }
         ```
-    
+
 * *Usage*. We can create a set of objects, i.e. called `Cache`, configured in various ways
 
     $\to$ When we need an object like the one we have configured, we just clone a prototype, instead of constructing a new object from scratch
@@ -434,7 +442,7 @@ tags: Software architecture
     * *Abstraction (abstract class)*. Define the abstract interface, and maintain the Implementator reference
 
         $\to$ This provides high-level control logic, and relies on the implementation object to do the actual low-level work
-    
+
     * *Refined abstraction (class)*. Extend the interface defined by Abstraction
 
         $\to$ Provide variants of contorl logic. Like their parent, they work with different implementations via the general implementation interface
@@ -442,11 +450,11 @@ tags: Software architecture
     * *Implementator (interface)*. Define the interface for implementation classes
 
         $\to$ This declares the common interface for all concrete implementations
-    
+
     * *Concrete implementator (class)*. Implement the Implementator interface
 
         $\to$ Contain platform-specific code
-    
+
 * *Examples*.
 
     <div style="text-align:center">
@@ -459,8 +467,8 @@ tags: Software architecture
         <figcaption>Example 2. We abstract the message sending method from abstract class</figcaption>
     </div>
 
-**Filter pattern**. Also called Criteria pattern. 
-* *Purpose*. Enable developers to 
+**Filter pattern**. Also called Criteria pattern.
+* *Purpose*. Enable developers to
     * Filter a set of object, using different criteria and
     * Chain the criteria in a decoupled way through logical operations
 * *Idea*. A simple pattern of criteria pattern is

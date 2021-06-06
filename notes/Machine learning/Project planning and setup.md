@@ -3,9 +3,17 @@ title: Project planning and setup
 tags: Machine learning
 ---
 
-**Source**. https://www.youtube.com/watch?v=tBUK1_cHu-8
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+# Table of Contents
+* [Life cycle of a machine learning project](#life-cycle-of-a-machine-learning-project)
+* [Planning and project setup](#planning-and-project-setup)
+  * [Prioritizing projects and choosing goals](#prioritizing-projects-and-choosing-goals)
+  * [Choosing metrics](#choosing-metrics)
+  * [Chossing baselines](#chossing-baselines)
+* [Discussions](#discussions)
+<!-- /TOC -->
 
-[toc]
+**Source**. https://www.youtube.com/watch?v=tBUK1_cHu-8
 
 ### Life cycle of a machine learning project
 
@@ -69,11 +77,11 @@ tags: Machine learning
 * *Impact*. High-impact machine learning problems.
     * Automate complex parts of some pipeline
     * Places where cheap prediction is valuable
-* *Feasibility*. Cost of machine learning projects. 
+* *Feasibility*. Cost of machine learning projects.
     * Mainly driven by data availability
     * Accuracy requirements play the second main role
 
-**High-impact machine learning projects**. 
+**High-impact machine learning projects**.
 * Where we can take advantage of cheap prediction
     * *Cheap prediction*. Prediction can be made everywhere
     * *Explain*.
@@ -93,8 +101,8 @@ tags: Machine learning
 
 #### Choosing metrics
 
-**Key points for choosing a metric**. We need to pick a formula for combining metrics 
-* *Explain*. 
+**Key points for choosing a metric**. We need to pick a formula for combining metrics
+* *Explain*.
    * The real world is very complex, thus we usually care about lots of metric
    * Machine learning systems work best when optimizing a single number
 
@@ -144,7 +152,7 @@ tags: Machine learning
 
 ###  Discussions
 * Do not evaluate your model ont test set frequently, otherwise it may lead to overfitting
-* Should we do fine-tuning? If the dataset is similar to our desired dataset and our data is limited then we should do that 
+* Should we do fine-tuning? If the dataset is similar to our desired dataset and our data is limited then we should do that
 * Data size for deep learning
     * Deep learning system hardly works well with less tham 10,000 examples
     * Vision systems start working well with hundreds of thousands of examples

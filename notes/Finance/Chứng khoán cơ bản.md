@@ -3,7 +3,17 @@ title: Chứng khoán cơ bản
 tags: Finance
 ---
 
-[toc]
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+# Table of Contents
+* [Chứng khoán](#chứng-khoán)
+* [Bảng giá chứng khoán HOSE](#bảng-giá-chứng-khoán-hose)
+* [Giao dịch chứng khoán](#giao-dịch-chứng-khoán)
+* [Vốn điều lệ và vốn chủ sở hữu](#vốn-điều-lệ-và-vốn-chủ-sở-hữu)
+  * [Vốn điều lệ và vốn chủ sở hữu](#vốn-điều-lệ-và-vốn-chủ-sở-hữu)
+  * [Các hoạt động thay đổi vốn điều lệ và vốn chủ sở hữu](#các-hoạt-động-thay-đổi-vốn-điều-lệ-và-vốn-chủ-sở-hữu)
+* [Mở rộng](#mở-rộng)
+* [Nguồn tham khảo](#nguồn-tham-khảo)
+<!-- /TOC -->
 
 ### Chứng khoán
 **Chứng khoán**. Giấy chứng nhận số tiền ta đóng góp vào công ty / doanh nghiệp
@@ -13,8 +23,8 @@ tags: Finance
 * *Giá trị cổ phiếu*.
     * *Việt Nam*. Đại diện cho 10,000 đồng vốn điều lệ của doanh nghiệp, e.g. vốn điều lệ 10 tỉ đồng tương đương 1 triệu cổ phiếu
 * *Các loại cổ phiếu*.
-    * *Cổ phiếu thường* (common stock). Cổ đông sở hữu cổ phiếu thường được 
-        * Quyền tự do chuyển nhượng 
+    * *Cổ phiếu thường* (common stock). Cổ đông sở hữu cổ phiếu thường được
+        * Quyền tự do chuyển nhượng
         * Quyền biểu quyết đối với các quyết định của công ty tại Đại hội cổ đông
         * Được hưởng cổ tức theo kết quả kinh doanh và giá trị cổ phiếu đang nắm giữ
     * *Cổ phiếu ưu đãi* (preferred stock). Cổ đông sở hữu cổ phiếu ưu đãi được
@@ -73,7 +83,7 @@ tags: Finance
 * *Cột "Giá"*.
     * *Cột "Giá cao nhất"*. Mức giá khớp cao nhất từ đầu phiên tới hiện tại
     * *Cột "Giá thấp nhất"*. Mức giá khớp thấp nhất từ đầu phiên tới hiện tại
-* *Cột "Dư mua / Dư bán"*. 
+* *Cột "Dư mua / Dư bán"*.
     * *Trong phiên*. Biểu thị khối lượng cổ phiếu đang chờ khớp
     * *Kết thúc ngày giao dịch*. Biểu thị khối lượng cổ phiếu không được thực hiện trong ngày giao dịch
 * *Cột "ĐTNN"*. Khối lượng cổ phiếu được giao dịch của nhà đầu tư nước ngoài trong ngày giao dịch
@@ -89,7 +99,7 @@ tags: Finance
 **Khớp lệnh**. Việc thực hiện xong thỏa thuận giữa bên mua và bên bán trên bảng giao dịch điện tử
 * *Giải thích*. Lệnh của các nhà đầu tư được ghép với nhau để giao dịch theo mức giá phù hợp với nguyên tắc ưu tiên khớp lệnh
 * *Nguyên tắc khớp lệnh*.
-    * *Ưu tiên về giá*. 
+    * *Ưu tiên về giá*.
         * Lệnh mua có mức giá cao hơn được ưu tiên thực hiện trước
         * Lệnh bán có mức giá thấp hơn được ưu tiên thực hiện trước
     * *Ưu tiên về thời gian*. Nếu các lệnh có cùng mức giá thì lệnh nhập trước sẽ được thực hiện trước
@@ -105,7 +115,7 @@ tags: Finance
 ### Vốn điều lệ và vốn chủ sở hữu
 #### Vốn điều lệ và vốn chủ sở hữu
 **Vốn điều lệ**. Tổng số vốn do các thành viên hoặc cổ đông đóng góp, hoặc cam kết sẽ góp trong một thời hạn nhất định và được ghi vào điều lệ công ty
-* *Ví dụ*. 2 thành viên A và B thành lập công ty C với 2,000,000,000 đồng vốn điều lệ 
+* *Ví dụ*. 2 thành viên A và B thành lập công ty C với 2,000,000,000 đồng vốn điều lệ
     * Thành viên A đăng ký góp vốn 1,200,000,000 đồng và cam kết góp đủ số tiền trong tối đa 30 ngày kể từ ngày công ty được cấp giấy chứng nhận đăng ký doanh nghiệp
     * Thành viên B đăng ký góp vốn 800,000,000 đồng và cam kết góp đủ vốn vào công ty trong tối đa 25 ngày kể từ ngày công ty được cấp giấy chứng nhận đăng ký doanh nghiệp
 * *Mục đích*. Xác định tỉ lệ phần vốn đóng góp của các thành viên trong doanh nghiệp, từ đó làm cơ sở phân chia quyền, lợi ích, và nghĩa vụ giữa các cổ đông
@@ -114,7 +124,7 @@ tags: Finance
         * *Đơn vị xác nhận và cấp phép*. Phòng đăng ký kinh doanh, Sở kế hoạch đầu tư tỉnh / thành phố
     * *Vốn điều lệ đăng ký*. Lượng vốn các thành viên đăng ký sẽ đóng góp trong một thời hạn nhất định
 * *Lưu ý*.
-    * Không cần chứng minh vốn điều lệ trong tài khoản ngân hàng khi thành lập / góp vốn công ty 
+    * Không cần chứng minh vốn điều lệ trong tài khoản ngân hàng khi thành lập / góp vốn công ty
     * Vốn điều lệ là nội bộ doanh nghiệp. Không có cơ quan nào kiểm tra vốn điều lệ
     * Thời hạn góp vốn điều lệ là 90 ngày kể từ ngày doanh nghiệp được cấp giấy chứng nhận đăng ký doanh nghiệp
     * Vốn điều lệ chỉ được phép thay đổi khi có sự đồng ý của cổ đông
@@ -207,8 +217,8 @@ tags: Finance
 
 **Phân loại cổ phiếu**.
 * *Dựa trên quyền lợi người nắm giữ*.
-    * *Cổ phiếu thường* (common stock). Cổ đông sở hữu cổ phiếu thường được 
-        * Quyền tự do chuyển nhượng 
+    * *Cổ phiếu thường* (common stock). Cổ đông sở hữu cổ phiếu thường được
+        * Quyền tự do chuyển nhượng
         * Quyền biểu quyết đối với các quyết định của công ty tại Đại hội cổ đông
         * Được hưởng cổ tức theo kết quả kinh doanh và giá trị cổ phiếu đang nắm giữ
     * *Cổ phiếu ưu đãi* (preferred stock). Cổ đông sở hữu cổ phiếu ưu đãi được

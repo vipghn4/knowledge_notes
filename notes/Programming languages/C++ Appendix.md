@@ -3,6 +3,13 @@ title: C++ Appendix
 tags: Programming languages
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+# Table of Contents
+* [Introduction](#introduction)
+* [Basic](#basic)
+* [Appendix](#appendix)
+<!-- /TOC -->
+
 ## Introduction
 **Development philosophy**. https://en.wikipedia.org/wiki/C%2B%2B#Philosophy
 * It must be driven by actual problems and its features should be immediately useful in real world programs.
@@ -100,7 +107,7 @@ tags: Programming languages
 
 ## Appendix
 **Tricks**.
-* Use `g++` to quick unit test C++ code, e.g. 
+* Use `g++` to quick unit test C++ code, e.g.
 
     ```
     g++ SignClassificationCalibrator.cpp -I . -o SignClassificationCalibrator.fuckyou -lnvinfer -I/usr/local/cuda-10.2/targets/aarch64-linux/include `pkg-config --cflags --libs opencv4` -L/usr/local/cuda-10.2/targets/aarch64-linux/lib -lcudart -lstdc++fs && ./SignClassificationCalibrator.fuckyou ~/giangh/AutoPilot/tmp/calib_sample_data/

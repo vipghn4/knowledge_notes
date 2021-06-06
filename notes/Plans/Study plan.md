@@ -3,9 +3,20 @@ title: Study plan
 tags: Plans
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-
-[toc]
+* [Objective and plan](#objective-and-plan)
+* [Background](#background)
+  * [Current task](#current-task)
+  * [Pending](#pending)
+  * [Characteristics of good software](#characteristics-of-good-software)
+    * [Maintainability](#maintainability)
+    * [Correctness](#correctness)
+    * [Reusability](#reusability)
+    * [Reliability](#reliability)
+    * [Portability](#portability)
+    * [Efficiency](#efficiency)
+<!-- /TOC -->
 
 # Objective and plan
 **Be able to implement good software before the age of 25**

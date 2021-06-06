@@ -3,8 +3,17 @@ title: Testing and deployment
 tags: Full stack deep learning
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Testing and deployment](#testing-and-deployment)
+  * [Project structure](#project-structure)
+  * [Machine learning test code](#machine-learning-test-code)
+  * [CI and testing](#ci-and-testing)
+  * [Monitoring](#monitoring)
+* [Appendix](#appendix)
+  * [Questions](#questions)
+<!-- /TOC -->
+
 # Testing and deployment
 ## Project structure
 
@@ -80,7 +89,7 @@ tags: Full stack deep learning
 * New features can be added quickly
 * All input feature code is tested
 
-**Model tests**. 
+**Model tests**.
 * Model specs are reviewed and submitted
 * Offline and online metrics correlate
 * All hyperparameters have been tuned
@@ -157,11 +166,11 @@ tags: Full stack deep learning
 **Data distribution monitoring**. There is no actual automatical way to do this
 * *Tools*. Domino data lab
 
-**Closing the flywheel**. 
+**Closing the flywheel**.
 * Important to monitor the business uses of the model, not just its own statistics, e.g. how users interact with the system
 * Important to be able to contribute failures back to training dataset
     * *Example*. Compare expectation of human user with our model
-* 
+*
 
 # Appendix
 ## Questions

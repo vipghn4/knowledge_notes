@@ -3,15 +3,22 @@ title: Orthogonal transforms
 tags: Video streaming
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Orthogonal transforms](#orthogonal-transforms)
+  * [Orthogonal transform](#orthogonal-transform)
+  * [Karhunen-Loeve transform (KLT)](#karhunen-loeve-transform-klt)
+  * [Separable transform](#separable-transform)
+* [Appendix](#appendix)
+  * [Concepts](#concepts)
+<!-- /TOC -->
 
 # Orthogonal transforms
-## Orthogonal transform 
+## Orthogonal transform
 **History**. During the late 1960s and early 1970s, there was a great deal of research activity related to digital orthogonal transforms and their use for image data compression
 
 $\to$ There were a large number of transforms being introduced with claims of better performance relative to other transforms
-* *Benchmark method*. 
+* *Benchmark method*.
     * *Qualitative method*. Comparisons were made on qualitative basis, by viewing a set of standard images, which had been subjected to data compression using transform coding techniques
     * *Quantitative method*. At the same time, a number of researchers were doing some excellent work on making comparisons on quantitative basis
         * *Explain*. The variance criterion and the rate distortion criterion were developed and used extensively as performance measures for evaluating image data compression
@@ -69,12 +76,12 @@ $\to$ Just take $\mathbf{A}^T$
 * *Idea*. Since $\Sigma_x$ is a symmetric matrix
 
     $\to$ We can diagonalize it as $\Sigma_x = \mathbf{A}^T \Sigma_y \mathbf{A}$ and yield $\mathbf{y}$ with fully decorrelated entries
-* *Requirements*. 
+* *Requirements*.
     * $\Sigma_x$ has $N$ real numbered eigenvalues
 
         $\to$ There are also $N$ corresponding eigenvectors $\mathbf{a}_1,\dots,\mathbf{a}_N$ forming the matrix $\mathbf{A}$
     * $\forall i\in\{1,\dots,N\},\|\mathbf{a}_i\| = 1$ must be satisfied
-* *Drawbacks*. 
+* *Drawbacks*.
     * Depend on signal statistics
     * Not separable for image blocks
 
@@ -117,7 +124,7 @@ $\to$ Just take $\mathbf{A}^T$
 * *Assumptions*.
     * $\mathbf{y}$ is a $N\times N$ block of transform coefficients
     * $\mathbf{A}$ is orthonormal transform matrix of size $N\times N$
-    * $\mathbf{x}$ is a $N\times N$ block of input signal 
+    * $\mathbf{x}$ is a $N\times N$ block of input signal
 * *Separable transform*. A transform is separable if the transform of a $N\times N$ signal block can be expressed by
 
     $$\mathbf{y}=\mathbf{A}\mathbf{x}\mathbf{A}^T$$
@@ -147,8 +154,8 @@ $\to$ Just take $\mathbf{A}^T$
 
         $$\text{minimize}_{Q_{Y|X}(y|x)} I_Q(Y;X) \text{ s.t. } D_Q \leq D^*$$
     * *Distortion between $X$ and $Y$ for a given $Q_{Y|X}(y|x)$*. $D_Q$ and $D^*$
-        * *Formula*. 
-            
+        * *Formula*.
+
             $$\begin{aligned}
             D_Q&=\int_\infty^\infty \int_\infty^\infty P_{X,Y}(x,y) (x - y)^2 dx dy\\
             &=\int_\infty^\infty \int_\infty^\infty Q_{Y|X}(y|x) P_X(x) (x - y)^2 dx dy

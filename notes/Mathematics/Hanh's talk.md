@@ -3,9 +3,13 @@ title: Hanh's talk
 tags: Mathematics
 ---
 
-[toc]
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+# Table of Contents
+* [Question](#question)
+* [Toán học trong ML](#toán-học-trong-ml)
+<!-- /TOC -->
 
-<!-- #### Question
+#### Question
 **1.** Proofs or intuitions? How to practice both skills?
 
 **2.** If we just focus on intuition, how can we prove something, e.g. our intuition?
@@ -16,21 +20,19 @@ tags: Mathematics
 **4.** Quora users suggested that the best way to learn mathematics is to practice as much as we can. What is the purpose of practicing in the sense of improving proofs and intuitions?
 
 **5.** When facing a mathematical problem, e.g. prove an inequality or a theorem, how can we survey for ideas or solutions, i.e. GG cannot understand latex words
-* *Examples*. Prof. Truyen Tran (from A2I2 lab, Deakin university) said that he used to have a look at all inequalities listed by Wikipedia to search for an appropriate one, which fits his needs 
+* *Examples*. Prof. Truyen Tran (from A2I2 lab, Deakin university) said that he used to have a look at all inequalities listed by Wikipedia to search for an appropriate one, which fits his needs
 
 **6.** The best way to start learning something?
 
-**7.** The best way to read a mathematical text book, or book? To deeply understand everything with intuitions and proofs, or just to get to know things? 
-* *Examples*. 
+**7.** The best way to read a mathematical text book, or book? To deeply understand everything with intuitions and proofs, or just to get to know things?
+* *Examples*.
     * Dr. Long Q. Tran said that we just have to get to know the concepts and methods, without remembering them in details. Because once we know they exists, we can search for them with GG
     * Prof. Truyen Tran said that something is not important that we should understand
 
 **8.** What is the objective when doing research? To come up with a new thing or to learn something?
 * *Examples*. Prof. Truyen Tran said that the being researcher is to maximize what we can learn per time unit
 
-**9.** What should be done first? To find a problem of interest or to build a solid background, i.e. overview -->
-
-<!-- --- -->
+**9.** What should be done first? To find a problem of interest or to build a solid background, i.e. overview
 
 # Toán học trong ML
 **Motivation**
@@ -39,13 +41,13 @@ tags: Mathematics
 * *Idea*. Input an MRI image, output the probability of cancer
     * *Problem*. Understand the mechanism of MRI, i.e. we cannot do ML upon something we do not understand
 * *Question 1*. What is MRI
-    * Inject điện từ into body and capture the điện từ phát ra từ bệnh nhân 
+    * Inject điện từ into body and capture the điện từ phát ra từ bệnh nhân
 * *Solving a problem principle*.
     1. Learn about the aspects of the problems, i.e.
         * Learn about how an MRI image is constructed
             * MRI relates to DRUM problem, i.e.
-                * MRI. 
-                * DRUM. 
+                * MRI.
+                * DRUM.
                     * Cơ bản.
                         * Mô tả.
                             * Khi gảy 1 dây đàn thì phát âm thanh ở dạng sóng âm (sau khi phân tích phổ bằng Fourier)
@@ -70,7 +72,7 @@ tags: Mathematics
                             * Ta suy ra n cái trống đó sẽ sinh ra cùng 1 âm thanh
                             * Kết hợp các phương pháp khác ta sẽ suy ra trống nào là trống tạo âm thanh
                         * Thí nghiệm. Cho 2 chiếc trống với hình dạng khác nhau được chọn trước, 2 chiếc trống này tạo ra cùng 1 âm thanh
-                            * Suy luận 1. 
+                            * Suy luận 1.
                                 * Nếu chỉ nghe âm thanh thì ko biết trống loại nào
                                 * Nếu ta có 2 ảnh MRI thì người có u chỗ này, người có u chỗ kia, i.e. không phân biệt được u của 2 chỗ
                             * Suy luận 2.
@@ -85,7 +87,7 @@ tags: Mathematics
     1. Từ lambda_i (eigenvalue) suy ra Delta f (Laplace operator), i.e. Delta f = lambda_i f
         * Mặt phẳng ~> vector space  ~> inner product space ~> normed space ~> metric space ~> topology (i.e. open sets - gần nhau)
             * "Gần nhau". Trong 1 số trường hợp, ta không thể define 1 metric cho 1 topological space, do vậy ta dựa vào open set
-                
+
                 ~> Gần nhau là như nào?
             * Timf hiểu về hội tụ (topology)
         * Mặt phẳng ~> metric space dx ~> độ dài dx^2 + dy^2 (Riemann geometry)
@@ -93,7 +95,7 @@ tags: Mathematics
         * Mặt phẳng bị đục 1 lỗ (incomplete space) ~> Không còn là mặt phẳng nữa
         * Mặt phẳng bị bẻ cong (Riemann geometry)
             * Thể nào là mặt phẳng cong or độ cong? Mặt phẳng có đồng chất hay ko?
-            
+
                 ~> Phát triển công cụ toán học để định nghĩa sự cong
     * Riemann geometry ~> Cấu trúc khoảng cách đặt trên 1 đường hoặc 1 mặt nào đó
     * Manifold ~> 1 cấu trúc đc đặt lên trên 1 đường hoặc 1 mặt nào đó
@@ -111,18 +113,18 @@ tags: Mathematics
     ~> Convolution = trung bình có trọng số của các phép tịnh tiến
 * *Lọc (xử lý ảnh)*. Xử lý ảnh = có 1 hàm $f$ (ảnh) được xử lý = 1 hàm $g$
     * *Thực tiễn*. $f*g$ là tịnh tiến $f$ 1 đoạn (trái phải trên dưới) và chia trung bình
-        
+
         >**NOTE**. Thời xưa, nta tính tay phép nhân mệt nên nta nghĩ đến phép + trên miền log
-    
+
         >**NOTE**. Tư duy đơn giản hóa tính toán này rất oke
-    
+
     * *Fourier*. Biến đổi convolution thành phép nhân
         * Bước 1. Biến đổi ảnh từ miền space sang miền frequency
         * Bước 2. Tính product của Fourier transforms
         * Bước 3. Biến miền frequency thành lại miền space
     * Suy luận 1. Mọi mạng neuron thông thường = 1 mạng neuron tích chập (qua Fourier transform)
         * Mạng convnet rất phù hợp & nhạy cảm với tịnh tiến trên các miền liên tục (dựa vào phép tịnh tiến, qua Fourier transform, )
-        * Mạng neuron thường phù hợp & nhạy cảm với giá trị 
+        * Mạng neuron thường phù hợp & nhạy cảm với giá trị
 
 ---
 
@@ -137,10 +139,10 @@ tags: Mathematics
 **Đạo hàm**. Bâc 1 ~ vận tốc, Bậc 2 ~ gia tốc
 
 **Vector space**. Bất cứ tập objects có thể định nghĩa phép cộng và phép nhân vô hướng
-* VD. 
+* VD.
     * Mặt phẳng, ko gian 3 chiều, 1D
     * Computer science example. 1 mảng int hoặc float 2 chiều
-* Xử lý data. 
+* Xử lý data.
     * Copy & paste dữ liệu từ DB ra ngoài (copy paste như nào thì tùy ý)
     * Xử lý data ~> Phải sử dụng ĐSTT, i.e. map từ input ra output (map như nào tùy ý)
 * Ánh xạ. Cho $f: R^n \to R^m$ ~> Có bao nhiêu kiểu hàm f, i.e. null (hoặc kernel) (vứt đi) and range
@@ -148,9 +150,9 @@ tags: Mathematics
     * Ánh xạ f từ R^n vào chính nó, e.g. dùng 1 ánh xạ tác động vào 1 ảnh để cho ra 1 ảnh
         * Có 1 đường tròn, ta kéo dãn đường tròn theo các phương khác nhau
         * Vậy mọi ánh xạ tuyến tính nên được biểu diễn ở dạng kéo dãn các chiều khác nhau, i.e. SVD
-        
+
             >**NOTE**. Trong hầu hết trường hợp, mỗi eigenvalue ~ 1 eigenvector
-        
+
         * Nếu ta biết eigenvectors của 1 linear operator f thì ta sẽ chuyển basis của ta về eigenvectors >>> khi áp dụng linear operator ta chỉ đơn giản kéo dãn các eigenvectors này sau đó sum up lại là xong
 * Tổng quát hóa bài toán chéo hóa ma trận
     * Ta coi 1 số hàm $f$ giống như 1 ma trận $A$, khi đó trị riêng (ma trận) ~> giá trị riêng (hàm số) của $f$
@@ -176,7 +178,7 @@ tags: Mathematics
     ~> Conditional metric space
 * Vấn đền. Ta cho 1 sequence các metrics khác nhau thì các sequence này sẽ hội tụ như thế nào?
 
-**Proof**. 
+**Proof**.
 * Proof giống như 1 file exe còn intuition là source code, i.e. khó dịch ngược, dễ dịch xuôi
 * Proof là bản release còn intuition là bản dev
 * Khi có intuition kiểu gì cũng ra proof
@@ -189,4 +191,4 @@ tags: Mathematics
 
 **Cơ học lượng tử**. Cho 1 vật bé vô cùng, ta ko đo được vị trí và xung lượng của vật đó
 
-Không bao giờ có tiêu chuẩn chung cho cả 1 ngành, nếu ta nhìn 1 vấn đề theo 1 cách khác và đưa ra 1 solution tốt hơn hẳn thì sẽ là chuyên gia top 
+Không bao giờ có tiêu chuẩn chung cho cả 1 ngành, nếu ta nhìn 1 vấn đề theo 1 cách khác và đưa ra 1 solution tốt hơn hẳn thì sẽ là chuyên gia top

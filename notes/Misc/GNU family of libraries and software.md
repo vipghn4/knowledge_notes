@@ -3,8 +3,11 @@ title: GNU family of libraries and software
 tags: Misc
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [GNU family of libraries and software](#gnu-family-of-libraries-and-software)
+  * [Introduction](#introduction)
+<!-- /TOC -->
 
 # GNU family of libraries and software
 ## Introduction
@@ -21,7 +24,7 @@ tags: Misc
 * *Softwares*.
     * *GNU compiler collection (GCC)*. An optimizing compiler produced by the GNU project supporting various programming languages, hardware architectures, and OSes
     * *GNU network object model environment (GNOME)*. A free and open-source desktop environment for UNIX-like OSes
-    * *GNU image manipulation program (GIMP)*. A free and open-source raster graphics editor 
+    * *GNU image manipulation program (GIMP)*. A free and open-source raster graphics editor
         * *Usages*. Image manipulation and image editing, free-form drawing, transcoding between image file formats, and more specialized tasks
     * *GIMP tool kit (GTK)*. A GUI toolkit developed to facilitate the development of GIMP
         * *GTK+*. Redesigned version of GTK, which uses object-oriented programming techniques
@@ -40,11 +43,11 @@ tags: Misc
         * Dynamic arrays, balanced binary trees, N-ary trees
         * Quarks, i.e. a two-way association of a string and a unique integer identifier
         * Keyed data lists, relations, and tuples
-    * *Functions*. 
+    * *Functions*.
         * Threads, thread programming, and related facilities
             * *Example*. Primitive variable access, mutexes, asynchronous queues, secure memory pools, message passing and logging, hook functions, i.e. callback registering, and timers
         * Message passing facilities, e.g. byte-order conversion and I/O channels
-        * Other features such as standard macros, warning and assertions, and dynamic loading of modules 
+        * Other features such as standard macros, warning and assertions, and dynamic loading of modules
 * *Components*. GObject, GLib, GModule, GThread, and GIO
 * *Similar projects*. Libraries below provide low-level functions and implementations of data structures
     * *Standard template library (STL)*. C++ library for data structures and algorithms

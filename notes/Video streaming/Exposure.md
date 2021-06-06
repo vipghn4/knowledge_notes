@@ -3,6 +3,13 @@ title: Exposure
 tags: Video streaming
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+# Table of Contents
+* [Exposure](#exposure)
+  * [Introduction](#introduction)
+  * [Optimum exposure](#optimum-exposure)
+<!-- /TOC -->
+
 # Exposure
 ## Introduction
 **Irradiance**. The radiant flux received by a surface per unit area
@@ -14,7 +21,7 @@ tags: Video streaming
     * *Frequency spectral flux*. $\Phi_{e,\nu}=\frac{\partial \Phi_e}{\partial \nu}$ where $\nu$ is the frequency
     * *Frequency spectral irradiance*. $E_{e,\nu} = \frac{\partial E_e}{\partial \nu}$
 * *Wavelength spectral flux and radiance*.
-    * *Wavelength spectral flux*. $\Phi_{e,\lambda}=\frac{\partial \Phi_e}{\partial \lambda}$ where $\lambda$ is the frequency 
+    * *Wavelength spectral flux*. $\Phi_{e,\lambda}=\frac{\partial \Phi_e}{\partial \lambda}$ where $\lambda$ is the frequency
     * *Wavelength spectral irradiance*. $E_{e,\lambda} = \frac{\partial E_e}{\partial \lambda}$
 
 **Exposure**. Amount of light per unit area, i.e. image plane illumiance times the exposure time, reaching a frame of photographic film or the surface of an electronic image sensor

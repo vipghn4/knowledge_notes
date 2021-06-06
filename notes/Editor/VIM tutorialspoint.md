@@ -3,8 +3,19 @@ title: VIM tutorialspoint
 tags: Editor
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Tutorialspoint](#tutorialspoint)
+  * [Basic](#basic)
+  * [Edit](#edit)
+  * [Navigation](#navigation)
+  * [Buffering](#buffering)
+  * [Search](#search)
+  * [Working with multiple things](#working-with-multiple-things)
+  * [Markers (bookmarks)](#markers-bookmarks)
+  * [Folding](#folding)
+  * [Remote editing](#remote-editing)
+<!-- /TOC -->
 
 # Tutorialspoint
 ## Basic
@@ -65,7 +76,7 @@ tags: Editor
 * *Jump to line `n`*. `:n`
     * *Jump to first line*. `:0`
     * *Jump to last line*. `:$`
-* *Word navigation*. 
+* *Word navigation*.
     * *Move to the beginning of the next word*. `w`
     * *Move to the end of the current word*. `e`
     * *Move cursor to the beginning of the previous word*. `b`
@@ -94,20 +105,20 @@ tags: Editor
 * *Misc*.
     * *Auto indent when paste*. `:set paste`
 
-**Undo and redo**. 
+**Undo and redo**.
 * *Undo*. `:u` or `:<number>u`
 * *Redo*. `Ctrl + r`
 
 ## Search
 **Search settings**.
-* *Incremental search*. 
+* *Incremental search*.
     * *Enable*. `:set incsearch`
     * *Disable*. `:set noincsearch`
-* *Highlight search*. 
+* *Highlight search*.
     * *Enable*. `:set hlsearch`
     * *Disable*. `:set nohlsearch`
 
-**Search commands**. 
+**Search commands**.
 * *Forward search*. `/<expression>`
     * *Repeat previous forward search*. `//`
 * *Backward search*. `?<expression>`
@@ -149,12 +160,12 @@ tags: Editor
 * *Move to last tab*. `:tablast`
 
 **Multiple windows**.
-* *New window*. 
+* *New window*.
     * `:new` or `:new <filename>`, or
     * `:sp` (horizontal split) or `:sp <filename>`
     * `:vsp` (vertical split) or `:vsp <filename>`
 * *Close window*. `:close`
-* *Switch between windows*. 
+* *Switch between windows*.
     * `:winc <direction>` where `<direction>` can be `h, j, k, l`
 
 **Multi-cursor**.

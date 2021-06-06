@@ -3,14 +3,25 @@ title: PyTorch C++ / CUDA extensions
 tags: Programming languages
 ---
 
-[toc]
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+# Table of Contents
+* [Writing a C++ Extension](#writing-a-c-extension)
+  * [Building with `setuptools`](#building-with-setuptools)
+  * [Building with `torch.utils.cpp_extension.load()`](#building-with-torchutilscppextensionload)
+* [Writing a mixed C++/CUDA extension](#writing-a-mixed-ccuda-extension)
+  * [CUDA basic](#cuda-basic)
+    * [CUDA programming model](#cuda-programming-model)
+    * [Basics of CUDA programming](#basics-of-cuda-programming)
+  * [Writing CUDA extension](#writing-cuda-extension)
+* [References](#references)
+<!-- /TOC -->
 
 ## Writing a C++ Extension
 ### Building with `setuptools`
 **`setuptools`**. Allow building C++ extensions ahead of time
 
 **Build C++ extension**. Write a `setup.py` using `setuptools` to compile our C++ code
-* *Code*. 
+* *Code*.
 
     ```python
     from setuptools import setup, Extension
@@ -27,7 +38,7 @@ tags: Programming languages
     setup(
         name='lltm_cpp',
         ext_modules=[cpp_extension.CppExtension(
-            name='lltm_cpp', 
+            name='lltm_cpp',
             sources=['lltm.cpp']
         )],
         cmdclass={
@@ -36,7 +47,7 @@ tags: Programming languages
     )
     ```
 
-* *Explain*. 
+* *Explain*.
     * `CppExtension` is a convenient wrapper for `setuptools.Extension` passing the correct include paths and sets the language of the extension to C++. The equivalent vanilla `setuptools` code would be
 
         ```python
@@ -70,7 +81,7 @@ torch::Tensor d_sigmoid(torch::Tensor z) {
     * `auto` is a placeholder type specifiers
         * For variables, the type is deduced from the initializer
         * For functions, the return type is deduced from its return statements
-        * For non-type template parameters, the type will be deduced form the argument 
+        * For non-type template parameters, the type will be deduced form the argument
 
 **Write LLTM module**.
 * *Step 1: Forward pass*.
@@ -121,7 +132,7 @@ torch::Tensor d_sigmoid(torch::Tensor z) {
             torch::Tensor X,
             torch::Tensor gate_weights,
             torch::Tensor weights) {
-            
+
             auto d_output_gate = torch::tanh(new_cell) * grad_h;
             auto d_tanh_new_cell = output_gate * grad_h;
             auto d_new_cell = d_tanh(new_cell) * d_tanh_new_cell + grad_cell;
@@ -160,11 +171,11 @@ torch::Tensor d_sigmoid(torch::Tensor z) {
             m.def("backward", &lltm_backward, "LLTM backward");
         }
         ```
-    
+
     * *Explain*. `TORCH_EXTENSION_NAME` will be defined, by the torch extension build, as the name we give our extension in `setup.py`, i.e. in this case is `lltm`
 * *Step 4*. Compile our extension
     * *Directory structure*.
-        
+
         ```
         pytorch/
             lltm-extension/
@@ -306,7 +317,7 @@ torch::Tensor d_sigmoid(torch::Tensor z) {
     kernel<<<grid, block>>>(...);
     ```
 
-**Built-in device variables**. 
+**Built-in device variables**.
 * *Built-in device variables*. All `__global__` and `__device__` functions have access to
     * `dim3 gridDim`. Dimensions of the grid in blocks
     * `dim3 blockDim`. Dimensions of the grid in threads
@@ -330,12 +341,12 @@ torch::Tensor d_sigmoid(torch::Tensor z) {
             int idx;
             for (idx = 0; idx<N; idx++) a[idx] = a[idx] + 1;
         }
-        
+
         int main(){
             inc_cpu(a, N);
         }
         ```
-    
+
     * *CUDA code*.
 
         ```cpp
@@ -358,7 +369,7 @@ torch::Tensor d_sigmoid(torch::Tensor z) {
     * *CUDA files*. Contain actual CUDA kernels
     * *CUDA functions*. This file will also declare functions defined in CUDA (`.cu`) files
     * *Using CUDA functions*.
-        * The C++ functions will then do some checks 
+        * The C++ functions will then do some checks
         * The C++ functions forward their calls to the CUDA functions
 2. Bind the functions to Python with pybind11
 3. Write `setup.py` file
@@ -475,12 +486,12 @@ torch::Tensor d_sigmoid(torch::Tensor z) {
 
         // size_t is an unsigned integer data type, which measures bytes of any object's
         // size and returned by sizeof operator. In C++, the default size for array
-        // indices and loop counting is size_t. This is because of the fact that the 
+        // indices and loop counting is size_t. This is because of the fact that the
         // largest array supported by the platform will be indexable with size_t
-        // Reference: 
+        // Reference:
         //     * https://en.cppreference.com/w/c/types/size_t
         //     * https://stackoverflow.com/questions/59728149/why-size-t-is-used-for-indexing-representing-size-of-an-array
-        
+
         template <typename scalar_t>
         __global__ void lltm_cuda_forward_kernel(
             const torch::PackedTensorAccessor<scalar_t,3,torch::RestrictPtrTraits,size_t> gates,
@@ -490,7 +501,7 @@ torch::Tensor d_sigmoid(torch::Tensor z) {
             torch::PackedTensorAccessor<scalar_t,2,torch::RestrictPtrTraits,size_t> input_gate,
             torch::PackedTensorAccessor<scalar_t,2,torch::RestrictPtrTraits,size_t> output_gate,
             torch::PackedTensorAccessor<scalar_t,2,torch::RestrictPtrTraits,size_t> candidate_cell) {
-            
+
             //batch index
             const int n = blockIdx.y;
             // column index
@@ -547,7 +558,7 @@ torch::Tensor d_sigmoid(torch::Tensor z) {
         ```
 
 * *Explain*.
-    * `AT_DISPATCH_FLOATING_TYPES`. 
+    * `AT_DISPATCH_FLOATING_TYPES`.
         * *Description*. ATen abstract away the device and data type of the tensors we deal with. A tensor will, at runtime, still be backed by memory of a concrete type, on a concrete device
 
             $\to$ We need a way of determining, at runtime, what type a tensor is, and then selectively call functions with the corresponding correct type signature
@@ -557,7 +568,7 @@ torch::Tensor d_sigmoid(torch::Tensor z) {
             * A lambda function, where the type alias `scalar_t` is available and is defined as the type that the tensor actually is, at runtime, in that context
 
         >**NOTE**. If we want to dispatch over all types, not just floating point types, we can use `AT_DISPATCH_ALL_TYPES`
-    
+
     * In CUDA kernels, we work directly on pointers with the right type, since working directly with high level type agnotic tensors inside CUDA kernels is very inefficient
     * `gates.packed_accessor<scalar_t,3,torch::RestrictPtrTraits,size_t>()`. Provide an easier way to index elements of `gates`, i.e. `gates[n][c][h]` rather than `gates[3*n + 5*c + h]`
         * `scalar_t` is the true type of the tensor

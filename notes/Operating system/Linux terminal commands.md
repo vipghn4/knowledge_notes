@@ -3,11 +3,42 @@ title: Linux terminal commands
 tags: Operating system
 ---
 
-[toc]
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+# Table of Contents
+* [Basic commands](#basic-commands)
+    * [Basic commands](#basic-commands)
+    * [Utilities](#utilities)
+    * [Hot keys](#hot-keys)
+      * [Terminal](#terminal)
+* [Permissions](#permissions)
+    * [Users and groups](#users-and-groups)
+      * [Introduction](#introduction)
+      * [User](#user)
+      * [Group](#group)
+    * [Change modes](#change-modes)
+      * [`chmod`](#chmod)
+        * [Syntax](#syntax)
+      * [`chown`](#chown)
+      * [`chgrp`](#chgrp)
+    * [Common practices](#common-practices)
+* [Resource limitations](#resource-limitations)
+* [Files and directories](#files-and-directories)
+    * [File system](#file-system)
+      * [inode](#inode)
+      * [`ln` command](#ln-command)
+* [Packages](#packages)
+    * [Package management](#package-management)
+      * [`dpkg`](#dpkg)
+      * [`apt` and `apt-get`](#apt-and-apt-get)
+    * [C/C++ Builder](#cc-builder)
+      * [C compilation process](#c-compilation-process)
+    * [`tmux`](#tmux)
+* [Root directory structure](#root-directory-structure)
+<!-- /TOC -->
 
 # Basic commands
 ### Basic commands
-* *Display previous commands* 
+* *Display previous commands*
 
     ```bash
     $ history
@@ -61,9 +92,9 @@ tags: Operating system
 ```bash=
 grep [options] pattern [files]
 ```
-    
+
 * *Options*.
-    
+
     | Option | Description |
     | --- | --- |
     | `-c` (count) | Print a count of lines which match a pattern |
@@ -98,7 +129,7 @@ xargs [options] [command [initial-arguments]]
     | `-n [number]` | Read a maximum of `number` arguments from stdin and puts them on the end of command template |
 
 * *Examples*.
-    
+
     ```bash=
     xargs -I {} mv dir1/{} dir2/{} # Replace `{}` with names from standard input
     ```
@@ -143,7 +174,7 @@ xargs [options] [command [initial-arguments]]
     * Allow more accurate system logging, particularly when combined with sudo
 
 #### User
-**User management**. 
+**User management**.
 * *Add user*. `useradd username`
     * *Options*.
 
@@ -270,7 +301,7 @@ chmod [options] [references][operator][modes] file ...
         <td>=</td>
         <td>the modes specified are to be made the exact modes for the specified classes</td>
     </tr>
-</table> 
+</table>
 
 * *Other modes*
 
@@ -287,7 +318,7 @@ chmod [options] [references][operator][modes] file ...
         <td>t</td>
         <td>save program text on swap device</td>
     </tr>
-</table> 
+</table>
 
 * *Examples*.
     * `chmod a+rx file.txt`. Adds read and execution permissions for all classes
@@ -377,7 +408,7 @@ VAR_NAME=value command_to_execute
           }
         }
         ```
-    
+
     * *Example 2*.
 
         ```bash
@@ -405,7 +436,7 @@ VAR_NAME=value command_to_execute
     ```bash
     cgexec -g <controllers>:<group_name> <command>
     ```
-    
+
     * *Example*.
 
         ```bash
@@ -414,7 +445,7 @@ VAR_NAME=value command_to_execute
 
 * *List all controllers*. See `/sys/fs/cgroup`
     * *Mechanism of group creation*. By creating a controller of group `groupname`
-        
+
         $\to$ A directory named `groupname` would be created inside the corresponding controller directory in `/sys/fs/cgroup`
 
 # Files and directories
@@ -462,18 +493,18 @@ VAR_NAME=value command_to_execute
 
 #### `ln` command
 
-**Description**. A standard Unix command to create a hard link or a symbolic link to an existing 
+**Description**. A standard Unix command to create a hard link or a symbolic link to an existing
 
 **Symbolic link (symlink)**. A separate file, whose contents point to the linked-to file
-* *Symlink and original file*. 
+* *Symlink and original file*.
     * The original file is a name connected directry to the inode
     * The symlink refers to the name
 * *Usage*. Special files which refer to other files by name
-* *Create symbolic link*. 
+* *Create symbolic link*.
 
 
     ```bash
-    $ ln -s file_to_be_linked symlink_file 
+    $ ln -s file_to_be_linked symlink_file
     ```
 >**NOTE**. We can think of a symlink as a shortcut
 * *Other details*.
@@ -503,7 +534,7 @@ VAR_NAME=value command_to_execute
 **`dpkg`**. The Linux Debian packages manager, i.e. add or remove applications
 * *Usage*. Install or remove programs, list them or retrieve specific information about them
 
->**NOTE**. When `apt` or `apt-get` are used, they invoke the `dpkg` program to install or remove applications 
+>**NOTE**. When `apt` or `apt-get` are used, they invoke the `dpkg` program to install or remove applications
 
 **Commands**.
 * *Install software using `dpkg`*.
@@ -557,7 +588,7 @@ VAR_NAME=value command_to_execute
     * *Reinstall a new software*.
 
         ```bash
-        $ apt --reinstall install package_name 
+        $ apt --reinstall install package_name
         ```
 * *Remove software with `apt`*.
     * *Remove software without removing configuration files*
@@ -631,7 +662,7 @@ VAR_NAME=value command_to_execute
 </div>
 
 * *Preprocessing*. GCC includes the headers, i.e. `#include`, and expands the macros, i.e. `#define`
-    * *Command*. 
+    * *Command*.
 
         ```bash
         $ cpp src.c > src.i
@@ -670,7 +701,7 @@ VAR_NAME=value command_to_execute
     * *Shared library*. When a program is linked against a shared library, only a small table is created in the executable
         * *Dynamic linking*. Before execution, the OS loads the machine code needed for the external functions
         * *Expansions*. `.so` (shared object) or `.dll` (dynamic link library)
-    * *Discussions*. 
+    * *Discussions*.
         * Dynamic linking makes executable files smaller and saves disk space
         * Most OS allows one copy of a shared library in memory to be used by all running programs, i.e. save memory
         * Shared library codes can be upgraded without recompiling the linked programs
@@ -679,7 +710,7 @@ VAR_NAME=value command_to_execute
         * *Compiler* needs the header files to compile the source codes
         * *Linker* needs the libraries to resolve external references from toher object files or libraries
     * *Guilding the search of header files and libraries*.
-        * *Header files*. Use environment variable `CPATH` 
+        * *Header files*. Use environment variable `CPATH`
         * *Libraries*. Use environment variable `LIBRARY_PATH`
 
 **Other environment variables**.
@@ -689,11 +720,11 @@ VAR_NAME=value command_to_execute
 
 **Related commands**.
 * `ldconfig`. Create the necessary links and cache to the most recent shared libraries
-    * *Places to check for shared libraries*. 
+    * *Places to check for shared libraries*.
         * In the directories specified in the command line
         * In the `/etc/ld.so.conf` file
         * In the trusted directories, i.e. `/lib` and `/usr/lib` (32-bit OS) or `/lib64` and `/usr/lib64` (64-bit OS)
-    
+
     >**NOTE**. For details, please run `man ldconfig`
 
 ### `tmux`

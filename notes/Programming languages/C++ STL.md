@@ -3,8 +3,27 @@ title: C++ STL
 tags: Programming languages
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [C++ STL](#c-stl)
+  * [Introduction](#introduction)
+  * [Iterators](#iterators)
+  * [Containers](#containers)
+    * [Iterator](#iterator)
+    * [Vector](#vector)
+    * [Deque](#deque)
+    * [List](#list)
+    * [Stack](#stack)
+    * [Queue](#queue)
+    * [Priority queue](#priority-queue)
+    * [Set](#set)
+    * [Multi-set](#multi-set)
+    * [Map](#map)
+    * [Multi-map](#multi-map)
+  * [STL algorithms](#stl-algorithms)
+* [Appendix](#appendix)
+  * [Tricks and advices](#tricks-and-advices)
+<!-- /TOC -->
 
 # C++ STL
 ## Introduction
@@ -157,7 +176,7 @@ vector<int, vector<int> > third(N);
     * `remove(const)`, i.e. remove all elements with value `const`, ($\sim O(n)$)
     * `remove_if(function)`, i.e. remove all elements which `function` returns `true`, ($\sim O(n)$)
     * `unique`, i.e. remove duplicate elements, ($\sim O(n)$)
-        
+
         >**NOTE**. Elements in list must be sorted beforehand
     * `sort` ($\sim O(n\log n)$)
     * `reverse` ($\sim O(n)$)
@@ -253,7 +272,7 @@ set<int, cmp> s;
 * *Capacity*. `size()` ($\sim O(1)$) and `empty()` ($\sim O(1)$)
 * *Modify elements*.
     * `insert(iterator, x)` ($\sim O(\log n)$)
-    * `erase(iterator)` 
+    * `erase(iterator)`
         * Erase by iterator ($\sim O(\log n)$)
         * Erase by key, i.e. remove all elements with a specific key ($\sim O(\log n + n)$)
     * `swap(other_vector)` ($\sim O(n)$)

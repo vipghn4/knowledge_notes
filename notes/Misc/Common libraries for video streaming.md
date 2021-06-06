@@ -3,8 +3,11 @@ title: Common libraries for video streaming
 tags: Misc
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Introduction](#introduction)
+  * [GStreamer](#gstreamer)
+<!-- /TOC -->
 
 # Introduction
 ## GStreamer

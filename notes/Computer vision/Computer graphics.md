@@ -3,7 +3,41 @@ title: Computer graphics
 tags: Computer vision
 ---
 
-[toc]
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+# Table of Contents
+* [1. Các khái niệm cơ bản](#1-các-khái-niệm-cơ-bản)
+  * [Đối tượng cơ bản](#đối-tượng-cơ-bản)
+  * [Các khái niệm trong đồ họa](#các-khái-niệm-trong-đồ-họa)
+  * [Một số thuật ngữ](#một-số-thuật-ngữ)
+* [2. Các thuật toán tô phủ](#2-các-thuật-toán-tô-phủ)
+  * [Tổng quan](#tổng-quan)
+  * [Phương pháp](#phương-pháp)
+* [3. Vẽ đường thẳng](#3-vẽ-đường-thẳng)
+  * [Tổng quan](#tổng-quan)
+  * [Phương pháp](#phương-pháp)
+* [4. Các thuật toán cắt xén (clipping)](#4-các-thuật-toán-cắt-xén-clipping)
+  * [Tổng quan](#tổng-quan)
+  * [Clipping trong 2D](#clipping-trong-2d)
+    * [Clipping đoạn thẳng](#clipping-đoạn-thẳng)
+    * [Clipping đa giác](#clipping-đa-giác)
+  * [Clipping 3D](#clipping-3d)
+* [5. Các phép biến đổi](#5-các-phép-biến-đổi)
+  * [Một số hệ tọa độ](#một-số-hệ-tọa-độ)
+  * [Các phép biến đổi](#các-phép-biến-đổi)
+  * [Các phép biến đổi cơ bản](#các-phép-biến-đổi-cơ-bản)
+  * [3D transformations](#3d-transformations)
+* [6. Phép chiếu (projection)](#6-phép-chiếu-projection)
+* [7. Mô hình hóa đối tượng](#7-mô-hình-hóa-đối-tượng)
+  * [Các dạng thể hiện 3D](#các-dạng-thể-hiện-3d)
+  * [Thể hiện và lưu trữ đa giác](#thể-hiện-và-lưu-trữ-đa-giác)
+  * [Tạo lưới và phân tách](#tạo-lưới-và-phân-tách)
+  * [Mô hình khối rắn](#mô-hình-khối-rắn)
+* [8. Thuật toán mặt hiện](#8-thuật-toán-mặt-hiện)
+  * [Tổng quan](#tổng-quan)
+  * [Phương pháp](#phương-pháp)
+    * [Ưu tiên theo danh sách](#ưu-tiên-theo-danh-sách)
+    * [Chính xác theo ảnh](#chính-xác-theo-ảnh)
+<!-- /TOC -->
 
 # 1. Các khái niệm cơ bản
 ## Đối tượng cơ bản
@@ -32,7 +66,7 @@ tags: Computer vision
     <img src="/media/T1715R2.png">
 </div>
 
-* *Luồng xử lý 2D*. 
+* *Luồng xử lý 2D*.
 
 <div style="text-align:center">
     <img src="/media/5imQYGT.png">
@@ -69,7 +103,7 @@ tags: Computer vision
 * *Option 2*. Bắt đầu từ điểm hạt giống, ta loang ra các điểm xung quanh mà không vượt ra khỏi viền bao
     * *Áp dụng*. Các thuật toán dựa trên điểm
 
-**Bài toán tô phủ loang (flood fill problem)**. 
+**Bài toán tô phủ loang (flood fill problem)**.
 * *Giả thiết*. Với 2 màu khác nhau $c$ và $c'$, một tập các điểm $A$ có cùng màu $c$ được bao quanh bởi các điểm có màu khác $c$ và $c'$
 * *Yêu cầu*. Thay màu tất cả các điểm thuộc $A$ thành $c'$
 
@@ -140,7 +174,7 @@ def scan_hi(x, y, lx, rx):
 
 **Đường thẳng lý tưởng**
 * Trông phải thẳng và liên tục
-* Phải bắt đầu và kết thúc đúng điểm 
+* Phải bắt đầu và kết thúc đúng điểm
 * Phải có mật độ điểm đều
 * Phải có mật độ điểm không phục thuộc vào độ dài và hệ số góc của đoạn thẳng
 * Phải được vẽ ra một cách nhanh chóng
@@ -152,7 +186,7 @@ def scan_hi(x, y, lx, rx):
     * *Giải thích*. Với mỗi giá trị $x$, có 1 giá trị $y$
 * *Nhược điểm*. Không tốt cho các đường thẳng hệ số góc lớn hơn 1
     * *Giải thích*. Với mỗi giá trị $x$, có nhiều giá trị $y$
-    * *Giải pháp*. 
+    * *Giải pháp*.
         * Sử dụng phương pháp đối xứng
         * Thay đổi vai trò của các trục tọa độ theo từng góc phần tám (45 độ)
 
@@ -162,7 +196,7 @@ với $\varepsilon \in \mathbb{R}$
 * *Ý tưởng*. Tô màu chuỗi điểm $p_{i+1}=p_i+\varepsilon\cdot(\Delta x, \Delta y)$
     >**NOTE**. Để hiển thị được, ta cần $q_i$ là các điểm với tọa độ làm tròn từ $p_i$
 
-    >**NOTE**. Chọn đầu vào `(x0, y0)` và `dx_dt`, `dy_dt` sao cho `dx_dt < 1` và `dy_dt < 1`, i.e. khi ta tăng $t$ thêm `dt` thì ta không bị sót pixel nào 
+    >**NOTE**. Chọn đầu vào `(x0, y0)` và `dx_dt`, `dy_dt` sao cho `dx_dt < 1` và `dy_dt < 1`, i.e. khi ta tăng $t$ thêm `dt` thì ta không bị sót pixel nào
 * *Mã giả*.
     ```python
     x, y = x0, y0
@@ -171,7 +205,7 @@ với $\varepsilon \in \mathbb{R}$
         y = y + dy_dt
         set(x, y)
     ```
-* *Triển khai*. 
+* *Triển khai*.
     * *DDA đơn giản*. Chọn `dt` là `max(dx, dy)` với `dx = x2 - x1` và `dy = y2 - y1`
     * *DDA đối xứng*. Chọn `dt` là `2^n` với `2^(n-1) <= max(dx, dy) < 2^n`
 * *Nhược điểm*. Cần nhiều phép toán số thực
@@ -183,12 +217,12 @@ $$\begin{aligned}
     x_i &= x_{i-1} + 1\\
     y_i &= y_{i-1} + b/a
 \end{aligned}$$
-* *Triển khai*. 
+* *Triển khai*.
     * Nếu $y_0=0$, khi nào $y_i=1$? Ta sẽ làm tròn $y_i$
     * So sánh $2b, 4b, \dots$ với $a, 3a, \dots$ thay vì tính $b/a$
         * *Giải thích*. Tránh các phép tính số thực
-        * *Cụ thể*. 
-            * Đặt biến quyết định $d=2b-a$, i.e. 
+        * *Cụ thể*.
+            * Đặt biến quyết định $d=2b-a$, i.e.
             $$d>0 \Leftrightarrow b/a>1/2\\d\leq 0\Leftrightarrow b/a\leq1/2$$
             * Mỗi lần cần cộng thêm $2b$ vào $d$, i.e.
             $$(n+1)b/a>1/2\Leftrightarrow 2nb+2b>a$$
@@ -219,17 +253,17 @@ $$\begin{aligned}
     * *Ý tưởng*. Tại mỗi thời điểm
     $$\begin{aligned}
         x_{i+1} &= x_i + 1\\
-        y_{i+1} &= y_i + \mathbf{1}_{f(x_i+1, y_i+1/2) > 0} 
+        y_{i+1} &= y_i + \mathbf{1}_{f(x_i+1, y_i+1/2) > 0}
     \end{aligned}$$
     * *Nhược điểm*.
         * Cần tìm $a,b,c$
 
     >**NOTE**. Các hệ số góc khác được xử lý như trong Bresenham. Đoạn thẳng đứng được xử lý riêng
-* *Thuật toán điểm giữa*. Dựa vào phương trình $y=\frac{dy}{dx}x+b$ với, i.e. 
+* *Thuật toán điểm giữa*. Dựa vào phương trình $y=\frac{dy}{dx}x+b$ với, i.e.
 $F(x,y)=dy\cdot x - dx\cdot y + c=0$
     * *Đại lượng quyết định*: $d=F(x_p+1,y_p+1/2)$ với $x_p,y_p$ là tọa độ nguyên mới nhất
-    * *Tính nhanh $d$*. 
-    
+    * *Tính nhanh $d$*.
+
     $$\begin{aligned}
         F(x_p+2,y_p+1/2)&=F(x_p+1,y_p+1/2)+dy\\
         F(x_p+2,y_p+3/2)&=F(x_p+1,y_p+1/2)+dy-dx
@@ -316,7 +350,7 @@ while x < x2:
     3. Nếu đoạn thẳng chưa được chấp nhận / loại bỏ, ta chia đoạn đó ra. sau đó quay lại B1 với những đoạn mới
         * Ta đặt
 
-            $$\begin{cases} 
+            $$\begin{cases}
                 P=P_2, Q=P_1 & c_1 = 0\\
                 P=P_1, Q=P_2 & c_1\neq 0
             \end{cases}$$
@@ -334,20 +368,20 @@ while x < x2:
         * If $d<0$, the vector pointed towards interior
         * If $d = 0$, the vector pointed parallel to plane containing $p$
         * If $d>0$, the vector pointed away from interior
-* *Clipping algorithm*. 
+* *Clipping algorithm*.
     1. Calculate the normals of every edge
     2. Calculate the vector for the clipping line
-    3. Calculate 
+    3. Calculate
     $$\forall i,t=\frac{n_i \cdot (p(0) - p_{E_i})}{-n_i \cdot (p(1) - p(0))}=\frac{n_i \cdot(p_{E_i} - p(0))}{n_i \cdot (p(1) - p(0))}$$
     1. Values of $t$ are classified as entering or exiting (from all edges) via their denominators
-    2. Choose one value of $t$ from each group. 
+    2. Choose one value of $t$ from each group.
         * $t_E$ is the $t$ value for entering intersection point, i.e. the minimum of $t$ values, for which $n_i (p(1) - p(0))$ is negative, and $1$
         * $t_L$ is the $t$ value for exiting intersection point, i.e. the maximum of $t$ values, for which $n_i (p(1) - p(0))$ is positive, and $0$
     3. If the line intersects the window, we have cases
         * If $0<t_E<t_L<1$, the line is partially inside the clipping window
         * If $0\leq t_E\leq t_L \leq 1$, the line has one point inside, i.e. $t_E = t_L$, or the intersection points are on the end points of the line, i.e. $0=t_E<t_L=1$
         * If $t_E<0<1<t_L$, the line completely inside the window
-        * If $t_L<t_E$, the the line is completely outside the window, i.e. 
+        * If $t_L<t_E$, the the line is completely outside the window, i.e.
             * When $t_E>1$ and is clipped to $1$, i.e. $t_L < t_E = 1$
             * When $t_L<0$ and is clipped to $0$, i.e. $0=t_L<t_E$
 
@@ -377,7 +411,7 @@ $$\begin{aligned}
         * Nếu $\forall k, c_k=0 \implies q_k\geq 0$, đường thẳng nằm trong cửa sổ, i.e.
             * $x_2 = x_1 \geq x_\text{min}$ and $x_\text{max} \geq x_1 = x_2$, or
             * $y_2 = y_1 \geq y_\text{min}$ and $y_\text{max} \geq y_1 = y_2$
-* *Kết luận*. 
+* *Kết luận*.
     * Loại bỏ đoạn thẳng nếu
         * Một giá trị $t$ ứng với điểm vào $>1$
         * Một giá trị $t$ ứng với điểm ra $<0$
@@ -416,7 +450,7 @@ $$\begin{aligned}
             elif is_visible(prev_point, clip_edge):
                 output_list.add(intersection)
     ```
-* *Advantage*. Avoid generating new data, e.g. turning points 
+* *Advantage*. Avoid generating new data, e.g. turning points
 
 ## Clipping 3D
 **Clipping 3D**. Sử dụng thuật toán Cohen-Sutherland với mã 6 bit
@@ -445,7 +479,7 @@ $$\begin{aligned}
         * Hướng lên $\mathbf{w}$
         * Khoảng cách $\mathbf{d}$ từ máy quay đến mặt phẳng nhìn
 
-## Các phép biến đổi 
+## Các phép biến đổi
 **Phép biến đổi** có dạng $P' = T(P)$ với $P$ là một điểm
 
 **Các loại biến đổi (theo bản chất)**. Continuous, one-to-one, invertible
@@ -545,7 +579,7 @@ i.e. $x_p=x, y_p=y, z_p=d$
 * *Nhược điểm*. Không cho phép hình dung toàn bộ chi tiết của vật thể
 
 **Thể hiện bề mặt qua đa giác**. Dạng 3D cơ bản nhất trong hầu hết các ứng dụng
-* *Ưu điểm*. 
+* *Ưu điểm*.
     * Xử lý dễ và nhanh
     * Các ứng dụng sử dụng hình khối khác đều đưa về đa giác để xử lý
     * Phù hợp với thuật toán scan-line algorithm
@@ -567,7 +601,7 @@ i.e. $x_p=x, y_p=y, z_p=d$
 
 >**NOTE**. Thường người ta bỏ qua danh sách cạnh, chỉ lưu trữ danh sách đỉnh và đa giác bề mặt
 
-**Thể hiện đa giác**. 
+**Thể hiện đa giác**.
 * *Thể hiện tam giác*. Thể hiện bằng 3 đỉnh và 3 cạnh
 
     >**NOTE**. Nếu ta biến đổi 1 tam giác, ta phải biến đổi tọa độ của 3 điểm, i.e. 3 phép toán ma trận cho 1 tam giác
@@ -579,12 +613,12 @@ i.e. $x_p=x, y_p=y, z_p=d$
 
 ## Tạo lưới và phân tách
 **Tạo lưới**. Quá trình phân tách một bề mặt phức tạp thành các đối tượng đơn giản, e..g tam giác 3D
-* *Quá trình tạo lưới*. 
+* *Quá trình tạo lưới*.
     * Áp dụng ở khâu tiền xử lý
     * Được lưu trữ lại trước khi đưa vào luồng xử lý đồ họa (tăng hiệu quả xử lý)
 
 **Thuật toán phân tách đơn giản**. Chuyển các đa giác thành các quạt tam giác
-* *Ý tưởng*. 
+* *Ý tưởng*.
     * Giữ một đỉnh làm đỉnh chung của mọi tam giác
     * Lấy đỉnh chung và 2 đỉnh tiếp theo làm 1 tam giác
 
@@ -594,12 +628,12 @@ i.e. $x_p=x, y_p=y, z_p=d$
     * *Nhược điểm*. Các tứ giác sinh ra có kích thước rất khác nhau
 * *Option 2: Tạo lưới theo khối 8 mặt và 20 mặt*. Tạo ra các tam giác có kích thước gần bằng nhau
     * *Ý tưởng*. Xấp xỉ một hình cầu với một khối 8 mặt
-    * *Phương pháp*. 
+    * *Phương pháp*.
         1. Mỗi tam giác được chia ra bằng cách tạo ra đỉnh mới ở giữa các cạnh của tam giác sẵn có
         2. Nối các đỉnh mới để tạo ra 3 cạnh mới, i.e. 4 tam giác được tạo ra từ tam giác gốc
         3. Chuẩn hóa tọa độ các đỉnh mới, i.e. scale các đỉnh về khoảng cách 1 so với gốc tọa độ
 
-**Tách đa giác thành các tam giác**. 
+**Tách đa giác thành các tam giác**.
 1. Xét 1 tam giác ABC đang có
 2. Kiểm tra xem mọi điểm có nằm ngoài tam giác ABC không
 3. Nếu mọi điểm nằm ngoài tam giác thì lưu tam giác và tiếp tục với đỉnh trái nhất tiếp theo, i.e. ABD
@@ -610,12 +644,12 @@ i.e. $x_p=x, y_p=y, z_p=d$
 
 ##  Mô hình khối rắn
 **Mô hình khối rắn**. Khắc phục sự nhập nhằng của thể hiện khung dây
-* *Cách tạo*. 
+* *Cách tạo*.
     * Quét chụp đối tượng
     * Quét cong các bản thảo 2D
 
 **Liệt kê không gian bao phủ**. Một cách mô hình hóa đối tượng
-* *Ý tưởng*. 
+* *Ý tưởng*.
     * Toàn bộ không gian bao phủ được chia thành các voxels
     * Mỗi đối tượng được biểu diễn bởi một tập các voxels
 
@@ -625,12 +659,12 @@ i.e. $x_p=x, y_p=y, z_p=d$
 * *Ý tưởng*. Sử dụng các mẫu cơ bản, là các mô hình khối rắn, và các toán tử logic, để tạo nên các bề mặt hoặc đối tượng phức tạp
     * *Các mẫu cơ bản*. Khối hộp, trụ, lăng trụ, chóp, cầu, nón, etc.
     * *Các phép logic cơ bản*. Hợp, giao, loại trừ, etc.
-    
+
 # 8. Thuật toán mặt hiện
 ## Tổng quan
 **Các thuật toán mặt hiện**.
 * *Chính xác theo đối tượng*. Với mỗi đối tượng $O$ trong thực tại, tìm phần $A$ của $O$ có thể nhìn thấy và hiển thị $A$ tương đối
-* *Chính xác theo ảnh*. Với mỗi điểm ảnh trên màn hình, 
+* *Chính xác theo ảnh*. Với mỗi điểm ảnh trên màn hình,
     * Xác định vị trí điểm ảnh mà đối tượng $O$ có bị tia chiếm (từ điểm nhìn) chạm tới
     * Nếu $O$ bị nhìn thấy thì hiển thị màu phù hợp
     * Nếu $O$ không bị nhìn thấy thì hiển thị màu nền
@@ -708,7 +742,7 @@ i.e. $x_p=x, y_p=y, z_p=d$
         * Tìm được một đa giác bao quanh $W$ và nằm trước các đa giác giao với $W$, i.e. tô $W$ với màu của đa giác
     3. Với các $W$ khác
         * Ta chia $W thành 4 cửa sổ  con đều nhau và đưa vào $L$
-        * Lặp lại quá trình xử lý tới khi ta hạ kích thước cửa sổ xuống thành 1 điểm 
+        * Lặp lại quá trình xử lý tới khi ta hạ kích thước cửa sổ xuống thành 1 điểm
 * *Các phép thử*
     * *Kiểm tra cứa sổ tách biệt với đa giác*. Sử dụng hộp bao
     * *Kiểm tra cửa sổ nằm trong đa giác*. Thay tọa độ đỉnh của cửa sổ vào công thức cạnh đa giác
@@ -721,7 +755,7 @@ i.e. $x_p=x, y_p=y, z_p=d$
 **Thuật toán Weiler-Atherton**. Sử dụng cửa sổ con để tạo sự cân xứng cho hình dạng của đa giác
 
 **Thuật toán bộ đệm Z**. Ghi lại thông tin về độ sâu hiện thời của mỗi điểm
-* *Ý tưởng*. 
+* *Ý tưởng*.
     * Lưu thông tin về độ sâu hiện thời của mỗi điểm
     * Nội suy z trong quá trình tính toán
     * Lưu trữ một ma trận độ sâu tương ứng với ảnh đầu ra

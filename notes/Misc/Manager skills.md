@@ -3,13 +3,18 @@ title: Manager skills
 tags: Misc
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+# Table of Contents
+* [Manager](#manager)
+<!-- /TOC -->
+
 ## Manager
 **Responsibility**. Ensure that progresses go smoothly
 * Have an overview of work assignment
     * What jobs to be done
     * Who is responsbile for what job
 * Examine the progress of team members everyday
-    * *Report format*. 
+    * *Report format*.
         * *Ý tưởng*. Everybody must produce a three-point report
             * *Done*. What have been done today
             * *Blocked*. What is the current difficulty (if any)
@@ -26,10 +31,10 @@ tags: Misc
             * *LƯU Ý*. Nếu có 1 task nào đó mà có 2 người cùng làm
                 * *Hệ quả*. Khó kiểm soát và đánh giá hiệu suất công việc
                 * *Giải pháp*. Nếu có 2 người cùng làm thì chứng tỏ task đó vẫn chia nhỏ được
-                    
+
                     $\to$ Tiếp tục chia nhỏ task
             * *LƯU Ý*. Nếu nhân viên ước lượng thời gian cho 1 task quá dài so với khối lượng công việc thì cần yêu cầu giải thích tại sao lại mất nhiều thời gian thế
-        * *Công cụ quản lý task*. 
+        * *Công cụ quản lý task*.
             * Trello (như công ty đang dùng). Thực chất là dựa theo bảng Kanban. Cách quản lý này phù hợp với các tasks nhiều khả năng bị trê deadlines, hoặc không có deadline
             * Gantt. Phù hợp trong trường hợp cần quản lý chặt các task và mỗi task đều cần estimate chính xác. Ngoài ra, Gantt chart còn cho thấy progess của cả dự án một cách dễ dàng (e.g. thứ tự các task, thời điểm bắt đầu, estimate time, etc.)
     * Đảm bảo rằng các công việc sẽ được hoàn thành đúng tiến độ
@@ -52,10 +57,10 @@ tags: Misc
     * *Phạt*. Nếu trễ deadline 1, 2 lần thì khiến trách, 3 lần thì phạt etc.
 * *Các vấn đề có thể gặp phải và các đề xuất*.
     * Nhân viên làm đối phó
-        * *Giải pháp*. 
+        * *Giải pháp*.
             * Với mỗi task, phải đưa ra một "định nghĩa hoàn thành" (definition of done), i.e. như nào thì được gọi là hoàn thành task đó
             * Bổ sung thêm 1 bảng vào Trello là bảng Review, i.e. chứa các task đang trong quá trình review
-                
+
                 $\to$ Quá trình review nhằm đánh giá xem 1 task có pass được definition of done hay ko
     * Các anh chị không chịu cập nhật tiến độ
         * *Giải thích*. Do em còn trẻ, chưa có kinh nghiệm, nên có thể sẽ khó keep track các anh chị

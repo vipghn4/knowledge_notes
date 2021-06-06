@@ -15,3 +15,7 @@
 
 ## Contribution
 Please checkout [convention for writing notes](/docs/CONVENTION.md) before contributing to the directory
+
+## TODO
+- [ ] Fine-grain split tag directories
+- [ ] Double check visualization of images

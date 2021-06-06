@@ -3,8 +3,24 @@ title: Data management
 tags: Full stack deep learning
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Sources](#sources)
+* [Data labeling](#data-labeling)
+  * [User interfaces](#user-interfaces)
+  * [Sources of labor](#sources-of-labor)
+  * [Service companies](#service-companies)
+* [Storage](#storage)
+  * [Building blocks of data storage](#building-blocks-of-data-storage)
+  * [What goes where](#what-goes-where)
+* [Versioning](#versioning)
+  * [Level 0](#level-0)
+  * [Level 1](#level-1)
+  * [Level 2](#level-2)
+  * [Level 3](#level-3)
+* [Appendix](#appendix)
+  * [Discussions](#discussions)
+<!-- /TOC -->
 
 # Sources
 **Motivation**.
@@ -18,7 +34,7 @@ tags: Full stack deep learning
 * *Motivation*. Top tier companies have much more data than us, thus our models cannot be as accurate as their models
 
     $\to$ If we wait until our models until it is as accurate as their ones, then we will never ship product
-* *Solution*. 
+* *Solution*.
     1. Ship a model, which is not quite good, but at least has high precision and low recall
     2. Use data flywheel to collect user labels, e.g. capcha
 
@@ -68,7 +84,7 @@ tags: Full stack deep learning
 ## Service companies
 **Motivation**. Data labeling requires separate software stack, temporary labor, and quality assureance
 
-$\to$ It makes sense to outsource this 
+$\to$ It makes sense to outsource this
 
 **Choosing service companies**. We should dedicate several days to selecting the best service companies for labeling our data
 1. Label gold standard data by ourself
@@ -90,7 +106,7 @@ $\to$ It makes sense to outsource this
 ## Building blocks of data storage
 **File system**. Foundation layer of storage
 * *Fundamental unit*. A file, which can be text or binary, is not versioned, and is easily overwritten
-* *Types of file systems*. 
+* *Types of file systems*.
     * *Local file system*. A hard disk containing all the files we need
     * *Remote file system*. A remote server, which is accessible over network by multiple machines
     * *Distributed file system*. Data is stored and accessed over multiple machines
@@ -132,7 +148,7 @@ $\to$ It makes sense to outsource this
 * *Metadata (labels, user activities, etc.)*. Stored in database
 * *Features which are not obtainable from database (logs)*. Set up data lake and a proces to aggregate required data
 
-**Data usage**. At training time, copy the required data onto file system (local or networked) 
+**Data usage**. At training time, copy the required data onto file system (local or networked)
 
 **References**. Designing data-intensive applications (book)
 
@@ -191,7 +207,7 @@ $\to$ We can version deployed models, and get back to past performance, but this
     * *Tricks*.
         1. Start from a pretrained network on large datasets, e.g. ImageNet
         2. Transfer to pretrained model to the target problem
-* *How to deal with very unbalanced datasets*. 
+* *How to deal with very unbalanced datasets*.
     * Use class weights, e.g. based on frequency
     * Use focal loss
     * Start with the whole dataset, train and evaluate dataset, put wrong predicted examples into the train dataset, or increase the weights of wrongly predicted examples, then retrain again

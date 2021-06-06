@@ -3,8 +3,10 @@ title: Standard README structure
 tags: Misc
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [README standard structure](#readme-standard-structure)
+<!-- /TOC -->
 
 # README standard structure
 **README**. Contain information about other files in a directory or archive of computer software
@@ -36,4 +38,4 @@ tags: Misc
 | Bugs | Known bugs and instructions on reporting new onces |
 | Contributing / hacking | Guide for prospective contributors to the project |
 | FAQ | Frequently asked questions |
-| TODO | Things to be done in the future 
+| TODO | Things to be done in the future

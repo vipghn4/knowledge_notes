@@ -3,8 +3,29 @@ title: Appendix
 tags: NVIDIA GPU programming
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Appendix](#appendix)
+  * [C++](#c)
+    * [Types of pointers](#types-of-pointers)
+    * [Types of data type casting](#types-of-data-type-casting)
+  * [TensorRT](#tensorrt)
+    * [General workflow](#general-workflow)
+  * [GPU coding](#gpu-coding)
+    * [Image processing](#image-processing)
+  * [Memory optimization with CUDA](#memory-optimization-with-cuda)
+    * [Minimizing data transfer](#minimizing-data-transfer)
+    * [Overlapping data transfers](#overlapping-data-transfers)
+    * [Efficient memory access](#efficient-memory-access)
+      * [Data structure alignment](#data-structure-alignment)
+      * [Efficient memory access in CUDA](#efficient-memory-access-in-cuda)
+  * [Execution configuration optimizations](#execution-configuration-optimizations)
+    * [Occupancy](#occupancy)
+    * [Tricks](#tricks)
+  * [Advanced technologies by NVIDIA](#advanced-technologies-by-nvidia)
+  * [Concepts](#concepts)
+  * [External resources](#external-resources)
+<!-- /TOC -->
 
 # Appendix
 ## C++
@@ -15,20 +36,20 @@ tags: NVIDIA GPU programming
     $\to$ The pointed object must get automatically destroyed
 * *Exclusive ownership model*. `auto_ptr` is based on exclusive ownership model
 * *Example code*.
-    
+
     ```c=
     #include <memory>
-    
+
     auto_ptr<ClassName> ptr(new ClassName);
     ```
 * *Why deprecated*. Due to exclusive ownership model, assignment or copy transfers ownership and resets the `rvalue` of the auto pointer to `nullptr`
 
     $\to$ `auto_ptr` cannot be used within STL containers since it cannot be copied
-    
+
 **`unique_ptr`**. A replacement of `auto_ptr`, with improved security, i.e. no fake copy assignments, added features, i.e. deleters, and support for arrays
 * *Structure*. A container for raw pointers
-* *Features*. 
-    * `unique_ptr` cannot be copied, i.e. 
+* *Features*.
+    * `unique_ptr` cannot be copied, i.e.
 
         ```c=
         unique_ptr<A> ptr1 (new A);
@@ -41,7 +62,7 @@ tags: NVIDIA GPU programming
         ```
 * *Usage*. When we want to have exclusive ownership of the resource
 
-**`shared_ptr`**. A container for raw pointers, based on reference counting ownership model 
+**`shared_ptr`**. A container for raw pointers, based on reference counting ownership model
 * *Usage*. When we want to share ownership of a resource
 
 **`weak_ptr`**. A copy of `shared_ptr`. It provides access to an object, which is owned by one or more `shared_ptr` instances, but does not participate in reference counting
@@ -55,11 +76,11 @@ tags: NVIDIA GPU programming
                                       \   v
                                         object C
         ```
-        
+
         If the rest of the program is destroyed, the reference count of A reduces from `2` to `1`, and A, B, and C are not destroyed. But in fact, we want everything to be destroyed
 
 ### Types of data type casting
-**Implicit conversion**. 
+**Implicit conversion**.
 * *Use cases*. Automatically performed when a value is copied to a compatible type
 * *Types of implicit conversion*.
     * *Standard conversion*. Convert from child data type to parent data type
@@ -70,25 +91,25 @@ tags: NVIDIA GPU programming
 
         ```c=
         class A {};
-        
+
         class B {
         public:
             B (const A& x) {}
         }
         ```
-        
+
         * *Assignment operator*. Implicitly convert a particular type on assignments, i.e.
 
         ```c=
         B& operator= (const A& x) {return *this;}
         ```
-        
+
         * *Type-cast operator*. Implicitly convert to a particular type, i.e.
 
         ```c=
         operator A() {return A();}
         ```
-            
+
 * *Special cases*.
     * Null pointers can be converted to pointers of any type
     * Pointers to any type can be converted to void pointers
@@ -96,25 +117,25 @@ tags: NVIDIA GPU programming
 
 **Type casting**.
 * *Traditional type casting*.
-    
+
     ```c=
     (new_type) expression // C-like type casting
     new_type (expresion) // functional type casting
     ```
-* *Dynamic casting*. 
+* *Dynamic casting*.
     * *Ability*.
         * Pointer upcast, in the same way as allowed in implicit conversion
         * Downcast polymorphic classes, i.e. those with virtual members, if and only if the pointed object is a valid complete object of the target type
         * Implicit cast null pointers between pointers types
         * Cast pointer of any type to a `void*` pointer
     * *Usage*. Only be used with pointers and references to classes, or with `void*`
-    * *Example*. 
-     
+    * *Example*.
+
         ```c=
         Base *pba = new Derived;
         Base *pbb = new Base;
         Derived *pd;
-        
+
         pd = dynamic_cast<Derived*> (pbb);
         ```
 * *Static casting*. Perform conversions between pointers to related clases, both upcast and downcast
@@ -154,7 +175,7 @@ tags: NVIDIA GPU programming
     * Comments: One model can have multiple execution contexts
 3. Copy host input buffer to device input buffer
 4. Pass associated I/O buffers to `exe_context.enqueue()` (async) to execute inference
-    * *Alternative methods*. 
+    * *Alternative methods*.
         * `exe_context.enqueueV2()` (async)
         * `exe_context.execute()` (sync)
         * `exe_context.executeV2()` (sync)
@@ -185,7 +206,7 @@ tags: NVIDIA GPU programming
 
     ```c=
     float* decimate_cuda(
-        float* readbuff, uint32_t nSrcH, uint32_t nSrcW, 
+        float* readbuff, uint32_t nSrcH, uint32_t nSrcW,
         uint32_t nDstH, uint32_t nDstW
     ) {
         size_t  srcStep;
@@ -199,7 +220,7 @@ tags: NVIDIA GPU programming
             (void**)&devSrc, &srcStep, 3 * nSrcW * sizeof(float), nSrcH
         ));
         CUDA_CALL(cudaMemcpy2D(
-            devSrc, srcStep, 
+            devSrc, srcStep,
             readbuff, 3 * nSrcW * sizeof(Npp32f), 3*nSrcW * sizeof(Npp32f), nSrcH, cudaMemcpyHostToDevice
         ));
 
@@ -262,7 +283,7 @@ tags: NVIDIA GPU programming
 * *Idea*. Use a temporary array, preferably pinned, and pack it with the data to be transferred
 
 ### Overlapping data transfers
-**Overlapping kernel execution and data transfer**. 
+**Overlapping kernel execution and data transfer**.
 * *Requirements*.
     * The device must be capable of "concurrently copy and execution"
 
@@ -313,7 +334,7 @@ $\to$ As long as the memory word size is at least as large as the largest primit
     | `long long` | 4-byte aligned |
     | `long double` | 8-byte aligned with C++ builder, 2-byte aligned with DMC, 4-byte aligned with GCC |
 
-* *Structures*. 
+* *Structures*.
     * *Before compilation*. Before compilation, the structure is 8-byte-sized
 
         ```c++
@@ -327,7 +348,7 @@ $\to$ As long as the memory word size is at least as large as the largest primit
         ```
 
     * *After compilation*. After compilation, data structures will be supplemented with padding bytes to ensure a proper alignment for each of its members, i.e.
-        
+
         ```c++
         struct MixedData  /* After compilation in 32-bit x86 machine */
         {
@@ -374,7 +395,7 @@ $\to$ As long as the memory word size is at least as large as the largest primit
 
     >**NOTE**. We should ensure that global memory accesses are coalesced whenever possible
 
-    * *Access requirements for coalescing*. 
+    * *Access requirements for coalescing*.
         * *Compute capability 6.0 or higher*. The concurrent accesses of the threads of a warp will coalesce into a number of transactions equal to the number of 32-byte transactions required to service all of the threads of the warp
 
             >**NOTE**. In these devices, L1-caching is default
@@ -385,7 +406,7 @@ $\to$ As long as the memory word size is at least as large as the largest primit
 
         >**NOTE**. Choosing sensible block sizes, e.g. multiple of the warp size, facilitates memory accesses by warps, which are properly aligned
 
-* *Misaligned data access*. Misaligned data accesses can reduce the bandwidth of the data transfer 
+* *Misaligned data access*. Misaligned data accesses can reduce the bandwidth of the data transfer
     * *Global memory layout*. Arrays allocated in device memory are aligned to 256-byte memory segments by the CUDA driver for efficiency
         * *Explain*. The pointers which are allocated by using any of the CUDA Runtime's device memory allocation functions e.g `cudaMalloc` or `cudaMallocPitch` are guaranteed to be 256 byte aligned, i.e. the address is a multiple of 256
 
@@ -437,9 +458,9 @@ $\to$ To maintain forward compatbility to future hardware and toolkits, and to e
 * *The number of blocks per grid*. The primary concern is keeping the entire GPU busy
 
     $\to$ The number of blocks in a grid should be larger than the number of SMs
-    * *Explain*. 
+    * *Explain*.
         * All SMs have at least one block to execute
-        * There should be multiple active blocks for SM 
+        * There should be multiple active blocks for SM
 
             $\to$ Blocks, which are not waiting for a `__syncthreads()`, can keep the hardware busy
 
@@ -458,17 +479,17 @@ $\to$ To maintain forward compatbility to future hardware and toolkits, and to e
         * Use several smaller thread blocks, rather than one large thread block per SM if latency affects performance
 
             >**NOTE**. This is beneficial particularly to kernels which frequently call `__syncthreads()`
-        
+
     >**NOTE**. When a thread block allocates more registers than are available on a SM
     >$\to$ The kernel launch fails
 
-**Effects of shared memory**. 
-* *Usages of shared memory*. 
+**Effects of shared memory**.
+* *Usages of shared memory*.
     * Help to coalesce or eliminate redundant access to global memory
     * Act as a constraint on occupancy, i.e. increasing the shared memory per block will effectively reduce the occupancy of the kernel
 * *Determining the sensitivity of performance to occupancy*. Through experimentation with the amount of dynamically allocated shared memory
 
-**Concurrent kernel execution**. CUDA streams can be used to 
+**Concurrent kernel execution**. CUDA streams can be used to
 * Overlap kernel execution with data transfers
 * Execute multiple kernels simultaneously to more fully take advantage of the device's SMs (on device with concurrent kernel execution ability only)
 

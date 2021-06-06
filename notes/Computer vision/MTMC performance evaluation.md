@@ -3,6 +3,14 @@ title: MTMC performance evaluation
 tags: Computer vision
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+# Table of Contents
+* [Performance measures](#performance-measures)
+  * [Within-camera issues](#within-camera-issues)
+  * [Handover issues](#handover-issues)
+  * [The truth-to-result match](#the-truth-to-result-match)
+<!-- /TOC -->
+
 ## Performance measures
 ### Within-camera issues
 **Current event-based MTMC tracking performance measures**. Count mismatches bewteen ground-truth and system output through changes of identity over time  
@@ -11,7 +19,7 @@ tags: Computer vision
     * *Consequence*. Inconsistencies if correct identities are crucial
 
 **Idea to quantify the extent of mistakes**. Decide which of the two computed identities we should match with the true identity
-    
+
 $\to$ Once the choice is made, every frame, in which the true identity is assigned to wrong computed identity, is a frame in which the tracker is in error
 
 >**NOTE**. The choice should be made for each tracker, under evaluation, e.g. for each tracker, we choose the output ID which matches the corresponding true ID for most frames, to ensure fair evaluation
@@ -20,13 +28,13 @@ $\to$ Once the choice is made, every frame, in which the true identity is assign
 * *Another point of view for the proposed solution*. The evaluation procedure starts with, for each given computed tracker's output trajectory, choosing the longest ground-truth trajectory as the correct match
 
 ### Handover issues
-**Current event-based MTMC tracking performance measures**. Evaluate handover errors separately from within-camera errors 
-* *Idea*. Whether a mismatch is within-camera or handover depends on the identities associated to 
+**Current event-based MTMC tracking performance measures**. Evaluate handover errors separately from within-camera errors
+* *Idea*. Whether a mismatch is within-camera or handover depends on the identities associated to
     * The last frame, in which a trajectory in seen in one camera
     * The first frame, in which the trajectory is seen in the next camera
 * *Consequence*. This proposition is not very good
 
-**First proposed method**. 
+**First proposed method**.
 * *Idea*. Count the number of incorrectly matched frames (even across different cameras), ragardless of other consideration
 
     $\to$ If only one frame is wrong, the penalty is small
@@ -60,21 +68,21 @@ $\to$ Ground-truth identities are matched to computed identities
 * *Matching idea*.
     * A true trajectory, i.e. a regular node in $V_T$, can be matched with a computed trajectory, i.e. a regular node in $V_C$, or matched with nothing (meaning that the true trajectory is a false negative), i.e. $f_\tau^- \in V_C$
     * A computed trajectory, i.e. a regular node in $V_C$, can be matched with a true trajectory, i.e. a regular node in $V_T$, or matched with nothing (meaning that the computed trajectory is a false positive), i.e. $f_\tau^- \in V_C$
-* *Miss definition*. 
+* *Miss definition*.
     * *Miss definition for two regular nodes $\tau,\gamma$*.
         * *Assumptions*.
             * $\tau(t)$ is the sequence of detections for true trajectory $\tau$, i.e. one detection for each frame $t$ in the set ${\cal{T}}_\tau$ over which $\tau$ extends
             * $\gamma(t)$ is the sequence of detections for computed trajectory $\gamma$, i.e. one detection for each frame $t$ in the set ${\cal{T}}_\gamma$ over which $\gamma$ extends
         * *Miss definition*. Two simultaneous detections $\tau(t)$ and $\gamma(t)$ are a miss if they do not overlap in space
             * *Formula*.
-            
+
             $$m(\tau, \gamma, t, \Delta) = \begin{cases}
             1 & \text{mismatched}\\
             0 & \text{otherwise}
             \end{cases}$$
-            
-            * *Miss definition with spatial overlap measured in the image plane*. $m(\tau, \gamma, t, \Delta) = 1$ when 
-                
+
+            * *Miss definition with spatial overlap measured in the image plane*. $m(\tau, \gamma, t, \Delta) = 1$ when
+
                 $$\text{IOU}(\tau(t), \gamma(t)) < \Delta$$
 
                 where $\Delta \in (0,1)$

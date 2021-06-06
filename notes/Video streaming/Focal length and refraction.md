@@ -3,6 +3,15 @@ title: Focal length and refraction
 tags: Video streaming
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+# Table of Contents
+* [Focal length and refraction](#focal-length-and-refraction)
+  * [Introduction](#introduction)
+  * [Refraction by lenses](#refraction-by-lenses)
+* [Appendix](#appendix)
+  * [Concepts](#concepts)
+<!-- /TOC -->
+
 # Focal length and refraction
 ## Introduction
 **Focal length of an optical system**. A measure of how strongly the system converges or diverges light
@@ -20,7 +29,7 @@ tags: Video streaming
     $\to$ This brings the rays to focus in a shorter distance, or diverging them more quickly
 * *Field-of-view*. Longer focal length leads to higher magnification and a narrower angle of view
 
-**Thin lens approximation**. 
+**Thin lens approximation**.
 * *Focal length*. The distance from the center of the lens to the principal focal points of the lens
     * *Convex lens*. The distance, at which a beam of collimated light will be focused to a single spot
         * *Focal length's sign*. Positive, i.e. converging
@@ -54,7 +63,7 @@ tags: Video streaming
         <figcaption>Compression of wave</figcaption>
     </div>
 
-* *Snell's law*. 
+* *Snell's law*.
 
     <div style="text-align:center">
         <img src="/media/Oz9MimS.png">
@@ -69,13 +78,13 @@ tags: Video streaming
 * *Generalization*. Snell's law is applicable for all kinds of waves, e.g. acoustics, water waves, etc., not only light waves
 
 **Refraction by lenses**.
-* *Refraction by converging lens*. 
+* *Refraction by converging lens*.
     * *Refraction points*.
         * As a ray of light enters a lens, it is refracted
         * As a ray of light exits a lens, it is refracted again
     * *Consequence*. Images are formed depending on the geometric shape of the lens
 * *Refraction model of lights*.
-    
+
     <div style="text-align:center">
         <img src="/media/dtNrX4B.png">
         <figcaption>Incident rays traveling parallel to the principle axis</figcaption>
@@ -90,7 +99,7 @@ tags: Video streaming
 ## Concepts
 **Lenses**. A carefully ground or molded piece of transparent material which refracts light rays to form an image
 
-**Types of lenses**. 
+**Types of lenses**.
 * *Convex lenses*.
     * *Plano-convex*. Flat on one side and convex on the other
     * *Bi-convex*. Convex on both sides

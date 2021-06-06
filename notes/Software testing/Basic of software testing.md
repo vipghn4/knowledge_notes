@@ -3,8 +3,20 @@ title: Basic of software testing
 tags: Software testing
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Software testing life cycle](#software-testing-life-cycle)
+  * [Phases and activities](#phases-and-activities)
+  * [Testing principles](#testing-principles)
+* [Software testing methods](#software-testing-methods)
+  * [Static testing](#static-testing)
+  * [Dynamic testing](#dynamic-testing)
+    * [Types](#types)
+  * [Black box testing](#black-box-testing)
+  * [White box testing](#white-box-testing)
+  * [Agile testing](#agile-testing)
+* [References](#references)
+<!-- /TOC -->
 
 # Software testing life cycle
 ## Phases and activities
@@ -30,7 +42,7 @@ tags: Software testing
 * Testing shows the presence of defects, not their absense
 * Exhaustive testing is impossible
     * *Explain*. There is an infinite number of scenarios, environments, and paths to
-        
+
         $\to$ It is technically impossible to test all of them
 * Early testing saves time and money
 * Defects cluster together
@@ -80,7 +92,7 @@ tags: Software testing
     * *Purpose*. Find defects, evaluate quality standards, assess individual performance, or identify process improvement areas
     * *Conduction*. Formally with a defined process and documentation, by seniors or experts and more rigorous than reviews
 
-**Guidelines**. 
+**Guidelines**.
 1. Make sure the objectives of each static testing are clear
 2. Clarify the roles and responsibilities of each person involved
 3. Select the specific static testing type, i.e. review, walkthrough, or inspection, appropriate to the type and level of work products and participants
@@ -110,7 +122,7 @@ tags: Software testing
 >$\to$ The defects in that documentation will not be detected through testing
 
 **Smoke testing (build verification testing)**. Comprise of a non-exhaustive set of tests aiming at ensuring that the most important functions work
-* *Purpose*. 
+* *Purpose*.
     * Decide if a build is stable enough to proceed with further testing
     * Decide whether to announce a production release or to revert
     * EXpose integration and major problems early in the cycle
@@ -142,12 +154,12 @@ $\to$ Confirmation testing is performed after fixing a defect to confirm that a 
 
         $\to$ This is costly in terms of time and effort and may not always be feasible
     * *Partial regression test*. Certain test cases are selected and run while others are left out
-        * *General prioritization*. Prioritize test cases based on 
-            * Business impact 
+        * *General prioritization*. Prioritize test cases based on
+            * Business impact
             * Critical features
             * Frequently used functionalities
             * Complex implementation and buggy areas of the software
-        * *Version-specific prioritization*. Prioritize test cases based on 
+        * *Version-specific prioritization*. Prioritize test cases based on
             * What changes have been made in the version of software
             * The likely areas in the software that might have been impacted due to those changes
 
@@ -189,13 +201,13 @@ $\to$ Confirmation testing is performed after fixing a defect to confirm that a 
 **Levels**. Integration testing, system testing, and acceptance testing
 
 **Techniques**.
-* *Equivalance partitioning*. 
+* *Equivalance partitioning*.
     1. Divide input values into valid and invalid partitions
     2. Select representative values from each partition as test data
 * *Boundary value analysis*.
     1. Determine boundaries for input values
     2. Select values which are at the boundaries and just inside / outside of the boundaries as test data
-* *Cause-effect graphing*. 
+* *Cause-effect graphing*.
     1. Identify the cases (input conditions) and effects (output conditions)
     2. Produce a cause-effect graph
     3. Generate test cases accordingly to the graph

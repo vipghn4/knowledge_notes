@@ -3,8 +3,12 @@ title: 28082020 Cleaning plan
 tags: Plans
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Cleaning plan](#cleaning-plan)
+  * [General plan](#general-plan)
+  * [TODO list](#todo-list)
+<!-- /TOC -->
 
 # Cleaning plan
 ## General plan
@@ -28,7 +32,7 @@ tags: Plans
             - [ ] Clean rooms
         - [ ] Rearrange things
     - [ ] Inner room of 3rd floor
-- [ ] *HackMD notes* 
+- [ ] *HackMD notes*
     - [ ] Standardize notes
         - [ ] Create writing convention for types of notes
         - [ ] Learn about these features: Multi-tag notes, Directories
