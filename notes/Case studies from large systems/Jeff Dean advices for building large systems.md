@@ -3,8 +3,19 @@ title: Jeff Dean advices for building large systems
 tags: Case studies from large systems
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Case studies from large systems](#case-studies-from-large-systems)
+  * [Designs, lessions and advice from building large distributed systems - Jeff Dean](#designs-lessions-and-advice-from-building-large-distributed-systems---jeff-dean)
+    * [Indexing systems](#indexing-systems)
+    * [System building experiences](#system-building-experiences)
+    * [Patterns](#patterns)
+    * [Other notes](#other-notes)
+  * [Software engineering advice from building large-scale distributed systems - Jeff Dean](#software-engineering-advice-from-building-large-scale-distributed-systems---jeff-dean)
+    * [Google engineering environment](#google-engineering-environment)
+    * [Appendix](#appendix)
+      * [Tricks](#tricks)
+<!-- /TOC -->
 
 # Case studies from large systems
 ## Designs, lessions and advice from building large distributed systems - Jeff Dean
@@ -42,7 +53,7 @@ tags: Case studies from large systems
         3. The program then contacts and receives the data from the chunkserver directly
 * *Workspace*. Unlike most other file systems, GFS is not implemented in the kernel of an OS, but is provided as a userspace library
 
-**MapReduce**. 
+**MapReduce**.
 * *Motivation*. In 2003, Jeff Dean et. al. started working on re-writing Google's indexing system
     * *Phases of indexing*. Start with raw page contents on disk
         * Eliminate duplications
@@ -106,7 +117,7 @@ tags: Case studies from large systems
 $\to$ This serves as a basis for custom remote procedure call (RPC) system, which is used for nearly all inter-machine communication at Google
 * *Objectives*. Extensible, efficient, compact, easy-to-use, cross-language, and self-describing
 * *Example*. Protocol buffers (`protobuf`)
-    * *Idea*. 
+    * *Idea*.
         * Data structures (messages) and services are described in a `.proto` file and compiled with `protoc`
 
             $\to$ The compiler generates code which can be invoked by a sender or recipient of these data structures
@@ -157,9 +168,9 @@ $\to$ Keep likely features in mind as we design base system
 
     >**NOTE**. More than 100x probably requires rethink and rewrite
 
-### Patterns 
+### Patterns
 **Single master, 1000s of workers**.
-* *Idea*. 
+* *Idea*.
     * Master controls global operation of systems, e.g. load balancing, work assignment, failure handling, etc.
     * Client interaction with master is fairly minimal
 * *Examples*. GFS, BigTable, MapReduce, transfer service, cluster scheduling system, etc.
@@ -269,7 +280,7 @@ $\to$ Keep likely features in mind as we design base system
         * Realtime and base, i.e. high number of docs, fresh, low money per doc
 
 ### Other notes
-**Add sufficient monitoring / status / debugging hooks**. 
+**Add sufficient monitoring / status / debugging hooks**.
 * *Google's case study*. All of Google's servers
     * Export HTML-based status pages for easy  diagnosis
     * Export a collection of key-value pairs via a standard interface
@@ -296,7 +307,7 @@ $\to$ Keep likely features in mind as we design base system
 * *Choices*.
     * *Consistent operations*. Often impose additional latency for common case
     * *Inconsistent operations*. Better performance and availability, but apps harder to write and reason about in this model
-    
+
     >**NOTE**. Many apps need to use a mix of both of these
     >* *Example*. In Gmail, marking a message as read is asynchronous, sending a message is a heavier-weight consistent operation
 
@@ -313,7 +324,7 @@ $\to$ Keep likely features in mind as we design base system
 **Sharing in storage and retrieval systems**. Storage and retrieval systems with mix of private, semi-private, widely shared, and public documents
 * *Example*. Email, shared doc among 10 people, messages with group with 100,000 members, or public web pages
 * *Objective*. Building storage and retrieval systems, which efficiently deal with access control lists (ACLs) varying widely in size
-    
+
     >**NOTE**. Best solution for doc shared with 10 people is different than for doc shared with the world
 
     >**NOTE**. Sharing patterns of a document might change over time
@@ -348,7 +359,7 @@ $\to$ Keep likely features in mind as we design base system
     * Document precisely, but avoid constraining implementation
 
         >**NOTE**. It it very important to be able to re-implement
-    
+
     * Get feedback on our interfaces before implementing
     * Best way to learn is to look at well-designed interfaces
 
@@ -361,7 +372,7 @@ $\to$ Keep likely features in mind as we design base system
 **Threads**. If we are not using threads, we are wasting ever larger fractions of typical machines
 * *Explain*. Threading our application can help both throughput and latency
 
-**Understanding data access**. 
+**Understanding data access**.
 * *Data access*.
     * *Disks*. Seesk, sequential reads, etc.
     * *Memory*. Caches, branch predictors, etc.
@@ -378,7 +389,7 @@ $\to$ Keep likely features in mind as we design base system
 * *Libraries for data encoding and compression*. There are many tradeoffs, e.g. space, encoding / decoding speeds, etc.
 
 **System robustness to failures**.
-* *Possible solutions*. 
+* *Possible solutions*.
     * Canary requests
     * Failover to replicas or data centers
     * Bad backend detection, i.e. stop using for live requests until behavior gets better
@@ -393,13 +404,13 @@ $\to$ Keep likely features in mind as we design base system
     * Lots of lower-level libraries used by almost everything
     * Higher-level app or domain-specific libraries
     * Application specific code
-* *Benefits*. 
+* *Benefits*.
     * Improvements in core libraries benefit everyone
     * Easy to reuse code which someone else has written in another context
 * *Drawbacks*. Reuse sometimes leads to tangled dependencies
 * *Source code searching*. Essential to be able to easily search whole source base
     * *Tools*. `gsearch`, i.e. internal tool for fast searching of source code
-    * *Benefits*. 
+    * *Benefits*.
         * Huge productivity boost, i.e. easy to find uses, defs, examples, etc.
         * Make large-scale refactoring or renaming easier
 
@@ -422,7 +433,7 @@ $\to$ Keep likely features in mind as we design base system
     2. Go find some people and chat at a whiteboard, especially people familiar with buidling similar systems
     3. It is even better to discuss a few different potential designs and evaluate
 
-**Designing efficient systems**. 
+**Designing efficient systems**.
 * *Important skill 1*. Given a basic problem definition, how do we choose the best solution
 * *Important skill 2*. Ability to estimate performance of a system design, without actually having to build it
 

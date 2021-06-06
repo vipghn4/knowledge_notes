@@ -3,6 +3,19 @@ title: DriveOS architecture
 tags: Case studies from large systems
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+# Table of Contents
+* [NVIDIA DRIVE OS 5.1 Linux SDK](#nvidia-drive-os-51-linux-sdk)
+  * [Platform software stacks](#platform-software-stacks)
+    * [Foundation service stack](#foundation-service-stack)
+    * [Foundation virtualization stack](#foundation-virtualization-stack)
+    * [NvMedia architecture](#nvmedia-architecture)
+      * [NvMedia stack](#nvmedia-stack)
+      * [NvMedia API architecture](#nvmedia-api-architecture)
+* [Appendix](#appendix)
+  * [Concepts](#concepts)
+<!-- /TOC -->
+
 # NVIDIA DRIVE OS 5.1 Linux SDK
 ## Platform software stacks
 **Drive OS stack**.
@@ -53,11 +66,11 @@ $\to$ Multiple guest OSes can run on the hardware, with the Hypervisor managing 
 * *Partition loader*. Load the Guest OS
 * *Monitor partition*. Maintain and monitor the per-guest health using Watchdog timer
 * *Resource manager server partition*. Manage the server partitions for the various virtualized component servers
-* *Boot and power manager processor (BPMP)*. 
+* *Boot and power manager processor (BPMP)*.
     * During boot, BPMP executes the boot ROM code, and controls the SoC boot sequence
     * After boot, BPMP runs power management functions
 * *Audio*. Provide Audio Server which para-virtualizes the Audio Processing Engine (APE) of the Tegra device
-* *I2C*. 
+* *I2C*.
     * Allow multiple guests to access the same I2C controller, without requiring prior information
     * Provide a framework to assign slaves to one or more guests
 * *Virtual system configuration storage*. Manage the storage configuration files, which are required for flashing script to identify the hypervisor and guest partitions to be flashed
@@ -115,7 +128,7 @@ $\to$ Multiple guest OSes can run on the hardware, with the Hypervisor managing 
     * *IPP framework*. Process incoming image data with AE, AWB controls, and include the ISP processing capability
 
         >**NOTE**. IPP framework supports camera tuning tools
-    
+
     * *Image signal processor (ISP)*. Provide the ability to capture data over the CSI interface
     * *Image 2D*. Provide the ability to perform manipulation of image data, e.g. cropping, scaling, copying, and converting format
     * *Image encode processing (IEP)*. Provide the ability to encode processed YUV-420 or RGB surface inputs to H264, H265, and JPEG formats

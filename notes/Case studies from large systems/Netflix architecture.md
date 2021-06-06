@@ -3,10 +3,28 @@ title: Netflix architecture
 tags: Case studies from large systems
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+# Table of Contents
+* [A design analysis of cloud-based micro-services architecture at Netflix](#a-design-analysis-of-cloud-based-micro-services-architecture-at-netflix)
+  * [Introduction](#introduction)
+  * [Architecture](#architecture)
+  * [Playback architecture](#playback-architecture)
+  * [Backend architecture](#backend-architecture)
+  * [Components](#components)
+  * [Design goals](#design-goals)
+  * [Tradeoffs](#tradeoffs)
+  * [Resilience](#resilience)
+  * [Scalability](#scalability)
+  * [Conclusion](#conclusion)
+* [Appendix](#appendix)
+  * [Concepts](#concepts)
+  * [References](#references)
+<!-- /TOC -->
+
 # A design analysis of cloud-based micro-services architecture at Netflix
 ## Introduction
 **Netflix**. One of the best online subscription-based video streaming services in the world up to 2021
-* *Scale at 2019*. 
+* *Scale at 2019*.
     * *Subscribers*. 167M subscribers, 5M new subscribers added every quarter, and over 200 countries
     * *Requests*. 165M hours of watching over 4K films and 47K episodes daily
 * *Consequence*. Netflix technical teams have design such an amazing video streaming system with very high availability and scalability to serve their customers globally
@@ -27,7 +45,7 @@ tags: Case studies from large systems
         * *Cons*. Significant improvement in  scalability and service availability
 * *Microservices*. Microservices targets the problems of monolith software design by encouraging separation of concerns
     * *Separation of concerns*. Big programs are broken into smaller software components by modularity with data encapsulation on its own
-    * *Benefits*. 
+    * *Benefits*.
         * Increase the scalability via horizontal scaling and workload partitioning
         * Engineers can easily change any services which lead to faster deployments
         * Engineers can track the performance of each service, and quickly isolate its issues from other running services

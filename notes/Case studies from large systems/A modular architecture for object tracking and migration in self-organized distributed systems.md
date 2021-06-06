@@ -3,8 +3,16 @@ title: A modular architecture for object tracking and migration in self-organize
 tags: Case studies from large systems
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-
+* [A modular architecture for object tracking and migration in self-organized distributed systems](#a-modular-architecture-for-object-tracking-and-migration-in-self-organized-distributed-systems)
+  * [Problem formulation](#problem-formulation)
+  * [Architecture of an invididual node](#architecture-of-an-invididual-node)
+  * [Modular architecture for object tracking and migration](#modular-architecture-for-object-tracking-and-migration)
+    * [Stand-alone node](#stand-alone-node)
+    * [Communicating nodes](#communicating-nodes)
+  * [Use-case](#use-case)
+<!-- /TOC -->
 
 # A modular architecture for object tracking and migration in self-organized distributed systems
 ## Problem formulation

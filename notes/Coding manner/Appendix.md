@@ -3,8 +3,13 @@ title: Appendix
 tags: Coding manner
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Appendix](#appendix)
+  * [Coding conventions](#coding-conventions)
+    * [Python](#python)
+  * [Best practices](#best-practices)
+<!-- /TOC -->
 
 # Appendix
 ## Coding conventions
@@ -94,7 +99,7 @@ tags: Coding manner
         """
     ```
 
-**Flask**. 
+**Flask**.
 * *Flask basic*. http://exploreflask.com/en/
 
 ## Best practices
@@ -113,10 +118,10 @@ tags: Coding manner
         ```python=
         def read_image(path):
             pass
-        
+
         def process_image(image):
             pass
-        
+
         def display(result):
             pass
         ```
@@ -138,7 +143,7 @@ tags: Coding manner
         def read_image(path):
             image = cv2.imread(path)
             return image
-        ``` 
+        ```
 
 
 **Class**
@@ -150,7 +155,7 @@ tags: Coding manner
         def __init__(self):
             pass
     ```
-    
+
     instead of
 
     ```python

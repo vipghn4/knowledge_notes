@@ -3,8 +3,11 @@ title: Industrial problems
 tags: Case studies from large systems
 ---
 
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-[toc]
+* [Industrial problems](#industrial-problems)
+  * [Camera processing nodes synchronization](#camera-processing-nodes-synchronization)
+<!-- /TOC -->
 
 # Industrial problems
 ## Camera processing nodes synchronization
@@ -13,7 +16,7 @@ tags: Case studies from large systems
 $\to$ How can a server synchronizes outputs of the processing nodes
 
 **Solution from Sinh**.
-* *Key ideas*. 
+* *Key ideas*.
     * Keep the processing time of the processing nodes uniform with each other
         * *Method*.
             * Increase processing time of the faster nodes, i.e. by doing more tasks
