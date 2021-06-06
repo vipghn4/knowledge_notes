@@ -13,16 +13,12 @@
 ## Directory convention
 All directories in the repository must obey the following conventions
 
-[README](/README.md)  
-
 ### Directory structure
 **Master note**. Each directory containing notes about a book or a field or something similar, must have a master note
 * *Example*. Directory about OS should have a master note `Master note.md`
 * *Master note content*. Master note contains links to notes in the directory with clear naming and explanation of each note
 
     $\to$ The naming and explanation of each note must be detail enough for readers to easily see what note they are seeking for
-
-**Medias used in notes**. All medias used in a note must be put in the `media` directory, and be referenced with relative path from the project root
 
 ### Main directories
 **`notes/`**. Knowledge notes directory
@@ -91,5 +87,17 @@ tags: Operating system
 ```
 
 ### Body
+**Medias used in notes**. All medias used in a note must be put in the `media` directory, and be referenced with relative path from the project root, e.g. `/media/some-image.jpg`
+
+**Image**. Each image must be located at the center of the note width, with clear captioning
+
+```html
+<div style="text-align:center">
+    <img src="path/to/image">
+    <figcaption>Caption for image</figcaption>
+</div>
+```
+
+**Code snippet**. Any code snippet must be highlighted with the corresponding language
 
 ### Footer
