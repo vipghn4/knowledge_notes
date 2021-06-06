@@ -4,7 +4,7 @@ tags: Case studies from large systems
 ---
 
 # Table of Contents
-[toc]
+
 
 # A modular architecture for object tracking and migration in self-organized distributed systems
 ## Problem formulation
@@ -69,7 +69,7 @@ tags: Case studies from large systems
 
 >**NOTE**. To keep the architecture as general as possible, no initial communication restrictions on the network's capacity are assumed
 
-**Usage of communication by a node**. 
+**Usage of communication by a node**.
 * To improve the estimation of an object's track by fusing a node's local detections and / or estimated tracks with those of neighboring nodes
 * Guarantee correct object migration through the networked system by propagating objects to neighboring nodes
 
@@ -86,12 +86,12 @@ tags: Case studies from large systems
     * *Additional operations*.
         * *Send raw detections*. Add each new detection of fuse-in data to fuse-out data
         * *Send processed detection*. Build both fuse-out detections and fuse-out tracks based on detections and tracked, at each sample instant
-        * *Receive fuse*. 
+        * *Receive fuse*.
             * Stack the diffrerent detections of fuse-in data into one local set of received detections
             * Stack the diffrerent tracks of fuse-in data into one local set of received tracks
         * *Detect fusion*. Fuse the local detections with the received ones to determine the fused detection set
         * *Track fusion*. Fuse the local tracks with the received ones to determine the fused track set
-* *Migration of objects*. 
+* *Migration of objects*.
 
     <div style="text-align:center">
         <img src="/media/LdpnPsr.png">
@@ -112,11 +112,11 @@ tags: Case studies from large systems
             $\to$ If an object fits the criteria, then it is copied to the set of propagate objects, and the receiving node ID is added to the object
         * *Add objects*. Add received objects of propagate objects set properly to a node's local set objects
     * *Performing the second task*. To decide when to remove an object, a node can receive information from neighboring nodes
-        * *Example*. 
+        * *Example*.
             * A neighboring node can notify that an object, which the current node propagated, is currently detected
             *  A node can check the recevied set, i.e. fuse-in, on whether one of its propagated objects was detected at a neighboring node
         *  *Consequence*. The following functions must be defined
-            *  *Help object migration*. 
+            *  *Help object migration*.
                 1. Check which local objects, which fit certain criteria, contain useful information for the neighboring node which propagated the object
                 2. Add this information in the object's take-over field
             * *Successful object migration*. Update certain fields of local objects, e.g. take-over field, using the received object take-over sets and fuse-in data

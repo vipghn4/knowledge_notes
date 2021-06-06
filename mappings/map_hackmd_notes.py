@@ -74,10 +74,12 @@ def _save_all_images_to_local(lines, image_dir):
     return lines
 
 def _get_image_link_from_md_link(line):
+    r"""Get image link from Markdown image link"""
     link = line[line.find("(")+1:line.rfind(")")]
     return link
 
 def _get_image_link_from_html_tag(line):
+    r"""Get image link from HTML tag"""
     soup = BeautifulSoup(line, features="lxml")
     return soup.img["src"]
 
@@ -118,6 +120,7 @@ def save_md_file(lines, title, tags, path, dest_note_dir):
                     f.write(line)
     else:
         raise RuntimeError("Cannot save file {}".format(save_path))
+    return save_path
 
 def print_unique_tags(all_tags):
     r"""Print all unique tags and their counts in HackMD raw note directory"""
@@ -145,7 +148,7 @@ if __name__ == "__main__":
 
     all_tags = []
     for path in md_paths:
-        print("Processing {}".format(path))
         lines, title, tags = refactor_md_file(path, args.dest_image_dir)
-        save_md_file(lines, title, tags, path, args.dest_note_dir)
+        save_path = save_md_file(lines, title, tags, path, args.dest_note_dir)
         all_tags.append(tags)
+        print("Saved {} to {}".format(path, save_path))
