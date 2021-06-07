@@ -18,4 +18,5 @@ Please checkout [convention for writing notes](/docs/CONVENTION.md) before contr
 
 ## TODO
 - [ ] Fine-grain split tag directories
-- [ ] Double check visualization of images
+- [x] Double check visualization of images
+- [ ] Fix image for `4. Cache memory` and `Appendix` of Computer architecture directory
