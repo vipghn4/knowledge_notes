@@ -48,6 +48,319 @@ $\to$ We need to change elements state to make it do something
 
 **Pipeline running**. Internally, GST will start threads running the pipeline, and take care of message switching from the pipeline's thread into the application's thread, using a `GstBus`
 
+## GLib dynamic type system
+### Data type
+**Data type in GLib**. Much more generic than what is usually understood as an Object type
+* *Implementation*.
+
+    ```cpp
+    typedef struct _GTypeInfo               GTypeInfo;
+    struct _GTypeInfo
+    {
+    /* interface types, classed types, instantiated types */
+    guint16                class_size;
+    
+    GBaseInitFunc          base_init;
+    GBaseFinalizeFunc      base_finalize;
+    
+    /* classed types, instantiated types */
+    GClassInitFunc         class_init;
+    GClassFinalizeFunc     class_finalize;
+    gconstpointer          class_data;
+    
+    /* instantiated types */
+    guint16                instance_size;
+    guint16                n_preallocs;
+    GInstanceInitFunc      instance_init;
+    
+    /* value handling */
+    const GTypeValueTable *value_table;
+    };
+
+    /* used to register new GType in the type system */
+    GType g_type_register_static (GType             parent_type,
+                                const gchar      *type_name,
+                                const GTypeInfo  *info,
+                                GTypeFlags        flags);
+    GType g_type_register_fundamental (GType                       type_id,
+                                    const gchar                *type_name,
+                                    const GTypeInfo            *info,
+                                    const GTypeFundamentalInfo *finfo,
+                                    GTypeFlags                  flags);
+    ```
+
+**Fundamental types**. 
+* *Fundamental and non-fundamental types*.
+    * *Fundamental types*. Top-level types which do not derive from any other type
+    * *Non-fundamental types*. Types which derive from other types
+* *Definition of fundamental and non-fundamental types*.
+    * *Class size*. The `class_size` field in `GTypeInfo`
+    * *Class initialization functions (C++ constructor)*. The `base_init` and `class_init` fields in `GTypeInfo`
+    * *Class destruction functions (C++ destructor)*. The `base_finalize` and `class_finalize` fields in `GTypeInfo`
+    * *Instance size (C++ parameter to `new`)*. THe `instance_size` field in `GTypeInfo`
+    * *Instantiation policy (C++ type of new operator)*. The `n_preallocs` field in `GTypeInfo`
+    * *Copy functions (C++ copy operators)*. The `value_table` field in `GTypeInfo`
+    * *Type characteristic flags*. `GTypeFlags`
+    * *Fundamental flags*. 
+        * Fundamental types are also defined by a set of `GTypeFundamentalFlags` stored in `GTypeFundamentalInfo`
+        * Non-fundamental types are defined by the type of their parent, i.e. `parent_type` to `g_type_register_static` amd `g_type_register_dynamic`
+
+### Copy functions
+**The major common point between all GLib types**. They can all be manipulated through a single API to copy/assign them
+
+**`GValue` structure**. Used as an abstract container for all of the types
+* *`value_table` functions*. `GValue`'s simple API can be used to invoke `value_table` functions registed during type registration
+    * *Example*. `g_value_copy` copies the content of a `GValue` to another `GValue`
+* *Types of copy functions*.
+    * *Copy value*. Allocate a new memory chunk and to copy the data from the source to the destination
+    * *Copy reference*. Increment the reference count of the instance and copy the reference to the new `GValue`
+
+**`GTYpeValueTable`**. Used to specify assignment functions
+
+>**NOTE**. It is very unlikely that we will need to specify a `value_table` during type registration
+>* *Explain*. `value_table`s are inherited from the parent types for non-fundamental types
+
+```cpp
+typedef struct _GTypeValueTable         GTypeValueTable;
+struct _GTypeValueTable
+{
+  void     (*value_init)         (GValue       *value);
+  void     (*value_free)         (GValue       *value);
+  void     (*value_copy)         (const GValue *src_value,
+                                  GValue       *dest_value);
+  /* varargs functionality (optional) */
+  gpointer (*value_peek_pointer) (const GValue *value);
+
+  // data structure description of the type
+  gchar            *collect_format;
+
+  // Assign values in collect_values to value
+  gchar*   (*collect_value)      (GValue       *value,
+                                  guint         n_collect_values,
+                                  GTypeCValue  *collect_values,
+                                  guint                collect_flags);
+  
+  // data structure description of the type
+  gchar            *lcopy_format;
+  
+  // Assign values in value to collected_values
+  gchar*   (*lcopy_value)        (const GValue *value,
+                                  guint         n_collect_values,
+                                  GTypeCValue  *collect_values,
+                                  guint                collect_flags);
+};
+```
+
+* *Reference*. https://developer.gnome.org/gobject/stable/gobject-Type-Information.html#GTypeValueTable
+
+## Signals
+**GObject's singals**. Connect arbitrary application-specific events with any number of listeners
+* *Explain*. In GTK+, every user event is received from the windowing system and generates a GTK+ event in the form of a signal emission on the widget object instance
+
+>**NOTE**. GObject signal is different from standard UNIX signals
+
+* *Signal registration*. Each signal is registered in the type system, with the type on which it can be emitted
+* *Signal connection*. Users of the type are said to *connect to* the signal on a given type instance when they register a closure to be invoked upon the signa emission
+    * *Signal closure*. Represent callbacks, whose signature looks like
+
+        ```cpp
+        return_type function_callback (gpointer instance, …, gpointer user_data);
+        ```
+
+    * *Closure invocation*. When a signal is emitted on a given type instance
+
+        $\to$ All the closures connected to this signal on this type instance will be invoked
+* *Signal emission*. Users can emit the signal themselves, or stop the emission of the signal from within one of the closures connected to the signal
+
+### Signal registration
+**Signal registration on an existing type**. Use functions `g_signal_new...()`
+
+```cpp
+guint g_signal_newv (const gchar        *signal_name,
+                    GType               itype,
+                    GSignalFlags        signal_flags,
+                    GClosure           *class_closure,
+                    GSignalAccumulator  accumulator,
+                    gpointer            accu_data,
+                    GSignalCMarshaller  c_marshaller,
+                    GType               return_type,
+                    guint               n_params,
+                    GType              *param_types);
+```
+
+**Signal registration parameters**.
+* *`signal_name`*. A string uniquely identifying a given signal
+* *`itype`*. The instance type, on which this signal can be emitted
+* *`signal_flags`*. Partial definition of the order, in which closures connected to the signal are invoked
+* *`class_closure`*. The default closure for the signal
+
+    >**NOTE**. This is not NULL upon the signal emission
+
+* *`accumulator`*. A function pointer invoked after each closure has been invoked
+    * *Return value*. If `FALSE` then signal emission is stopped, otherwise signal emission proceeds normally
+    * *Usage*. Compute the return value of the signal, based on the return value of all the invoked closures
+* *`accu_data`*. The pointer to be passed down to each invocation of the accumulator during emission
+* *`c_marshaller`*. The default C marshaller for any closure, which is connected to the signal
+* *`return_type`*. The type of the return value of the signal
+* *`n_params`*. The number of parameters this signal takes
+* *`param_types`*. An array of GTypes indicating the type of each parameter of the signal
+
+### Signal connection
+**Possibilities when connecting to a signal with a closure**.
+* *Case 1*. We can register a class closure at signal registration
+
+    $\to$ The class closure will be invoked during each emission of a given signal, on any of the instances of of the type supporting that signal
+* *Case 2*. Use `g_signal_override_class_closure`, which overrides the class closure of a given type
+
+    >**NOTE**. It is possible to call this function only on a derived type of the type, on which the signal was registered
+
+* *Case 3*. We can register a closure with `g_signal_connect`
+
+    $\to$ The closure will be invoked only during emission of a given signal on a given instance
+
+**Emission hook**. Invoked whenever a signal signal is emitted, whatever the instance on which it is emitted
+
+### Signal emission
+**Signal emission**. Use `g_signal_emit` family of functions
+
+```cpp
+void g_signal_emitv (const GValue *instance_and_params,
+                     guint         signal_id,
+                     GQuark        detail,
+                     GValue       *return_value);
+```
+
+* *Emission parameters*.
+    * *`instance_and_params` array*. Contain the list of input parameters to the signal
+        * *First element*. The instance pointer, on which to invoke the signal
+        * *Following elements*. Contain the list of parameters to the signal
+    * *`signal_id`*. Identify the signal to invoke
+    * *`detail`*. Identify the specific detail of the signal to invoke
+        * *Explain*. A detail is a kind of magic token/argument, which is passed aroung during signal emission
+        * *Usage*. Used by closures connected to the signal to filter out unwanted signal emissions
+
+        >**NOTE**. For most cases, we can safely set this value to zero
+
+    * *`return_value`*. Hold the return value of the last closure invoked during emission if no accumulator was specified
+
+        >**NOTE**. If an accumulator is specified during signal creation, this accumulator is used to calculated the return value
+
+        >**NOTE**. If no closure is invoked during emission, `return_value` is nonetheless initialized to zero/null
+
+**Steps of signal emission**. There are 5 steps
+1. *`RUN_FIRST`*. If `G_SIGNAL_RUN_FIRST` flag was used during signal registration, and if there exists a class closure for this signal
+
+    $\to$ The class closure is invoked
+2. *`EMISSION_HOOK`*. If any emission hook was added to the signal
+
+    $\to$ They are invoked from first to last added, and their return values are accumulated
+3. *`HANDLE_RUN_FIRST`*. If any closure were connected with the `g_sinal_connect` family of functions, and if they are not blocked by `g_signal_handler_block` family of functions
+
+    $\to$ They are run from first to last connected
+4. *`RUN_LAST`*. If the `G_SIGNAL_RUN_LAST` flag was set during registration, and if a class closure was set
+
+    $\to$ It is invoked here
+5. *`HANDLER_RUN_LAST`*. If any closure were connected with the `g_sinal_connect_after` family of functions, and if they are not invoked during `HANDLER_RUN_FIRST`, and if they are not blocked
+
+    $\to$ They are run from first to last connected
+6. *`RUN_CLEANUP`*. If the `G_SIGNAL_RUN_CLEANUP` flag was set during registration, and if a class closure was set
+
+    $\to$ It is invoked here, and the emission is completed
+
+**Special states**.
+* *`RUN_CLEANUP` state*. If, at any point during emission, except in `RUN_CLEANUP` or `EMISSION_HOOK` state, one of the closures stops the signal emission with `g_signal_stop_emission`
+
+    $\to$ Emission jumps to `RUN_CLEANUP` state
+* *`RUN_FIRST` state*. If, any point during emission, one of the closures or emission hook emits the same signal on the same instance
+
+    $\to$ Emission is restarted from the `RUN_FIRST` state
+
+**Accumulator function**. Invoked in all states, after invocation of each closure, except in `RUN_EMISSION_HOOK` and `RUN_CLEANUP`
+
+>**NOTE**. If, at any point, the accumulator function return `FALSE`, the emission jumps to `RUN_CLEANUP` state
+
+>**NOTE**. If no accumulator function was provided, the value returned by the last handler run will be returned by `g_signal_emit`
+
+### References
+* https://developer.gnome.org/gobject/stable/signal.html
+
+## Events
+### Downstream events
+**Downstream events**. Received through the sink pad's event handler, as set using `gst_pad_set_event_function()` when the pad was created
+* *Traveling methods*.
+    * *In-band traveling*. Serialized with the buffer flow
+    * *Out-of-band traveling*. 
+        * Traveling through the pipeline instantly, possibly not in the same thread as the streaming thread which is processing the buffers
+        * Skipping ahead of buffers being processed or queued in the pipeline
+* *Common in-band downstream events*. `SEGMENT`, `CAPS`, `TAG`, `EOS`
+
+**Event function**.
+* *Typical implementation*.
+
+    ```cpp
+    static gboolean
+    gst_my_filter_sink_event (GstPad  *pad, GstObject * parent, GstEvent * event)
+    {
+    GstMyFilter *filter;
+    gboolean ret;
+
+    filter = GST_MY_FILTER (parent);
+    ...
+
+    switch (GST_EVENT_TYPE (event)) {
+        case GST_EVENT_SEGMENT:
+        /* maybe save and/or update the current segment (e.g. for output
+        * clipping) or convert the event into one in a different format
+        * (e.g. BYTES to TIME) or drop it and set a flag to send a segment
+        * event in a different format later */
+        ret = gst_pad_push_event (filter->src_pad, event);
+        break;
+        case GST_EVENT_EOS:
+        /* end-of-stream, we should close down all stream leftovers here */
+        gst_my_filter_stop_processing (filter);
+        ret = gst_pad_push_event (filter->src_pad, event);
+        break;
+        case GST_EVENT_FLUSH_STOP:
+        gst_my_filter_clear_temporary_buffers (filter);
+        ret = gst_pad_push_event (filter->src_pad, event);
+        break;
+        default:
+        ret = gst_pad_event_default (pad, parent, event);
+        break;
+    }
+
+    ...
+    return ret;
+    }
+    ```
+
+* *Chain-based elements*. If our element is chain-based, we will almost always have to implement a sink event function
+    * *Explain*. This is how we are notified about segments, caps, and EOS
+* *Exclusively loop-based*. We may or may not want a sink event function
+    * *Explain*. Since the element is driving the pipeline, it will know the stream length in advance or be notified by the flow return value of `gst_pad_pull_range()`
+
+### Upstream events
+**Upstream events**. Generated by an element somehwere downstream in the pipeline
+* *Most common upstream events*. Seek events, QoS (quality-of-service), and reconfigure events
+* *Send upstream event*. Use `gst_pad_send_event` function
+    * *Mechanism*. 
+        1. The function calls the default event handler of the pad, which is `gst_pad_event_default`
+        2. The function sends the event to the peer of the internally linked pad
+
+            $\to$ Upstream events always arrive on the src pad of our element, and are handled by the default event handler, except if we override that handler
+* *Custom upstream event handler*. We need this if
+    * *Case 1*. We have multiple sink pads in our element, and we have to decide which one of the sink pads will receive the event
+    * *Case 2*. We need to handle the event locally, e.g. a navigation event which we want to convert before sending upstream, or a QoS event we want to handle
+
+**Rules for custom event handler**.
+* Aways handle events we will not handle using `gst_pad_event_default` method
+    * *Explain*. `gst_pad_event_default` will depend on the event, forward the event or drop it
+* If we are generating some new event based on the one we received, do not forget to `gst_event_unref` the event we received
+* Event handler function are supposed to return `TRUE` or `FALSE` indicating if the event has been handled or not
+* The event handler might be called from a different thread than the streaming thread
+
+    $\to$ Make sure we use appropriate locking everywhere
+
 ## GstBaseTransform
 **GstBaseTransform**. The base class for filter elements which process data
 * *Suitable elements*. Ones where the size and caps of the output is known entirely from the input caps and buffer sizes
@@ -381,3 +694,13 @@ $\to$ The most complicated work is done in the source pads
 * *References*.
     * http://eisfuchs.info/eisfuchs/gstreamer/
     * https://gstreamer.freedesktop.org/documentation/application-development/basics/pads.html?gi-language=c#visualisation-of-a-gstbin-------element-with-a-ghost-pad
+
+**Peaking and poking with pointers**.
+* *`PEEK` command*. Return the byte value at a memory location
+* *`POKE` command*. Set the value of a memory location
+
+**Function closure**. A record storing a function together with an environment
+* *Envonrment*. A mapping associating each free variable of the function with the value or reference, to which the name was bound when the closure was created
+    * *Free variable of a function*. Variables used locally, but defined in an enclosing scope
+
+**Chain-based and exclusively loop-based elements**.
