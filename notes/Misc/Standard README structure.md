@@ -5,7 +5,8 @@ tags: Misc
 
 <!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-* [README standard structure](#readme-standard-structure)
+- [Table of Contents](#table-of-contents)
+- [README standard structure](#readme-standard-structure)
 <!-- /TOC -->
 
 # README standard structure

@@ -28,7 +28,7 @@
                 * Bài của cô: The maps illustrate the developments with occurred in the town of Y in N between 1990 and 2010
         * Overview: 
             * Bài của cô: In 1990, the town was a much greener residential area with a large number of trees and individual houses, but during the next 20 years, the town experienced a number of dramatic changes
-            * Đối với overview và topic sentence cho các đoạn trong body: Ta dùng 3 cấu trúc sau:
+            * Đối với overview và topic sentence (câu đứng đầu đoạn) cho các đoạn trong body: Ta dùng 3 cấu trúc sau:
                 * S + experienced / saw / witnessed / underwent + adj + noun
                     * CHÚ Ý: chỉ nên chọn 1 từ, VD "experienced" (theo đề xuất của cô giáo)
                 * S + to be + V-ed + adv (or S + to be + adv + V-ed)
