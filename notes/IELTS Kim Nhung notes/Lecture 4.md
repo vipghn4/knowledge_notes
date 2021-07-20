@@ -1,0 +1,12 @@
+
+* Correct translation homework:
+
+    The two maps illustrate the layout of a library 5 years ago and the changes after 5 years. Overall, the library has experienced dramatic changes in terms of / about facilities, room arrangement and extra services, which make the library more space-efficient to serve more people and more purposes. 5 years ago, there were 2 areas of bookshelves at the back and in front of the library. The one at the back, which is larger, has remaine, while the one in front of the library near the entrance has been replaced by a desk for students to use laptops. On the left, while the meeting room has remained, the class has been converted into a recording studio. Meanwhile, a help desk has been added into the area used for borrowings and returns in the past, with a new separate area for readers to turn books being created. On the right-hand side, the replacement of the library office by the conference room has occurred / take place. It is also noticable that those who want to use computers have to bring their laptops and sit in the area where there were desktop computers 5 years ago. In the centre, the previous study tables have given way to 36 individual seats organized into 6 groups, accommodating more people.
+
+* Tricks:
+    * For large area, we use south/north/east/west
+    * For small area, we use left, right, front of, back of, etc.
+    * Occur = take place but take place is more natural
+* Correct Islip writing test:
+    
+    The diagrams illustrate some proposed changes to the central area of the town of Islip. It is clear that the principal change to the town will be the construction of a ring road around the centre. Various other developments regarding to shops and housing will accompany the buildings of this road. Looking at the map of Islip as it is now, we can see that a main road runs through its centre from east to west. The second map shows the planned pedestrianization of this road. Traffic will be diverted onto a dual carriageway which will form a ring around the town centre. Currently, there is a row of shops along either side of the main road. However, it appears that the shops along the north side of the new pedestrian street will be demolished to make way for a bus station, shopping centre, car park and new housing area. The shops along the south side of the street will remain, but it seems that the town's park will be reduced in size so that more new houses can be built within the ring road
