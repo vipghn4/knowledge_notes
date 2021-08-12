@@ -84,7 +84,7 @@
         * Cường độ cập nhật: 1 tuần 1 lần
     * Lưu ý: Doanh nghiệp càng lớn thì phương pháp này càng hiệu quả
 
-**Công thức thành công**. 
+**Công thức thành công**. Tiền = Quan hệ + Vốn + Kiến thức + Kinh nghiệm
 * Tiền, thời gian, và công sức
 * Không được đi cùng đám đông nếu đám đông sai hơn mình
 * Nếu không có đầu tư mà chỉ làm doanh nghiệp thì không có đột phá và thành tựu
