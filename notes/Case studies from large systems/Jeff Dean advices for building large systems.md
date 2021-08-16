@@ -5,16 +5,17 @@ tags: Case studies from large systems
 
 <!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-* [Case studies from large systems](#case-studies-from-large-systems)
-  * [Designs, lessions and advice from building large distributed systems - Jeff Dean](#designs-lessions-and-advice-from-building-large-distributed-systems---jeff-dean)
-    * [Indexing systems](#indexing-systems)
-    * [System building experiences](#system-building-experiences)
-    * [Patterns](#patterns)
-    * [Other notes](#other-notes)
-  * [Software engineering advice from building large-scale distributed systems - Jeff Dean](#software-engineering-advice-from-building-large-scale-distributed-systems---jeff-dean)
-    * [Google engineering environment](#google-engineering-environment)
-    * [Appendix](#appendix)
-      * [Tricks](#tricks)
+- [Table of Contents](#table-of-contents)
+- [Case studies from large systems](#case-studies-from-large-systems)
+  - [Designs, lessions and advice from building large distributed systems - Jeff Dean](#designs-lessions-and-advice-from-building-large-distributed-systems---jeff-dean)
+    - [Indexing systems](#indexing-systems)
+    - [System building experiences](#system-building-experiences)
+    - [Patterns](#patterns)
+    - [Other notes](#other-notes)
+  - [Software engineering advice from building large-scale distributed systems - Jeff Dean](#software-engineering-advice-from-building-large-scale-distributed-systems---jeff-dean)
+    - [Google engineering environment](#google-engineering-environment)
+    - [Appendix](#appendix)
+      - [Tricks](#tricks)
 <!-- /TOC -->
 
 # Case studies from large systems
