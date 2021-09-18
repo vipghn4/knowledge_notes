@@ -8,6 +8,7 @@
 - [Conditional random field (CRF)](#conditional-random-field-crf)
   - [Introduction](#introduction-1)
   - [Description](#description)
+  - [Variants](#variants)
 <!-- /TOC -->
 
 # Background
@@ -37,9 +38,14 @@
 * Markov random field: $X$ form a Markov random field w.r.t $G$ if $X$ satisfy the local Markov properties
 
 **Local Markov properties**:
-* Pairwise Markov property: $X_u$ and $X_v$ are conditionally independent given all other variables
+* Pairwise Markov property: $X_u$ and $X_v$ are conditionally independent given all other variables if they are non-adjacent
+    * *Formula*. $X_u \perp X_v | X_{V\setminus\{u,v\}}$
 * Local Markov property: $X_u$ is conditionally independent of all other variables given its neighbors
+    * *Formula*. $X_v\perp X_{V\setminus N[v]}|X_{N(v)}$
+        * $N(v)$ is the set of neighbors of $v$
+        * $N[v] = v\cup N(v)$ is the closed neighborhood of $v$
 * Global Markov property: any two subsets of variables are conditionally independent given a separating subset
+    * *Formula*. $X_A\perp X_B | X_S$ where every path from a node in $X$ to a node in $B$ passes through $S$
 
 # Conditional random field (CRF)
 ## Introduction
@@ -59,3 +65,20 @@
     * Output variables: $\textbf{Y}$
 
 **Parameter learning**: $\theta$ is learned by maximizing $P(Y_i|X_i; \theta)$ (i.e. maximum likelihood learning)
+
+## Variants
+**Higher-order CRFs and semi-Markov CRFs**.
+* *Higher-order CRFs*. CRFs can be extended into higher order models by making $Y_i$ dependent on a fixed number $k$ of previous variables $Y_{i-k},\dots,Y_{i-1}$ 
+
+    $\to$ Training and inference are only practical for small values of $k$, e.g. $k\leq 5$
+    * *Explain*. The computational costr increases exponentially with $k$
+* *Semi-Markov CRF (semi-CRF)*. Model variable-length segmentations of the label sequence $Y$
+
+**Latent-dynamic CRF (LDCRF)**. A type of CRFs for sequence tagging tasks
+* *Assumptions*.
+    * $\mathbf{x}=(x_1,\dots,x_n)$ are observations
+    * $\mathbf{y}=(y_1,\dots,y_n)$ are labels
+    * $\mathbf{h}$ are random latent variables
+* *Chain rule of probability*. $P(\mathbf{y}|\mathbf{x})=\sum_{\mathbf{h}} P(\mathbf{y}|\mathbf{h},\mathbf{x}) P(\mathbf{h}|\mathbf{x})$
+
+    $\to$ This allows capturing latent structure, between the observations and labels
