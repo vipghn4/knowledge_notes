@@ -5,13 +5,15 @@ tags: Software architecture
 
 <!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-* [Design pattern Tutorialspoint](#design-pattern-tutorialspoint)
-  * [Creational patterns](#creational-patterns)
-  * [Structural patterns](#structural-patterns)
-  * [Behavioral patterns](#behavioral-patterns)
-  * [J2EE patterns](#j2ee-patterns)
-* [Appendix](#appendix)
-  * [Discussion](#discussion)
+- [Table of Contents](#table-of-contents)
+- [Design pattern Tutorialspoint](#design-pattern-tutorialspoint)
+  - [Creational patterns](#creational-patterns)
+  - [Structural patterns](#structural-patterns)
+  - [Behavioral patterns](#behavioral-patterns)
+  - [J2EE patterns](#j2ee-patterns)
+  - [Other patterns](#other-patterns)
+- [Appendix](#appendix)
+  - [Discussion](#discussion)
 <!-- /TOC -->
 
 # Design pattern Tutorialspoint
@@ -500,6 +502,149 @@ $\to$ A proxy controls access to the original object, allowing user to perform s
 ## Behavioral patterns
 
 ## J2EE patterns
+
+## Other patterns
+**Interceptor design pattern**. A software design pattern used when software systems or frameworks want to offer a way to change, or augment, their usual processing cycle
+
+<div style="text-align:center">
+    <img src="https://i.imgur.com/7P4PglI.png">
+    <figcaption>Interceptor design pattern</figcaption>
+</div>
+
+* *Key aspects*. Transparent and automatically
+    * *Explain*. In essence, the rest of the system does not have to know something have been added or changed, and can keep working as before
+    * *Requirements*. 
+        * A predefined interface for extension has to be implemented
+        * Some kind of dispatching mechanism is required, where interceptors are registered, e.g. dynamic, at runtime, or static
+        * Context objects are provided to allow access to the framework's internal state
+* *Motivation*.
+    * *Preprocessing and postprocessing requests*. 
+        * Some of preprocessing and postprocessing actions determine whether the processing will continue
+        * Some of preprocessing and postprocessing actions manipulate the incoming and outgoing data stream into a form suitable for further processing
+    * *Classic solution*. Have a series of conditional checks, with any failed check aborting the request
+        * *Implementation*. Use nested if-else statements (standard strategy)
+        * *Drawback*. This solution leads to code fragility, and a copy-and-paste style of programming
+            * *Explain*. The flow of the filtering and the action of the filters is compiled into the application
+    * *Key idea to solve the problem in a flexible and unobtrusive manner*. Have a mechanism for adding and removing processing components, in which each component completes a specific action
+* *Components of the pattern*.
+    * *Filter manager*. Manage the filter processing, i.e.
+        * Create the filter chain with the appropriate filters, in correct order
+        * Initiate processing
+    * *Filter chain*. An ordered collection of independent filters
+    * *Filters*. Individual filters mapped to a target, whose processing are coordinated by the filter chain
+    * *Target*. The resource requested by the client
+* *Pros and cons*.
+    * *Pros*.
+        * Improved reusability, i.e. command code is centralized in pluggable components enhancing reuse
+        * Improved flexibility, i.e. generic common components can be applied and removed declaratively, improving flexibility
+    * *Cons*. Information sharing is inefficient
+* *Example code*.
+    * *Filters*.
+
+        ```java
+        interface Filter {
+            public void execute(String request);
+        }
+        
+        class AuthenticationFilter implements Filter {
+            public void execute(String request) {
+                System.out.println("Authenticating : " + request);
+            }
+        }
+        
+        class DebugFilter implements Filter {
+            public void execute(String request) {
+                System.out.println("Log: " + request);
+            }
+        }
+        ```
+
+    * *Target*.
+
+        ```java
+        class Target {
+            public void execute(String request) {
+                System.out.println("Executing : " + request);
+            }
+        }
+        ```
+    
+    * *Filter chain*.
+
+        ```java
+        class FilterChain {
+            private List<Filter> filters = new ArrayList<Filter>();
+            private Target target;
+        
+            public void addFilter(Filter filter) {
+                filters.add(filter);
+            }
+        
+            public void execute(String request) {
+                for (Filter filter : filters) 
+                {
+                    filter.execute(request);
+                }
+                target.execute(request);
+            }
+        
+            public void setTarget(Target target) {
+                this.target = target;
+            }
+        }
+        ```
+
+    * *Filter manager*.
+
+        ```java
+        class FilterManager {
+            FilterChain filterChain;
+        
+            public FilterManager(Target target) {
+                filterChain = new FilterChain();
+                    filterChain.setTarget(target);
+            }
+            public void setFilter(Filter filter) {
+                filterChain.addFilter(filter);
+            }
+            
+            public void filterRequest(String request) {
+                filterChain.execute(request);
+            }
+        }
+        ```
+
+    * *Client*.
+
+        ```java
+        class Client {
+            FilterManager filterManager;
+        
+            public void setFilterManager(FilterManager filterManager) {
+                this.filterManager = filterManager;
+            }
+        
+            public void sendRequest(String request) {
+                filterManager.filterRequest(request);
+            }
+        }
+        ```
+    
+    * *Main code*.
+
+        ```java
+        class InterceptingFilter {
+            public static void main(String[] args) {
+                FilterManager filterManager = new FilterManager(new Target());
+                filterManager.setFilter(new AuthenticationFilter());
+                filterManager.setFilter(new DebugFilter());
+        
+                Client client = new Client();
+                client.setFilterManager(filterManager);
+                client.sendRequest("Downloads");
+            }
+        }
+        ```
 
 # Appendix
 ## Discussion
