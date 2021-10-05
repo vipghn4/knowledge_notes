@@ -36,8 +36,8 @@
 **Spectral graph theory**. Study the properties of graphs via the eigenvalues and eigenvectors of a graph via its Laplacian
 
 ## Real-valued functions on graphs
-**Real-valued function on graph**. Any function $f:{\cal{V}} \to\mathbf{R}$
-* *Vector representation*. We can see that $f\in\mathbf{R}^n$ where $n=|{\cal{G}}|$
+**Real-valued function on graph**. Any function $f:{\mathcal{V}} \to\mathbf{R}$
+* *Vector representation*. We can see that $f\in\mathbf{R}^n$ where $n=|{\mathcal{G}}|$
 * *Notation*. $f = (f(v_1),\dots,f(v_n)) = (f(1),\dots,f(n))$
 
 **Adjacent matrix as eigenfunctions**. The eigenvectors of the adjacency matrix $A$ can be seen as eigenfunctions w.r.t linear operator $A$
@@ -60,8 +60,8 @@
 
 **Laplacian matrix of undirected weighted graph**.
 * *Assumption*.
-    * $\cal{G}$ is a graph where each edge $e_{i,j}$ is weighted by $w_{i,j} > 0$
-* *Laplacian matrix of $\cal{G}$*. $(L f)(v_i) = \sum_{v_j \sim v_i} w_{i,j} (f(v_i) - f(v_j))$
+    * $\mathcal{G}$ is a graph where each edge $e_{i,j}$ is weighted by $w_{i,j} > 0$
+* *Laplacian matrix of $\mathcal{G}$*. $(L f)(v_i) = \sum_{v_j \sim v_i} w_{i,j} (f(v_i) - f(v_j))$
     * *Quadratic form*. $f^T L f = \frac{1}{2} \sum_{e_{i,j}} w_{i,j} (f(v_i) - f(v_j))^2$
 
 **Properties of Laplacian matrix of graph**.
