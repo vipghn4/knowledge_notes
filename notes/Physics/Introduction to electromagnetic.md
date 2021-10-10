@@ -2,6 +2,9 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Introduction to electromagnetic](#introduction-to-electromagnetic)
+  - [Fundamental](#fundamental)
+    - [Energy](#energy)
+    - [Work](#work)
   - [Electrochemical](#electrochemical)
   - [Electrical theory](#electrical-theory)
     - [Introduction](#introduction)
@@ -11,6 +14,46 @@
 <!-- /TOC -->
 
 # Introduction to electromagnetic
+## Fundamental
+### Energy
+**Energy**. The quantitative property, which must be transferred to a body or a physical system to perform work on the body, or to heat it
+* *Conservation*. Energy can be converted in form, but not created or destroyed
+* *Unit of measurement*. Joule (J)
+    * *Meaning*. Energy transferred to an object by the work of moving it a distance of one metre against a force of one Newton, i.e. energy transferred to an object per unit work
+* *Common forms of energy*.
+    * *Kinetic energy*. Energy of a moving object
+    * *Potential energy*. Stored by an object's positive in a force field, e.g. gravitational, electric, or magnetic
+    * *Elastic energy*. Stored by stretching solid objects
+    * *Chemical energy*. Released when a fuel burns
+    * *Radiant energy*. Carried by light
+    * *Thermal energy*. Due to an object's temperature
+
+**Energy and mass**. 
+* *Mass-energy equivalence*. $E=mc^2$
+    * *Explain*. A small amount of rest mass corresponds to an enormous amount of energy, which is independent of the composition of the matter
+        * Any object having mass when stationary, i.e. rest mass, also has an equivalent amount of energy, i.e. rest energy
+        * Any additional energy of any form acquired by the object above that rest energy will increase the object's total mass, just as it increases its total energy
+* *Rest mass*. The portion of the total mass of an object or system of objects, which is independent of the overall motion of the system
+
+**Energy in classical mechanics**. Work, i.e. $W=\int_C \mathbf{F} \cdot d\mathbf{s}$ is a function of energy
+
+### Work
+**Work**. Work performed by a system is energy transferred by the system to its surroundings, by a mechanism, through which the system can spontaneously exert macroscopic forces on its surroundings
+* *Formula*. $W = F s \cos\theta$ where $F$ is force, $s$ is displacement, and $\theta$ is the angle between the force and the displacement
+
+    $\to$ Work is the energy transferred to or from an object via the application of a force along a displacement
+
+**History**.
+* *1824*. Work, i.e. weight lifted through a height, was originally defined in 1824 by Sadi Carnot in his paper, where he used the term "motive power" for work
+    * *Quote*. We use here motive power to express the useful effect which a motor is capable of producing. This effect can always be likened to the elevation of a weight to a certain height. It has, as we know, as a measure, the product of weight multipled by the height, to which it is raised
+
+        $\to$ $\text{Work}=\text{Height}\times \text{Weight}$
+* *1845*. James Joule wrote a paper, in which he reported his best-known experiment, in which the mechanical power released through the action of a "weight falling through a height" was used to turn a paddle-wheel in an insulated barrel of water
+    * *Explain*. The motion of the paddle wheel, through agitation and friction, heated the body of water, to increase its temperature
+
+        $\to$ Both the temperature change of water, and the height of the fall of the weight, were recorded
+    * *Consequence*. Joule determined the mechanical equivalent of heat
+
 ## Electrochemical
 **Orbitals and orbits**. Electrons in fact inhabit regions of space known as orbitals
 
@@ -177,11 +220,14 @@ $\to$ Energy is transferred in the form of electricity as electrons move freely 
         * $q$ is the charge of one carrier
         * $\vec{v}_a$ is the average speed of their movement
     * *Consequence*. The electric current can be understood as the amount of charge per unit time flowing through a chosen cross section
-* *Resistivity*. Given a material, where the current and the electric field may vary or not in different part of the material, then
-    * *Formula*. $\rho=E/J$
+* *Resistivity*. A fundamental property of a material measuring how strongly it resists electric current
+    * *Formula*. Given a material, where the current and the electric field may vary or not in different part of the material, then
+        
+        $$\rho=E/J$$
+        
         * $E$ is the magnitude of the electric field (inside the conductor)
         * $J$ is the magnitude of the current density (inside the conductor)
-    * *Derivation of resistance from resistivity*.
+    * *Derivation of resistance from resistivity*. Resistivity is derived from the Ohm's law by removing the area and length factors of the resistor
         * Consider the resistivity for parallel current and electric field
 
             $$\rho=E/J$$
@@ -302,6 +348,15 @@ $\to$ Energy is transferred in the form of electricity as electrons move freely 
 
 **Coulomb's law**. An experimental law of physics quantifying the amount of force between two stationary, electrically charged particles
 * *Electric force (Coulomb force)*. The electric force between charged bodies at rest, i.e. they are not moving
+* *Ampere force law*. The force of attraction or repulsion between two current-carrying wires
+
+    <div style="text-align:center">
+        <img src="https://i.imgur.com/MVmY340.png">
+        <figcaption>Ampere force law</figcaption>
+    </div>
+
+    * *Explain*. Each wire generates a magnetic field, following the Biot-Savart law, and the other wire experiences a magnetic force as a consequence, follwoing the Lorentz force law
+
 * *Law content*. 
     * *Assumptions*. 
         * $\mathbf{F}$ is the electrostatic force between two point charges $q_1$ and $q_2$
@@ -342,7 +397,7 @@ $\to$ Energy is transferred in the form of electricity as electrons move freely 
                 * Two thin, straight, stationary, parallel wires, a distance $r$ apart in free space
                 * Each wire carries a current $I$ excerting a force on each other
             * *Conclusion*. $\frac{|\mathbf{F}_m|}{L}=\frac{\mu_0}{2\pi} \frac{|\mathbf{I}|^2}{\mathbf{r}}$
-        * *Observation*. Given $\mathbf{r}=1$, $\mathbf{I}=1$, and $L=1$, then $\mathbf{F}_m$
+        * *Observation*. Given $\mathbf{r}=1$, $\mathbf{I}=1$, and $L=1$, then $\mathbf{F}_m$ can be measured
 
             $\to$ We can compute $\mu_0$ accordingly
     * *Value of $\epsilon_0$*. $\epsilon_0=\frac{1}{\mu_0 c^2}$ where $\mu_0$ is given above, and $c$ is the light speedin classical vacuum

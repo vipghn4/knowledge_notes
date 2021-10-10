@@ -4,6 +4,8 @@
 - [Graph Laplacian](#graph-laplacian)
   - [Introduction](#introduction)
   - [Real-valued functions on graphs](#real-valued-functions-on-graphs)
+  - [Connectivity](#connectivity)
+  - [Laplacian of fundamental graphs](#laplacian-of-fundamental-graphs)
   - [Laplacian embedding - mapping a graph on a line](#laplacian-embedding---mapping-a-graph-on-a-line)
 - [Appendix](#appendix)
   - [Concepts](#concepts)
@@ -45,34 +47,133 @@
 * *Adjacent matrix as a quadratic form*. $f^T A f = \sum_{A_{i,j} = 1} f(i) f(j)$
 
 **Graph spectrum**. The set of graph eigenvalues of the adjacency matrix
+* *Intuition*.
 
 **Co-boundary mapping of the graph**. The mapping $T:f\to\nabla \cdot f$ where $f$ is a real-valued function on the graph, and $\nabla$ is the indicence matrix of the transformed graph
-* *Formula*. $(\nabla f)(e_{i,j}) = f(v_j) - f(v_i)$
+* *Incidence matrix of a graph $|\mathcal{E}|\times |\mathcal{V}|$*. A $m\times n$ matrix $\nabla$ defined as
+
+    $$\nabla = \begin{cases}
+    \nabla_{ev} = -1 & v\text{ is the initial vertex of } e\\
+    \nabla_{ev} = 1 & v\text{ is the terminal vertex of } e\\
+    \nabla_{ev} = 0 & v\text{ is not in } e\\
+    \end{cases}$$
+* *Co-boundary mapping of the graph*. $(\nabla f)(e_{i,j}) = f(v_j) - f(v_i)$
     * $e_{i,j}$ is the edge from $i$ to $j$
     * $v_i,v_j$ are vertices $i$ and $j$
 
 **Laplacian matrix of a graph from co-boundary mapping**. 
-* *Theorem*.
+* *Formal*.
     * $L=\nabla^T \nabla$
     * $(L f)(v_i) = \sum_{v_i \sim v_j} (f(v_i) - f(v_j))$
-* *Proof*.
+* *Theorem*. $L = D - A$ (easy to prove)
 * *Intuition*.
+    * Let $N(v)$ be the set of vertices having connection with vertex $v$ 
+    * Consider the product of the Laplacian matrix $L$ and a function $f$ defined on $\mathcal{V}$
+
+        $$\begin{aligned}
+        L\cdot f&=\begin{bmatrix}
+        |N(v_1)| f(v_1) - \sum_{u\in N(v_1)} f(u)\\
+        \vdots\\
+        |N(v_n)| f(v_n) - \sum_{u\in N(v_n)} f(u)\\
+        \end{bmatrix}=\begin{bmatrix}
+            \sum_{u\in N(v_1)} [f(v_1) - f(u)]\\
+            \vdots\\
+            \sum_{u\in N(v_n)} [f(v_n) - f(u)]\\
+            \end{bmatrix}\\
+        \end{aligned}$$
+    
+    * This is somewhat similar to the Laplacian of a function $f$ with $h_1=1$ and $h_2=-1$ and
+
+        $$f'(x)=\frac{f(x+h_1) - f(x)}{h_1},\quad f''(x)=\frac{f'(x+h_2) - f'(x)}{h_2}$$
+    
+* *Consequences*. 
+    * *Derivative of graph*. From the Laplacian of graph, we can define directional derivatives of graph at a node $v\in\mathcal{V}$ w.r.t a neighbor $u\in N(v)$ as
+
+        $$\frac{\partial f}{\partial u}(v)=\frac{f(u)-f(v)}{h}$$
+
+        where $h=1$ or $h=-1$ depending on the definition of the user
+        * *Intuition of $h$*. Neighbor vertices within a graph is treated as having unit space between each other
+    * *Generalization*. A Euclidean space can be seen as a infinite graph with infinitely many nodes, each of which has vertical and horizontal neighbors as in ordinary Euclidean space
+
+        $\to$ In this case, graph Laplacian becomes ordinary Laplapce operator, with $h\to 0$
+        * *Consequence*. Eigenvectors of the graph Laplacian now becomes eigenfunctions of Laplace operator
 
 **Laplacian matrix of undirected weighted graph**.
-* *Assumption*.
-    * $\mathcal{G}$ is a graph where each edge $e_{i,j}$ is weighted by $w_{i,j} > 0$
+* *Assumption*. $\mathcal{G}$ is a graph where each edge $e_{i,j}$ is weighted by $w_{i,j} > 0$
 * *Laplacian matrix of $\mathcal{G}$*. $(L f)(v_i) = \sum_{v_j \sim v_i} w_{i,j} (f(v_i) - f(v_j))$
     * *Quadratic form*. $f^T L f = \frac{1}{2} \sum_{e_{i,j}} w_{i,j} (f(v_i) - f(v_j))^2$
+* *Intuition*.
+    * The degree matrix $D$ is given as
+
+        $$D=\begin{bmatrix}
+        \sum_{i=1}^n w_{1,i} & 0 & \cdots & 0\\
+        \vdots & \vdots & \ddots & \vdots\\
+        0 & 0 & \cdots & \sum_{i=1}^n w{n,i}
+        \end{bmatrix}$$
+    * The adjacenct matrix $A$ is given as
+
+        $$A=\begin{bmatrix}
+        w_{11} & \cdots & w_{1n}\\
+        \vdots & \ddots & \vdots\\
+        w_{n1} & \cdots & w_{nn} 
+        \end{bmatrix}$$
 
 **Properties of Laplacian matrix of graph**.
 * *Theorem*.
     * $L$ is symmetric and positive-definite
     * $L$ has $n$ non-negative, real-valued eigen values $0=\lambda_1 \leq \dots \leq \lambda_n$
+* *Proof*.
 
-**Generalizations of Laplacian matrix of graph**.
+**Examples of Laplacian matrix of graph**.
 * *3D discrete surface (mesh)*. An undirected weighted graph where $w_{i,j} = \exp \frac{-\|v_i - v_j\|^2}{\sigma^2}$, i.e. Gaussian kernel
 
     $\to$ The geometric structure of a mesh is encoded in the weights
+* *Cloud of points graph representation*. 
+    * *Option 1*. 3-nearest neighbor graph, i.e. the graph is guaranteed to be connected
+    * *Option 2*. $\epsilon$-radius graph, i.e. the graph is not guaranteed to be connected
+
+## Connectivity
+**Zero eigenvalue of Laplacian matrix**. Given any constant vector $x$, then $L x = 0$, i.e $x$ is an eigenvector of eigenvalue $0$
+
+**Connectivity and Laplacian matrix**.
+* *Assumptions*. 
+    * $G=(\mathcal{V}, \mathcal{E})$ be a graph
+    * $0=\lambda_1\leq\lambda_2\leq\dots\leq\lambda_n$ are eigenvalues of the Laplacian matrix
+* *Consequence*. $\lambda_2 > 0$ if and only if $G$ is connected
+
+**Laplacian of a graph with $K$ conneceted components**.
+* *One connected component only, i.e. $K=1$*. A graph with one connected component has the constant vector $\mathbf{U}_1=\mathbf{1}_n$ as the only eigenvector of the Laplacian $L$ with eigenvalue $0$
+* *More than one connected components, i.e. $K>1$*.
+
+## Laplacian of fundamental graphs
+**Complete graph on $n$ vertices**. Consider a complete graph $K_n$ on $n$ vertices, which has edge set $\{(u,v):u\neq v\}$
+* *Eigenvalues of the Laplacian of $K_n$*. The Laplacian of $K_n$ has eigenvalue $0$ with multiplicity $1$, and $n$ with multiplicity $n-1$
+
+**Star graph on $n$ vertices**. Consider a star graph $S_n$ on $n$ vertices, which has edge set $\{(1,v):2\leq u\leq n\}$
+* *Eigenvalues of graph with connected vertices*. Let $G=(\mathcal{V},\mathcal{E})$ be a graph, and $i,j$ are vertices of degree one, which are both connected to another vertex $k$, then the vector $v$
+
+    $$v(u)=\begin{cases}
+    1 & u=i\\
+    -1 & u=j\\
+    0 & \text{otherwise}
+    \end{cases}$$
+
+    is an eigenvector of the Laplacian of $G$ of eigenvalue $1$
+
+* *Eigenvalues of the Laplacian of $S_n$*. The Laplacian $S_n$ has eigenvalue $0$ with multiplicity $1$, eigenvalue $1$ with multiplicity $n-2$, and eigenvalue $n$ with multiplicity $1$
+
+**Path graph on $n$ vertices**. Consider a path graph $P_n$ on $n$ vertices, which has edge set $\{(u,u+1):1\leq u\leq n\}$
+
+**Ring graph on $n$ vertices**. Consider a ring graph $R_n$ on $n$ vertices, which the edges of the path graph, plus the edge $(1,n)$
+* *Eigenvalues of the Laplacian of $R_n$*. 
+    * *Formal*. 
+        * The Laplacian $R_n$ has eigenvectors
+
+            $$x_k(u) = \sin(2\pi k u/n),\quad y_k(u)=\cos(2\pi k u/n)$$
+
+            for $1\leq k\leq n/2$
+        * When $n$ is even, $x_{n/2}$ is the all-zero vector, thus we only have $y_{n/2}$
+        * Eigenvectors $x_k$ and $y_k$ have eigenvalue $2-2\cos(2\pi k/n)$
 
 ## Laplacian embedding - mapping a graph on a line
 **Laplacian embedding**. Map a weighted graph onto a line so that connected nodes stay as close as possible
@@ -103,3 +204,4 @@
 * [2] https://en.wikipedia.org/wiki/Laplacian_matrix
 * [3] https://en.wikipedia.org/wiki/Eigenfunction
 * [4] https://en.wikipedia.org/wiki/Laplace_operator
+* [5] https://www.cs.yale.edu/homes/spielman/561/2009/lect02-09.pdf
