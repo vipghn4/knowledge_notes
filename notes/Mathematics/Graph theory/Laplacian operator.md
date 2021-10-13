@@ -6,7 +6,6 @@
     - [Vector calculus in brief](#vector-calculus-in-brief)
     - [Divergence of a vector field](#divergence-of-a-vector-field-1)
   - [Laplace operator](#laplace-operator)
-  - [Laplace equation](#laplace-equation)
 - [Appendix](#appendix)
   - [Concepts](#concepts)
   - [References](#references)
@@ -48,6 +47,8 @@ where charge density $\rho$ is the amount of electric charge per unit volume, an
     &\approx\frac{1}{\epsilon_0} q/|V|\\
     &=\rho/\epsilon_0
     \end{aligned}$$
+
+>**NOTE**. This is called the Poisson equation, which relates the electric potential $\phi$ to the charge density $\rho$
 
 **Gauss's law (Gauss' flux theorem)**. Relate the distribution of electric charge to the resulting electric field
 * *Assumptions*.
@@ -91,13 +92,47 @@ where charge density $\rho$ is the amount of electric charge per unit volume, an
 
     $$\nabla \cdot F = \frac{\partial F_x}{\partial x} + \frac{\partial F_y}{\partial y} + \frac{\partial F_z}{\partial z}$$
 
+    * *Derivation*.
+        * *Scenario*. 
+            * Consider an infinitesimal cube with sides $\Delta x, \Delta y, \Delta z$ centered on $(x,y,z)$
+            * Fill the cube with a vector field $\vec{F}$
+            * We want to compute the flux of $\vec{F}$ over this cube
+        * *Observations*.
+            * Consider the flux over just the $z$ faces
+
+                $$\begin{aligned}
+                \Delta\Phi_z&=\int_{\text{top \& bottom}} \vec{F} d\vec{A}\\
+                &\approx \Delta x\Delta y F_z(x,y,z+\Delta z/2) - \Delta x\Delta y F_z(x,y,z-\Delta z/2)
+                \end{aligned}$$
+
+                where $-F_z(x,y,z-\Delta z/2)$ reflects the fact that the underlying face is pointing down
+            * We have that, by Taylor approximation
+
+                $$\begin{aligned}
+                \Delta\Phi_z&\approx \Delta x\Delta y [F(x,y,z) + \frac{\Delta z}{2}] - \Delta x\Delta y [F(x,y,z) - \frac{\Delta z}{2}]\\
+                &\approx \Delta x \Delta y \Delta z \frac{\partial F_z}{z}
+                \end{aligned}$$
+            
+            * Similarly, we have
+
+                $$\Delta\Phi_x = \Delta x\Delta y\Delta z \frac{\partial F_x}{\partial x},\quad \Delta\Phi_y = \Delta x\Delta y\Delta z \frac{\partial F_y}{\partial y}$$
+            
+            * Therefore, we have that
+
+                $$\begin{aligned}
+                \text{div}\vec{F} &= \lim_{V\to 0} \frac{1}{|V|} \int \vec{F} \cdot d\vec{A}\\
+                &=\lim_{\Delta x,\Delta y,\Delta z \to 0} \frac{\Delta x\Delta y\Delta z (\partial F_x/\partial x + \partial F_y / \partial y + \partial F_z / \partial z)}{\Delta x \Delta y \Delta z}\\
+                &=\frac{\partial F_x}{\partial x} + \frac{\partial F_y}{\partial y} + \frac{\partial F_z}{\partial z}\\
+                &=\vec{\nabla} \cdot \vec{F}
+                \end{aligned}$$
+
 * *Cylindrical coordinates*. $F = F_r e_r + F_\theta e_\theta + F_z e_z$
 
     $$\nabla \cdot F = \frac{1}{r} \frac{\partial}{\partial r} (r F_r) + \frac{1}{r} \frac{\partial F_\theta}{\partial \theta} + \frac{\partial F_z}{\partial z}$$
     * *Idea*. Derived from Cartesian coordinates divergence
 
 ## Laplace operator
-**Laplacian operator (from [4])**. A second-order differential operator in the $n$-d Euclidean space
+**Laplacian operator (from [4])**. A second-order differential operator in the $n$-d Euclidean space, which describes the divergence of gradient of a function
 * *Background*.
     * *Vector differential operator $\nabla$*. Given that $e_i$ is the unit vector correpsonding to axis $x_i$, then
 
@@ -117,18 +152,33 @@ where charge density $\rho$ is the amount of electric charge per unit volume, an
 * *Definition*. $\Delta f = \nabla^2 f = \nabla \cdot \nabla f= \sum_{i=1}^n \frac{\partial^2 f}{\partial x_i^2}$ where 
     * $\nabla f = \big( \frac{\partial f}{\partial x_1},\dots,\frac{\partial f}{\partial x_n} \big)$
     * $\nabla \cdot$ is the divergence of gradient $\nabla f$
-* *Motivation*.
-    * *Laplacian as average*. 
-        * *Assumptions*.
-            * $f:\mathbf{R}^n \to \mathbf{R}$ is a twice continuously differentiable function
-            * A point $p\in\mathbf{R}^n$ and a real number $h>0$
-            * $\bar{f}_B(p,h)$ is the average of $f$ over the ball with radius $h$ around $p$
-            * $\bar{f}_S(p,h)$ is the average of $f$ over the sphere with radius $h$ around $p$
-        * *Conclusion*. 
-            * $\bar{f}_B(p,h) = f(p) + \frac{\Delta f(p)}{2(n+2)} h^2 + o(h^2)$ as $h\to 0$
-            * $\bar{f}_S(p,h) = f(p) + \frac{\Delta f(p)}{2n} h^2 + o(h^2)$ as $h\to 0$
+* *Vector Laplacian in multivariate Catesian coordinates*. $\nabla^2 \mathbf{A} = (\nabla^2 A_x, \nabla^2 A_y, \nabla^2 A_z)$
 
-## Laplace equation
+**Laplacian as average**.
+* *Ball and sphere*. Given a point $\bar{x}\in\mathbb{R}^d$ and a radius $h>0$, tnen we have the ball and sphere
+    
+    $$\begin{aligned}
+    B&=B(\bar{x},h)&=\{x\in\mathbb{R}^d:|x-\bar{x}|<h\},\\
+    S&=S(\bar{x},h)&=\{x\in\mathbb{R}^d:|x-\bar{x}|=h\}
+    \end{aligned}$$
+
+* *Assumptions*.
+    * $f:\mathbf{R}^n \to \mathbf{R}$ is a twice continuously differentiable function
+    * A point $p\in\mathbf{R}^n$ and a real number $h>0$
+    * $\bar{f}_B(p,h)$ is the average of $f$ over the ball with radius $h$ around $p$
+    * $\bar{f}_S(p,h)$ is the average of $f$ over the sphere with radius $h$ around $p$
+* *Conclusion*. 
+    * $\bar{f}_B(p,h) = f(p) + \frac{\Delta f(p)}{2(n+2)} h^2 + o(h^2)$ as $h\to 0$
+    * $\bar{f}_S(p,h) = f(p) + \frac{\Delta f(p)}{2n} h^2 + o(h^2)$ as $h\to 0$
+* *Intuitive explanation*. We have that
+
+    $$\begin{aligned}
+    f(p) +\frac{\Delta f(p)}{2n} h^2 &= f(p) + \frac{h^2}{2n} \lim_{h\to 0} \sum_{i=1}^n \frac{f(x_1,\dots,x_i+h,\dots,x_n) - 2 f(x_1,\dots,x_i,\dots,x_n) + f(x_1,\dots,x_i-h,\dots,x_n)}{h^2}\\
+    &=\frac{1}{n} \sum_{i=1}^n \frac{f(x_1,\dots,x_i+h,\dots,x_n) + f(x_1,\dots,x_i-h,\dots,x_n)}{2}\\
+    &\approx \bar{f}_S(p,h)
+    \end{aligned}$$
+
+    >**NOTE**. This is just a approximate explanation
 
 # Appendix
 ## Concepts
@@ -139,3 +189,4 @@ where charge density $\rho$ is the amount of electric charge per unit volume, an
 * [2] https://en.wikipedia.org/wiki/Laplacian_matrix
 * [3] https://en.wikipedia.org/wiki/Eigenfunction
 * [4] https://en.wikipedia.org/wiki/Laplace_operator
+* [5] https://web.mit.edu/sahughes/www/8.022/lec04.pdf
