@@ -119,10 +119,16 @@
         \end{bmatrix}$$
 
 **Properties of Laplacian matrix of graph**.
-* *Theorem*.
-    * $L$ is symmetric and positive-definite
-    * $L$ has $n$ non-negative, real-valued eigen values $0=\lambda_1 \leq \dots \leq \lambda_n$
-* *Proof*.
+* *Theorem*. $L$ is symmetric and positive semi-definite
+    * *Proof*.
+        * For unweighted graphs
+
+            $$\forall x,x^T L x = \sum_{(i,j)\in\mathcal{E}} (x_i - x_j)^2 \geq 0$$
+        * For weighted graphs
+            
+            $$\forall x,x^T L x = \sum_{(i,j)\in\mathcal{E}} w_{i,j} (x_i - x_j)^2 \geq 0$$
+* *Consequence*. $L$ has $n$ non-negative, real-valued eigen values $0=\lambda_1 \leq \dots \leq \lambda_n$
+    * *Proof*. Since $L$ is positive semi-definite, it cannot have negative eigenvalue, and it also has eigenvalue $0$ corresponding to eigenvector $\mathbf{1}_n$
 
 **Examples of Laplacian matrix of graph**.
 * *3D discrete surface (mesh)*. An undirected weighted graph where $w_{i,j} = \exp \frac{-\|v_i - v_j\|^2}{\sigma^2}$, i.e. Gaussian kernel
@@ -139,11 +145,57 @@
 * *Assumptions*. 
     * $G=(\mathcal{V}, \mathcal{E})$ be a graph
     * $0=\lambda_1\leq\lambda_2\leq\dots\leq\lambda_n$ are eigenvalues of the Laplacian matrix
-* *Consequence*. $\lambda_2 > 0$ if and only if $G$ is connected
+* *Conclusion*. $\lambda_2 > 0$ if and only if $G$ is connected
+* *Proof*.
+    * If $G$ is disconnected, then by reindexing the vertices, $L$ can be written as a block matrix
 
-**Laplacian of a graph with $K$ conneceted components**.
-* *One connected component only, i.e. $K=1$*. A graph with one connected component has the constant vector $\mathbf{U}_1=\mathbf{1}_n$ as the only eigenvector of the Laplacian $L$ with eigenvalue $0$
-* *More than one connected components, i.e. $K>1$*.
+        $$L=\begin{bmatrix}
+        L_1 & 0 & \cdots & 0\\
+        0 & L_2 & \cdots & 0\\
+        \vdots & \vdots & \ddots & \vdots\\
+        0 & 0 & \cdots & L_m
+        \end{bmatrix}$$
+
+        where $L_1,\dots,L_m$ are matrix blocks
+    * It is proven that the solution of $Lx=0$ has the form
+
+        $$x=[x_1;\dots;x_m]$$
+
+        where $x_i$ is a solution of $L_i x = 0$ and $[\cdot;\cdot]$ denotes concatenation
+    * Thus, if $G$ is disconnected, by setting $x_1\neq x_2\neq \cdots \neq x_m$
+
+        $\to$ We have at least two eigenvectors corresponding to eigenvalue $\lambda = 0$
+* *Generalization*. The number of zero eigenvalues is the number of connected components of the graph, with the corresponding eigenvectors
+
+    $$\{\begin{bmatrix}1_{n_1} \\ 0 \\ \vdots \\ 0\end{bmatrix},\begin{bmatrix}0 \\ 1_{n_2} \\ \vdots \\ 0\end{bmatrix},\dots,\begin{bmatrix}0 \\ 0 \\ \vdots \\ 1_{n_m}\end{bmatrix}\}$$
+
+    where $n_i$ is the number of vertices in the $i$-th connected component
+    * *Consequence*. $(0,\dots,1_{n_i},\dots,0)$ is the indicator vector of the graph's $i$-th connected component
+* *Consequence*. In general, it is pointless to consider unconnected graphs, because their spectra are just the union of the spectra of their components
+
+**Fiedler vector of the graph Laplacian**. 
+* *Fiedler value*. The first non-zero eigenvalue $\lambda_{k+1}$ where $k$ is the number of zero eigenvalues of the Laplacian
+    * *Interpretation*. Represent the algebraic connectivity of a graph, i.e. the further from 0, the more connected
+    * *Usage*. Extensively used for spectral bi-partitioning
+
+    >**NOTE**. Fiedler value only makes sense for connected graph
+
+* *Fiedler vector*. The eigenvector corresponding to the Fiedeler eigenvalue
+* *Multiplicity of Fiedler eigenvalue*. Always equal to 1
+    * *Explain*.
+* *References*.
+    * https://arxiv.org/pdf/2002.00283.pdf
+
+**Eigenvectors of the Laplacian of connected graphs**.
+* *Special eigenvectors*.
+    * *Eigenvector 1*. $1_n$, i.e. $L 1_n = 0$
+    * *Eigenvector 2*. The Fiedler vector with multiplicity 1
+* *Relationships between eigenvectors*.
+    * The eigenvectors form an orthonormal basis, i.e. due to symmetricity of $L$
+    * For any eigenvector $u_i$ where $2\leq i\leq n$, $u_i^T 1_n = 0$
+
+        $\to$ $\sum_{i=1}^n u_{ij} = 0$
+    * Each component is bounded by $-1<u_{ij}<1$
 
 ## Laplacian of fundamental graphs
 **Complete graph on $n$ vertices**. Consider a complete graph $K_n$ on $n$ vertices, which has edge set $\{(u,v):u\neq v\}$
