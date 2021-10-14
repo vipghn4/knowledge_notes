@@ -181,6 +181,40 @@
     >**NOTE**. Fiedler value only makes sense for connected graph
 
 * *Fiedler vector*. The eigenvector corresponding to the Fiedeler eigenvalue
+* *Fiedler vector as optimization solution*.
+    * *Smallest eigenvector finding as optimization*. Let $A$ be any symmetric matrix
+
+        $\to$ Minimizing $\frac{x^T A x}{x^T x}$ over all nonzero $x$, i.e. $\|x\| = 1$ results in the smallest eignevalue, with $x$ being its eigenvector
+    * *Fiedler vector finding*.
+        * *Optimization problem*.
+
+            $$\begin{aligned}
+            \text{minimze } &\frac{x^T A x}{x^T x}\\
+            \text{subject to } & \|x\|=1\\
+            & x^T 1_n = 0
+            \end{aligned}$$
+            
+            * *The second constraint*. Mean that the desired $x$ should be perpendicular to the first eigenvalue of $A$
+                
+                $\to$ We will yield the second smallest eigenvalue
+        * *Consequence*. Finding the Fiedler vector means minimzing
+
+            $$x^T L x = \sum_{(i,j)\in\mathcal{E}} (x_i - x_j)^2$$
+
+            $\to$ We want to make the components on any two adjacent vertices as close as possible
+        * *Interpretation of Fiedler vector*. The Fiedler vector paints the graph in a gradient going from positive to negative, so that
+            * Each individual value $x$ does not mean much by itself
+            * Clusters of neighbor vertices get similar values
+            * Far-apart vertices often get different values
+    * *Generalization*. To find the next eigenvector, we add additional constraints to our problem in the similar manner
+
+        $\to$ This eigenvector should have similar properties, but be different from the previous eigenvectors, hence describing a different feature of the graph
+        * *Example*. If our graph has three big and sparsely connected clusters
+            * The Fiedler vector may assign positive values to one cluster and negative values to the other two
+            * The next eigenvector may choose a different cluster to separate from the other two clusters
+        * *Consequence*. The eigenvectors of the Laplacian distinguishes all the clusters
+
+            $\to$ The eigenvector after that will have to find some inter-cluster separation
 * *Multiplicity of Fiedler eigenvalue*. Always equal to 1
     * *Explain*.
 * *References*.
