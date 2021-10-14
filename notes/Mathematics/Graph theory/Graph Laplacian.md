@@ -6,7 +6,9 @@
   - [Real-valued functions on graphs](#real-valued-functions-on-graphs)
   - [Connectivity](#connectivity)
   - [Laplacian of fundamental graphs](#laplacian-of-fundamental-graphs)
-  - [Laplacian embedding - mapping a graph on a line](#laplacian-embedding---mapping-a-graph-on-a-line)
+  - [Laplacian embedding](#laplacian-embedding)
+  - [Other Laplacian matrices](#other-laplacian-matrices)
+  - [The graph partitioning problem](#the-graph-partitioning-problem)
 - [Appendix](#appendix)
   - [Concepts](#concepts)
   - [References](#references)
@@ -261,9 +263,9 @@
         * When $n$ is even, $x_{n/2}$ is the all-zero vector, thus we only have $y_{n/2}$
         * Eigenvectors $x_k$ and $y_k$ have eigenvalue $2-2\cos(2\pi k/n)$
 
-## Laplacian embedding - mapping a graph on a line
-**Laplacian embedding**. Map a weighted graph onto a line so that connected nodes stay as close as possible
-* *Problem*.
+## Laplacian embedding
+**Laplacian embedding on a line**. Map a weighted graph onto a line so that connected nodes stay as close as possible
+* *Optimization problem*.
 
     $$\begin{aligned}
     \text{minimize}_{f} & \sum_{i,j=1}^n w_{i,j} (f(v_i) - f(v_j))^2 = f^T L f \\
@@ -273,8 +275,109 @@
 * *Solution*. The eigenvector associated with the smallest nonzero eigenvalue of the eigenvalue problem
 
     $\to$ This is called the Fiedler vector
+* *Interpretation*. Fiedler vector maps nodes of a graph onto a line
 
-**Generalizations**. When $f$ maps vertices to vectors in $\mathbf{R}^m$
+**Laplacian embedding on an Euclidean space**. When $f$ maps vertices to vectors in $\mathbf{R}^m$
+* *Idea*, Embed the graph in a $k$-dimensional Euclidean space
+    * *Explain*. The embedding is given by the $n\times k$ matrix $\mathbf{F} = \begin{bmatrix}\mathbf{f}_1 & \cdots & \mathbf{f}_k\end{bmatrix}$
+
+        $\to$ The $i$-th row $\mathbf{f}^{(i)}$ of this matrix corresponds to the Euclidean coordinates of the $i$-th graph node $v_i$
+* *Optimization problem*,
+
+    $$\begin{aligned}
+    \text{minimize } & \sum_{(i,j)\in\mathcal{E}} w_{ij} \|\mathbf{f}^{(i)} - \mathbf{f}^{(j)}\|^2\\
+    \text{subject to } & \mathbf{F}^T \mathbf{F} = \mathbf{I}
+    \end{aligned}$$
+
+* *Solution*. The solution is provided by the matrix of eigenvectors corresponding to the $k$ lowest nonzero eigenvalues of the eigenvalue problem $Lf = \lambda f$
+
+**Spectral embedding using the unnormalized Laplacian**.
+
+<div style="text-align:center">
+    <img src="https://i.imgur.com/WZ47urG.png">
+    <figcaption>Mappings of graph on different eigenvectors</figcaption>
+</div>
+
+1. Compute the eigendecomposition of the Laplacian $L = D - A$
+2. Select the $k$ smallest non-zero eigenvalues $\lambda_2 \leq \dots \leq \lambda_{k+1}$
+    * *Eigengap*. $\lambda_{k+2} - \lambda_{k+1}$
+3. Compute the corresponding eigenvectors and obtain the $n\times k$ matrix
+
+    $$\mathbf{U} = \begin{bmatrix}\mathbf{u}_2 & \cdots & \mathbf{u}_{k+1}\end{bmatrix}$$
+
+    * *Orthogonality of $\mathbf{U}$*. $\mathbf{U}^T \mathbf{U} = \mathbf{I}_k$
+4. The column $i$, where $2\leq i\leq k+1$, of this matrix is a mapping of the graph on the eigenvector $\mathbf{u}_i$
+
+**Euclidean L-embedding of the graph's vertices**.
+* *Assumptions*.
+  * $\mathbf{\Lambda}_k = \text{diag}(\lambda_2,\dots,\lambda_{k+1})$ is a diagonal matrix
+  * $\mathbf{U} = \begin{bmatrix}\mathbf{u}_2 & \cdots & \mathbf{u}_{k+1}\end{bmatrix}$ is the matrix of the corresponding eigenvectors
+* *L-embedding of the graph*. $\mathbf{X}=\mathbf{\Lambda}_k^{-1/2} \mathbf{U}^T = \begin{bmatrix}\mathbf{x}_1 & \cdots & \mathbf{x}_n\end{bmatrix}$
+
+    $\to$ $\mathbf{x}_j = (\frac{\mathbf{u}_{2,j}}{\sqrt{\lambda_2}}, \dots, \frac{\mathbf{u}_{k+1,j}}{\sqrt{\lambda_{k+1}}})$
+* *Commute-time distance (CTD) and PCA of a graph*. Important contepts allowing to reason statistically on a graph
+    * *The commute-time distance (CTD)*. The average number of (weighted) edges that it takes, starting at vertex $v_i$, to randomly reach vertex $v_j$ for the first time and go back
+        
+        >**NOTE**. This is a well known quantity in Markov chains
+
+        * *Formal*. $\text{CTD}^2(v_i, v_j) = \text{vol}(\mathcal{G}) \|\mathbf{x}_i - \mathbf{x}_j\|^2$
+        * *CTD and the number of connections*. The CTD decreases as the number of connections between the two nodes increases
+        * *CTD and connectivity structure of graph*. The CTD captures the connectivity structure of a small graph volume, rather than a single path between two vertices, e.g. the shortest-path geodesic distance
+    * *The graph PCA*.
+        * *Graph embedding mean*. 
+            
+            $$\bar{\mathbf{x}} = \frac{1}{n} \sum_{i=1}^n \mathbf{x}_j = \mathbf{\Lambda}_k^{-1/2} \begin{bmatrix} \sum_{j=1}^n \mathbf{u}_{2,j} \\ \vdots \\ \sum_{j=1}^n \mathbf{u}_{k+1,j}\end{bmatrix} = \mathbf{0}$$
+        
+        * *Graph covariance matrix*.
+
+            $$\mathbf{S} = \frac{1}{n} \sum_{j=1}^n \mathbf{x}_j \mathbf{x}_j^T = \frac{1}{n} \mathbf{X} \mathbf{X}^T = \frac{1}{n} \mathbf{\Lambda}_k^{-1/2} \mathbf{U}^T \mathbf{U} \mathbf{\Lambda}_k^{-1/2}=\frac{1}{n} \mathbf{\Lambda}_k^{-1}$$
+        
+        * *Consequence*. The vectors $\mathbf{u}_2,\dots,\mathbf{u}_{k+1}$ are the directions of maximum variance of the graph embedding, with $\lambda_2^{-1} \geq \dots \geq \lambda_{k+1}^{-1}$
+
+## Other Laplacian matrices
+**Other Laplacian matrices**.
+* *Normalized graph Laplacian*. $\mathbf{L}_n = \mathbf{D}^{-1/2} \mathbf{L} \mathbf{D}^{-1/2}$
+* *Transition matrix (analogous to Markov chains)*. $\mathbf{L}_t = \mathbf{D}^{-1} \mathbf{A}$
+* *Random-walk graph Laplacian*. $\mathbf{L}_r = \mathbf{D}^{-1} \mathbf{L} = \mathbf{I} - \mathbf{L}_t$
+* *Similarity between graph Laplacians*. 
+    
+    $$\mathbf{L}_r = \mathbf{D}^{-1/2} \mathbf{D}^{-1/2} \mathbf{L} \mathbf{D}^{-1/2} \mathbf{D}^{1/2} = \mathbf{D}^{-1/2} \mathbf{L}_n \mathbf{D}^{1/2}$$
+
+**Eigenvalues and eigenvectors of $\mathbf{L}_n$ and $\mathbf{L}_r$**.
+
+**Spectral embedding using $\mathbf{L}_r$**.
+
+**The normalized additive Laplacian**.
+
+## The graph partitioning problem
+**The graph partitioning problem**.
+* *Graph-cut problem*. Partition the graph such that edges between groups have very low weight, and edges within a group have high weight, i.e.
+
+    $$\text{cut}(A_1,\dots,A_k) = \frac{1}{2} \sum_{i=1}^k W(A_i,\bar{A}_i)$$
+
+    where $W(A,B) = \sum_{i\in A, j\in B} w_{ij}$
+* *Ratio cut*.
+
+    $$\text{RatioCut}(A_1,\dots,A_k) = \frac{1}{2} \sum_{i=1}^k \frac{W(A_i,\bar{A}_i)}{|A_i|}$$
+* *Normalized cut*.
+
+    $$\text{NCut}(A_1,\dots,A_k) = \frac{1}{2} \sum_{i=1}^k \frac{W(A_i,\bar{A}_i)}{\text{vol}(A_i)}$$
+
+**Spectral clustering**. Both ratio-cut and normalized-cut minimizations are NP-hard problems
+
+$\to$ Spectral clustering is a way to solve relaxed versions of these problems
+* *Idea*.
+    * The smallest non-zero eigenvectors of the unnormalized Laplacian approximate the ratio-cut minimization criterion
+    * The smallest non-zero eigenvectors of the random-walk Laplacian approximate the NCut criterion
+
+**Spectral clustering using the random-walk Laplacian**.
+
+**Example - Mesh segmentation using spectral clustering**.
+
+<div style="text-align:center">
+    <img src="https://i.imgur.com/EsATjHu.png">
+    <figcaption>Mesh segmentation using spectral clustering</figcaption>
+</div>
 
 # Appendix
 ## Concepts
