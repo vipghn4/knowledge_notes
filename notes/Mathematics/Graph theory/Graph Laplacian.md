@@ -219,8 +219,7 @@
             $\to$ The eigenvector after that will have to find some inter-cluster separation
 * *Multiplicity of Fiedler eigenvalue*. Always equal to 1
     * *Explain*.
-* *References*.
-    * https://arxiv.org/pdf/2002.00283.pdf
+* *References*. https://arxiv.org/pdf/2002.00283.pdf
 
 **Eigenvectors of the Laplacian of connected graphs**.
 * *Special eigenvectors*.
@@ -231,7 +230,7 @@
     * For any eigenvector $u_i$ where $2\leq i\leq n$, $u_i^T 1_n = 0$
 
         $\to$ $\sum_{i=1}^n u_{ij} = 0$
-    * Each component is bounded by $-1<u_{ij}<1$
+    * Each component is bounded by $-1<u_{ij}<1$, i.e. so that $\|u_i\|=1$ 
 
 ## Laplacian of fundamental graphs
 **Complete graph on $n$ vertices**. Consider a complete graph $K_n$ on $n$ vertices, which has edge set $\{(u,v):u\neq v\}$
