@@ -7,6 +7,7 @@
     - [Divergence of a vector field](#divergence-of-a-vector-field-1)
   - [Laplace operator](#laplace-operator)
   - [Laplace equation](#laplace-equation)
+  - [Dirichlet energy](#dirichlet-energy)
 - [Appendix](#appendix)
   - [Concepts](#concepts)
   - [References](#references)
@@ -257,6 +258,59 @@ where charge density $\rho$ is the amount of electric charge per unit volume, an
         $\to$ This gives some intuition as to why the eigenvalues should be related to the connectivity of the graph
 * *Conclusion*. The eigenvalues of the Laplacian describe some important physical properties of the graph / manifold
 * *Reference*. https://math.stackexchange.com/questions/308952/motivation-for-spectral-graph-theory
+
+## Dirichlet energy
+**Dirichlet energy**. A measure of how variable a function is
+* *Formal*.
+    * *Assumptions*.
+        * $\Omega\subseteq\mathbb{R}^n$ is an open set
+        * $u:\Omega\to\mathbb{R}$ is a function
+        * $\nabla u:\Omega\to\mathbb{R}^n$ is the gradient vector field of $u$
+    * *Dirichlet energy of $u$*.
+
+        $$E(u)=\frac{1}{2}\int_\Omega \|\nabla u(x)\|^2 dx$$
+* *Dirichlet energy and Laplace operator*. By solving the Laplace's equation $-\Delta u(x) = 0$ for all $x\in\Omega$, subject to proper boundary conditions
+    
+    $\to$ We are solving the variational problem of finding $u$ satisfying the boundary conditions and has minimal Dirichlet energy
+    * *Harmonic functions*. A twice differentiable function satisfying Laplace's equation, i.e. $\Delta u=0$
+* *Applications*. Used in image processing, computer graphics, geometry processing, and manifold learning
+    * *Interpretation of Dirichlet eneryg*. Basically, over some region $\Omega$, $E(u)$ measures how much $u$ changes over $\Omega$
+    * *Dirichlet energy and variational calculus*. Variational calculus is something like a generalization of the standard calculus approach to find maxima and minima
+        * *Explain*. For a function $f$, we look for extrema by finding points where $\partial_x f=0$, but what if we want the extrema of a functional, i.e. a function of functions
+
+            $\to$ We need to take the derivative of a functional w.r.t a function, i.e. first variation, and find a function so that we are at a min/max of the functional
+
+**Dirichlet energy in image processing**. 
+* *Image segmentation*. A region segment should have very low gradient, i.e. low DE
+
+    $\to$ This is part of the basis of the famous Mumford-Shah functional
+    * *Idea*. An image is modeled as a piecewise-smooth function. The function penalizes
+        * The distance between the model and the input image
+        * The lack of smoothness of the model within the sub-regions
+        * The length of the boundaries of the sub-regions
+    * *Mumford-Shah functional*. Consider an image $I$ over domain $D$, and a model $J$ with boundary $b$
+
+        $$E_\text{MS}(J,b)=\gamma \int_D |I(p) - J(p)|^2 dp + \alpha \int_{D\setminus b} \|\nabla J(p)\|_2^2 dp + \beta \int_b ds$$
+* *Image smoothing and denoising*. Minimizing the DE can be used to penalize noisy image regions
+* *Deep learning*. DE is used in deep learning loss functions without even being named
+
+**Functional derivative (or variational derivative)**. Relate a change in a functional, i.e. functions acting on functions, to a change in a function, or which the functional depends
+* *Functional expression in variational calculus*. Usually in terms of an integral of functions, their arguments, and their derivatives
+    * *Definition*. In an integral $L$ of a functional, if a function $f$ is varied by adding to it another function $\delta f$, which is arbitrarily small, and the resulting integrand is expanded in powers of $\delta f$
+        
+        $\to$ Functional derivative is the coefficient of $\delta f$ in the first order term
+    * *Example*. Consider the functional
+
+        $$J(f)=\int_a^b L(x,f(x),f'(x))dx$$
+
+        where $f'(x)=df/dx$
+        * If $f$ is varied by adding to it a function $\delta f$, the resulting integrand $L(x,f+\delta f,f'+\delta f')$ is expanded in powers of $\delta f$
+            
+            $\to$ The change in the value of $J$ to the first order in $\delta f$ can be written as
+
+            $$\begin{aligned}
+            \delta J&=\int_a^b \bigg(\frac{\partial L}{\partial f} \delta f(x) + \frac{\partial L}{\partial f'} \frac{d}{dx}\delta f(x)\bigg) dx
+            \end{aligned}$$
 
 # Appendix
 ## Concepts

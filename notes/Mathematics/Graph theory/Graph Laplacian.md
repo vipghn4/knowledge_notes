@@ -334,8 +334,22 @@
         * *Consequence*. The vectors $\mathbf{u}_2,\dots,\mathbf{u}_{k+1}$ are the directions of maximum variance of the graph embedding, with $\lambda_2^{-1} \geq \dots \geq \lambda_{k+1}^{-1}$
 
 ## Other Laplacian matrices
+**Normalized adjacency matrix**. $\hat{\mathbf{A}}=\mathbf{D}^{-1/2} \mathbf{A} \mathbf{D}^{-1/2}$
+* *Motivation*.
+    * *Largest eigenvalue of $\mathbf{A}$*. Given $d_\text{min}$ and $d_\text{max}$ as the minimum and maximum degrees among graph vertices 
+        
+        $$d_\text{min}\leq \min_{\|\mathbf{x}\|_2=1} \mathbf{x}^T \mathbf{A} \mathbf{x} \leq \lambda_\text{min} \leq \lambda_\text{max} \leq \max_{\|\mathbf{x}\|_2=1} \mathbf{x}^T \mathbf{A} \mathbf{x}\leq d_\text{max}$$
+    * *Proof*. For any $\mathbf{x}\neq \mathbf{0}$, suppose that $\mathcal{E}$ is the set of edges in the graph, and $\mathcal{V}$ is the set of vertices
+        
+        $$\begin{aligned}
+        \frac{\mathbf{x}^T \mathbf{A} \mathbf{x}}{\mathbf{x}^T \mathbf{x}} &= \frac{\sum_{(i,j)\in\mathcal{E}} 2 x_i x_j}{\sum_{i\in\mathcal{V}} x_i^2}\\
+        &\leq \frac{\sum_{(i,j)\in\mathcal{E}} (x_i^2 + x_j^2)}{\sum_{i\in\mathcal{V}} x_i^2}\\
+        &= \frac{\sum_{i\in\mathcal{V}} d_i x_i^2}{\sum_{i\in\mathcal{V}} x_i^2}\\
+        &\in [d_\text{min},d_\text{max}]
+        \end{aligned}$$
+
 **Other Laplacian matrices**.
-* *Normalized graph Laplacian*. $\mathbf{L}_n = \mathbf{D}^{-1/2} \mathbf{L} \mathbf{D}^{-1/2}$
+* *Normalized graph Laplacian*. $\mathbf{L}_n = \mathbf{D}^{-1/2} \mathbf{L} \mathbf{D}^{-1/2} = \mathbf{I} - \hat{\mathbf{A}}$
 * *Transition matrix (analogous to Markov chains)*. $\mathbf{L}_t = \mathbf{D}^{-1} \mathbf{A}$
 * *Random-walk graph Laplacian*. $\mathbf{L}_r = \mathbf{D}^{-1} \mathbf{L} = \mathbf{I} - \mathbf{L}_t$
 * *Similarity between graph Laplacians*. 
