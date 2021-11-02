@@ -187,7 +187,7 @@ $\to$ The underlying principle is least privilege, i.e. each process has exactly
         ssh -p 22 -J firewall.example.org:22 server2.example.org
         ```
 
-    * *Command line arguments*. `-J [user@]host[:port]` connects to the target host by first making a ssh connection to the jump host, then establish a TCP forwarding to the ultimate destination from there
+    * *Command line arguments*. `-J [user@]host[:port]` connects to the target host by first making a SSH connection to the jump host, then establish a TCP forwarding to the ultimate destination from there
 
         >**NOTE**. Multiple jump hops may be specified separated by comma characters
 
