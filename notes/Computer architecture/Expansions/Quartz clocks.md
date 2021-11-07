@@ -1,0 +1,200 @@
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+# Table of Contents
+- [Table of Contents](#table-of-contents)
+- [Quartz clocks](#quartz-clocks)
+  - [Fundamental concepts](#fundamental-concepts)
+  - [Piezoelectricity](#piezoelectricity)
+  - [Introduction to quartz clock](#introduction-to-quartz-clock)
+  - [Quartz clock sturcture and mechanism](#quartz-clock-sturcture-and-mechanism)
+<!-- /TOC -->
+
+# Quartz clocks
+## Fundamental concepts
+**Resonance**. The phenomenon of increased amplitude occuring when the frequency of a periodically applied force, or a Fourier component of it, is equal or close to a natural frequency of a system, on which it acts
+* *Explain*. When an oscillating force is applied at a resonant frequency of a dynamic system
+
+    $\to$ The system will oscillate at a higher amplitude than when the same force is applied at other, non-resonant frequencies
+
+**Resonator**. A device or system that exhibits resonance or resonant behavior
+* *Explain*. It naturally oscillates with greater amplitude at some frequencies, i.e. resonant frequencies, than at other frequencies
+* *Usage* Generate waves of specific frequencies, or to select specific frequencies from a signal
+* *Example*. Quartz crystals used in electronic devices, e.g. radio transmitter, and quartz watches to produce oscillation of very precise frequency
+
+**Transducer**. A device converting energy from one form to another, e.g. a signal in one form of energy to a signal in another
+
+## Piezoelectricity
+**Electric dipole moment**.
+* *Moment*. An expression involving the product of a distance and physical quantity, which accounts for how the physical quantity is located or arranged
+    * *Reference point* Moments are usually defined w.r.t a fixed reference point
+    * *Commonly used quantities*. Forces (work done), masses (momentum), electric charge distributions (electric dipole)
+    * *Formula*.
+        * *Most basic form*. $\mu_n = r^n Q$
+            * $Q$ is the physical quantity, e.g. force applied at a point
+            * $r^n$ is the distance to reference point, raised to a power of $n$
+        * *General formula*. $\mu_n = \int r^n \rho(r) dr$
+            * $\rho$ is the distribution of the quantity being considered
+        * *More complex formulas*. Take into account the angular relationships between the distance and the physical quantity
+    * *Naming conventions*.
+        * *Monopole moment*. Moment with $n=0$
+        * *Dipole moment*. Moment with $n=1$
+        * *Quadrupole moment*. Moment with $n=2$
+    * *History*. The concept of physical moment is derived from the mathematical concept of moments
+        * *Principle of moments*. Derived from Archimedes's discovery of the operating principle of the lever
+            * *Idea*. In the lever, one applies a force, and the amount of force applied to the object, i.e. the moment of force, is given as
+
+                $$M=rF$$
+
+                where $F$ is the applied force, and $r$ is the distance from the applied force to object
+        * *Meaning of "moment"*. The word moment was first used in mechanics in its the sense of "importance" or "consequence"
+
+            $\to$ The moment of a force about an axis meant the importance of the force w.r.t its power to generate in matter rotation about the axis
+* *Electric dipole moment*. A measure of the separation of positive and negative electrical charges within a system, i.e. a measure of the system's overal polarity
+    * *Unit of measurement*. Coulomb-meter
+    * *Elementary definition*. 
+        * *Point changes*. Point particles with electric charge
+        * *Electric dipole*. Two point charges, one with charnge $+q$ and the other with charge $-q$ separated by a distance $d$ constitute an electric dipole
+            * *Electric dipole moment magnitude*. $p=qd$
+
+                >**NOTE**. Some authors may split $d$ in half, and use $s=d/2$ since this quantity is the distance between either charge and the center of the dipole
+
+            * *Electric dipole moment direction*. From negative charge to positive charge
+            * *General mathematical definition*. $\mathbf{q} = q \mathbf{d}$ where $\mathbf{d}$ is the displacement vector pointing from the negative charge to the positive charge
+        * *Ideal case*. When the two charge are infinitely charged and are infinitesimally separated
+    * *Energy and torque*. An object with an electric dipole moment is subject to a torque $\tau$ when placed in an external electric field
+        * *Torque*. Tend to align the dipole with the field, i.e. a dipole aligned parallel to an electric field has lower potential energy than a dipole making some angle with it
+        * *Formula*. Given the dipole moment $\mathbf{p}$ 
+            * *Energy*. $U=-\mathbf{p}\cdot\mathbf{E}$
+            * *Torque*. $\mathbf{\tau} = \mathbf{p}\times \mathbf{E}$
+    * *Dipole moment for a continuous distribution of charge confined to a volume $V$*. 
+        * *Formal*. $\mathbf{p}(\mathbf{r}) = \int_V \rho(\mathbf{r}_0) (\mathbf{r}_0 - \mathbf{r}) d^3 \mathbf{r}_0$
+            * $\mathbf{r}$ locates the point of observation
+            * $d^3\mathbf{r}_0$ denotes an elementary volume in $V$
+        * *Charge density an array of point charges*. $\rho(\mathbf{r}) = \sum_{i=1}^n q_i \delta(\mathbf{r}-\mathbf{r}_i)$ where $\delta(\cdot)$ is the Diract delta function
+        * *Reduced formula*. $\mathbf{p}(\mathbf{r}) = \sum_{i=1}^n q_i (\mathbf{r}_i - \mathbf{r})$
+* *Dipole moment density and polarization density*.
+    * *Dipole moment density of an array of charges*. Contain both the location of the array and its dipole moment
+
+**Nature of piezoelectric effect**. Closely related to the occurrence of electric dipole moments in solids
+* *Electric dipole moments in solids*. 
+    * Either be induced for ions on crystal lattice sites with asymmetric charge surroundings, or
+        * *Crystal lattice (Bravais lattice)*. An infinite array of discrete points generated by a set of discrete translation operations given as
+
+            $$\mathbf{R}=n_1 + \mathbf{a}_1 + n_2 \mathbf{a}_2 + n_3 \mathbf{a}_3$$
+
+            where $n_i$ are integers and $\mathbf{a}_i$ are primitive translation vectors
+    * Directly be carried by molecular groups
+* *Dipole density (polarization)*. Can be calculated for crystals by summing up the dipole moments per volume of the crystallographic unit cell
+    * *Dipole field*. Since every dipole is a vector, the dipole density $\mathbf{P}$ is a vector field
+* *Piezoelectric effect*. The change of polarization $\mathbf{P}$ when applying a mechanical stress
+    * *Explain*. This may be caused 
+        * By a reconfiguration of the dipole-inducing surrounding, or 
+        * By re-orientation of molecular dipole moments under the influence of the external stress
+    * *Consequence*. Piezoelectricity may then manifest in a variation of the polarization strength, its direction or both, with the details depending on
+        * The orientation of $\mathbf{P}$ within the crystal
+        * Crystal symmetry
+        * The applied mechanical stress
+
+## Introduction to quartz clock
+**Quartz clock (quartz watches)**. Timepieces which use an electronic oscillator regulated by a quartz crystal to keep time
+
+<div style="text-align:center">
+    <img src="https://i.imgur.com/Oo85FZn.png">
+    <figcaption>Circuit board from a chronograph-wristwatch</figcaption>
+</div>
+
+* *Advantage over mechanical clocks*. The crystal oscillator creates a signal with very precise frequency
+
+    $\to$ Quartz clocks and watches are at least order of magnitude more accurate than mechanical clocks
+
+**Properties of quartz**.
+* *Piezoelectric material*. 
+    * *Description*.
+        * When a quartz crystal is subject to mechanical stress, e.g. bending
+
+            $\to$ It accumulates electrical charge across some planes
+        * If charges are placed across the crystal plane, quartz crystals will bend
+    * *Consequence*. 
+        * *Quartz crystal in resonator*. Since quartz can be directly driven to flex by an electric signal, no additional transducer is required to use it in a resonator
+        * *Quartz crystal in phonograph catridges*. The movement of the stylus, i.e. needle, flexes a quartz crystal , producing a small voltage
+
+            $\to$ This voltage is amplified and played through speakers
+* *Change of size due to temperature*. Quartz crystal's size does not change much as temperature fluctuates
+    * *Consequence*. A quartz plate's resonance frequency, based on its size, will not significantly rise or fall
+        
+        $\to$ Since its resonator does not change the shape, a quartz clock will remain relatively accurate as the temperature changes
+
+**History of quartz resonator**.
+* In the early 20th century, radio engineers sought a precise, stable source of radio frequencies and started with steel resonator
+* When Walter Guyton Cady found that quartz can resonate with less equipment and better temperature stability
+
+    $\to$ Steel resonators disappeared within a few years
+* Later, scientists at NIST discovered that a crystal oscillator could be more accurate than a pendulum clock
+
+## Quartz clock sturcture and mechanism
+**Quartz clock structure**. A feedback oscillator circuit in the form of a crystal oscillator circuit
+
+<div style="text-align:center">
+    <img src="https://i.imgur.com/PHA8uzf.png">
+    <figcaption>A feedback linear oscillator; an amplifier A with its output v_0 fed back to its input v_f through a filter beta(j \omega)</figcaption>
+</div>
+
+* *Filter*. A piezoelectric crystal, e.g. a quartz crystal
+    * *Idea*. The crystal mechanically vibrates as a resonator, and its frequency of vibration determines the oscillation frequency
+    * *Benefits of crystal resonator*. Very high Q-factor and better temperature stability
+
+        $\to$ These lead to better frequency stability
+* *Q-factor*. 
+    * *Definitions*.
+        * *Bandwidth definition*. $Q=\frac{f_r}{\Delta f}$ where $f_r$ is the resonant frequency, and $\Delta f$ is the resonant width
+        * *Stored energy definition*. $Q=2\pi \times \frac{\text{energy\_stored}}{energy\_dissipated\_per\_cycle}$
+    * *Resonant width*. The bandwidth, over which the power of vibration is greater than half the power at the resonant frequency
+    * *Interpretation*. Higher Q-factor implies less power loss after each cycle of oscillation, i.e.
+        * *Option 1*. How underdamped an oscillator or resonator is
+            * *Underdamped*. An oscillating mass commonly tends to overshoot its starting position, then return, overshooting again
+
+                $\to$ With each overshoot, some energy in the system is dissipated, and the oscillation die towards zero
+        * *Option 2*. Approximately the ratio of the initial energy stored in the resonator to the energy lost in one radian of the oscillation cycle
+
+**Quartz resonator**.
+
+<div style="text-align:center">
+    <img src="https://i.imgur.com/1oiuQFQ.png">
+    <figcaption>Quartz crystal resonator used as the time keeping component in quartz watches and clocks, with the case removed. It is formed in the shape of a tuning fork</figcaption>
+</div>
+
+* *Mechanisms*.
+    1. The electronic circuit acts as an oscillator, i.e. an amplifier whose output passes through the quartz resonator
+    2. The resonator acts as an electronic filter, eliminating but the single frequency of interest
+    3. The output of this module feeds back to the input of the amplifier
+        
+        $\to$ The resonator assures that the oscillator howls with the exact frequency of interest
+    4. When the circuit is powered up, a single burst of shot noice, which always present in electronic circuits, can cascade to bringing the oscillator into oscillation at the desired frequency
+
+        >**NOTE**. If the amplifier were perfectly noise-free, the oscillator would not start
+
+        * *Burst noise*. Burst noise plagues semiconductors, and is usually caused by the imperfection of the semiconductor materials
+            * *Interpretation*. Burst noise represents abrupt voltage or current transations, which can even be heard by amplifying a contaminated signal
+            * *Example*. When transferred to a speaker, this signal sounds like popcorn popping
+
+                $\to$ This type of noise is sometimes referred as "popcorn noise"
+* *Oscillation frequency of the crystal*. Depend on its shape, size, and the crystal plane, on which the quartz is cut
+    * *Typical shape*. The crystal is cut in a small tuning fork shape on a particular crystal plane
+    * *Typical resulting frequency*. In nearly all quartz watches, the frequency is $32768=2^{15}$
+        * *Desired properties*.
+            * The frequency is high enough to exceed the human hearing range
+            * The frequency is low enough to keep electric energy consumption at a modest level, and to permit inexpensive counters to derive a 1-second pulse
+
+        >**NOTE**. It is possible for quartz clocks and watches to have their quartz crystal oscillate at a higher frequency than 32768 Hz, or generate a digital pulse more than once per second
+        >* *Purpose*. Drive an analog second hand at a higher power of 2 than once every second
+        >* *Trade-off*. The energy consumption goes up accordingly, since higher oscillation frequencies and any activation of stepping motore costs energy
+
+**One-second counter implementation**. 
+1. The data line output from such a quartz resonator goes high and low 32768 times a second
+2. The data line output is fed into a flipflop, which changes from low to high, or vice versa, whenever the line from the crystal goes from high to low
+    * *Flip-flop*. Essentially two transistors with a bit of cross-connection
+3. The output of the first flip-flop is fed into a second flip-flop, and so on
+4. Through a chain of 15 flip-flops, each of which acts as an effective power of 2 frequency divider
+
+    $\to$ The result is a 15-bit binary digital counter driven by the frequency, which will overlow once per second
+    * *Frequency divider*. Divide the frequency of the input signal by 2
+    * *Consequence*. A digital pulse is created once per second
