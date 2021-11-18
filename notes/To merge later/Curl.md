@@ -28,3 +28,21 @@
                 <img src="https://i.imgur.com/lj2swUp.png" width="350">
                 <figcaption>Vector field with minimum curl</figcaption>
             </div>
+* *Formulation of curl under Cartesian coordinates*.
+
+    $$\begin{aligned}
+    (\nabla\times \mathbf{F})_x&=\frac{\partial F_z}{\partial y} - \frac{\partial F_y}{\partial z}\\
+    (\nabla\times \mathbf{F})_y&=\frac{\partial F_x}{\partial z} - \frac{\partial F_z}{\partial x}\\
+    (\nabla\times \mathbf{F})_z&=\frac{\partial F_y}{\partial x} - \frac{\partial F_x}{\partial y}\big)
+    \end{aligned}$$
+
+    * *Properties*. 
+        * $\nabla \times \mathbf{F}$ is invariant under proper rotations of the coordinate axes
+        * $\nabla \times \mathbf{F}$ inverts under reflection
+* *Generalization to orthogonal coordinates*. Let $(u_1,u_2,u_3)$ be an orthogonal coordinates
+
+    $$\begin{aligned}
+    (\nabla\times \mathbf{F})_1&=\frac{1}{h_2 h_3} \big(\frac{\partial (h_3 F_3)}{\partial u_2} - \frac{\partial (h_2 F_2)}{\partial u_3}\big)\\
+    (\nabla\times \mathbf{F})_2&=\frac{1}{h_3 h_1} \big(\frac{\partial (h_1 F_1)}{\partial u_3} - \frac{\partial (h_3 F_3)}{\partial u_1}\big)\\
+    (\nabla\times \mathbf{F})_3&=\frac{1}{h_1 h_2} \big(\frac{\partial (h_2 F_2)}{\partial u_1} - \frac{\partial (h_1 F_1)}{\partial u_2}\big)
+    \end{aligned}$$
