@@ -1,3 +1,36 @@
+<!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
+# Table of Contents
+- [Table of Contents](#table-of-contents)
+  - [GstElements](#gstelements)
+    - [Types of Gst elements](#types-of-gst-elements)
+    - [Element states](#element-states)
+  - [GLib dynamic type system](#glib-dynamic-type-system)
+    - [Data type](#data-type)
+    - [Copy functions](#copy-functions)
+  - [Signals](#signals)
+    - [Signal registration](#signal-registration)
+    - [Signal connection](#signal-connection)
+    - [Signal emission](#signal-emission)
+    - [References](#references)
+  - [Events](#events)
+    - [Downstream events](#downstream-events)
+    - [Upstream events](#upstream-events)
+  - [GstBaseTransform](#gstbasetransform)
+    - [Processing modes](#processing-modes)
+  - [GstSignal](#gstsignal)
+  - [Gstreamer Caps](#gstreamer-caps)
+    - [Pad Caps](#pad-caps)
+    - [Caps structure](#caps-structure)
+    - [Caps operations](#caps-operations)
+    - [Related functions](#related-functions)
+    - [References](#references-1)
+  - [Caps negotiation](#caps-negotiation)
+    - [Push-mode caps negotiation](#push-mode-caps-negotiation)
+    - [References](#references-2)
+- [Appendix](#appendix)
+  - [Case studies](#case-studies)
+  - [Concepts](#concepts)
+<!-- /TOC -->
 
 ## GstElements
 **Elements**. A black box, i.e. when we put something in, the element does something with it, and something else comes out at the other side
@@ -673,6 +706,8 @@ $\to$ The most complicated work is done in the source pads
     * https://docs.nvidia.com/metropolis/deepstream/python-api/PYTHON_API/NvDsMeta/NvDsFrameMeta.html
     * https://github.com/riotu-lab/deepstream-facenet/blob/master/deepstream_test_2.py
     * https://forums.developer.nvidia.com/t/facenet-with-deepstream-python-not-able-to-parse-output-tensor-meta/159139/14
+
+**Writing custom GstPlugin**. https://gstreamer.freedesktop.org/documentation/plugin-development/introduction/basics.html?gi-language=c
 
 ## Concepts
 **Ghost Pads**. Useful when organizing pipelines with GstBins like elements

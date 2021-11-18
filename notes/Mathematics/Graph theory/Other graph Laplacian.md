@@ -5,6 +5,8 @@
   - [Normalized graph Laplacian](#normalized-graph-laplacian)
   - [Random walk and adjacent matrix](#random-walk-and-adjacent-matrix)
   - [Summary](#summary)
+- [Appendix](#appendix)
+  - [Concepts](#concepts)
 <!-- /TOC -->
 
 # Other Laplacian matrices
@@ -110,9 +112,30 @@ $\to$ The row $\hat{\mathbf{A}}_i$ gives the induced probability distribution ov
     * *Conclusion*. There exists a constant $C$ such that, for all $t$, we have
 
         $$\|\pi - p^{(t)}\|_1 \leq C\cdot n\cdot e^{-t\sigma}$$
-    * *Interpretation*. Even if the number of vertices of the graph is gigantic, e.g. $n=2^d$ for some $d$
+    * *Explain*.
+        * Consider the left eigenvectors $\pi,v_2,\dots,v_n$ of $M$, since those vectors are linearly independent
+
+            $\to$ $p^{(0)}$ can be written as a linear combination of those vectors, i.e. $p^{(0)} = \pi + \sum_{i=2}^n c_i v_i$
+        * We have that
+
+            $$p^{(0)} M^t = \pi + \sum_{i=2}^n \lambda_i^t c_i v_i \to \pi$$
+
+            due to the previous theorem
+        * Without loss of generality, assume that $\|v_i\|=1$ for all $v_i$. We also have that
+
+            $$\begin{aligned}
+            \|\pi-p^{(t)}\|_1 &= \|\sum_{i=2}^n \lambda_i^t c_i v_i\|_1\\
+            &\leq\sum_{i=2}^n |\lambda^t| |c_i| & \text{since } \|v_i\|_1 = 1\\
+            &\leq\sum_{i=2}^n |(1 - \lambda)^t| |c_i|\\
+            &\leq C\cdot n\cdot (1 - \sigma)^t\\
+            &\leq C \cdot n\cdot e^{-\sigma t} & \text{since } 1 - \sigma \leq e^\sigma
+            \end{aligned}$$
+
+    * *Consequence*. Even if the number of vertices of the graph is gigantic, e.g. $n=2^d$ for some $d$
 
         $\to$ We can get convergence very close to the stationary distribution in only $O(d/\sigma)$ steps of random walk
+
+    >**NOTE**. The equality $1 - \sigma \leq e^\sigma$ is very important for proof of convergence related to probability
 
 **PageRank**.
 * *Key idea*. Let $G$ be the directed graph of hyperlinks on the web, where each vertex is a webpage with edges to every page it has links to
@@ -124,7 +147,7 @@ $\to$ The row $\hat{\mathbf{A}}_i$ gives the induced probability distribution ov
 
     $\to$ This is the PageRank of the graph $G$
 * *Page ranking*. For each page $i$, its rank or score is $\pi(i)$, with larger being better
-    * *Property of $pi$*. Following from the fact that $\pi M = \pi$
+    * *Property of $\pi$*. Following from the fact that $\pi M = \pi$
 
         $$\pi(j) = \sum_{i=1}^n \pi(i) M(i,j) = \frac{\alpha}{n} + (1-\alpha) \sum_{i:(i,j)\in G} \frac{\pi(i)}{\text{degree}(i)}$$
     * *Interpretation*. The asymptotic probability of being on page $j$ is the sum of two processes
@@ -133,6 +156,9 @@ $\to$ The row $\hat{\mathbf{A}}_i$ gives the induced probability distribution ov
 * *Problem*. Since the number of webpages is very large, we need to approximately sample from $\pi$
 
 **Markov chain Monte Carlo**.
+* *Idea*. We need to sample or estimate an integral from a challenging distribution over a very large space
+
+    $\to$ We cannot write down the distribution, but we have some information about it
 * *Theorem*.
     * *Assumptions*.
         * $p^{(0)}$ is any distribution and $p^{(t)} = p^{(0)} M^t$
@@ -140,11 +166,13 @@ $\to$ The row $\hat{\mathbf{A}}_i$ gives the induced probability distribution ov
     * *Conclusion*. If $M$ is connected, i.e. state $i$ is reachable from any state $j$, then 
         * It has a unique stationary distribution $\pi$
         * As $t\to\infty$, the average $\frac{\sum_{i=0}^t p^{(i)}}{t}$ converges to $\pi$
-* *Lemma*. FOr a Markov chain with transition matrix $M$, if strongly connected, if there exists a distribution $\pi$ such that
+* *Lemma*. For a Markov chain with transition matrix $M$, if strongly connected, if there exists a distribution $\pi$ such that
 
-    $$\pi(i)M(i,j)=\pi(j)M(i,j)$$
+    $$\pi(i)M(i,j)=\pi(j)M(j,i)$$
 
     then $\pi$ is the unique stationary distribution
+
+    >**NOTE**. This does not claim the stationary distribution always satisfies this relationship
 
 **Reference**. https://www.bowaggoner.com/courses/2019/csci5454/docs/spectral.pdf
 
@@ -160,3 +188,10 @@ $\to$ The row $\hat{\mathbf{A}}_i$ gives the induced probability distribution ov
     $$\mathbf{L}_r = \mathbf{D}^{-1/2} \mathbf{D}^{-1/2} \mathbf{L} \mathbf{D}^{-1/2} \mathbf{D}^{1/2} = \mathbf{D}^{-1/2} \mathbf{L}_n \mathbf{D}^{1/2}$$
 
 **Eigenvalues and eigenvectors of $\mathbf{L}_n$ and $\mathbf{L}_r$**.
+
+# Appendix
+## Concepts
+**Strongly connected graph**.
+* Connected is usually associated with undirected graphs (two way edges), i.e. there is a path between every two nodes
+* Strongly connected is usually associated with directed graphs (one way edges), i.e. there is a route between every two nodes
+* Complete graphs are undirected graphs where there is an edge between every pair of nodes

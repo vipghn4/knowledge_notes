@@ -23,57 +23,6 @@
 **Transducer**. A device converting energy from one form to another, e.g. a signal in one form of energy to a signal in another
 
 ## Piezoelectricity
-**Electric dipole moment**.
-* *Moment*. An expression involving the product of a distance and physical quantity, which accounts for how the physical quantity is located or arranged
-    * *Reference point* Moments are usually defined w.r.t a fixed reference point
-    * *Commonly used quantities*. Forces (work done), masses (momentum), electric charge distributions (electric dipole)
-    * *Formula*.
-        * *Most basic form*. $\mu_n = r^n Q$
-            * $Q$ is the physical quantity, e.g. force applied at a point
-            * $r^n$ is the distance to reference point, raised to a power of $n$
-        * *General formula*. $\mu_n = \int r^n \rho(r) dr$
-            * $\rho$ is the distribution of the quantity being considered
-        * *More complex formulas*. Take into account the angular relationships between the distance and the physical quantity
-    * *Naming conventions*.
-        * *Monopole moment*. Moment with $n=0$
-        * *Dipole moment*. Moment with $n=1$
-        * *Quadrupole moment*. Moment with $n=2$
-    * *History*. The concept of physical moment is derived from the mathematical concept of moments
-        * *Principle of moments*. Derived from Archimedes's discovery of the operating principle of the lever
-            * *Idea*. In the lever, one applies a force, and the amount of force applied to the object, i.e. the moment of force, is given as
-
-                $$M=rF$$
-
-                where $F$ is the applied force, and $r$ is the distance from the applied force to object
-        * *Meaning of "moment"*. The word moment was first used in mechanics in its the sense of "importance" or "consequence"
-
-            $\to$ The moment of a force about an axis meant the importance of the force w.r.t its power to generate in matter rotation about the axis
-* *Electric dipole moment*. A measure of the separation of positive and negative electrical charges within a system, i.e. a measure of the system's overal polarity
-    * *Unit of measurement*. Coulomb-meter
-    * *Elementary definition*. 
-        * *Point changes*. Point particles with electric charge
-        * *Electric dipole*. Two point charges, one with charnge $+q$ and the other with charge $-q$ separated by a distance $d$ constitute an electric dipole
-            * *Electric dipole moment magnitude*. $p=qd$
-
-                >**NOTE**. Some authors may split $d$ in half, and use $s=d/2$ since this quantity is the distance between either charge and the center of the dipole
-
-            * *Electric dipole moment direction*. From negative charge to positive charge
-            * *General mathematical definition*. $\mathbf{q} = q \mathbf{d}$ where $\mathbf{d}$ is the displacement vector pointing from the negative charge to the positive charge
-        * *Ideal case*. When the two charge are infinitely charged and are infinitesimally separated
-    * *Energy and torque*. An object with an electric dipole moment is subject to a torque $\tau$ when placed in an external electric field
-        * *Torque*. Tend to align the dipole with the field, i.e. a dipole aligned parallel to an electric field has lower potential energy than a dipole making some angle with it
-        * *Formula*. Given the dipole moment $\mathbf{p}$ 
-            * *Energy*. $U=-\mathbf{p}\cdot\mathbf{E}$
-            * *Torque*. $\mathbf{\tau} = \mathbf{p}\times \mathbf{E}$
-    * *Dipole moment for a continuous distribution of charge confined to a volume $V$*. 
-        * *Formal*. $\mathbf{p}(\mathbf{r}) = \int_V \rho(\mathbf{r}_0) (\mathbf{r}_0 - \mathbf{r}) d^3 \mathbf{r}_0$
-            * $\mathbf{r}$ locates the point of observation
-            * $d^3\mathbf{r}_0$ denotes an elementary volume in $V$
-        * *Charge density an array of point charges*. $\rho(\mathbf{r}) = \sum_{i=1}^n q_i \delta(\mathbf{r}-\mathbf{r}_i)$ where $\delta(\cdot)$ is the Diract delta function
-        * *Reduced formula*. $\mathbf{p}(\mathbf{r}) = \sum_{i=1}^n q_i (\mathbf{r}_i - \mathbf{r})$
-* *Dipole moment density and polarization density*.
-    * *Dipole moment density of an array of charges*. Contain both the location of the array and its dipole moment
-
 **Nature of piezoelectric effect**. Closely related to the occurrence of electric dipole moments in solids
 * *Electric dipole moments in solids*. 
     * Either be induced for ions on crystal lattice sites with asymmetric charge surroundings, or
