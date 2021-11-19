@@ -36,6 +36,7 @@
     (\nabla\times \mathbf{F})_z&=\frac{\partial F_y}{\partial x} - \frac{\partial F_x}{\partial y}\big)
     \end{aligned}$$
 
+    * *Intuition*. 
     * *Properties*. 
         * $\nabla \times \mathbf{F}$ is invariant under proper rotations of the coordinate axes
         * $\nabla \times \mathbf{F}$ inverts under reflection
