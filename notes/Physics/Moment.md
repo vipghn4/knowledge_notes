@@ -3,12 +3,15 @@
 - [Table of Contents](#table-of-contents)
 - [Moment](#moment)
   - [Fundamental](#fundamental)
+    - [Conservative force](#conservative-force)
+    - [Energy](#energy)
   - [Moment](#moment-1)
   - [Physical moments](#physical-moments)
 <!-- /TOC -->
 
 # Moment
 ## Fundamental
+### Conservative force
 **Curl**. A vector operator describing the infinitesimal circulation of a vector field in 3D Euclidean space
 * *Mathematical representation*. 
     * *The curl at a point*. A vector whose length and direction denote the magnitude and axis of the maximum circulation
@@ -33,14 +36,6 @@
             $$(\nabla\times \mathbf{F})(p)\cdot \hat{\mathbf{n}} = \lim_{A\to 0} \frac{1}{|A|} \oint_C \mathbf{F}\cdot d\mathbf{r}$$
 
             >**NOTE**. This is somewhat similar to the definition of divergence, where $\mathbf{F}\cdot \hat{\mathbf{n}}$ is taken, rather than $\mathbf{F}\cdot d\mathbf{r}$ due to the difference in purposes
-
-* *Interpretation*.
-    * *Assumptions*.
-        * A vector field describes the velocity field of a fluid flow
-        * A small ball is located within the fluid or gas, with the centre being fixed at a certain point
-    * *Conclusion*. If the ball has a rough surface, the fluid flowing past it will make it rotate
-        * The rotation axis, oriented according to the right-hand rule, points in the direction of the curl
-        * The angular speed of the rotation is half the magnitude of the curl at this point
 * *Intuition of curl*.
     * *Solving for curl*. Since $\nabla\times \mathbf{F}\in\mathbb{R}^3$, we have that
         
@@ -50,9 +45,9 @@
         \lim_{A_z\to 0} \frac{1}{|A_z|} \oint_C \mathbf{F}\cdot d\mathbf{r}_z\end{bmatrix}$$
     
     * *Extreme cases*. Assume that the magnitudes of the vectors within the vector field $\mathbf{F}$ are fixed, and their orientations are allowed to change, then
-        * *Maximum curl*. $\mathbf{F}$ reaches maximum curl at $p$ when 
+        * *Maximum curl*. $\mathbf{F}$ reaches maximum curl when 
             
-            $$\forall p'\in N(p),\cos[\mathbf{F}(p'), d\mathbf{r}(p')]=1$$
+            $$\forall p\in\mathbb{R}^3,\cos[\mathbf{F}(p), d\mathbf{r}(p)]=1$$
             
             i.e. if $A$ has circular shape, then $\mathbf{F}$ will be circular as illustrated below
 
@@ -61,9 +56,9 @@
                 <figcaption>Vector field with maximum curl</figcaption>
             </div>
 
-        * *Minimum curl*. $\mathbf{F}$ reaches minimum curl when $\oint_C \mathbf{F}(p) \cdot d\mathbf{r}(p)=0$, i.e.
+        * *Minimum curl*. $\mathbf{F}$ reaches maximum curl when $\oint_C \mathbf{F}(p) \cdot d\mathbf{r}(p)=0$, i.e.
 
-            $$\forall p'\in N(p),\mathbf{F}(p')=\mathbf{c}$$
+            $$\forall p\in\mathbb{R}^3,\mathbf{F}(p)=\mathbf{c}$$
 
             for some constant vector $\mathbf{c}$
 
@@ -71,6 +66,32 @@
                 <img src="https://i.imgur.com/lj2swUp.png" width="350">
                 <figcaption>Vector field with minimum curl</figcaption>
             </div>
+* *Formulation of curl under Cartesian coordinates*.
+
+    $$\begin{aligned}
+    (\nabla\times \mathbf{F})_x&=\frac{\partial F_z}{\partial y} - \frac{\partial F_y}{\partial z}\\
+    (\nabla\times \mathbf{F})_y&=\frac{\partial F_x}{\partial z} - \frac{\partial F_z}{\partial x}\\
+    (\nabla\times \mathbf{F})_z&=\frac{\partial F_y}{\partial x} - \frac{\partial F_x}{\partial y}\big)
+    \end{aligned}$$
+
+    * *Intuition*. Approximate $(\nabla \times \mathbf{F})(p)$ using an infinitesimal cube centered at $p$
+    * *Properties*. 
+        * $\nabla \times \mathbf{F}$ is invariant under proper rotations of the coordinate axes
+        * $\nabla \times \mathbf{F}$ inverts under reflection
+* *Generalization to orthogonal coordinates*. Let $(u_1,u_2,u_3)$ be an orthogonal coordinates
+
+    $$\begin{aligned}
+    (\nabla\times \mathbf{F})_1&=\frac{1}{h_2 h_3} \big(\frac{\partial (h_3 F_3)}{\partial u_2} - \frac{\partial (h_2 F_2)}{\partial u_3}\big)\\
+    (\nabla\times \mathbf{F})_2&=\frac{1}{h_3 h_1} \big(\frac{\partial (h_1 F_1)}{\partial u_3} - \frac{\partial (h_3 F_3)}{\partial u_1}\big)\\
+    (\nabla\times \mathbf{F})_3&=\frac{1}{h_1 h_2} \big(\frac{\partial (h_2 F_2)}{\partial u_1} - \frac{\partial (h_1 F_1)}{\partial u_2}\big)
+    \end{aligned}$$
+* *Interpretation*.
+    * *Assumptions*.
+        * A vector field describes the velocity field of a fluid flow
+        * A small ball is located within the fluid or gas, with the centre being fixed at a certain point
+    * *Conclusion*. If the ball has a rough surface, the fluid flowing past it will make it rotate
+        * The rotation axis, oriented according to the right-hand rule, points in the direction of the curl
+        * The angular speed of the rotation is half the magnitude of the curl at this point
 * *Stokes' theorem*.
     * *Assumptions*.
         * $\Sigma$ is a smooth oriented surface in $\mathbf{R}^3$ with boundary $\partial \Sigma$
@@ -79,6 +100,39 @@
 
         $$\iint_\Sigma (\nabla\times \mathbf{A}) \cdot d\mathbf{a} = \oint_{\partial \Sigma} \mathbf{A} \cdot d\mathbf{l}$$
 
+**Conservative force**. 
+* *Conservative force*. A force with the property that the total work done in moving a particle between two points is independent of the path taken
+    
+    $\to$ Equivalently, if a particle travels in a closed loop, the total work done by a conservative force is zero
+    * *Total work done*. The sum of the force acting along the path multiplied by the displacement
+    * *Examples*. 
+        * Force in elastic spring
+        * Electrostatic force between two electric charges
+        * Magnetic force between two magnetic poles
+    * *Consequences*. A conservative force depends only on the position of the object
+        * If a force is conservative, we can assign a numerical value for the potential at any point, and conversely
+            * *Explain*. When an object moves from one location to another, the force changes the potential energy of the object, by an amount which does not depend on the path taken
+
+                $\to$ This contributes to the mechanical energy and the overall conservation of energy
+        * If a force is not conservative, then defining a scalar potential is not possible
+            * *Explain*. Taking different paths would lead to conflicting potential differences between the start and end points
+* *Mathematical formulation*.
+    * *Formulation*. A force field $\mathbf{F}$ defined everywhere in space is conservative if it meets any of these equivalent conditions
+        * The curl of $\mathbf{F}$ is the zero vector, i.e.
+
+            $$\nabla\times\mathbf{F} = \mathbf{0}$$
+        
+        * There is zero net work $W$ done by the force when moving a particle through a trajectory starting and ending in the same place
+
+            $$W=\oint_C \mathbf{F}\cdot d\mathbf{r}=\mathbf{0}$$
+        
+        * The force can be written as the negative gradient of a potential $\mathbf{\Phi}$
+
+            $$\mathbf{F}=-\nabla\mathbf{\Phi}$$
+    * *Intuition*.
+* *Meaning of "conservative"*. When a conservative force exists, it converses mechanical energy
+
+### Energy
 **Kinetic energy**. The energy an object possesses due to its motion, i.e. the work required to accelerate the object of a given mass from rest to its stated velocity
 
 $\to$ Having gained this energy during its acceleration, the body maintains this energy unless its speed changes
