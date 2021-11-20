@@ -12,6 +12,30 @@
 # Moment
 ## Fundamental
 ### Conservative force
+**Conservative vector field**. A vector field which is the gradient of some function
+* *Characteristics*. 
+    * The line integral is path independent, i.e. the choice of any path between two points does not change the value of the line integral
+
+        $\to$ Path independence of line integral is equivalent to the vector field being conservative
+    * The vector field is irrotational, i.e. in 3D, it means that it has vanishing curl
+* *Conservative vector field in mechanics*. They are vector fields representing forces of physical systems, in which energy is conserved
+* *Mathematical definition*.
+    * *Assumptions*.
+        * $U$ is an open subset of $\mathbb{R}^n$
+        * $\mathbf{v}:U\to\mathbb{R}^n$ is a vector field
+    * *Conclusion*. $\mathbf{v}$ is conservative if and only if there exists a $C^1$ scalar field $\phi$ on $U$ such that
+
+        $$\mathbf{v}=\nabla \phi$$
+    * *Scalar potential for $\mathbf{v}$*. $\phi$
+* *Fundamental theorem of vector calculus*. Any vector field can be expressed as the sum of a conservative vector field and a solenoidal field
+    * *Solenoidal vector field*. A vector field $\mathbf{v}$ with zero divergence at all points in the field, i.e.
+
+        $$\nabla\cdot \mathbf{v}=0$$
+
+        * *Other names*. Incompressible vector field, or divergence-free vector field, or traverse vector field
+* *Path independence*. $\oint_C \mathbf{v}\cdot d\mathbf{r}=0$ for every rectifiable simple closed path $C$ in $U$
+* *Reference*. https://en.wikipedia.org/wiki/Conservative_vector_field
+
 **Conservative force**. 
 * *Conservative force*. A force with the property that the total work done in moving a particle between two points is independent of the path taken
     
@@ -69,10 +93,15 @@ $\to$ Having gained this energy during its acceleration, the body maintains this
 
     $\to$ If a particle travels in a closed loop, the total work done by a conservative force is zero
     * *Examples*. Gravitational force, force in elastic spring, electrostatic force between two electric charges, and magnetic force between two magnetic poles
-* *Motivation*. 
-    * If the work done by a force on a body moving from A to B does not depend on the path between these points, i.e. the work is done by a conservative force
+* *Motivation*.  If the work done by a force on a body moving from A to B does not depend on the path between these points, i.e. the work is done by a conservative force
 
-        $\to$ The work of this force measured from A assigns a scalar value to every other point in space and define a scalar potential field
+    $\to$ The work of this force measured from A assigns a scalar value to every other point in space and define a scalar potential field
+    * *Consequence*. There is a function $U(\mathbf{x})$, i.e. a potential, can be evaluated at two points $\mathbf{x}_A,\mathbf{x}_B$ to obtain the work over any trajectory between these points
+
+        $$W=\int_C\mathbf{F}\cdot d\mathbf{x}=U(\mathbf{x}_A) - U(\mathbf{x}_B)$$
+
+        where $C$ is the trajectory taken from $A$ to $B$
+    * *The potential energy associated with the applied force*. $U(\mathbf{x})$
 
 ## Moment
 **Moment**. An expression involving the product of a distance and physical quantity, which accounts for how the physical quantity is located or arranged
