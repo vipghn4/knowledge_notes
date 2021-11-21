@@ -5,8 +5,10 @@
   - [Fundamental](#fundamental)
     - [Conservative force](#conservative-force)
     - [Energy](#energy)
-  - [Moment](#moment-1)
+    - [Moment](#moment-1)
   - [Physical moments](#physical-moments)
+    - [Mechanical moments](#mechanical-moments)
+    - [Electrical moments](#electrical-moments)
 <!-- /TOC -->
 
 # Moment
@@ -102,7 +104,7 @@ $\to$ Having gained this energy during its acceleration, the body maintains this
         where $C$ is the trajectory taken from $A$ to $B$
     * *The potential energy associated with the applied force*. $U(\mathbf{x})$
 
-## Moment
+### Moment
 **Moment**. An expression involving the product of a distance and physical quantity, which accounts for how the physical quantity is located or arranged
 * *Reference point* Moments are usually defined w.r.t a fixed reference point
 * *Commonly used quantities*. Forces (work done), masses (momentum), electric charge distributions (electric dipole)
@@ -129,6 +131,7 @@ $\to$ Having gained this energy during its acceleration, the body maintains this
         $\to$ The moment of a force about an axis meant the importance of the force w.r.t its power to generate in matter rotation about the axis
 
 ## Physical moments
+### Mechanical moments
 **Momentum**. A vector quantity, where the direction and magnitude is used to predict the resulting direction and speed of motion of objects after they collide
 * *Other names*. Linear momentum, and translational momentum
 * *Formula*. $\mathbf{p} = m \mathbf{v}$
@@ -164,20 +167,7 @@ $\to$ Having gained this energy during its acceleration, the body maintains this
 
             $$\mathcal{L} = T - V$$
 
-**Angular momentum**.
-* *Moment of inertia*. Determine the torque required for a desired angular acceleration about a rotational axis, i.e. akin to how mass determines the force required for a desired acceleration 
-    * *Formula*. $I=m r^2$
-* *Angular momentum*. The rotational equivalent of linear momentum
-    * *Formula*. $L = I \omega$
-        * $\omega = \frac{\mathbf{r} \times \mathbf{v}}{r^2}$ is the orbital angular velocity
-        * $\mathbf{r}$ is the position vector
-        * $\mathbf{v}$ is the linear velocity of the particle relative to the origin
-        * $m$ is the mass of the particle
-* *Derivation*.
-    * *Observations*.
-        * The relation between physical velocity and angular velocity is given as $v=r\omega$
-
-**Torque**. A rotational equivalent of linear        force
+**Torque**. A rotational equivalent of linear force
 * *Other names*. Moment, moment of force, rotational force, or turning effect
 * *Motivation*. Originated from the studies by Archimedes of the usage of levers
 * *Ideas*. Just as a linear force is a push or a pull, 
@@ -201,6 +191,20 @@ $\to$ Having gained this energy during its acceleration, the body maintains this
 
     $$W=\int_{\theta_1}^{\theta_2} \tau d\theta =\int_{s_1}^{s_2} \mathbf{F} d\mathbf{s}$$
 
+**Angular momentum**.
+* *Moment of inertia*. Determine the torque required for a desired angular acceleration about a rotational axis, i.e. akin to how mass determines the force required for a desired acceleration 
+    * *Formula*. $I=m r^2$
+* *Angular momentum*. The rotational equivalent of linear momentum
+    * *Formula*. $L = I \omega$
+        * $\omega = \frac{\mathbf{r} \times \mathbf{v}}{r^2}$ is the orbital angular velocity
+        * $\mathbf{r}$ is the position vector
+        * $\mathbf{v}$ is the linear velocity of the particle relative to the origin
+        * $m$ is the mass of the particle
+* *Derivation*.
+    * *Observations*.
+        * The relation between physical velocity and angular velocity is given as $v=r\omega$
+
+### Electrical moments
 **Electric dipole moment**. A measure of the separation of positive and negative electrical charges within a system, i.e. a measure of the system's overal polarity
 * *Unit of measurement*. Coulomb-meter
 * *Elementary definition*. 
