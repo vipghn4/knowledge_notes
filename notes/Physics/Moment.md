@@ -65,7 +65,6 @@
         * The force can be written as the negative gradient of a potential $\mathbf{\Phi}$
 
             $$\mathbf{F}=-\nabla\mathbf{\Phi}$$
-    * *Intuition*.
 * *Meaning of "conservative"*. When a conservative force exists, it converses mechanical energy
 
 ### Energy
