@@ -6,6 +6,7 @@
     - [Conservative force](#conservative-force)
     - [Energy](#energy)
     - [Moment](#moment-1)
+    - [Geometrical products](#geometrical-products)
   - [Physical moments](#physical-moments)
     - [Mechanical moments](#mechanical-moments)
     - [Electrical moments](#electrical-moments)
@@ -104,6 +105,12 @@ $\to$ Having gained this energy during its acceleration, the body maintains this
         where $C$ is the trajectory taken from $A$ to $B$
     * *The potential energy associated with the applied force*. $U(\mathbf{x})$
 
+**Relativity of potential energy**. Absolute energy values are based on an arbitrary zero value
+* *Example*. A teacher raises a 5-Newton weight from the bench to a height of 1.5m, they then calculate the work done to lift it up to 1.5m
+
+    $\to$ Assuming the weight has been raised before, what if it was raised from the floor, or from ground level outside if the room is not at ground level
+* *Interpretation of negative potential energy*. An object with negative potential energy is in a location, where it would require work done on it, i.e. energy put in, to move the object to the zero energy point
+
 ### Moment
 **Moment**. An expression involving the product of a distance and physical quantity, which accounts for how the physical quantity is located or arranged
 * *Reference point* Moments are usually defined w.r.t a fixed reference point
@@ -129,6 +136,35 @@ $\to$ Having gained this energy during its acceleration, the body maintains this
     * *Meaning of "moment"*. The word moment was first used in mechanics in its the sense of "importance" or "consequence"
 
         $\to$ The moment of a force about an axis meant the importance of the force w.r.t its power to generate in matter rotation about the axis
+
+### Geometrical products
+**Cross product**. Defined only in 3D space and denoted as $\mathbf{a}\times\mathbf{b}$
+* *Cross product $\mathbf{a}\times\mathbf{b}$*. A vector $\mathbf{c}$ which is perpendicular to both $\mathbf{a}$ and $\mathbf{b}$, with a direction given by the right-hand rule, and a magnitude equal to the area of the parallelogram spanned by $\mathbf{a}$ and $\mathbf{b}$
+    * *Assumptions*.
+        * $\theta$ is the angle between $\mathbf{a}$ and $\mathbf{b}$ in the plane containing them
+        * $\|\cdot\|$ denotes the magnitude operator
+        * $\mathbf{n}$ is the unit vector perpendicular to the plane containing $\mathbf{a}$ and $\mathbf{b}$, in the direction given by the right-hand rule
+    * *Formula*. $\mathbf{a}\times\mathbf{b}=\|\mathbf{a}\| \|\mathbf{b}\| \sin(\theta) \mathbf{n}$
+* *Derivation*.
+    * *Coordinate notation*. If $(\mathbf{i}, \mathbf{j}, \mathbf{k})$ is a oriented orthonormal basis, then the basis vectors satisfy the following equalities
+
+        $$\mathbf{i}\times\mathbf{j}=\mathbf{k},\quad \mathbf{j}\times\mathbf{k}=\mathbf{i},\quad \mathbf{k}\times\mathbf{i}=\mathbf{j}$$
+
+        * *Anticommutativity*. 
+
+            $$\mathbf{j}\times\mathbf{i}=-\mathbf{k},\quad \mathbf{k}\times\mathbf{j}=-\mathbf{i},\quad \mathbf{i}\times\mathbf{k}=-\mathbf{j}$$
+
+            * *Consequence*. $\mathbf{i}\times\mathbf{i} = \mathbf{0}$ for every vector $\mathbf{i}$
+    * *Derivation of $\mathbf{a}\times\mathbf{b}$*. We can derive $\mathbf{a}\times\mathbf{b}$ by representing these vectors as
+
+        $$\mathbf{a}=a_1\mathbf{i} + a_2\mathbf{j} + a_3\mathbf{k},\quad \mathbf{b}=b_1\mathbf{i} + b_2\mathbf{j} + b_3\mathbf{k}$$
+
+**Scalar triple product**. The dot product of one of the vectors with the cross product of the other two
+* *Formula*. $\mathbf{a}\cdot(\mathbf{b}\times\mathbf{c})$
+    * *Geometric interpretation*. The signed volume of the parallelepiped defined by the given three vectors
+* *Relation to exterior product*. The exterior product $\mathbf{a}\land \mathbf{b}\land \mathbf{c}$ is a trivector with magnitude equal to to scalar triple product, i.e.
+
+    $$|\mathbf{a}\land \mathbf{b}\land \mathbf{c}| = |\mathbf{a}\cdot (\mathbf{b}\times \mathbf{c})|$$
 
 ## Physical moments
 ### Mechanical moments
@@ -167,7 +203,31 @@ $\to$ Having gained this energy during its acceleration, the body maintains this
 
             $$\mathcal{L} = T - V$$
 
+**Lever**. A simple machine consisting of a beam or rigid rod pivoted at a fixed hinge, or fulcrum
+* *Importance of lever*. First mathematically described by Archimedes, play a central role in generalizing linear forces and moments to their rotational versions
+* *Meaning of "lever"*. From Old French word "levier", which means "to raise"
+* *Force and levers*. The mechanical advantage of a lever can be determined by considering the balance of moments or torque $T$ about the fulcrum
+    * *Assumptions*.
+        * $F_1, F_2$ are the input forces to the lever
+        * $a,b$ are the corresponding perpendicular distances between the forces and the fulcrum lying between the forces
+    * *Torque*. $T_1=F_1 a$ and $T_2 = F_2 b$
+    * *Balanced moments of torque*. $T_1 = T_2$
+    * *Mechanical advantage of the lever*. The ratio of output force to input force
+
+        $$\text{MA}=\frac{F_2}{F_1}=\frac{a}{b}$$
+* *Law of the lever*. $\text{MA}=\frac{F_2}{F_1}=\frac{a}{b}$
+    * *Explain*. As the lever rotates around the fulcrum, points further from this pivot move faster than points closer to the pivot
+
+        $\to$ A force applied to a point further from the pivot must be less than the force located at a point closer in
+        * *Explain*. Power is the product of force and velocity
+
 **Torque**. A rotational equivalent of linear force
+
+<div style="text-align:center">
+    <img src="https://i.imgur.com/bBgy3M6.png" width="350">
+    <figcaption>Torque illustration</figcaption>
+</div>
+
 * *Other names*. Moment, moment of force, rotational force, or turning effect
 * *Motivation*. Originated from the studies by Archimedes of the usage of levers
 * *Ideas*. Just as a linear force is a push or a pull, 
@@ -187,41 +247,115 @@ $\to$ Having gained this energy during its acceleration, the body maintains this
         * *Conclusion*.
 
             $$\mathbf{\tau} = \mathbf{r} \times \mathbf{F},\quad \tau=\|\mathbf{r}\| \|\mathbf{F}\| \sin\theta$$
-* *Equivalence to linear force*. The work $W$ of a torque can be given as
+        
+        * *Intuition*. Consider an object unit distance apart from the rotation center, then $\mathbf{\tau}$ is an entity with direction and magnitude, just as the angular displacement but with different meanings
+            * *Direction*. Represent the rotational direction, just as angular displacement
+            * *Magnitude*. Represent the force applied to the object when applying a force $\mathbf{F} \sin\theta$ perpendicularly to a point which is $\|\mathbf{r}\|$ distance apart from the rotation center (just as the principle of lever)
+* *Angular work - Equivalence to linear force*. The work $W$ of a torque can be given as
 
-    $$W=\int_{\theta_1}^{\theta_2} \tau d\theta =\int_{s_1}^{s_2} \mathbf{F} d\mathbf{s}$$
+    $$W=\int_{\theta_1}^{\theta_2} \tau \cdot d\theta =\int_{s_1}^{s_2} \mathbf{F} \cdot d\mathbf{s}$$
 
-**Angular momentum**.
-* *Moment of inertia*. Determine the torque required for a desired angular acceleration about a rotational axis, i.e. akin to how mass determines the force required for a desired acceleration 
-    * *Formula*. $I=m r^2$
-* *Angular momentum*. The rotational equivalent of linear momentum
-    * *Formula*. $L = I \omega$
-        * $\omega = \frac{\mathbf{r} \times \mathbf{v}}{r^2}$ is the orbital angular velocity
-        * $\mathbf{r}$ is the position vector
-        * $\mathbf{v}$ is the linear velocity of the particle relative to the origin
-        * $m$ is the mass of the particle
-* *Derivation*.
-    * *Observations*.
-        * The relation between physical velocity and angular velocity is given as $v=r\omega$
+    where $d\mathbf{s}=d\mathbf{\theta}\times\mathbf{r}$ is the infinitesimal linear displacement
+    * *Rotation representation in 3D*.
+        * *Axis-angle representation (rotation vector or Euler vector) of a rotation*. Parametrize a rotation in 3D Euclidean space by two quantities, i.e. a unit vector $\mathbf{e}$ indicating the direction of an axis of rotation, and an angle $\theta$ describing the magnitude of the rotation about the axis
+            * *Formal*. $\mathbf{\theta}=\theta \mathbf{e}$
+        * *Angular displacement in 3D*. 
+            * *Angular displacement*. An entity, i.e. an axis-angle, with a direction and a magnitude
+                * *Direction*. Specify the axis of rotation
+                * *Magnitude*. Specify the rotation in radians about the axis, using the right-hand rule to determine direction
+            * *Angular displacement as vectors*. Angular displacement is not a vector, since it does not obey the commutative law for addition
+    * *Linear displacement from angular displacement*. $\mathbf{s}=\mathbf{\theta}\times\mathbf{r}$ is the linear displacement, where $d\theta$ is the angular displacement, and $\mathbf{r}$ is the radius vector
+        * *Explain*. $\|\mathbf{s}\|=\theta \|\mathbf{r}\|$ and $\mathbf{s}$'s direction points to the direction of linear displacement
+    * *Proof*.
+
+        $$W=\int_{s_1}^{s_2} \mathbf{F} \cdot d\mathbf{s}=\int_{\theta_1}^{\theta_2} \mathbf{F}\cdot (d\mathbf{\theta}\times d\mathbf{r})=\int_{\theta_1}^{\theta_2} (\mathbf{F}\times\mathbf{r})\cdot d\mathbf{\theta}=\int_{\theta_1}^{\theta_2} \mathbf{\tau} \cdot d\mathbf{\theta}$$
+* *Pseudovector*. Quantities such as toeque, angular displacement, and axis-angle representation are called pseudovectors, i.e. they are not actually vectors but have direction and magnitude
+
+**Moment of inertia of a rigid body**. Determine the torque required for a desired angular acceleration about a rotational axis, i.e. akin to how mass determines the force required for a desired acceleration
+* *Other names*. Mass moment of inertia, angular mass, second moment of mass, or rotational inertia
+* *Scenario*. When a body is free to rotate around an axies, torque must be applied to change its angular momentum
+
+    $\to$ The amount of torque required to cause any given angular acceleration is proportional to the moment of inertia of the body
+    * *History*. Christian Huygens introduced this quantity in his study of the oscillation of a body hanging from a pivot
+* *Formula*. $I=m r^2$ where $m$ is the body's mass and $r$ is the distance from the pivot point
+    * *Explain*. Solve the equation $\mathbf{\tau}=I\alpha$ for $I$, given $\mathbf{\tau}=\mathbf{F}\times\mathbf{r}=m (d\mathbf{v}_\text{tangent} \times \mathbf{r})$ and $\alpha=(\mathbf{r}\times d\mathbf{v}_\text{tangent}) / r^2$
+* *Relation to torque*. If the shape of the body does not change, then
+
+    $$\mathbf{\tau}=I\alpha$$
+
+    where $\mathbf{\tau}$ is the applied torque on the body, and $\alpha$ is the angular acceleration around the principal axis
+    * *Angular acceleration*. A pseudovector representing the rate, at which the angular velocity of the object about the origin changes
+        * *Formula in 2D for angular velocity*. $\omega=\frac{v_\text{tangent}}{r}$
+        * *Formula in 3D for angular velocity*. $\mathbf{\omega}=\mathbf{r}\times\mathbf{v}_\text{tangent} / r^2$
+    * *Intuition*. This formula is just as $F=ma$
+
+**Angular momentum**. The rotational equivalent of linear momentum $\mathbf{p}=m\mathbf{v}$
+* *Formula*. $\mathbf{L} = I \mathbf{\omega} = m (\mathbf{r}\times\mathbf{v})$
+    * $\omega = \frac{\mathbf{r} \times \mathbf{v}}{r^2}$ is the orbital angular velocity
+    * $\mathbf{r}$ is the position vector
+    * $\mathbf{v}$ is the linear velocity of the particle relative to the origin
+    * $m$ is the mass of the particle
+* *Derivation*. 
+
+    $$\mathbf{L}=\int \mathbf{\tau} dt = \int m [d\mathbf{v}(t) \times \mathbf{r}] dt = m (\mathbf{r}\times\mathbf{v})$$
+
+* *Consequence*. Rotating a mass $mr$ with distance $(\mathbf{r}\times\mathbf{v}) / r$ apart from the origin is the same as rotating a mass $m$ with distance $\mathbf{r}\times\mathbf{v}$ apart from the origin
 
 ### Electrical moments
 **Electric dipole moment**. A measure of the separation of positive and negative electrical charges within a system, i.e. a measure of the system's overal polarity
 * *Unit of measurement*. Coulomb-meter
 * *Elementary definition*. 
-    * *Point changes*. Point particles with electric charge
+    * *Point charges*. Point particles with electric charge
     * *Electric dipole*. Two point charges, one with charnge $+q$ and the other with charge $-q$ separated by a distance $d$ constitute an electric dipole
         * *Electric dipole moment magnitude*. $p=qd$
 
             >**NOTE**. Some authors may split $d$ in half, and use $s=d/2$ since this quantity is the distance between either charge and the center of the dipole
 
         * *Electric dipole moment direction*. From negative charge to positive charge
-        * *General mathematical definition*. $\mathbf{q} = q \mathbf{d}$ where $\mathbf{d}$ is the displacement vector pointing from the negative charge to the positive charge
-    * *Ideal case*. When the two charge are infinitely charged and are infinitesimally separated
-* *Energy and torque*. An object with an electric dipole moment is subject to a torque $\tau$ when placed in an external electric field
-    * *Torque*. Tend to align the dipole with the field, i.e. a dipole aligned parallel to an electric field has lower potential energy than a dipole making some angle with it
-    * *Formula*. Given the dipole moment $\mathbf{p}$ 
-        * *Energy*. $U=-\mathbf{p}\cdot\mathbf{E}$
-        * *Torque*. $\mathbf{\tau} = \mathbf{p}\times \mathbf{E}$
+* *General mathematical definition*. $\mathbf{q} = q \mathbf{d}$ where $\mathbf{d}$ is the displacement vector pointing from the negative charge to the positive charge
+    * *Ideal case*. When the two charge are infinitely charged and are infinitesimally separated, but with a finite $\mathbf{p}$
+
+**Energy and torque of electric dipole**. An object with an electric dipole moment is subject to a torque $\tau$ when placed in an external electric field
+
+<div style="text-align:center">
+    <img src="https://i.imgur.com/C128a0Z.png" width="350">
+    <figcaption>Electric dipole moment and torque</figcaption>
+</div>
+
+* *Explain*. The torque tends to align the dipole with the field
+    
+    $\to$ A dipole aligned parallel to an electric field has lower potential energy than a dipole making some angle with it
+* *Torque*. $\mathbf{\tau} = \frac{1}{2} \mathbf{p}\times \mathbf{E} + \frac{1}{2} \mathbf{p}\times \mathbf{E} = \mathbf{p}\times \mathbf{E}$
+    * *Explain*. The torque is computed given that the lever arm for each charge is located at the center of the dipole
+
+        <div style="text-align:center">
+            <img src="https://i.imgur.com/OjHHrOI.png">
+            <figcaption>Electric dipole moment and torque</figcaption>
+        </div>
+    
+    * *References*. http://hyperphysics.phy-astr.gsu.edu/hbase/electric/diptor.html
+* *Potential energy*. $U=-\mathbf{p}\cdot\mathbf{E}$
+    * *Explain*. 
+
+        <div style="text-align:center">
+            <img src="https://i.imgur.com/22FF118.png">
+            <figcaption>Low energy and high energy states</figcaption>
+        </div>
+
+        * To rotate the dipole from the low energy state against the field requires work
+        * We have a potential energy function
+
+            $$\begin{aligned}
+            U&=\int_0^\theta \mathbf{\tau} d\theta'=\int_0^\theta (\mathbf{p}\times\mathbf{E})\cdot d\theta'\\
+            &=\int_0^\theta \|\mathbf{E}\| \|\mathbf{p}\| \sin(\theta') \|d\theta'\|\\
+            &=\|\mathbf{E}\| \|\mathbf{p}\| (1 - \cos\theta)
+            \end{aligned}$$
+
+            This is the potential energy of the dipole, provided one takes the potential energy to be zero when $\mathbf{p}$ and $\mathbf{E}$ are parallel, i.e. $U=0$ when $\theta=0$
+        * In many applications, writers find it convenient to take $U=0$ at $\theta=90^o$, in such cases, the potential energy is given as
+
+            $$U=\int_{\pi/2}^\theta \mathbf{\tau} d\theta'=-\|\mathbf{E}\| \|\mathbf{p}\| \cos\theta=-\mathbf{E}\cdot\mathbf{p}$$
+
 * *Dipole moment for a continuous distribution of charge confined to a volume $V$*. 
     * *Formal*. $\mathbf{p}(\mathbf{r}) = \int_V \rho(\mathbf{r}_0) (\mathbf{r}_0 - \mathbf{r}) d^3 \mathbf{r}_0$
         * $\mathbf{r}$ locates the point of observation
@@ -230,3 +364,6 @@ $\to$ Having gained this energy during its acceleration, the body maintains this
     * *Reduced formula*. $\mathbf{p}(\mathbf{r}) = \sum_{i=1}^n q_i (\mathbf{r}_i - \mathbf{r})$
 * *Dipole moment density and polarization density*.
     * *Dipole moment density of an array of charges*. Contain both the location of the array and its dipole moment
+
+        $$\mathbf{p}=\sum_i q_i \mathbf{d}_i$$
+    * *Polarization density*. $\mathbf{P} = \frac{d \mathbf{p}}{d V}$ where $\nabla \mathbf{p}$ is the dipole moment carried by a certain volume element $\nabla V$ in the material
