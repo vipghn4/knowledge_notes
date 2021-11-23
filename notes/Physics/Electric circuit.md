@@ -3,6 +3,7 @@
 - [Table of Contents](#table-of-contents)
 - [Electric circuit](#electric-circuit)
     - [Capacitor](#capacitor)
+    - [Other components](#other-components)
 - [Appendix](#appendix)
   - [Concepts](#concepts)
 <!-- /TOC -->
@@ -145,6 +146,21 @@ ch    * *Consequence*. Capacitors are commonly used in electronic devices to mai
     * *Consequence*. A capacitor attached to the flash gun charges up for a few seconds using energy from the camera's batteries
 
         $\to$ Once the capacitor is fully charged, it can release all the energy in an instant through the xenon flash bulb
+
+### Other components
+**Analog-to-digital converter (ADC, A/D, or A-to-D)**. A system converting an analog signal into a digital signal, or convert an analog input voltage or current to a digital number representing the magnitude of the voltage or current
+
+**Digital-to-analog converter (DAC)**. Perform the reverse function of ADC, i.e. convert a digital signal into an analog signal
+
+**Amplifier**. 
+* *Usage*. 
+    * Whenever we have to transmit a voltage signal to a far distance, it is done via sending current signal
+
+        $\to$ Due to the long distance, there would be lots of voltage drop and the signal strength will deteriorate
+    * After reaching the destination, and appropriate resistance is provided to convert the signal to voltage drop
+
+        $\to$ The voltage drop is then amplified to get a signal of measurable range
+* *Consequence*. We always measure the voltage level of any signal at the destination end
 
 # Appendix
 ## Concepts
