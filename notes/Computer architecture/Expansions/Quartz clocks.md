@@ -4,6 +4,7 @@
 - [Quartz clocks](#quartz-clocks)
   - [Fundamental concepts](#fundamental-concepts)
   - [Piezoelectricity](#piezoelectricity)
+    - [Introduction](#introduction)
   - [Introduction to quartz clock](#introduction-to-quartz-clock)
   - [Quartz clock sturcture and mechanism](#quartz-clock-sturcture-and-mechanism)
 <!-- /TOC -->
@@ -23,6 +24,7 @@
 **Transducer**. A device converting energy from one form to another, e.g. a signal in one form of energy to a signal in another
 
 ## Piezoelectricity
+### Introduction
 **Piezoelectricity**. The process of using crystals to convert mechanical energy into electrical energy, or vice versa
 
 <div style="text-align:center">
@@ -53,6 +55,11 @@
             * If we take the same piezoelectric crystal and apply an electric current to it
                 
                 $\to$ The crystal will expand and contract, converting electrical energy into mechanical energy
+* *Definition from Wikipedia*. The electric charge accumulating in certain solid materials, in response to applied mechanical stress
+    * *Meaning of "piezoelectricity"*. Electricity resulting from pressure and latent heat
+
+        $\to$ It is derived from the Greek word "piezein", i.e. squeeze or press, and "elektron", i.e. "amber"
+    * *Origins of piezoelectric effect*. The linear electromechanical interaction between mechanical and electrical states in crystalline materials with no inversion symmetry
 
 **Nature of piezoelectric effect and electric dipole moments in solids**. Closely related to the occurrence of electric dipole moments in solids
 * *Electric dipole moments in solids*. 

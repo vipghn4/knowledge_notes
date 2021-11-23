@@ -5,7 +5,6 @@
   - [Fundamental](#fundamental)
     - [Energy](#energy)
     - [Work](#work)
-  - [Electrochemical](#electrochemical)
   - [Electrical theory](#electrical-theory)
     - [Introduction](#introduction)
     - [Resistance, voltage, and electric current](#resistance-voltage-and-electric-current)
@@ -37,6 +36,10 @@
 
 **Energy in classical mechanics**. Work, i.e. $W=\int_C \mathbf{F} \cdot d\mathbf{s}$ is a function of energy
 
+**Power**. The amount of energy transferred or converted per unit time
+* *Formula*. $P=\frac{dW}{dt}$
+* *Unit of measurements*. Joule per second
+
 ### Work
 **Work**. Work performed by a system is energy transferred by the system to its surroundings, by a mechanism, through which the system can spontaneously exert macroscopic forces on its surroundings
 * *Formula*. $W = F s \cos\theta$ where $F$ is force, $s$ is displacement, and $\theta$ is the angle between the force and the displacement
@@ -53,120 +56,6 @@
 
         $\to$ Both the temperature change of water, and the height of the fall of the weight, were recorded
     * *Consequence*. Joule determined the mechanical equivalent of heat
-
-## Electrochemical
-**Orbitals and orbits**. Electrons in fact inhabit regions of space known as orbitals
-
-<div style="text-align:center">
-    <img src="https://i.imgur.com/HYgrlJS.jpg">
-    <figcaption>Orbitals</figcaption>
-</div>
-
-* *The impossibility of drawing orbits for electrons*. To plot a path for something we need to know exactly where it is
-    
-    $\to$ We cannot do this for electrons
-* *Heisenberg uncertainty principle*. We cannot know with certainty both where an electron is, and where it is going next
-* *Orbital*.
-    * *Experiments*. Consider a single hydrogen atom
-        * At a particular instant plotted the position of one electron
-        * Soon afterwards, we do the same thing, and find that it is in a new position
-
-            $\to$ We have no idea how it got from the first place to the second
-        * We keep doing the experiment to gradually build up a sort of 3D map of the places, which the electron is likely to be found
-    * *Orbital*. 95% of the time, the electron will be found within a fairly easily defined region of space quite close to the nucleus, i.e. an orbital
-
-        $\to$ We can think of orbital as the region of space, in which the electron lives
-    * *Electron operation in orbital*. Nobody knows
-* *Orbital naming*. Each orbital naming has a name, e.g. 1s, 2s, 2p, etc.
-    * *Energy level*. The numerical prefix of orbital name, e.g. 1, 2, 3, etc.
-    * *Orbital shape*. The suffix of the orbital name, e.g. s, p, d, etc.
-        * *Common shapes*.
-            * `s` means spherical shape
-            * `p` means two identical balloons tied together at the nucleus
-* *Fitting electrons into orbitals*. An atom is a very strange house, with the nucleus living on the ground floor, then various rooms, i.e. orbitals, on the higher floors occupied by the electrons
-    * *Maximum number of electrons per orbital*. 2, i.e. the room are not very big
-
-        $\to$ A convenient way of showing the orbitals, where the electrons live, is to draw electrons in boxes
-    * *Electrons in boxes*. Orbitals can be represented as boxes with the electrons in them shown as arrows
-
-**Electron shell**. An orbit followed by electrons around an atom's nucleus
-* *Electron shells*. Each shell can only contain a fixed number of electrons, i.e. the $n$th shell, in principle, can hold up to $2n^2$ electrons
-    * *Subshells*. Each shell consists of one or more subshells, each of which consists of one or more atomic orbitals
-* *Subshells*. 
-    * *Example*. 
-        * The first (K) shell has one subshell, i.e. 1s
-        * The second (L) shell has two subshells, i.e. 2s and 2p
-        * The third shell has 3s, 3p, and 3d
-        * The fourth shell has 4s, 4p, 4d, and 4f
-        * The fifth shell has 5s, 5p, 5d, 5f, and theoretically 5g
-    * *Subshell label and maximum number of electrons*.
-
-        | Subshell label | $l$ | Max electrons |
-        | --- | --- | --- |
-        | s | 0 | 2 |
-        | p | 1 | 6 |
-        | d | 2 | 10 |
-        | f | 3 | 14 |
-        | g | 4 | 18 |
-
-* *Energy level*. Fixed distances from the nucleus of an atom, where electrons may be found
-    * *Energy level and shell*. Energy level is a more correct term, the term "shell" is just used to make them easier to understand
-    * *Bound electrons*. Electrons which cannot leave their orbits and roam free
-
-        $\to$ This is because the electric force keeps them in their orbit
-        * *Consequence*. For them to escape from this bond, it must be given some energy
-
-            $\to$ When sufficient energy is given to the electron, it will come out of the orbit and will be free to move around, i.e. free electrons
-    * *Freeing an electron*. Use a high external voltage
-* *Subshell energies and filling order*. Electrons in a shell approximately have the same energy
-    * *Explain*. The electrons in one subshell do have exactly the same level of energy, with later subshells having more energy per electron than earlier ones
-    * *Shell filling*. The filling of shells and subshells with electrons proceeds form subshells of lower energy to subshells of higher energy
-        * *Madelung rule*. 
-            * Subshells with a lower $n+l$ value are filled before those with higher $n+l$ values
-            * In case of equal $n+l$ values, the subshell with a lower $n$ value is filled first
-
-**Electron configuration**. The distribution of electrons of an atom or molecule in atomic or molecular orbitals
-* *Idea*. Each electron moves independently in an orbital, in an average field created by all other orbitals
-
-**Conductor**. Substances allowing free electrons to flow through them easily
-
-$\to$ Energy is transferred in the form of electricity as electrons move freely from atom to atom
-* *How conductor works*. For a good conductor, the electricity passed through it must be able to move the electrons, i.e. the more electrons in a metal, the greater its conductivity 
-    * If we send an electrically charged electron into a conductor
-
-        $\to$ It hits a free electron, eventually knocking it off until it knocks off other free electrons
-    * This triggers sort of chain reaction creating electrical charge through the material
-* *Valence electrons*. The electrons in the last orbit also determines mainly the electrical properties of the elements known as valence electrons
-    * *Conductor and valence electrons*. If we observe the electronic configuration of any metal element, we will find that it has less than 4 electrons in its outermost shell
-        * *Example*. Aluminium has 3 valence electrons, magnesium has 2, and the copper has 1
-    * *Semiconductor and valence electrons*. When the number of valence electrons is 4, the properties of such elements and materials are in between metallic and non-metallic
-
-        $\to$ The elements or materials cannot conduct electric current as efficiently as a conductor
-    * *Insulator*. When the number of valence electrons is more than 4, the element behaves as non-metal, i.e. bad conductor
-* *Free electron*. Electron of the outmost shell of any atom, which can move freely as the atom is exerted by an external force, e.g. electric field
-* *References*.
-    * https://vi.wikipedia.org/wiki/C%E1%BA%A5u_h%C3%ACnh_electron
-    * https://www.banhoituidap.com/p/2987/electron-tu-do-la-gi-no-co-trong-ruot-day-dien-kim-loai-khong/
-
-**Electric field inside a conductor**.
-* *Scenario*. Assume that a conductor is kept in an external uniform electric field $E$
-* *Moving direction of charge*.
-    * Negative charge move in the direction opposite to the direction of the electric field
-    * Positive charge move in the direction of the electric field
-* *Conductor structure*. A conduct has a lot of mobile or free electrons
-    * *Formation of inner electric field*. 
-        * When keep the conductor in an external electric field, electrons will experience a force in the direction opposite to the direction of $E$
-
-            $\to$ Electrons will start accumulating at surface $A$ of the conductor
-        * The positive charge will then start building at the opposite face $B$ of the conductor
-
-            $\to$ This leads to the development of electric field $E'$ within the conductor
-    * *Direction of $E'$*. Opposite to $E$
-    * *Evolution of $E'$*. As the accumulation of electrons increases on face $A$, The strength of $E'$ will also increases strongly
-* *Equilibrium*. As soon as the strength of $E'$ equals to the strength of $E$, no net electric field will be inside the conductor to drive the electrons
-
-    $\to$ Further accumulation of electrons will stop
-    * *Consequence*. At equilibrium, the strength of electric field inside the conductor is zero
 
 ## Electrical theory
 ### Introduction
