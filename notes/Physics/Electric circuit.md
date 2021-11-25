@@ -173,10 +173,18 @@ ch    * *Consequence*. Capacitors are commonly used in electronic devices to mai
     * *Ohm's law in practice*. In practice, resistors deviate from the ideal behavior given by Ohm's law, e.g. they have inductance and capacitance affecting the relation between voltage and current in AC circuits
     * *Series and parallel resistors*.
         * *Serial resistors*. $R_\text{eq} = R_1 + R_2 + \dots + R_n$
+            * *Explain*. Serial resistors means summation of resistors' lengths, i.e. if all resistors have the same area and resistivity
+
+                $\to$ Their total length is the summation of individual lengths
         * *Parallel resistors*. $\frac{1}{R_\text{eq}} = \frac{1}{R_1} + \frac{1}{R_2} + \dots + \frac{1}{R_n}$
+            * *Explain*. Parallel resistors means summation of resistors' areas, i.e. if all resistors have the same length and resistivity
+
+                $\to$ Their total area is the summation of individual areas
     * *Power dissipation*. At any instant, the power $P$ (watts) consumed by a resistor of resistance $R$ (ohms) is given as
 
         $$P=I^2 R = I V = \frac{V^2}{R}$$
+
+        where $V$ is the voltage across the circuit, $R$ is the resistance of the circuit, and $I$ is the current flowing through the circuit
 
         $\to$ This power is converted into heat, which must be dissipated by the resistor's package before its temperature rises excessively
         * *Explain*. Voltage in an electric circuit is measured against a ground point, whose voltage are supposed to be zero, and the voltage across all resistors are, in fact, the total voltage drop when plugging an power source to the circuit
@@ -213,3 +221,22 @@ $\to$ This results in an excessive current flowing through the circuit
 **Why dielectric is used in capactiors**. Dielectric material between the two plates developed an electric field opposed to the electric field of the power source, decreasing the voltage across the capactior
 
 $\to$ Capacitance is increased
+
+**Electric current in serial and parallel circuits**.
+* *Serial circuits*. $I = I_1 = I_2 = \dots = I_n$
+    * *Explain*. The high resistance of the resistor doesn’t block the passing charges, it slows them
+        
+        $\to$ These slower moving charges in turn repel the charges approaching the resistor and so the current in the whole circuit slows
+* *Parallel circuits*. $I = I_1 + I_2 + \dots + I_n$
+    * *Explain*. Due to the summation of conductivity
+* *Reference*. 
+    * https://www.reddit.com/r/AskPhysics/comments/lcccye/why_is_the_current_before_and_after_a_resistor/
+    * https://en.wikipedia.org/wiki/Kirchhoff%27s_circuit_laws
+
+**What if the electric circuit does not have return path to the ground**.
+
+**Why electrons cannot flow in an open circuit**.
+
+**What is the definition of "voltage" inside an electric circuit**.
+
+**Why voltage and electric current in serial and parallel circuits have their form**.
