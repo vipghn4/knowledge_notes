@@ -2,10 +2,13 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Electric circuit](#electric-circuit)
+  - [Major components](#major-components)
     - [Capacitor](#capacitor)
+    - [Resistor](#resistor)
     - [Other components](#other-components)
 - [Appendix](#appendix)
   - [Concepts](#concepts)
+  - [Discussion](#discussion)
 <!-- /TOC -->
 
 # Electric circuit
@@ -33,6 +36,7 @@
 
     where $F(\cdot)$ is the output of the circuit, $x_1(t),x_2(t)$ are signals applied to the circuit
 
+## Major components
 ### Capacitor
 **Polarizability**. Refer to the tendency of matter, when subjected to an electric field, to acquire an electric dipole moment in proportion to the applied field
 
@@ -75,6 +79,11 @@ $\to$ This is a property of all matter
     <figcaption>Charge separation in a parallel-plate capacitor</figcaption>
 </div>
 
+<div style="text-align:center">
+    <img src="https://i.imgur.com/SYfOPca.png">
+    <figcaption>Battery charges capactiro to applied voltage</figcaption>
+</div>
+
 * *Theory of operation - Overview*. 
     * *Capacitor structure*. Consist of two conductors separated by a non-conductive region, which can be a vacuum, or a dielectric
     * *Functionality*. A charge on one conductor exerts a force on charge carriers within the other conductor, attracting opposite polarity charge and repelling like polarity charges
@@ -86,14 +95,16 @@ $\to$ This is a property of all matter
         $$C=Q/V$$
 
         where $Q$ is the positive or negative charge on each conductor, and $V$ is the voltage between them
-        * *Interpretation*. Unit capacitance means that one coulomb of charge on each conductor causes a voltage of one volt across the device
+        * *Interpretation*. Unit capacitance means that one coulomb of charge on each conductor causes a voltage of one volt across the capacitor, i.e. the voltage between the two plates of the capacitor
+
+            $\to$ Higher capacitance means that the capacitor can holds more charges before being fully charged
         * *Conductor separation*. Since conductors are close together, the opposite charges on the conductors attract one another due to their electric fields
 
             $\to$ The capacitor can store more charge for a given voltage than when the conductors are separated, yielding a larger capacitance
     * *Practical devices*. $C=dQ / dV$
 * *Energy stored in a capacitor*. To increase the charge and voltage on a capacitor
 
-    $\to$ Work must be done by an external power source to move charge from the the negative to the positive plate against the opposing force of the electric field
+    $\to$ Work must be done by an external power source to move charge from the negative to the positive plate against the opposing force of the electric field
     * *Energy to move a small increment of charge*.
         * *Assumption*.
             * $V$ is the voltage on the capacitor
@@ -129,13 +140,18 @@ $\to$ This is a property of all matter
         
     $$V_C = V_S = 12V$$
 
+**Capacitor discharging**. The action of neutralizing the charge in the capacitor by connecting a conductive path across the dielectric
+* *Explain*. With the stored charge in the dielectric providing the potential difference, the negative plate repels electrons, which are attracted to the positive plate through the wire
+
+    $\to$ This keeps going until the positive and negative charges are neutralized
+
 **Applications of capacitor**. 
 * *Energy storage*. A capacitor can store electric energy when it is connected to its charging circuit
     
     $\to$ When it is disconnected from its charging circuit, it can dissipate that stored energy, so it can be used like a temporary battery
 ch    * *Consequence*. Capacitors are commonly used in electronic devices to maintain power supply while batteries are being changed
         
-        $\to$ This prevents loss of information in volatile memory (DRAM)
+    $\to$ This prevents loss of information in volatile memory (DRAM)
 * *Energy release*. When we disconnect the power, the capacitor keeps holding its charge until we connect it to a seond circuit containing an object, e.g. a flash bulb
 
     $\to$ Charge will flow from the capacitor, through the lamp, until there is nothing on the plates
@@ -146,6 +162,26 @@ ch    * *Consequence*. Capacitors are commonly used in electronic devices to mai
     * *Consequence*. A capacitor attached to the flash gun charges up for a few seconds using energy from the camera's batteries
 
         $\to$ Once the capacitor is fully charged, it can release all the energy in an instant through the xenon flash bulb
+
+### Resistor
+**Resistor**. A passive two-terminal electrical component implementing electrical resistance as a circuit element
+* *Usage*. Used in electronic circuits to reduce current flow, adjust signal levels, divide voltages, bias active elements, and terminate transmission lines
+    * *High-power resistors*. Dissipate many watts of electrical power as heat, and are used as part of motor controls, power distribution systems, or as test loads for generators
+    * *Fixed resistors*. Have resistances only changing slightly with temperature, time, or operating voltage
+    * *Variable resistors*. Can be used to adjust circuit elements, or as sensing devices for heat, light, humidity, force, or chemical activity
+* *Theory of operation*.
+    * *Ohm's law in practice*. In practice, resistors deviate from the ideal behavior given by Ohm's law, e.g. they have inductance and capacitance affecting the relation between voltage and current in AC circuits
+    * *Series and parallel resistors*.
+        * *Serial resistors*. $R_\text{eq} = R_1 + R_2 + \dots + R_n$
+        * *Parallel resistors*. $\frac{1}{R_\text{eq}} = \frac{1}{R_1} + \frac{1}{R_2} + \dots + \frac{1}{R_n}$
+    * *Power dissipation*. At any instant, the power $P$ (watts) consumed by a resistor of resistance $R$ (ohms) is given as
+
+        $$P=I^2 R = I V = \frac{V^2}{R}$$
+
+        $\to$ This power is converted into heat, which must be dissipated by the resistor's package before its temperature rises excessively
+        * *Explain*. Voltage in an electric circuit is measured against a ground point, whose voltage are supposed to be zero, and the voltage across all resistors are, in fact, the total voltage drop when plugging an power source to the circuit
+
+            $\to$ The ground point is supposed to have a fixed voltage 0, and the input voltage is computed depending on the voltage drop across all resistors and the ground voltage 
 
 ### Other components
 **Analog-to-digital converter (ADC, A/D, or A-to-D)**. A system converting an analog signal into a digital signal, or convert an analog input voltage or current to a digital number representing the magnitude of the voltage or current
@@ -172,3 +208,8 @@ $\to$ This results in an excessive current flowing through the circuit
 
     $\to$ With low resistance in the connection, a high current will flow, causing the delivery of a large amount of energy in a short period of time
     * *Consequence*. Rapid increase of temperature, potentially resulting in an explosion with the release of hydrogen gas and electrolyte, i.e. an acid or base, which can burn tissue can cause blindness or even death
+
+## Discussion
+**Why dielectric is used in capactiors**. Dielectric material between the two plates developed an electric field opposed to the electric field of the power source, decreasing the voltage across the capactior
+
+$\to$ Capacitance is increased

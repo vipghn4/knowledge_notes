@@ -92,7 +92,7 @@
 **Electrical resistance of an object**. A measure of its opposition to the flow of the electric current
 
 <div style="text-align:center">
-    <img src="https://i.imgur.com/ZnjWds3.png">
+    <img src="https://i.imgur.com/ZnjWds3.png" width="300">
     <figcaption>Conductor geometry</figcaption>
 </div>
 
@@ -144,6 +144,10 @@
     * *Joule's law*. By varying the current and the wire length, Joule discovered that
 
         $$P\propto I^2 R$$
+
+        * *Explain*. $P$ is proportional to the total energy of the electric current, i.e. consider unit time and unit area, we have that
+
+            $$P\propto J^2 \rho = E J = E n q v_a = W$$
 
 **Voltage**. The difference between in electric potential between two points, which, in a static eletric field, is defined as the work required per unit of charge to move a test charge between two points
 
@@ -204,6 +208,9 @@
 * *Electric current flowing through a metal wire*. 
     * *Formula*. $I=Q/t$ where $Q$ is the electric charge transferred through the surface over a time $t$
 * *Electric current direction*. the flow of positive charge
+
+**Electrical power**. $P=VI$
+* *Explain*. Based on the formula $W = V Q$ where $V$ is the voltage, $Q$ is the total charge flowing through the device
 
 ### Electric charge
 **Electric charge**. 

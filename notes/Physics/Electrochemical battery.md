@@ -5,6 +5,7 @@
   - [Metals and their properties](#metals-and-their-properties)
   - [How battery works in the first glance](#how-battery-works-in-the-first-glance)
 - [Appendix](#appendix)
+  - [Concepts](#concepts)
   - [Discussion](#discussion)
 <!-- /TOC -->
 
@@ -137,6 +138,17 @@ $\to$ The replacement of the negative and positive ions from the electrolyte bac
 **References**. https://www.science.org.au/curious/technology-future/batteries
 
 # Appendix
+## Concepts
+**Electrical load**. An electrical component or portion of a circuit which consumes electric power
+
+**Power supply**. An electrical device supplying electric power to an electrical load, primarily by converting electric current from a source to the correct voltage, current, and frequency to power the load
+
+$\to$ Power supplies are sometimes referred to as electric power converters
+* *Main functionality*. 
+    * Change voltage up or down
+    * Convert power to direct current
+    * Regulate power for smoother outcoming voltage
+
 ## Discussion
 **How water acts as an extremely aggressive solvent and the generation of voltage**. Water is an extremely aggressive solvent
 
@@ -187,22 +199,42 @@ $\to$ The replacement of the negative and positive ions from the electrolyte bac
     * *Flow of electricity*. When the battery is connected to a load, one plate dissolves and delivers energy, and the other un-dissolves and sucks in energy
 
         $\to$ Most of the chemical energy stored in a metal plate moves from the dissolving plate to the other
+* *How electric current flows*. Both battery-plates create voltage, but these are unequal, and one plate “wins”
+    * *Explain*. One plate creates higher voltage than the other, and that plate dominates the battery operation
+        
+        $\to$ Its higher voltage will force the other plate to “run backwards” 
+        * *Consequence*. Rather than dissolving and giving up some energy, that “backwards” plate is being fed energy
+            
+            $\to$ This backwards-forced chemical reaction is building new metal onto the plate
+    * *Example*. In the simple zinc-copper cell, the zinc dissolves, while the copper plate gets thicker
+* *Reference*. https://www.quora.com/Why-does-the-electrons-in-the-anode-in-a-galvanic-cell-go-through-a-conductor-and-not-just-immediately-reacts-with-the-electrolyte
 
 **Examples with $\ce{Zn,Cu,H_2SO_4}$**.
+* *Electrochemical corrosion*.
 
-<div style="text-align:center">
-    <img src="https://i.imgur.com/dsqiLYe.png">
-    <figcaption>Illustration</figcaption>
-</div>
+    <div style="text-align:center">
+        <img src="https://i.imgur.com/dsqiLYe.png">
+        <figcaption>Illustration</figcaption>
+    </div>
 
-* *Embed $\ce{Zn}$ and $\ce{Cu}$ (without connecting wire) into dilute $\ce{H_2SO_4}$*. $\ce{Zn + H_2SO_4 \to ZnSO_4 + H_2}$
-    * *Phenomenon*. $\ce{Zn}$ is corroded and some gas appears
-* *Embed $\ce{Zn}$ and $\ce{Cu}$ (with connecting wire) into dilute $\ce{H_2SO_4}$*.
-    
-    $$\ce{2Zn + H_2SO_4 \to Zn_2SO_4 + 2H^+ + 2e^-} \text{ (cathode)},\quad \ce{2H^+ + 2e^- \to H_2} \text{ (anode)}$$
-    
-    * *Phenomenon*. $\ce{Zn}$ is corroded but gas appears only at the $\ce{Cu}$ side
-* *Additional information*. Ionization energy of $\ce{Zn}$ is 9.3942, while ionization energy of $\ce{Cu}$ is 7.7264
+    * *Embed $\ce{Zn}$ and $\ce{Cu}$ (without connecting wire) into dilute $\ce{H_2SO_4}$*. $\ce{Zn + H_2SO_4 \to ZnSO_4 + H_2}$
+        * *Phenomenon*. $\ce{Zn}$ is corroded and some gas appears
+    * *Embed $\ce{Zn}$ and $\ce{Cu}$ (with connecting wire) into dilute $\ce{H_2SO_4}$*.
+        
+        $$\ce{2Zn + H_2SO_4 \to Zn_2SO_4 + 2H^+ + 2e^-} \text{ (cathode)},\quad \ce{2H^+ + 2e^- \to H_2} \text{ (anode)}$$
+        
+        * *Phenomenon*. $\ce{Zn}$ is corroded but gas appears only at the $\ce{Cu}$ side
+    * *Additional information*. Ionization energy of $\ce{Zn}$ is 9.3942, while ionization energy of $\ce{Cu}$ is 7.7264
+* *Electrochemical battery*.
+
+    <div style="text-align:center">
+        <img src="https://i.imgur.com/XeN6wxY.png">
+        <figcaption>Illustration</figcaption>
+    </div>
+
+    * *Chemical equations*. 
+
+        $$\ce{Zn\to Zn^{2+} + 2e^-} \text{ (cathode)},\quad \ce{Cu^{2+} + 2e^- \to Cu} \text{ (anode)}$$
 
 **Can ions exist independently of their oppositely charged pair**. In solution, oppositely charged ions are freely moving independently of ions of the opposite charge
 * *Explain*.  A sodium ion and a chloride ion in water solution, for example, will spend a few nanoseconds in proximity, gazing at each other wistfully
@@ -210,4 +242,18 @@ $\to$ The replacement of the negative and positive ions from the electrolyte bac
     $\to$ Then the mass action of so many water molecules, each of which is attracted to the ions because of water’s dipole, will probably drag the erstwhile lovers apart
 * *Conclusion*. The fact that ions can move freely within solution is similar to how water corrode metals
 
-**Why electrons cannot go from anode to cathode directly via the electrolyte**. 
+**Why electrons cannot go from anode to cathode directly via the electrolyte**. The electrolyte has no electron flowing, since electrolytes contain no moveable electrons, unlike metal
+* *Explain*. Electrons normal cannot leave the battery plate to enter the water, because the group of water molecules in pure water is an insulator, same as oil, liquid plastic, melted quartz, etc.
+    * At much higher voltage, the water would break down electrically, and We can force electrons from the metal to spew into the electrolytes and create negative ions
+    * However, the natural voltage produced by the battery is too low for the electrolyte to be conductive
+* *Occasional electron leaping onto a neutral water molecule*. If occasionally an electron from the metal should leap onto a neutral water molecule, then a negative water ion is formed spontaneously
+    
+    $\to$ If it’s unstable, then just the crashing of thermal vibrations will quickly knock the electron loose again, and it returns to the metal surface
+    * *Consequence*. To create a one-way electron flow, there cannot be any other chemical reactions “shorting out” the surface potential at the metal electrode
+* *Electrons jumping into the electrolyte*. Electrons jump into the electrolyte all the time, i.e. at the reducing electrode, they meet with incoming positive metal atoms from the electrolyte, and cancel them out
+
+    $\to$ The electrons and positive ions combine, forming neutral metal electroplating onto the surface of the plate
+    * *Explain*. 
+        * A current of protons is leaving the electrolyte and headed towards the metal, since the electrolyte is positively charged, i.e. due to dissolved metal ions
+        * A current of electrons is leaving the metal and headed towards the electrolyte, i.e. due to the same reason
+        * Inside the thin surface layer, the two are combining, the charge is cancelling, and new metal is being formed
