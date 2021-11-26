@@ -5,6 +5,7 @@
   - [Major components](#major-components)
     - [Capacitor](#capacitor)
     - [Resistor](#resistor)
+    - [Transistor](#transistor)
     - [Other components](#other-components)
 - [Appendix](#appendix)
   - [Concepts](#concepts)
@@ -191,6 +192,125 @@ ch    * *Consequence*. Capacitors are commonly used in electronic devices to mai
 
             $\to$ The ground point is supposed to have a fixed voltage 0, and the input voltage is computed depending on the voltage drop across all resistors and the ground voltage 
 
+### Transistor
+**Semiconductor doping**. The introduction of impurities into a semiconductor crystal to the defined modification of conductivity
+* *Materials for doping*. Boron (with 3 valence electrons), phosphorus (with 5 valence electrons)
+    * *Elements with 3 valence electrons*. Used for p-type doping
+    * *Elements with 5 valence electrons*. Used for n-type doping
+* *n-doping*. The 5-valent dopant has an outer electron more than the sillicon atoms
+
+    $\to$ Four outer electrons combine with ever one sillicon atom, while the fifth electron is free to move and serves as charge carrier
+
+    <div style="text-align:center">
+        <img src="https://i.imgur.com/86Il01c.png">
+        <figcaption>The phosphorus atom donates its fifth valence electron</figcaption>
+    </div>
+
+    * *Electron donor*. The dopant, which emits an electron, i.e. the dopants are then positively charged by the loss of electrons and are built into the lattice
+    * *n-type doped*. Doped semimetals whose conductivity is based on free electrons
+
+        $\tp$ Free electrons are major charge carriers, while free mobile holes are minor charge carriers
+        * *Explain*. Thermal energy may occasionally free an electron from the crystal lattice, leading to the appearance of holes
+* *p-doping*. The 3-valent dopants can catch an additional outer electron, leaving a hole in the valence band of silicon atoms
+
+    $\to$ Electrons in the valence band become mobile, and the holes move in the opposite direction to the movement of the electrons
+
+    <div style="text-align:center">
+        <img src="https://i.imgur.com/NSgXSQK.png">
+        <figcaption>The free place on the boron atom is filled with an electron</figcaption>
+    </div>
+
+    * *Movement of holes*. 
+
+        <div style="text-align:center">
+            <img src="https://i.imgur.com/XvZ8ZdV.png">
+            <figcaption>Movement of electron and hole</figcaption>
+        </div>
+
+        * In attempting to form four covalent bonds, the three electrons around the boron atom move around, trying to form four bonds, making the hole appear to move
+        * The boron atom may borrow an electron from an adjacent silicon atom to form four covalent bonds, leaving the silicon atom deficient by one electron
+
+            $\to$ The hole has moved to an adjacent silicon atom
+    * *Energy band of hole*. Holes reside in valence band, a level below the conduction band
+    * *Electron acceptor*. With the inclusion of an electron, the dopant, i.e. the acceptor, is negatively charged, and the dopant is fixed in the crystal lattice
+
+        $\to$ Only the positive charges can move
+    * *p-doped*. Due to positive holes, these semiconductors are called p-doped
+
+        $\to$ Holes are the major charge carriers, and free electrons are the minor charge carriers
+        * *Explain*. Thermal energy may occasionally free an electron from the crystal lattice, leading to the appearance of free electron
+* *Electron flow in doped semiconductors*.
+
+    <div style="text-align:center">
+        <img src="https://i.imgur.com/SkWxG5K.png">
+        <figcaption>Flow of electrons and holes</figcaption>
+    </div>
+
+    * *n-doped semiconductor*. Electron flow in an n-type semiconductor is similar to electrons moving in a metallic wire
+    * *p-doped semiconductor*. Holes may move about the semiconductor bar, thus, given the positive battery terminal connected to the left end of the p-type bar
+
+        $\to$ Electron flow is out of the negative battery terminal, through the the p-type bar, returning to the positive battery terminal
+        * An electron leaving the positive end of the semiconductor bar for the positive battery terminal leaves a hole in the semiconductor, which may move to the right
+
+            $\to$ Holes traverse the crystal lattice from left to right
+        * At the negative end of the bar, an electron from the battery combines with a hole, neutralizing it
+
+            $\to$ This makes room for another hole to move in at the positive end of the bar toward the right
+
+* *Reference*. 
+    * https://www.halbleiter.org/en/fundamentals/doping/
+    * https://workforce.libretexts.org/Bookshelves/Electronics_Technology/Book%3A_Electric_Circuits_III_-_Semiconductors_(Kuphaldt)/02%3A_Solid-state_Device_Theory/2.05%3A_Electrons_and_%E2%80%9Choles%E2%80%99%E2%80%99
+
+**Forward bias and reverse bias**. 
+
+**Transistor**. A semiconductor device used to amplify or switch electrical signals and power
+
+$\to$ This is one of the basic building block of modern electronics
+* *Structure*. A transistor is composed of semiconductor material, usually with at least three terminals for connection to an electronic circuit
+
+    $\to$ A voltage or current applied to one pair of transistor's terminals controls the current through another pair of terminals
+* *Usage*. In advanced circuits, there are plenty of cases when the output from one stage of a circuit is very small and we need that tiny amount of current to switch on a much larger current
+    
+    $\to$ In that case, this transistor circuit is just what we need
+
+**Simplified operation**.
+* *Main functionality*. 
+    * A transistor can use a small signal applied between one pair of its terminals to control a much larger signal at another pair of terminals
+
+        $\to$ Transistor can produce a stronger output signal, a voltage or current, which is proportional to a weaker input signal, hence act as an amplifier
+    * A transistor can be used to turn current on or off in a circuit as an electrically controlled switch, where the amount of current is determined by other circuit elements
+* *Types of transistor*.
+    * *Bipolar transistor*. Have terminals labeled base, collector, and emitter
+
+        <div style="text-align:center">
+            <img src="https://i.imgur.com/AN2lQTf.png">
+            <figcaption>Bipolar transistor structure</figcaption>
+        </div>
+
+        * *Functionality*. A small current at the base terminal, i.e. flowing between the base and the emitter, can control or switch a much larger current between the collector and the emitter terminals
+        * *Components*.
+            * *Emitter*. Supply charge carriers to the collector via the base region
+            * *Collector*. Collect most of all charge carriers emitted from the emitter
+            * *Base*. Trigger and control the amount of current flows through the emitter to collector
+    * *Field-effect transistor*. Terminals are labeled gate, source, and drain
+
+        <div style="text-align:center">
+            <img src="https://i.imgur.com/aVXMcc9.png">
+            <figcaption>Field-effect transistor structure</figcaption>
+        </div>
+
+        * *Functionality*. A voltage at the gate can control a current between source and drain
+* *Transistor as a switch*. Transistors are commonly used in digital circuits as electronic switches, which can be either in an "on" or "off" state, both for high-power applications and low-power applications
+    * *Important parameters*. The current switched, the voltage handled, and the switching speed, characterized by the rise-and-fall times 
+    * *Objectives*. Simulate, as near as possible, the ideal switch having the properties of an open circuit when off, the short circuit when on, and an instantaneous transition between the two states
+        * *Idea*. Parameters are chosen so that
+            * The "off" output is limited to leakage currents too small to affect connected circuitry
+            * The resistance of the transistor in the "on" state is too small to affect circuitry
+            * The transition between the two states is fast enough not to have an detrimental effect
+* *Transistor as an amplified*. Transistor-based amplifiers are designed so that a small change in input voltage changes the small current through the base of the basistor, whose current amplification combined with the properties of the circuit means that small swings in input voltage produce large changes in output voltage
+
+**How bipolar transistors work**.
+
 ### Other components
 **Analog-to-digital converter (ADC, A/D, or A-to-D)**. A system converting an analog signal into a digital signal, or convert an analog input voltage or current to a digital number representing the magnitude of the voltage or current
 
@@ -206,6 +326,17 @@ ch    * *Consequence*. Capacitors are commonly used in electronic devices to mai
         $\to$ The voltage drop is then amplified to get a signal of measurable range
 * *Consequence*. We always measure the voltage level of any signal at the destination end
 
+**Diode**. A two-terminal electronic component conducting current primarily in one direction, i.e. asymmetric conductance with low (ideally zero) resistance in one direction and high (ideally infinite) resistance in the other
+* *Types of dicode*.
+    * *Termionic diode*. A vacuum tube with two electrodes, i.e. a heated cathode and a plate, in which electron
+    * *Semiconductor diode*. A crystalline piece of semiconductor with a p-n function connected to two electrical terminals
+* *Main functions*. Allow an electric current to pass in one direction, i.e. diode's forward direction, while blocking it in the opposite direction, i.e. the reverse direction
+    * *Rectification*. The unidirectional behavior of the diode
+    * *Usage*. Convert alternating current (AC) to direct current (DC)
+* *Cut-in voltage*. Semiconductor diodes begin conducting electricity only if a certain threshold voltage, i.e. cut-in voltage, is present in the forward direction
+
+    $\to$ This is the state, in which the diode is said to be forward-biased
+
 # Appendix
 ## Concepts
 **Short circuit**. An electrical circuit allowing a current to travel along an unintended path with no or very low resistance
@@ -216,6 +347,80 @@ $\to$ This results in an excessive current flowing through the circuit
 
     $\to$ With low resistance in the connection, a high current will flow, causing the delivery of a large amount of energy in a short period of time
     * *Consequence*. Rapid increase of temperature, potentially resulting in an explosion with the release of hydrogen gas and electrolyte, i.e. an acid or base, which can burn tissue can cause blindness or even death
+
+**Electronic switch**. An electronic component or device, which can switch an electrical circuit, interrupting the current, or diverting it from one conductor to another
+
+**Electric circuit symbols**.
+* *Voltage symbol*. https://electronics.stackexchange.com/questions/162564/what-does-this-strange-symbol-refer-to
+
+**Depletion region**. An insulating region within a conductive, doped semiconductor material, where mobile charge carries have been diffused away, or have been forced away by an electric field
+* *Other names*. Depletion region, depletion layer, depletion zone, junction region, space charge region, or space charge layer
+
+>**NOTE**. Understanding the depletion region is key to explaining modern semiconductor electronics, e.g. diodes, transistors, etc.
+
+* *Formation of a p-n junction*. A depletion region forms instantaneously across a p-n junction, when the junction is in thermal equilibrium or in a steady state
+    * *Explain*. Electrons and holes diffuse into regions with lower concentration of them, i.e. when N-doped and P-doped semiconductors are placed together to form a junction
+
+        $\to$ Free electrons in the N-side conduction band migrate into the P-side conduction band, and holes in P-side valence band migrate into the N-side valence band
+        * Following transfer, the diffused electrons contact with holes and are eliminated by recombination in the P-side, likewise, the diffused holes are recombined with free electrons in the N-side
+
+            $\to$ The diffused electrons and holes are gone
+        * In a N-side region near to the junction interface, free electrons in the conduction band are gone due to
+            * The diffusion of electrons to the P-side, and
+            * Recombination of electrons to holes that are diffused from the P-side
+        * Holes in a P-side region near to the interface are also gone by a similar reason
+    * *Consequence*. Majority charge carriers are depleted in the region around the junction interface
+    * *Side effects*. The depletion region is charged, i.e. its N-side is positively charged and its P-side is negatively charged
+
+        $\to$ This creates an electric field providing a force opposing the charge diffusion
+        * *Consequence*. When the electric field is strong enough to cease further diffusion of holes and electrons, the region reaches equilibrium
+    * *Built-in voltage (junction voltage or barrier voltage)*. Integration of the electric field across the depletion region
+    * *Conclusion*. Charge transfer in semiconductor devices is from
+        * The charge carrier drift by the electric field, and
+        * The charge carrier diffusion due to the spatially varying carrier concentration
+* *Mathematical formulation of p-n junction formation*.
+    * *Assumptions*.
+        * $\sigma$ is the electrical conductivity, i.e. $\sigma = J / E$ is the reverse of resistivity
+        * $D_e,D_h$ are diffusion constants for electrons and holes respectively
+        * $\mathbf{E}$ is the electric field
+        * $e$ is the elementary charge, i.e. $1.6 \cdot 10^{-19}$ coulomb
+        * $p$ is the hole density, i.e. number of holes per unit volume
+        * $n$ is the electron density, i.e. the number of electrons per unit volume
+    * *Net current density for holes*. In the P-side of the depletion region, where holes drift by the electric field, the net current density is given by
+        
+        $$\mathbf{J} = \sigma \mathbf{E} - e D_h \nabla p$$
+    
+    * *Net current density for electrons*. In the N-side of the depletion region, where electrons drift by the electric field, the net current density is given by
+
+        $$\mathbf{J} = \sigma \mathbf{E} + e D_e \nabla n$$
+
+    * *Equilibrium*. Electrons will flow until the density gradient builds up enough for the diffusion current to exactly balance the drift current, i.e.
+
+        $$\sigma \mathbf{E} + e D_e \nabla n = 0$$
+
+    * *References*. 
+        * https://en.wikipedia.org/wiki/Diffusion_current
+        * https://en.wikipedia.org/wiki/Fick%27s_laws_of_diffusion
+* *Forward bias*. Narrow the depletion region and lower the baterrir to carrier injection by applying a positive voltage to the P-side w.r.t the N-side
+    * *Explain*. Majority carriers get some energy from the bias field, enabling them to go into the region and neutralize opposite charges
+        * The more bias the more neutralization (or screening of ions in the region) occurs
+            
+            $\to$ The carriers can be recombined to the ions but thermal energy immediately makes recombined carriers transition back
+        * When bias is strong enough that the depletion region becomes very thin, the diffusion component of the current, through the junction interface, greatly increases and the drift component decreases
+            
+            $\to$ The net current flows from the P-side to the N-side
+    * *Consequence*. The carrier density is large, i.e. it varies exponentially with the applied bias voltage, making the junction conductive and allowing a large forward current
+* *Reverse bias*. The potential drop across the depletion region increases by applying a negative voltage to the P-side w.r.t the N-side
+    * *Explain*. 
+        * Majority carriers are pushed away from the junction, leaving behind more charged ions
+        * The depletion region is widened and its field becomes stronger, which increases the drift component of current, through the junction interface, and decreases the diffusion component
+
+            $\to$ The net current flows from the N-side to the P-side
+    * *Consequence*. The carrier density, i.e. mostly minority carriers, is small and only a very small reverse saturation current flows
+* *Determining the depletion layer width*. 
+
+**p-n junction**. A boundary or interface between p-type and n-type semiconductor materials, inside a single crystal of semiconductor, which is created by doping
+* *Usage*. BUilding blocks of semiconductor electronic devices, e.g. diodes, transistors, etc.
 
 ## Discussion
 **Why dielectric is used in capactiors**. Dielectric material between the two plates developed an electric field opposed to the electric field of the power source, decreasing the voltage across the capactior
@@ -233,6 +438,8 @@ $\to$ Capacitance is increased
     * https://www.reddit.com/r/AskPhysics/comments/lcccye/why_is_the_current_before_and_after_a_resistor/
     * https://en.wikipedia.org/wiki/Kirchhoff%27s_circuit_laws
 
+**What is capacitance and inductance in resistors**
+
 **What if the electric circuit does not have return path to the ground**.
 
 **Why electrons cannot flow in an open circuit**.
@@ -240,3 +447,5 @@ $\to$ Capacitance is increased
 **What is the definition of "voltage" inside an electric circuit**.
 
 **Why voltage and electric current in serial and parallel circuits have their form**.
+
+**What is AC and DC and how they are generated**
