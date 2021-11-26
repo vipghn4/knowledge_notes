@@ -401,7 +401,15 @@ $\to$ This results in an excessive current flowing through the circuit
     * *References*. 
         * https://en.wikipedia.org/wiki/Diffusion_current
         * https://en.wikipedia.org/wiki/Fick%27s_laws_of_diffusion
-* *Forward bias*. Narrow the depletion region and lower the baterrir to carrier injection by applying a positive voltage to the P-side w.r.t the N-side
+* *Why depletion region does not occupy the whole semiconductor region*. The electrons already on the P side may "want" to continue diffusing deeper into the p-type material, further expanding the depletion region
+    
+    $\to$ However, this doesn't actually happen because semiconductor materials do not conduct minority carriers well at all
+    * *Explain*. 
+        * Once a hole gets filled by an electron, that electron falls from the conduction band down to the valence band and is effectively "annihilated" as far as charge conduction is concerned 
+        * Since the electric field is basically zero in the p-type region outside the depletion region (the negatively and positively charged sides of the junction balance each other out)
+            
+            $\to$ There is no strong force pushing electrons away from the junction. Of course, the reverse applies to holes on the n-type side
+* *Forward bias*. Narrow the depletion region and lower the baterrier to carrier injection by applying a positive voltage to the P-side w.r.t the N-side
     * *Explain*. Majority carriers get some energy from the bias field, enabling them to go into the region and neutralize opposite charges
         * The more bias the more neutralization (or screening of ions in the region) occurs
             
@@ -417,10 +425,9 @@ $\to$ This results in an excessive current flowing through the circuit
 
             $\to$ The net current flows from the N-side to the P-side
     * *Consequence*. The carrier density, i.e. mostly minority carriers, is small and only a very small reverse saturation current flows
-* *Determining the depletion layer width*. 
 
 **p-n junction**. A boundary or interface between p-type and n-type semiconductor materials, inside a single crystal of semiconductor, which is created by doping
-* *Usage*. BUilding blocks of semiconductor electronic devices, e.g. diodes, transistors, etc.
+* *Usage*. Building blocks of semiconductor electronic devices, e.g. diodes, transistors, etc.
 
 ## Discussion
 **Why dielectric is used in capactiors**. Dielectric material between the two plates developed an electric field opposed to the electric field of the power source, decreasing the voltage across the capactior
