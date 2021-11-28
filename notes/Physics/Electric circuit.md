@@ -261,8 +261,6 @@ ch    * *Consequence*. Capacitors are commonly used in electronic devices to mai
     * https://www.halbleiter.org/en/fundamentals/doping/
     * https://workforce.libretexts.org/Bookshelves/Electronics_Technology/Book%3A_Electric_Circuits_III_-_Semiconductors_(Kuphaldt)/02%3A_Solid-state_Device_Theory/2.05%3A_Electrons_and_%E2%80%9Choles%E2%80%99%E2%80%99
 
-**Forward bias and reverse bias**. 
-
 **Transistor**. A semiconductor device used to amplify or switch electrical signals and power
 
 $\to$ This is one of the basic building block of modern electronics
@@ -310,6 +308,54 @@ $\to$ This is one of the basic building block of modern electronics
 * *Transistor as an amplified*. Transistor-based amplifiers are designed so that a small change in input voltage changes the small current through the base of the basistor, whose current amplification combined with the properties of the circuit means that small swings in input voltage produce large changes in output voltage
 
 **How bipolar transistors work**.
+
+<div style="text-align:center">
+    <img src="https://i.imgur.com/Wx8gVm1.png">
+    <figcaption>NPN and PNP transistors</figcaption>
+</div>
+
+* *Structure*. A diode sandwich back-to-back, e.g. N-P-N or P-N-P
+* *NPN transistor*. Emitter is dramatically n-doped, base is very thin and lightly p-doped, and collector is moderately n-doped
+    * *OFF state*. Whenever we connect the power source to the transistor, i.e. across the emitter and the collector
+        
+        $\to$ One diode will always be reverse bias and block the electricity flow, i.e. the transistor is in the OFF state
+    * *ON state*. If we connect a second power supplier, across the emitter and the base, where the power source voltage is enough to overcome the potential barrier in the depletion region
+
+        $\to$ The N-P diode is forward bias and high number of electrons will be emitted from the N region
+        * A few electrons will jump through the holes and flow to the base, and the remaining electrons, among a very large amount of electrons will be attracted by the positive terminal of the first power source and flow towards that terminal
+        * The P region is very thin, ensuring that no remaining electrons flow to the positive terminal of the second power source
+    * *Consequence*. A small base current is amplified to a high collector current
+    * *Current gain*. $\beta = I_C / I_B$, i.e. the collector current divided by the base current
+
+**How MOSFET transitors work**.
+
+<div style="text-align:center">
+    <img src="https://i.imgur.com/gANf2A8.png">
+    <figcaption>MOSFET structure</figcaption>
+</div>
+
+* *Structure*. Source and drain components act as emitter and collector, there are also gate and base components
+* *PN junction*. Depletion regions are form along the source-base border and drain-base border
+    * *OFF state*. Whenever we connect the power source to the transistor, i.e. across the source and the drain
+
+        $\to$ Electricity flow will be blocked, due to the expansion of depletion region in the drain component
+    * *ON state*. If we connect a second power source to the transistor, with the gate connected to the positive terminal, and the base connected to the negative terminal
+
+        $\to$ The electrons will leave the metal plate above the source and the drain, through the gate, and dispersed into the base
+        * The gate is the positively charged and the base is negatively charged, attracting free electrons in the P region to top, i.e. near the gate
+        * After the holes on the top are filled, the top is overcrowded with electrons
+
+            $\to$ Right below the top, there is a depletion region formed by the overcrowded electrons on the top and the holes right below them
+        * The electron-crowded region breaks the depletion region barrier between that electron-crowded region, the source, and the drain
+
+            $\to$ A channel for electron flow is created and, if we connect a power source across the source and the drain, the electrons will flow from the source to the drain
+    * *Voltage control and mode switching*. If the voltage across the gate and the base is low enough, the electron channel would not be created and the electron would not flow
+
+        $\to$ By controlling the gate voltage, we can switch the mode of the MOSFET
+    * *Scalability of MOSFET*. MOSFET has a scalable nature, i.e. millions of MOSFETs can be fabricated on a single wafer
+    * *Current waste*. Bipolar transistors waste a small current, i.e. flow through the base, while MOSFETs do not
+    * *Noisy current*. MOSFET only operates with one type of charge carriers, e.g. a hole or an electron, making it less noisy
+* *Consequence*. MOSFET is popular for digital electronics
 
 ### Other components
 **Analog-to-digital converter (ADC, A/D, or A-to-D)**. A system converting an analog signal into a digital signal, or convert an analog input voltage or current to a digital number representing the magnitude of the voltage or current
