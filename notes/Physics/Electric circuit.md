@@ -399,6 +399,24 @@ $\to$ This results in an excessive current flowing through the circuit
 **Electric circuit symbols**.
 * *Voltage symbol*. https://electronics.stackexchange.com/questions/162564/what-does-this-strange-symbol-refer-to
 
+**Fick's first law of diffusion**. Relate the diffuse flux to the gradient of concentration
+* *Postulation*. The flux goes from the regions of high concentration to regions of low concentration, with a magnitude proportional to the concentration gradient, i.e. spatial derivative
+* *Mass diffusity*. A proportionality constant between the molar flux due to molecular diffusion and the gradient in the concentration of the species, or the driving force for diffusion
+* *Other names*. Diffusity, or diffusion coefficient
+* *1D spatial version*.
+    * *Assumptions*.
+        * $J$ is the diffusion flux measuring the amount of substance flowing through a unit area, during a unit time interval
+            * *Dimension*. Amount of substance per unit area per unit time
+        * $D$ is the diffusion coefficient, or diffusity
+            * *Dimension*. Area per unit time
+        * $\phi$ is the concentration, for ideal mixtures
+            * *Dimension*. Amount of substance per unit volume
+        * $x$ is the position
+            * *Dimension*. Length
+    * *Conclusion*. $J = -D \frac{d\phi}{dx}$
+    * *$D$'s dependencies*. $D$ is proportional to the squared velocity of the diffusing particles, which depends on the temperature
+* *n-D spatial version*. $\mathbf{J} = -D\nabla \phi$
+
 **Depletion region**. An insulating region within a conductive, doped semiconductor material, where mobile charge carries have been diffused away, or have been forced away by an electric field
 * *Other names*. Depletion region, depletion layer, depletion zone, junction region, space charge region, or space charge layer
 
@@ -424,7 +442,7 @@ $\to$ This results in an excessive current flowing through the circuit
     * *Conclusion*. Charge transfer in semiconductor devices is from
         * The charge carrier drift by the electric field, and
         * The charge carrier diffusion due to the spatially varying carrier concentration
-* *Mathematical formulation of p-n junction formation*.
+* *Mathematical formulation of p-n junction formation*. Based on Fick's first law of diffusion
     * *Assumptions*.
         * $\sigma$ is the electrical conductivity, i.e. $\sigma = J / E$ is the reverse of resistivity
         * $D_e,D_h$ are diffusion constants for electrons and holes respectively
