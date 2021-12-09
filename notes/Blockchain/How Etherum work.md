@@ -9,6 +9,9 @@
     - [Accounts](#accounts)
     - [Account state](#account-state)
     - [World state](#world-state)
+  - [Gas and payment](#gas-and-payment)
+  - [Transaction and messages](#transaction-and-messages)
+  - [Blocks](#blocks)
 - [Appendix](#appendix)
   - [Concepts](#concepts)
   - [References](#references)
@@ -198,11 +201,201 @@ $\to$ The ability to store all this information efficiently in Merkle tries is i
     * The branch, i.e. all of the partner hashes going up along the path from the chunk to the root
 * *Producing a Merkle proof*. Anyone reading the proof can verify that the hashing for that branch is consistent all the way up the tree, and therefore that the given chunk is actually at that position in the tree
 
+## Gas and payment
+**Fees in Etherum**. Every computation occurring as a result of a transaction on the Etherum network incurs a fee, which is paid in a denomination of "gas"
+* *Gas*. The unit used to measure the feeds required for a particular computation
+
+    <div style="text-align:center">
+        <img src="https://i.imgur.com/0fmNzCO.png">
+        <figcaption>Gas limit and gas price</figcaption>
+    </div>
+
+    * *Gas price*. The amount of ETH we are willing to spend on every unit of gas, and is measured in "gwei"
+        * *Wei*. "Wei" is the smallest unit of ETH, i.e. $10^{18}$ Wei represents 1 ETH
+        * *gwei*. One gwei is $10^9$ Wei
+    * *Gas limit*. With every transaction, a sender sets a gas limit and gas price, whose product represents the maximum amount of Wei which the sender is willing to pay for executing a transaction
+    * *Maxium transaction fee*. If they have enough Ether in their account balance to cover this maximum, they’re good to go
+    * *Gas refund*. The sender is refunded for any unused gas at the end of the transaction, exchanged at the original rate
+
+        <div style="text-align:center">
+            <img src="https://i.imgur.com/GBQS6fA.png">
+            <figcaption>Gas charging</figcaption>
+        </div>
+
+    * *Insufficient gas*. In the case that the sender does not provide the necessary gas to execute the transaction, the transaction runs “out of gas” and is considered invalid
+
+        <div style="text-align:center">
+            <img src="https://i.imgur.com/kNM1FtH.png">
+            <figcaption>Gas flow for failed transactions</figcaption>
+        </div>
+
+        * *Consequences*. 
+            * The transaction processing aborts and any state changes that occurred are reversed, such that we end up back at the state of Ethereum prior to the transaction
+            * A record of the transaction failing gets recorded, showing what transaction was attempted and where it failed
+            * Since the machine already expended effort to run the calculations before running out of gas, logically, none of the gas is refunded to the sender
+        * *Cash flow for failed transactions*. All the money spent on gas by the sender is sent to the “beneficiary” address, which is typically the miner’s address
+            * *Explain*. Miners are expending the effort to run computations and validate transactions, miners receive the gas fee as a reward
+    * *Gas price value*. Typically, the higher the gas price the sender is willing to pay, the greater the value the miner derives from the transaction
+        
+        $\to$ The more likely miners will be to select it
+        * *Consequence*. Miners are free to choose which transactions they want to validate or ignore
+            
+            $\to$ In order to guide senders on what gas price to set, miners have the option of advertising the minimum gas price for which they will execute transactions
+
+**Storage fees**. The total fee for storage is proportional to the smallest multiple of 32 bytes used
+* *Storage fee refund*. Since increased storage increases the size of the Ethereum state database on all nodes
+
+    $\to$ There is an incentive to keep the amount of data stored small
+    * *Consequence*. If a transaction has a step that clears an entry in the storage, the fee for executing that operation of is waived, and a refund is given for freeing up storage space
+
+**Purposes of fees**. In Etherum, every single operation executed by the network is simultaneously effected by every full node
+* *Problem 1*. Computational steps on the Etherum VM are very expensive
+
+    $\to$ Ethereum smart contracts are best used for simple tasks, e.g. running simple business logic or verifying signatures and other cryptographic objects, rather than more complex uses, e.g. file storage, email, or machine learning, which can put a strain on the network
+    * *Consequence*. Imposing fees prevents users from overtaxing the network
+* *Problem 2*. Ethereum is a Turing complete language, which allows for loops and makes Ethereum susceptible to the halting problem
+    * *Halting problem*. A problem in which we cannot determine whether or not a program will run infinitely
+    * *Consequence*. If there were no fees, a malicious actor could easily try to disrupt the network by executing an infinite loop within a transaction, without any repercussions
+        
+        $\to$ Thus, fees protect the network from deliberate attacks
+
+## Transaction and messages
+**Transaction's role**. Ethereum is a transaction-based state machine, i.e. transactions occurring between different accounts are what move the global state of Ethereum from one state to the next
+* *Transaction*. A cryptographically signed piece of instruction that is generated by an externally owned account, serialized, and then submitted to the blockchain
+* *Types of transactions*. Message calls, and contract creations, i.e. transactions creating new Etherum contracts
+
+**Transaction structure**.
+
+<div style="text-align:center">
+    <img src="https://i.imgur.com/hCMfa55.png">
+    <figcaption>Transaction structure</figcaption>
+</div>
+
+* *Nonce*. A count of the number of transactions sent by the sender
+* *Gas price*. The number of Wei that the sender is willing to pay per unit of gas required to execute the transaction
+* *Gas limit*. The maximum amount of gas that the sender is willing to pay for executing this transaction
+    
+    $\to$ This amount is set and paid upfront, before any computation is done
+* *To*. The address of the recipient
+    
+    >**NOTE**. In a contract-creating transaction, the contract account address does not yet exist, and so an empty value is used
+
+* *Value*. The amount of Wei to be transferred from the sender to the recipient
+    
+    >**NOTE**. In a contract-creating transaction, this value serves as the starting balance within the newly created contract account
+
+* *v, r, s*. Used to generate the signature that identifies the sender of the transaction
+* *Init (only exists for contract-creating transactions)*. An EVM code fragment, which is used to initialize the new contract account
+    * *Execution*. init is run only once, and then is discarded
+    * *Return value*. When init is first run, it returns the body of the account code, which is the piece of code that is permanently associated with the contract account
+* *Data (optional field which only exists for message calls)*. The input data (i.e. parameters) of the message call
+    * *Examples*. If a smart contract serves as a domain registration service, a call to that contract might expect input fields such as the domain and IP address
+
+**Transaction and external owned accounts**. Both message calls and contract-creating transactions are always initiated by externally owned accounts and submitted to the blockchain
+
+$\to$ Transactions are what bridge the external world to the internal state of Ethereum
+
+**Transaction and contract**. Contracts existing within the global scope of Ethereum’s state can talk to other contracts within that same scope
+* *Contract communication method*. Via “messages” or “internal transactions” to other contracts
+    
+    $\to$ We can think of messages or internal transactions as being similar to transactions, with the major difference that they are not generated by externally owned accounts
+    * *Internal transaction generation*. Generated by contracts
+    * *Internal transaction*. Virtual objects which are not serialized and only exist in the Ethereum execution environment
+* *Contract code execution*. When one contract sends an internal transaction to another contract, the associated code that exists on the recipient contract account is executed
+
+    <div style="text-align:center">
+        <img src="https://i.imgur.com/uZhgqJa.png">
+        <figcaption>Contract code execution</figcaption>
+    </div>
+
+* *Gas limit and internal transaction*. Internal transactions or messages do not contain a gas limit
+    * *Explain*. Gas limit is determined by the external creator of the original transaction, i.e. some externally owned account
+    * *Consequence*. The gas limit that the externally owned account sets must be high enough to carry out the transaction, including any sub-executions that occur as a result of that transaction
+    * *Execution reversion*. In the chain of transactions and messages, a particular message execution runs out of gas
+        
+        $\to$ That message’s execution will revert, along with any subsequent messages triggered by the execution
+        
+        >**NOTE**. The parent execution does not need to revert
+
+## Blocks
+**Block in Etherum**. Consist of the block header, information about the transaction set included in the block, and a set of other block headers for the current block's ommers
+
+**Ommer (or uncle block)**.
+
+<div style="text-align:center">
+    <img src="https://i.imgur.com/1NAUokS.png">
+    <figcaption>Ommer blocks</figcaption>
+</div>
+
+* *Block time in Etherum*. Much lower, i.e. about 15 seconds, than those of other blockchains, e.g. like Bitcoin (10 minutes)
+    * *Pros*. Faster transaction processing
+    * *Cons*. More competing block solutions, i.e. orphaned blocks, are found by miners
+        * *Explain*. There are lots of miners validating the same block at roughly the same time, but only the earliest one is made into the main chain, wasting other valid blocks
+        * *Orphaned blocks*. Blocks which are not made into the main chain by miners
+* *Purpose of ommers*. Help reward miners for including the orphaned blocks
+    * *Miner rewarding*. The ommers that miners include must be “valid”, i.e. within the sixth generation or smaller of the present block 
+        
+        $\to$ After six children, stale orphaned blocks can no longer be referenced
+        * *Explain*. Including older transactions would complicate things
+    * *Ommer blocks' reward*. Smaller than a full block's reward, but there is still some incentive for miners to include these orphaned blocks and reap a reward
+
+**Block header**.
+* *Parent hash*. A hash of the parent block’s header, i.e. this is what makes the block set a “chain”
+* *Ommer hash*. A hash of the current block's list of ommers
+* *Beneficiary*. The account address, which receives the fees for mining this block
+* *State root*. The hash of the root node of the state trie
+* *Transaction root*. The hash of the root node of the transaction trie
+* *Receipt root*. The hash of the root node of the receipt trie
+* *Logs bloom*. A bloom filter, i.e. a data structure, consisting of log information
+* *Difficulty*. The difficulty level of the block
+* *Number*. The count of current block, with genesis block numbered 0
+* *Gas limit*. The gas limit per block
+* *Gas used*. The some of total gas used by transactions in this block
+* *Timestamp*. The Unix timestamp of this block's inception
+* *Extra data*. Extra data related to this block
+* *Mix hash*. A hash that, when combined with the nonce, proves that the block has carried out enough computation
+* *Nonce*. A hash that, when combined when mix hash, proves that the block has carried out enough computation
+
+**Logs**. Etherum allows for logs to make it possible to track various transactions and messages
+* *Contract logging*. A contract can explicitly generate a log by defining events it wants to log
+* *Log entry structure*. Consist of
+    * The logger's account address
+    * A series of topics representing various events carried out by the transaction
+    * Any data associated with these events
+* *Bloom filter*. Logs are stored in a bloom filter, which stores the endless log data in an efficient manner
+
+**Transaction receipt**. Logs stored in the header come from the log information contained in the transaction receipt
+* *Explain*. As we receive a receipt when we buy something at a store, Ethereum generates a receipt for every transaction
+    
+    $\to$ Like we expect, each receipt contains certain information about the transaction
+* *Receipt structure*.
+    * The block number
+    * Block hash
+    * Transaction hash
+    * Gas used by the current transaction
+    * Cummulative gas used in the current block, after the current transaction has executed
+    * Logs created when executing the current transaction
+    * Other information
+
+**Block difficulty**. Used to enforce consistency in the time it takes to validate blocks
+* *Genesis block's difficulty*. 131,072
+* *Difficulties of subsequent blocks*. There is a special formula is used to calculate the difficulty of every block thereafter
+    * *Difficulty increment*. If a certain block is validated more quickly than the previous block, the Ethereum protocol increases that block’s difficulty
+* *Difficulty and nonce*. $n\leq \frac{2^{256}}{H_d}$ where $H_d$ is the difficulty
+
+    $\to$ The difficulty of a block affects its nonce, which is a hash calculated when mining a block, using the proof-of-work algorithm
+* *Finding a nonce which meets a difficulty threshold*. Use the proof-of-work algorithm to enumerate all of the possibilities
+    
+    $\to$ The expected time to find a solution is proportional to the difficulty
+    * *Explain*. The higher the difficulty, the harder it becomes to find the nonce, and so the harder it is to validate the block, which in turn increases the time it takes to validate a new block
+    * *Consequence*. By adjusting the difficulty of a block, the protocol can adjust how long it takes to validate a block
+* *Ensuring constant block validation time*. If, on the other hand, validation time is getting slower, the protocol decreases the difficulty
+    
+    $\to$ The validation time self-adjusts to maintain a constant rate, i.e. on average, one block every 15 seconds
+    
 # Appendix
 ## Concepts
 **Hasing algorithm used by Etherum**. KECCAK-256
-
-**Validating a block in blockchain**.
 
 **EVM code in contract accounts**. EVM code, i.e. as hashed into `codeHash` field of account's state, gets executed if the account gets a message call
 * *Immutability*. It cannot be changed unlike the other account fields
@@ -243,11 +436,8 @@ $\to$ The ability to store all this information efficiently in Merkle tries is i
         * If the destination of the transaction is another EOA, then the transaction may transfer some ETH but otherwise does nothing
         * If the destination is a contract, then the contract in turn activates, and automatically runs its code
 
-**How Merkle trie for state, transactions, and receipts are formed in Ethereum**.
-
-**What is inside a block's body within a blockchain**.
-
-**How to produce a Merkle proof**.
+**Block time**. The time required to create the next block in a chain
+* *Explain*. The time it takes for a blockchain miner to find a solution to the hash, i.e. the random series of characters associated with the block
 
 ## References
 * https://ethereum.org/en/developers/docs/accounts/
