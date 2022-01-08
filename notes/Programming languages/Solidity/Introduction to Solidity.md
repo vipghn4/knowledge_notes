@@ -70,6 +70,14 @@ $\to$ All variables and functions belong to a contract
     }
     ```
 
+* *Multi-inheritance*.
+
+    ```js
+    contract SatoshiNakamoto is NickSzabo, HalFinney {
+        // Omg, the secrets of the universe revealed!
+    }
+    ```
+
 ### Data types
 **Basic data types**.
 * *Boolean*. `bool`
@@ -450,6 +458,9 @@ $\to$ The app front-end can be "listening" for certain events and take action wh
     * *Consequence*. There will always be a `msg.sender`
 * *Purpose*. Using `msg.sender` gives you the security of the Ethereum blockchain
     * *Explain*. The only way someone can modify someone else's data would be to steal the private key associated with their Ethereum address
+
+**`msg.value`**. Return how much Ether was sent to the contract
+* *Built-in unit*. `ether`
 
 **`now`**. Return the current UNIX timestamp of the latest block
 * *UNIX time representation problem*. Unix time is traditionally stored in a 32-bit number, leading to the "Year 2038" problem

@@ -5,8 +5,11 @@
   - [Immutability of contracts](#immutability-of-contracts)
   - [Ownable contracts](#ownable-contracts)
   - [Function modifier](#function-modifier)
+    - [Payable modifiers](#payable-modifiers)
   - [Struct packing to save gas](#struct-packing-to-save-gas)
   - [Storage is expensive](#storage-is-expensive)
+  - [Random numbers](#random-numbers)
+  - [Token](#token)
 <!-- /TOC -->
 
 # Advanced Solidity
@@ -156,6 +159,77 @@ function driveCar(uint _userId) public olderThan(16, _userId) {
 }
 ```
 
+**Function modifiers summary**. 
+* *Common function modifiers*. `private`, `internal`, `external`, `public`, `view`, `pure`, `onlyOwner`, etc.
+* *Function modifiers stacking*.
+
+    ```js
+    function test() external view onlyOwner anotherModifier { /* ... */ }
+    ```
+
+### Payable modifiers
+**`payable` functions**. Special type of function which can receive Ether
+* *Explain*. In Ethereum, where both the money (Ether), the data (transaction payload), and the contract code itself all live on Ethereum
+    
+    $\to$ It is possible for you to call a function and pay money to the contract at the same time
+* *Consequence*. This allows for some really interesting logic, e.g. requiring a certain payment to the contract to execute a function
+
+>**NOTE**. If a function is not marked payable and you try to send Ether to it as above, the function will reject your transaction
+
+**Example for online store**.
+* *`OnlineStore` contract*.
+
+    ```js
+    contract OnlineStore {
+        function buySomething() external payable {
+            // Check to make sure 0.001 ether was sent to the function call:
+            require(msg.value == 0.001 ether);
+            // If so, some logic to transfer the digital item to the caller of the function:
+            transferThing(msg.sender);
+        }
+    }
+    ```
+
+* *Calling function from `web3.js`*.
+
+    ```js
+    // Assuming `OnlineStore` points to your contract on Ethereum:
+    OnlineStore.buySomething({from: web3.eth.defaultAccount, value: web3.utils.toWei(0.001)})
+    ```
+
+**Withdraws**. After you send Ether to a contract, it gets stored in the contract's Ethereum account
+
+$\to$ It will be trapped there, unless you add a function to withdraw the Ether from the contract
+* *Example*.
+
+    ```js
+    contract GetPaid is Ownable {
+        function withdraw() external onlyOwner {
+            address payable _owner = address(uint160(owner()));
+            _owner.transfer(address(this).balance);
+        }
+    }
+    ```
+
+* *`address payable`*. You cannot transfer Ether to an address unless that address is of type `address payable`
+    * *Example*. The `_owner` variable is of type `uint160`, i.e. we must explicitly cast it to `address payable`
+* *`transfer()`*. Once you cast the address from `uint160` to `address payable`
+    
+    $\to$ You can transfer Ether to that address using the `transfer` function
+    * *`transfer()`*. You can use `transfer` to send funds to any Ethereum address, e.g.
+
+        ```js
+        uint itemFee = 0.001 ether;
+        msg.sender.transfer(msg.value - itemFee);
+        ```
+
+        ```js
+        seller.transfer(msg.value)
+        ```
+
+* *`address(this).balance`*. Return the total balance stored on the contract
+    * *Example*. If 100 users had paid 1 Ether to our contract, `address(this).balance` would equal 100 Ether
+
 ## Struct packing to save gas
 **Struct packing**. 
 * *Gas charging for primitive types*. Normally there's no benefit to using these sub-types, since Solidity reserves `256` bits of storage regardless of the `uint` size
@@ -179,3 +253,70 @@ function driveCar(uint _userId) public olderThan(16, _userId) {
     * *Explain*. 
         * In most programming languages, looping over large data sets is expensive
         * In Solidity, this is way cheaper than using `storage` if it is in an `external view` function, since view functions don't cost your users any gas
+
+## Random numbers
+**Random number generation via `keccak256`**. The best source of randomness we have in Solidity is the keccak256 hash function
+
+```js
+// Generate a random number between 1 and 100:
+uint randNonce = 0;
+uint random = uint(keccak256(abi.encodePacked(now, msg.sender, randNonce))) % 100;
+randNonce++;
+uint random2 = uint(keccak256(abi.encodePacked(now, msg.sender, randNonce))) % 100;
+```
+
+* *Drawback*. 
+    * *Function invocation*. In Ethereum, when you call a function on a contract
+        1. You broadcast it to a node, or nodes on the network, as a transaction
+        2. The nodes on the network then collect a bunch of transactions, try to be the first to solve a computationally-intensive mathematical problem as a "Proof of Work"
+        3. The nodes then publish that group of transactions along with their Proof of Work (PoW) as a block to the rest of the network
+        4. Once a node has solved the PoW, the other nodes stop trying to solve the PoW
+        5. The other nodes verify that the other node's list of transactions are valid
+        6. The other nodes then accept the block and move on to trying to solve the next block
+    * *Consequence*. Our random number function is exploitable
+* *Motivation for attack*. 
+    * Since tens of thousands of Ethereum nodes on the network are competing to solve the next block, my odds of solving the next block are extremely low
+        
+        $\to$ It would take me a lot of time or computing resources to exploit this profitably
+        * *Consequence*. If the reward were high enough, it would be worth it for me to attack
+    * While this random number generation is not secure on Ethereum, in practice unless our random function has a lot of money on the line
+        
+        $\to$ The users of your game likely will not have enough resources to attack it
+
+**Safe random generation in Etherum**. Because the entire contents of the blockchain are visible to all participants, this is a hard problem
+* *Idea*. Use an oracle to access a random number function from outside of the Ethereum blockchain
+
+## Token
+**Token on Etherum**. A smart contract following some common rules
+
+$\to$ Namely, it implements a standard set of functions, which all other token contracts share, e.g.
+
+```js
+transferFrom(address _from, address _to, uint256 _tokenId)
+```
+
+```js
+balanceOf(address _owner)
+```
+
+* *Internal mapping of token*. Internally the smart contract usually has a mapping, `mapping(address => uint256)` balances keeping track of how much balance each address has
+    * *Consequence*. Basically a token is just a contract that keeps track of who owns how much of that token, and some functions so those users can transfer their tokens to other addresses
+
+**ERC20 tokens**. All ERC20 tokens share the same set of functions with the same names, they can all be interacted with in the same ways
+* *Homogeneous token*. If you build an application that is capable of interacting with one ERC20 token
+    
+    $\to$ It is also capable of interacting with any ERC20 token
+* *Consequence*. That way more tokens can easily be added to your app in the future without needing to be custom coded
+    
+    $\to$ You could simply plug in the new token contract address, and boom, your app has another token it can use
+* *Example*. When an exchange adds a new ERC20 token, it just needs to add another smart contract it talks to
+    * *Consequence*. The exchange only needs to implement this transfer logic once, then when it wants to add a new ERC20 token
+        
+        $\to$ it adds the new contract address to its database
+        * Users can tell that contract to send tokens to the exchange's wallet address
+        * The exchange can tell the contract to send the tokens back out to users when they request a withdraw
+
+**ERC721 tokens**. Another token standard, which is much better fit for crypto-collectibles, e.g. collection of items
+* *Idea*. ERC721 tokens are not interchangeable since each one is assumed to be unique, and are not divisible
+
+    $\to$ You can trade them only in whole units, and each one has a unique ID
