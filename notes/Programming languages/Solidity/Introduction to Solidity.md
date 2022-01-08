@@ -24,6 +24,9 @@
 
 **`for` loop**. The same as C/C++
 
+**Comment**. The same as C / C++
+* *Standard comment format in Solidity*. `natspec`.
+
 ## Contract
 **Contract**. Solidity's code is encapsulated in contracts, which is the fundamental building block of Ethereum applications
 
@@ -390,6 +393,21 @@ $\to$ `require` is useful for verifying certain conditions that must be true bef
     function sayHiToVitalik(string memory _name) public returns (string memory) {
         require(keccak256(abi.encodePacked(_name)) == keccak256(abi.encodePacked("Vitalik")));
         return "Hi!";
+    }
+    ```
+
+**Assertion**. `assert` is similar to `require`, where it will throw an error if false
+* *Difference from `require`*. `require` will refund the user the rest of their gas when a function fails, whereas assert will not
+    
+    $\to$ Most of the time you want to use require in your code
+* *Usage of `assert`*. Typically used when something has gone horribly wrong with the code, e.g. like a `uint` overflow
+* *Example*.
+
+    ```js
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        uint256 c = a + b;
+        assert(c >= a);
+        return c;
     }
     ```
 

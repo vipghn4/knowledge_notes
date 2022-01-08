@@ -10,6 +10,7 @@
   - [Storage is expensive](#storage-is-expensive)
   - [Random numbers](#random-numbers)
   - [Token](#token)
+  - [Preventing overflows](#preventing-overflows)
 <!-- /TOC -->
 
 # Advanced Solidity
@@ -320,3 +321,106 @@ balanceOf(address _owner)
 * *Idea*. ERC721 tokens are not interchangeable since each one is assumed to be unique, and are not divisible
 
     $\to$ You can trade them only in whole units, and each one has a unique ID
+
+**ERC721 transfer logic**.
+* *Option 1*. The sender of the token calls the transferFrom function
+
+    ```js
+    function transferFrom(address _from, address _to, uint256 _tokenId) external payable;
+    ```
+
+    * *Procedure*. The token's owner calls `transferFrom` with 
+        * His `address` as the _from `parameter`
+        * The `address` he wants to transfer to as the `_to` parameter
+        * The `_tokenId` of the token he wants to transfer
+* *Option 2*. The owner or the approved receiver of the token calls it
+
+    ```js
+    function approve(address _approved, uint256 _tokenId) external payable;
+
+    function transferFrom(address _from, address _to, uint256 _tokenId) external payable;
+    ```
+
+    1. Token's owner first calls `approve` with the `address` he wants to transfer to, and the `_tokenID`    
+        
+        $\to$ The contract then stores who is approved to take a token, usually in a `mapping (uint256 => address)`
+    2. When the owner or the approved address calls `transferFrom`
+    3. The contract checks if that `msg.sender` is the owner or is approved by the owner to take the token
+        
+        $\to$ If so it transfers the token to him
+
+**Extra features**. There are extra features we may want to add to our implementation
+* Some extra checks to make sure users don't accidentally transfer their zombies to address `0`, "burning" a token
+    
+    $\to$ Basically it is sent to an address that no one has the private key of, essentially making it unrecoverable
+* Put some basic auction logic in the DApp itself
+
+## Preventing overflows
+**Contract security enhancement - Overflows and underflows**. A major security feature you should be aware of when writing smart contracts
+* *Overflow*. When the number value exceeds the maximum value in the representation range of its data type
+* *Underflow*. When the number value is lower than the minimum value in the representation range of its data type
+* *Effects of overflow and underflow*. Cause unexpected behavior in DApp
+
+**`SafeMath`**. A library created by OpenZeppelin to prevent these issues by default
+* *Library*. A special type of contract in Solidity
+    * *Usage*. Attach functions to native data types
+    * *Example*.
+        
+        ```js
+        using SafeMath for uint256;
+
+        uint256 a = 5;
+        uint256 b = a.add(3); // 5 + 3 = 8
+        uint256 c = a.mul(2); // 5 * 2 = 10
+        ```
+
+* *`SafeMath` library*. Have 4 functions, i.e. `add`, `sub`, `mul`, and `div`, which we can access from `uint256` as given above
+
+**Writing a library**.
+* *`library` keyword*. Libraries are similar to `contract`s but with a few differences
+    * *Example*. Libraries allow us to use the `using` keyword, which automatically tacks on all of the library's methods to another data type, e.g.
+
+        ```js
+        using SafeMath for uint;
+        // now we can use these methods on any uint
+        uint test = 2;
+        test = test.mul(3); // test now equals 6
+        test = test.add(5); // test now equals 11
+        ```
+
+        * *Explain*. The `mul` and `add` functions (below) require 2 arguments, but when we declare `using SafeMath for uint`
+            
+            $\to$ The uint we call the function on, i.e. `test`, is automatically passed in as the first argument
+* *Example*.
+
+    ```js
+    library SafeMath {
+
+        function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+            if (a == 0) {
+            return 0;
+            }
+            uint256 c = a * b;
+            assert(c / a == b);
+            return c;
+        }
+
+        function div(uint256 a, uint256 b) internal pure returns (uint256) {
+            // assert(b > 0); // Solidity automatically throws when dividing by 0
+            uint256 c = a / b;
+            // assert(a == b * c + a % b); // There is no case in which this doesn't hold
+            return c;
+        }
+
+        function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+            assert(b <= a);
+            return a - b;
+        }
+
+        function add(uint256 a, uint256 b) internal pure returns (uint256) {
+            uint256 c = a + b;
+            assert(c >= a);
+            return c;
+        }
+    }
+    ```
