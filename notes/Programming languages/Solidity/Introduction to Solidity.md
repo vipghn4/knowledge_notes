@@ -219,6 +219,31 @@ mapping (uint => string) userIdToName;
         }
         ```
 
+**Tuple**. Similar as Python
+* *Function return tuples*.
+
+    ```js
+    function latestRoundData() external view returns (
+      uint80 roundId,
+      int256 answer,
+      uint256 startedAt,
+      uint256 updatedAt,
+      uint80 answeredInRound
+    );
+    ```
+
+* *Assign variables to each return variable*.
+
+    ```js
+    (uint80 roundId, int answer, uint startedAt, uint updatedAt, uint80 answeredInRound) = priceFeed.latestRoundData();
+    ```
+
+* *Assign variables with ignorance*.
+
+    ```js
+    (,int price,,,) = priceFeed.latestRoundData();
+    ```
+
 ### Data location
 **Storage and Memory variables**. Think of storage and memory variables like your computer's hard disk vs RAM
 * *Storage variables*. Refer to variables stored permanently on the blockchain
@@ -489,12 +514,24 @@ $\to$ The app front-end can be "listening" for certain events and take action wh
 
 ## Import files and packages
 **`import`**. When you have multiple files and you want to import one file into another, Solidity uses the `import` keyword
+* *Import local files*.
 
-```js
-import "./someothercontract.sol";
+    ```js
+    import "./someothercontract.sol";
 
-contract newContract is SomeOtherContract {}
-```
+    contract newContract is SomeOtherContract {}
+    ```
+
+* *Import remote files*. The below code import files from Github or NPM packages
+
+    ```js
+    // Start here
+    import "@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
+
+    contract PriceConsumerV3 {
+
+    }
+    ```
 
 ## Interacting with other contracts
 **Interface**. For our contract to talk to another contract on the blockchain that we don't own, first we need to define an `interface`
@@ -544,6 +581,12 @@ contract newContract is SomeOtherContract {}
     * Only declares the functions we want to interact with, without mentioning any other functions or state variables
     * Do not define the function bodies
 * *Interface exposure*. By including this interface in our dapp's code our contract knows what the other contract's functions look like, how to call them, and what sort of response to expect
+
+**Interface address**.
+* *Option 1*. Use the on-chain [Feeds Registry](https://docs.chain.link/docs/feed-registry/) which is an on-chain contract that keeps track of where all these feeds are
+* *Option 2*. Choose a contract address of our choosing by browsing all the [contract addresses](https://docs.chain.link/docs/reference-contracts/)
+
+>**NOTE**. Each network will have a different address for each piece of data you want
 
 # Appendix
 ## Concepts

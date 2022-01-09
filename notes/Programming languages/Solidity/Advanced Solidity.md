@@ -287,6 +287,21 @@ uint random2 = uint(keccak256(abi.encodePacked(now, msg.sender, randNonce))) % 1
 **Safe random generation in Etherum**. Because the entire contents of the blockchain are visible to all participants, this is a hard problem
 * *Idea*. Use an oracle to access a random number function from outside of the Ethereum blockchain
 
+**Chainlink VRF**. A way to get randomness from outside the blockchain, but in a proven cryptographic manner
+
+$\to$ This is important since we always want our logic to be truly incorruptible
+
+<div style="text-align:center">
+    <img src="https://cryptozombies.io/course/static/image/lesson-19/chainlink-vrf.png">
+    <figcaption>Chainlink VRF</figcaption>
+</div>
+
+* *Alternative approach for getting randomness outside the blockchain*. Use an off-chain API call to a service returning a random number
+    * *Problem*. If that services goes down, is bribed, hacked, or otherwise
+        
+        $\to$ You could potentially be getting back a corrupt random number
+    * *Solution*. Chainlink VRF includes on-chain verification contracts that cryptographically prove that the random number the contract is getting is really random
+
 ## Token
 **Token on Etherum**. A smart contract following some common rules
 
