@@ -10,6 +10,8 @@
   - [Incentive](#incentive)
   - [Reclaiming the disk](#reclaiming-the-disk)
   - [Simplified payment verification](#simplified-payment-verification)
+  - [Combining and splitting value](#combining-and-splitting-value)
+  - [Privacy](#privacy)
 - [Appendix](#appendix)
   - [Concepts](#concepts)
   - [Discussion](#discussion)
@@ -37,19 +39,6 @@ $\to$ This allows any two willing parties to transact directly with each other, 
 * *Requirements for security*. Honest nodes collectively control more CPU power than any cooperating group of attacker nodes
 
 ## Transaction
-**Transaction (tx)**. A transfer of bitcoin value from one or more inputs to one or more outputs
-* *Number of I/O*. A bitcoin transaction can have many inputs and many outputs
-    * *Explain*. Bitcoin has a transaction oriented logic, where amounts are transferred from previous transactions
-        * *Example 1*. Neglecting the fees, to be able to spend 1 bitcoin
-            * When the wallet has 2 previous tx with amounts of 0.5 BTC
-                
-                $\to$ A new tx is created with two inputs
-            * Same logic would apply, if 4 previous tx existed, each @0.25 BTC
-                
-                $\to$ A tx with 4 inputs would be created
-        * *Example 2*. For the outputs, we can create tx with one or more outputs
-            * *Explain*. Faucets pay to many outputs, instead of creating single transactions, to save fee
-
 **Electronic coin**. A chain of digital signatures
 
 <div style="text-align:center">
@@ -91,7 +80,6 @@ $\to$ Any one can generate unique bitcoin addresses, since they can generate the
     
     $\to$ He then concurrently buys another $10 shirt with the same $10 already paid to the cashier
 * *Root of problem*. Someone could add two transactions that consume from the same output
-    * *Intuition*. The blockchain is branching into two concurrent chain
 * *Centralized solution*. Have a trusted central authority, or mint, checking every transaction for double spending
     * *Idea*. After each transaction, the coin must be returned to the mint to issue a new coin
 
@@ -265,6 +253,39 @@ $\to$ This is the reward to the miner for doing its PoW
     * The interior hashes do not need to be stored
 
 ## Simplified payment verification
+**Verifying payments without running a full network node**. A user only needs to keep a copy of the block headers of the longest PoW chain
+* *Querying for block headers*. The user can get by querying network nodes until 
+    * He is convinced he has the longest chain
+    * He obtain the Merkle branch linking the transaction to the block it is timestamped in
+* *Consequence*. The user cannot check the transaction by itself, but by linking it to a place in the chain
+
+    $\to$ The user can see that a network node has accepted it, and blocks added after it further confirm the network has accepted it
+* *Requirements*. The verification is reliable if honest nodes control the network
+
+**Vulnerability**. This simplified method can be fooled by an attacker's fabricated transactions for as long as the attacker can continue to overpower the network
+* *Solution*. Accept alerts from network nodes when they detect an invalid block, prompting the user's software to download the full block, and alert transactions to confirm the inconsistency
+
+>**NOTE**. Businesses that receive frequent payments will probably still want to run their own nodes for more independent security and quicker verification
+
+## Combining and splitting value
+**Problem**. Although it would be possible to handle coins individually
+
+$\to$ It would be unwieldy to make a separate transaction for every cent in a transfer
+* *Solution*. To allow value to be split and combined, transactions contain multiple inputs and outputs
+    * *Ordinary combination*. 
+        * *Inputs combination*. Normally there will be either 
+            * A single input from a larger previous transaction, or
+            * Multiple inputs combining smaller amount
+        * *Outputs combination*. At most two outputs, i.e. 
+            * One for the payment
+            * One returning the change, if any, back to the sender
+
+## Privacy
+**Privacy in traditional banking model**. Achieved by limiting access to information to the parties involved and the trusted third party
+
+**Privacy in Bitcoin**. Maintained by breaking the flow of information in another place, i.e. by keeping public keys anonymous
+* *Idea*. The public can see that someone is sending an amount to someone else, without information linking the transaction to anyone
+* *Enhanced privacy*. A new key pair should be used for each transaction to keep them from being linked to a common owner
 
 # Appendix
 ## Concepts
@@ -333,6 +354,9 @@ $\to$ This is the reward to the miner for doing its PoW
         * *Input*. \$20 bill
         * *Output*. \$1 newly created bill to cashier, and \$19 newly created bill to ourself
     * *Example 2*. https://www.blockchain.com/btc/tx/0a1c0b1ec0ac55a45b1555202daf2e08419648096f5bcc4267898d420dffef87
+* *Consequence*. Each UTXO can be consumed only once
+
+**Block height of a block**. Number of blocks preceding the block in the blockchain
 
 ## Discussion
 **Changing blockchain history**. Consider hacking a blockchain, if modify a middle block of the chain and all subsequent blocks
