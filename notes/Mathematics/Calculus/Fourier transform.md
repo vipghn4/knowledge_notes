@@ -138,7 +138,7 @@ $\hspace{6.5cm} = \hat{f}(\xi) \hat{g}(\xi)$
 	* Formal: $\hat{f}(\xi) = -\hat{f}(-\xi)$
 
 # Fourier transform formulas under different normalizations
-**General formula**: ${\cal{F}} f(s) = \frac{1}{A} \int_{-\infty}^\infty e^{i B s t} f(t) dt$
+**General formula**: ${\mathcal{F}} f(s) = \frac{1}{A} \int_{-\infty}^\infty e^{i B s t} f(t) dt$
 
 **Different forms of Fourier transforms**:
 * Form 1: $A = \sqrt{2 \pi}$ and $B = \pm 1$
@@ -146,9 +146,9 @@ $\hspace{6.5cm} = \hat{f}(\xi) \hat{g}(\xi)$
 * Form 3: $A = 1$ and $B = \pm 1$
 
 **Basic principles to live with Fourier transforms**:
-* ${\cal{F}} {\cal{F}} f$
-* $({\cal{F}} f)'$
-* ${\cal{F}}(f * g)$
+* ${\mathcal{F}} {\mathcal{F}} f$
+* $({\mathcal{F}} f)'$
+* ${\mathcal{F}}(f * g)$
 
 # Applications
 **Solve partial differential equation**: the most important use of the Fourier transform
