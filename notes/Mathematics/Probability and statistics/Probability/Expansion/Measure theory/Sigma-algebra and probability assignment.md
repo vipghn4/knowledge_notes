@@ -109,18 +109,6 @@
 
 * *Interpretation*. A measure on a set is assigning sizes to subsets of the set
 
-**Outer measure**. A measure which exhibits monotonicity
-* *Assumptions*. $X$ is a set with power set $\mathcal{P}(X)$
-* *Outer measure on $X$*. A mapping $\mu:\mathcal{P}(X)\to\mathbb{R}_{++}\cup\{\infty\}$ satisfying
-    * *Null empty set*. $\mu(\emptyset)=0$
-    * *Monotonicity*. 
-        
-        $$\forall A,B\in\mathcal{P}(X):A\subseteq B\implies\mu(A)\leq \mu(B)$$
-    
-    * *Countable subadditivity*. For all sequences $\{A_i\}_{i\in\mathbb{N}}\in\mathcal{P}(X)$
-
-        $$\mu(\bigcup_{i=1}^\infty A_i)\leq \sum_{i=1}^\infty \mu(A_i)$$
-
 **Measurability**. The sets in a $\sigma$-field ${\mathcal{A}}$ are measurable
 * *Measurable sets*. Members of ${\mathcal{A}}$
 * *Measurable space*. $(\Omega, {\mathcal{A}})$ is a measurable space
@@ -130,12 +118,26 @@
 * *Measurable map*. A random variable $X$ is a measurable map $X: \Omega \to \textbf{R}$
     * *Explain*. $\{\omega:X(\omega) \leq x\} \in {\mathcal{A}}$ $\forall x$
 
-**Counting measure**. The counting measure of a set is the cardinity of that set
+**Common types of measure**.
+* *Counting measure*. The counting measure of a set is the cardinity of that set
 
-$\to$ All sets are measurable w.r.t the counting measure
-* *Explain*. 
-    * The finite sets have as measure the number of elements
-    * The infinite sets have measure $\infty$
+    $\to$ All sets are measurable w.r.t the counting measure
+    * *Explain*. 
+        * The finite sets have as measure the number of elements
+        * The infinite sets have measure $\infty$
+* *Outer measure*. A measure which exhibits monotonicity
+    * *Assumptions*. $X$ is a set with power set $\mathcal{P}(X)$
+    * *Outer measure on $X$*. A mapping $\mu:\mathcal{P}(X)\to\mathbb{R}_{++}\cup\{\infty\}$ satisfying
+        * *Null empty set*. $\mu(\emptyset)=0$
+        * *Monotonicity*. 
+            
+            $$\forall A,B\in\mathcal{P}(X):A\subseteq B\implies\mu(A)\leq \mu(B)$$
+        
+        * *Countable subadditivity*. For all sequences $\{A_i\}_{i\in\mathbb{N}}\in\mathcal{P}(X)$
+
+            $$\mu(\bigcup_{i=1}^\infty A_i)\leq \sum_{i=1}^\infty \mu(A_i)$$
+* *Probability measure*. A measure $\mu$ on the measurable space $(S,\mathcal{S})$, where $\mu(S)=1$
+* *Finite measure*. A measure $\mu$ on the measurable space $(S,\mathcal{S})$, where $\mu(S)<\infty$
 
 ### Lebesgue measure
 **Lebesgue measure**. A standard way of assigning a measure to subsets of $n$-dimensional Euclidean space
