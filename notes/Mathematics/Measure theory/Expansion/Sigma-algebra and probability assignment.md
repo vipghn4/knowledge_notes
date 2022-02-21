@@ -2,8 +2,10 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [$\sigma$-algebra and probability assignment](#sigma-algebra-and-probability-assignment)
-  - [Algebra and $\sigma$-algebra](#algebra-and-sigma-algebra)
+  - [Abstract measure spaces](#abstract-measure-spaces)
+  - [Boolean algebra and $\sigma$-algebra](#boolean-algebra-and-sigma-algebra)
     - [$\sigma$-algebra](#sigma-algebra)
+    - [Generated $\sigma$-algebra](#generated-sigma-algebra)
     - [Borel $\sigma$-algebra](#borel-sigma-algebra)
   - [Measure theory](#measure-theory)
     - [Measure and measurability](#measure-and-measurability)
@@ -15,57 +17,77 @@
 <!-- /TOC -->
 
 # $\sigma$-algebra and probability assignment
-## Algebra and $\sigma$-algebra
+## Abstract measure spaces
+**Requirements for definition of measure and integration on a general space $X$**.
+* The set $X$ itself
+* A collection $\mathcal{B}$ of subsets of $X$, which one is allowed to measure
+
+    $\to$ $\mathcal{B}$ must obey a number of axioms, which make it a $\sigma$-algebra
+* The measure $\mu(E)\in[0,\infty)$ one assigns to each measurable set $E\in\mathcal{B}$
+    
+    $\to$ $\mu$ must obey a number of axioms, i.e. most notably, a countable additivity axiom, to obtain a measure and integration theory comparable to Lebesgue theory on Euclidean spaces
+
+**Measure space**. $(X,\mathcal{B}, \mu)$
+
+$\to$ This has much the same role as vector spaces in abstract linear algebra
+
+## Boolean algebra and $\sigma$-algebra
 ### $\sigma$-algebra
-**Semi-ring of sets**. A collection of sets $F is a semiring if
-* $\emptyset \in F$
-* If $A,B\in F$ then $A\cap B\in F$, i.e. closed under intersection
-* If $A,B\in F$ then there exists a collection of sets $C_1,\dots,C_n\in F$ so that
-
-    $$A/B = \sum_{i=1}^n C_i$$
-
-**Algebra of sets**. A subset of semi-ring
-* *Algebra of sets*. A collection of sets $F$ is an algebra if
+**Boolean algebra of sets**. A subset of semi-ring
+* *Boolean algebra of sets*. A collection of sets $F$ is an algebra if
     * $\emptyset \in F$
     * If $A\in F$ then $A^C\in F$, i.e. closed under complementation
     * If $A,B\in F$ then $A\cup B\in F$, i.e. closed under pairwise
+* *Interpretation*. Boolean algebra of a set is closed under two basic Boolean operations, i.e. complement (NOT) and finite union (OR)
 
-**$\sigma$-algebra (or $\sigma$-field)**.
+    $\to$ Using the law of Boolean algebra, a Boolean algebra is also closed under other Boolean algebra operations, e.g. intersection (AND), set difference, and symmetric difference (XOR)
+
+**$\sigma$-algebra (or $\sigma$-field)**. A stronger variant of Boolean algebra
 * *Definition*. A class $\mathcal{A}$ satisfying
     * $\emptyset \in {\mathcal{A}}$
     * If $A_1, A_2, ... \in {\mathcal{A}}$ then $\bigcup_i A_i \in {\mathcal{A}}$
     * $A \in {\mathcal{A}}$ implies $A^c \in {\mathcal{A}}$
-* *Motivation*.
-    * *"$\sigma$"*. Indicate that the considered system of sets is closed with respect to the formation of denumerable unions
+* *Terminology*.
+    * *"$\sigma$"*. Indicate that the considered system of sets is closed under countable union
         * *Explain*. $\sigma$ [=Greek "s"] comes from the German words Summe, whose English translation is sum
     * *"Algebra"*. Closure under set operations
+* *Motivations*.
+    * *From Boolean algebra*. To obtain a measure and integration theory, which can cope well with limits
+
+        $\to$ The finite union axiom of a Boolean algebra is insufficient
     * *From measure theory*. $\sigma$-algebra are closed under operations which one would expect for measurable sets
         * The complement of a measurable set is a measurable set
         * The countable union of measurable sets is a measurable set
-* *Properties*.
-    * $\Omega \in {\mathcal{F}}$
-    * $A_1, A_2 \in {\mathcal{A}}$ implies $A_1 \cap A_2 \in {\mathcal{A}}$
-        * *Explain*. $A_1 \cap A_2 =  [A_1^c \cup A_2^c]^c$
-* *Applications*. The collections of subsets, for which a given measure is defined, is necessarily a $\sigma$-algebra
-* *Relationship to algebra*. 
-    * $\sigma$-algebra is a special case of algebra, which must be closed under countably infinite unions, rather than pairwise unions
-        * *Explain*. Closure under pairwise union does not necessarily imply closure under countable union
-    * Hence, we can treat algebra as surely being closure under finite union, and $\sigma$-algebra takes a further step by being closure under countable union
+* *Usage**. The collections of subsets, for which a given measure is defined, is necessarily a $\sigma$-algebra
 
-        $\to$ $\sigma$-algebra is required when dealing with more complicated systems, when closure under countable union is required
-    * We sticks with countable since it is very expressive and easy to deal with
-* *References*.
-    * https://www.quora.com/Why-do-we-need-sigma-algebra-to-define-measure
+**Relationship to Boolean algebra**. 
+* $\sigma$-algebra is a special case of algebra, which must be closed under countably infinite unions, rather than pairwise unions
+    * *Explain*. Closure under pairwise union does not necessarily imply closure under countable union
+* Hence, we can treat algebra as surely being closure under finite union, and $\sigma$-algebra takes a further step by being closure under countable union
 
-### Borel $\sigma$-algebra
+    $\to$ $\sigma$-algebra is required when dealing with more complicated systems, when closure under countable union is required
+* We sticks with countable since it is very expressive and easy to deal with
+
+**References**.
+* https://www.quora.com/Why-do-we-need-sigma-algebra-to-define-measure
+* http://www.stat.rice.edu/~dobelman/courses/texts/qualify/Measure.Theory.Tao.pdf
+
+### Generated $\sigma$-algebra
 **Intersection of $\sigma$-algebras**.
 * *Assumptions*.
     * $X$ is a set
-    * $A_1,A_2$ are two $\sigma$-algebras
-* *Conclusion*. $A = A_1\cap A_2$ is a $\sigma$-algebra
+    * $I$ is an index set which is possibly infinite or uncountable
+    * $A_\alpha$ is a $\sigma$-algebra for all $\sigma\in I$
+* *Conclusion*. $A = \bigcap_{\alpha\in I}A_\alpha$ is a $\sigma$-algebra
 * *Proof*. We have $X\in A$ is obvious and $A$ is closed under complement
 
     $\to$ It suffices to prove that $A$ is closed under countable union
+    * Consider a sequence $\{S_n\}_{n\in\mathbb{N}}$ of subsets of $X$, where $S_n\in A$ for all $n\in\mathbb{N}$
+    * Due to the definition of $\sigma$-algebra, we have that
+
+        $$\forall \alpha\in I,\bigcup_{n\in\mathbb{N}} S_n\in A_\alpha$$
+    
+    * Hence, we have that $\bigcup_{n\in\mathbb{N}} S_n\in A$
 
 **$\sigma$-algebra generated by $F$**.
 * *Assumptions*. Let $F$ be an arbitrary family of subsets of $X$
@@ -74,6 +96,7 @@
     $\to$ This is the intersection of all $\sigma$-algebras containing $F$, and is denoted as $\sigma(F)$
 * *Sample space and event*. The collection of possible events $\Sigma$, given the sample space $\Omega$, is the $\sigma$-algebra generated by $\Omega$
 
+### Borel $\sigma$-algebra
 **Borel $\sigma$-algebra**. The smallest $\sigma$-algebra holding every open set, i.e. the $\sigma$-algebra generated by the open sets
 * *Generation of Borel $\sigma$-algebra*. The Borel $\sigma$-algebra on $\mathbb{R}$ is generated by any of the following collections of intervals
 
