@@ -11,6 +11,8 @@
   - [Random numbers](#random-numbers)
   - [Token](#token)
   - [Preventing overflows](#preventing-overflows)
+- [Appendix](#appendix)
+  - [Concepts](#concepts)
 <!-- /TOC -->
 
 # Advanced Solidity
@@ -439,3 +441,9 @@ balanceOf(address _owner)
         }
     }
     ```
+
+# Appendix
+## Concepts
+**Usage of constructor in Solidity**. https://www.geeksforgeeks.org/solidity-constructors/
+
+**Calling a contract in another contract**. https://www.zupzup.org/smart-contract-interaction/#:~:text=A%20deployed%20contract%20always%20resides,storage)%20of%20the%20calling%20contract.

@@ -81,6 +81,8 @@ $\to$ All variables and functions belong to a contract
     }
     ```
 
+* *Virtual functions*. A function that allows an inheriting contract to override its behavior will be marked at `virtual`
+
 ### Data types
 **Basic data types**.
 * *Boolean*. `bool`
@@ -511,6 +513,9 @@ $\to$ The app front-end can be "listening" for certain events and take action wh
     * *Consequence*. If we wanted our DApp to keep running 20 years from now, we could use a 64-bit number instead
         
         $\to$ Our users would have to spend more gas to use our DApp in the meantime
+
+**`block`**. Return the information about the current block as an object, i.e. refer to https://docs.soliditylang.org/en/latest/units-and-global-variables.html?highlight=block#block-and-transaction-properties
+* *`block.timestamp`*. Current block timestamp as seconds since UNIX epoch (or UNIX time)
 
 ## Import files and packages
 **`import`**. When you have multiple files and you want to import one file into another, Solidity uses the `import` keyword
