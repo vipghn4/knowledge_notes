@@ -11,6 +11,8 @@
   - [Random numbers](#random-numbers)
   - [Token](#token)
   - [Preventing overflows](#preventing-overflows)
+- [Appendix](#appendix)
+  - [Discussions](#discussions)
 <!-- /TOC -->
 
 # Advanced Solidity
@@ -439,3 +441,7 @@ balanceOf(address _owner)
         }
     }
     ```
+
+# Appendix
+## Discussions
+**Security considerations**.
