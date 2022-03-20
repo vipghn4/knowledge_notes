@@ -1,6 +1,7 @@
 <!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
 - [Table of Contents](#table-of-contents)
+- [- Discussions](#--discussions)
 - [Advanced Solidity](#advanced-solidity)
   - [Immutability of contracts](#immutability-of-contracts)
   - [Ownable contracts](#ownable-contracts)
@@ -12,7 +13,13 @@
   - [Token](#token)
   - [Preventing overflows](#preventing-overflows)
 - [Appendix](#appendix)
+  - [Concepts](#concepts)
   - [Discussions](#discussions)
+<<<<<<< HEAD
+  - [Discussions](#discussions)
+=======
+  - [Concepts](#concepts)
+>>>>>>> 37d62fbe2fb3f0ab2f3ba3e30046f11446a3304b
 <!-- /TOC -->
 
 # Advanced Solidity
@@ -443,5 +450,10 @@ balanceOf(address _owner)
     ```
 
 # Appendix
+## Concepts
+**Usage of constructor in Solidity**. https://www.geeksforgeeks.org/solidity-constructors/
+
+**Calling a contract in another contract**. https://www.zupzup.org/smart-contract-interaction/#:~:text=A%20deployed%20contract%20always%20resides,storage)%20of%20the%20calling%20contract.
+
 ## Discussions
 **Security considerations**.
