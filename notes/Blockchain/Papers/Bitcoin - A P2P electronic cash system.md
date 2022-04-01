@@ -147,7 +147,7 @@ $\to$ Any one can generate unique bitcoin addresses, since they can generate the
     $\to$ It would be costless for anyone to manipulate it and the system would be hackable by definition
     * *Explain*. Since the longest chain is considered to be the truth, to modify an existing block in the middle of the chain
 
-        $\to$ The hacker only have to modify that block, compute the hash, then repeat for subsequent blocks, and all the things happen in seconds 
+        $\to$ The hacker only have to modify that block, compute the hash, then repeat for subsequent blocks, and all the things happen in seconds
 * *Idea*. Increment a nonce in the block until a value is found, which gives the block's hash the required zero bits
     * *Consequence*. Once the CPU effort has been expended to make it satisfy the PoW, the block cannot be changed without redoing the work
 
