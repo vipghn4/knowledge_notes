@@ -149,11 +149,11 @@ $\to$ There are other measures of earnings power
 * Substitutes, i.e. companies compete for investment dollars with other asset classes on a global stage
 * Incidental transactions, i.e. purchases or sales of a stock that are motivated by something other than belief in the intrinsic value of the stock
     * *Examples*. Insider transactions, institution buying or shorting a stock to hedge some other investment, etc.
-* Demographics
-* Trends
-* Liquidity
-* News
-* Market sentiment
+        * Demographics
+        * Trends
+        * Liquidity
+        * News
+        * Market sentiment
 
 **Reference**. https://www.investopedia.com/articles/basics/04/100804.asp
 
@@ -211,3 +211,8 @@ $\to$ There are other measures of earnings power
 
 **Growth rates**. The percentage of change of a specific variable within a specific time period
 * *Growth rates for investor*. The compounded annualized rate of growth of a company's revenues, earnings, dividends, or even macro concepts, e.g. GDP and retails sales
+
+**Share turnover**. A measure of stock liquidity
+* *Formula*. Dividing the total number of shares traded during some period by the average number of shares outstanding for the same period
+    
+    $\to$ The higher the share turnover, the more liquid company shares are
