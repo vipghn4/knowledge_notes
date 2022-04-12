@@ -66,7 +66,7 @@ $\to$ The model has difficulty capturing detailed features in a single informati
     
     >**NOTE**. The 1D positional embedding is shared with the text embedding layer
 
-* *Segment embedding*. We attach all visual tokens to the visual segment
+* *Segment embedding*. We attach all visual tokens to the visual segment $[C]$
 * *Formulation*. The $i$-th visual embedding can be given as
 
     $$\mathbf{v}_i=\text{Proj}(\text{VisTokEmb}(I)_i) + \text{PosEmb1D}(i) + \text{SegEmb}(\text{[C]})$$
@@ -80,11 +80,11 @@ $\to$ The model has difficulty capturing detailed features in a single informati
     * *Assumption*.
         * The normalized bounding box of the $i$-th, where $0 \leq i < W H + L$, text/visual token is
 
-            $$\text{box}_i = (x_\min, x_\max, y_\min, y_\max, \text{width}, \text{height})$$
+            $$\text{box}_i = (x_{\min}, x_{\max}, y_{\min}, y_{\max}, \text{width}, \text{height})$$
 
     * *Layout embedding*. Concatenate six bounding box features to construct a token-level 2D positional embedding
 
-        $$\mathbf{l}_i = \text{Concat}(\text{PosEmb2Dx}(x_\min, x_\max, \text{width}), \text{PosEmb2Dy}(y_\min, y_\max, \text{height}))$$
+        $$\mathbf{l}_i = \text{Concat}(\text{PosEmb2Dx}(x_{\min}, x_{\max}, \text{width}), \text{PosEmb2Dy}(y_{\min}, y_{\max}, \text{height}))$$
 
 * *Visual tokens as evenly divided grids*. Since CNNs perform local transformation
     
@@ -104,7 +104,7 @@ $\to$ The model has difficulty capturing detailed features in a single informati
 
     $\to$ It then fuses spatial information by adding the layout embedding to get the $i$-th, where $0\leq i<WH+L$, first layer input
 
-    $$\mathbf{x}_i^{(0)}=X_i+l_i,\quad X=\{\mathbf{v}_0,\dots,\mathbf{v}_{WH-1},\mathbf{t}_0,\dots,\mathbf{t}_{L-1}\}$$
+    $$\mathbf{x}_i^{(0)}=X_i+\mathbf{l}_i,\quad X=\{\mathbf{v}_0,\dots,\mathbf{v}_{WH-1},\mathbf{t}_0,\dots,\mathbf{t}_{L-1}\}$$
 
 * *Encoder architecture*. A stack of multihead self-attention layers followed by a feed forward network
     * *Drawback*. The original selfattention mechanism can only implicitly capture the relationship between the input tokens with the absolute position hints
@@ -118,7 +118,7 @@ $\to$ The model has difficulty capturing detailed features in a single informati
 
             $$\alpha_{ij}=\frac{1}{\sqrt{d_\text{head}}} (\mathbf{x}_i\mathbf{W}^Q) (\mathbf{x}_j \mathbf{W}^K)^T$$
         
-        * *Inclusion o semantic relative position and spatial relative position*. Considering the large range of positions, these are modelled as bias terms to prevent adding too many parameters
+        * *Inclusion of semantic relative position and spatial relative position*. Considering the large range of positions, these are modelled as bias terms to prevent adding too many parameters
             * *Assumptions*.
                 * $\mathbf{b}^{(1D)},\mathbf{b}^{(2D_x)}, \mathbf{b}^{(2D_y)}$ are the learnable 1D and 2D relative position biases
 

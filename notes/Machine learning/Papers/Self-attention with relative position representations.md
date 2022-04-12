@@ -69,10 +69,10 @@ $$e_{ij}=\frac{x_i W^Q (x_j W^K + a^K_{ij})^T}{\sqrt{d_z}}$$
     * *Conclusion*. We consider $2k + 1$ unique edge labels
 * *Position representation*.
 
-    $$\begin{aglined}
+    $$\begin{aligned}
     a^K_{ij}&=w^K_{\text{clip}(j-i,k)}\\
     a^V_{ij}&=w^V_{\text{clip}(j-i,k)}\\
-    \text{clip}(x,k)=\max\{-k,\min\{k,x\}\}
+    \text{clip}(x,k)&=\max\{-k,\min\{k,x\}\}
     \end{aligned}$$
 
     where $w^K=(w^K_{-k},\dots,w_k^K)$ and $w^V=(w^V_{-k}, \dots, w^V_k)$ are learnable parameters with $w_i^K,w_i^V\in\mathbb{R}^{d_a}$
