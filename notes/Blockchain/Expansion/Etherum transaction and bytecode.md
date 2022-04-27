@@ -206,22 +206,43 @@ $\to$ This is essentially the constructor function of a contract
     ```
 
 ## Transaction execution
-**Transaction execution**. Executing a transaction and updating the network's state is essentially the same
-1. The sender creates a new transaction and broadcast it to the network, until it reaches the miner
-2. The miner verifies the transaction
-3. The miner includes the transaction in a new block
-    * *Explain*. Miners put the transaction into a candidate block, then race to solve the proof of work for that block
-        
-        $\to$ If they are the first miner to solve the PoW, then their block will be accepted as canonical by the rest of the network
-4. The miner executes the transactions of the new block
-    * *Explain*. They essentially already have, by checking the state transitions are valid and solving the PoW before anyone else
-5. The miner sends the block to the rest of the network, which verifies it and executes its transactions
-    * *Explain*. Once a miner solves the PoW for the block
-        1. They propagate it to the network
-        2. Everyone else then verifies the state transitions are valid, and the PoW for the block is indeed correct
-    * *Consequence*. In verifying that the transactions equate to valid state transitions
+**Transaction execution**. Every transaction is mined, i.e. included in a new block and propagated for the first time, once
+
+$\to$ However, they are executed and verified by every participant in the process of advancing the canonical EVM state
+
+>**NOTE**. This highlights one of the central mantras of blockchain, i.e. don’t trust, verify
+
+1. The sender writes and signs a transaction request with the private key of some account
+2. The sender broadcasts the transaction request to the network, from some node, until it reaches the miner
+3. Upon hearing about the new transaction request
     
-        $\to$ They have, in effect, executed the transactions
+    $\to$ Each node in the Ethereum network adds the request to their local mempool
+    * *Mempool*. List of all transaction requests the node has heard about, which have not yet been committed to the blockchain in a block
+4. At some point, a mining node aggregates several dozen or hundred transaction requests into a potential block
+    * *Transaction grouping objective*. Maximize the transaction fees the miner earn, while still staying under the block gas limit
+5. The mining node then
+    * Verifies the validity of each transaction request, i.e. 
+        * No one is trying to transfer ether out of an account they have not produced a signature for
+        * The request is not malformed, etc.
+    * Executes the code of the request, altering the state of their local copy of the EVM
+6. The miner awards the transaction fee for each such transaction request to their own account
+7. Once all transaction requests in the block have been verified and executed on the local EVM copy
+    
+    $\to$ The miner begins the process of producing the proof-of-work “certificate of legitimacy” for the potential block
+8. A miner will finish producing a certificate for a block which includes our specific transaction request
+    
+    $\toT he miner then broadcasts the completed block, which includes the certificate and a checksum of the claimed new EVM state
+9. Other nodes hear about the new block
+    1. They verify the certificate
+    2. They execute all transactions on the block themselves, including the transaction originally broadcasted by our user
+    3. They verify that the checksum of their new EVM state after the execution of all transactions matches the checksum of the state claimed by the miner’s block
+    4. They append this block to the tail of their blockchain, and accept the new EVM state as the canonical state
+10. Each node removes all transactions in the new block from their local mempool of unfulfilled transaction requests
+11. New nodes joining the network download all blocks in sequence, including the block containing our transaction of interest
+    1. They initialize a local EVM copy, starting as a blank-state EVM
+    2. They go through the process of 
+        * Executing every transaction in every block on top of their local EVM copy
+        * Verifying state checksums at each block along the way
 
 **Miners as full nodes**. In order to execute a transaction, the miner needs the blockchain state, including contract's code, and the invocation, i.e. transaction payload
 
