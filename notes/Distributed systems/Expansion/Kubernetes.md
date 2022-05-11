@@ -6,8 +6,10 @@
     - [Historical deployment strategies](#historical-deployment-strategies)
     - [Needs for Kubernetes](#needs-for-kubernetes)
   - [Kubernetes components](#kubernetes-components)
-  - [Kubernetes API](#kubernetes-api)
-  - [Kubernetes objects](#kubernetes-objects)
+    - [Node components](#node-components)
+    - [Add-ons](#add-ons)
+- [Appendix](#appendix)
+  - [Concepts](#concepts)
 <!-- /TOC -->
 
 # Kubernetes
@@ -69,17 +71,15 @@ $\to$ Containers are considered lightweight
 
 ### Needs for Kubernetes
 **Brief**. In a production environment, we need to manage the containers running the applications and ensure that there is no downtime
+* *Kubernetes*. A framework to run distributed systems resiliently
 
-**Kubernetes**. A framework to run distributed systems resiliently
-
-$\to$ It takes care of scaling and failover for your application, provides deployment patterns, etc. 
+    $\to$ It takes care of scaling and failover for your application, provides deployment patterns, etc. 
 
 **Provided features of Kubernetes**.
 * *Service discovery and load balancing*. Kubernetes can expose a container using the DNS name or using their own IP address
     
-    $\to$ If traffic to a container is high, Kubernetes is able to load balance and distribute the network traffic
-    * *Consequence*. The deployment is stable
-* *Storage orchestration Kubernetes*. Allow us to automatically mount a storage system of our choice, e.g. local storages, public cloud providers, etc.
+    $\to$ If traffic to a container is high, Kubernetes is able to load balance and distribute the network traffic, leading to stable deployment
+* *Storage orchestration of Kubernetes*. Allow us to automatically mount a storage system of our choice, e.g. local storages, public cloud providers, etc.
 * *Automated rollouts and rollbacks*. We can describe the desired state for our deployed containers using Kubernetes
     
     $\to$ Kubernetes can change the actual state to the desired state at a controlled rate
@@ -183,34 +183,68 @@ $\to$ This is the front end for the Kubernetes control plane
     * *Route controller*. For setting up routes in the underlying cloud infrastructure
     * *Service controller*. For creating, updating and deleting cloud provider load balancers
 
-## Kubernetes API
-**API server**. The core of Kubernetes' control plane
-* *Main functionality*. 
-    * Expose an HTTP API letting end users, different parts of our cluster, and external components communicate with one another
-    * Let us query and manipulate the state of API objects in Kubernetes, e.g. Pods, Namespaces, ConfigMaps, and Events
-* *Interacting with API server*.
-    * *Command-line interface*. Most operations can be performed through the `kubectl` command-line interface or other command-line tools, e.g. `kubeadm`
-        
-        $\to$ These command-line interfaces uses the API
-    * *Direct interface*. We can access the API directly using REST calls
+### Node components
+**Node components**. Run on every node, maintaining running pods and providing the Kubernetes runtime environment
 
-**Persistence**. Kubernetes stores the serialized state of objects by writing them into `etcd`
-
-## Kubernetes objects
-**Kubernetes objects**. Persistent entities in the Kubernetes system used to represent the cluster state
-* *Functionality*. They can describe
-    * What containerized applications are running, and on which nodes
-    * The resources available to those applications
-    * The policies around how those applications behave, e.g. restart policies, upgrades, and fault-tolerance
-* *Object as a "record of intent"*. Once we create the object
-
-    $\to$ Kubernetes system will constantly work to ensure that object exists
-* *Object creation*. By creating an object
+**kubelet**. An agent running on each node in the cluster to make sure that containers are running in a Pod
+* *Idea*. The kubelet takes a set of PodSpecs that are provided through various mechanisms
     
-    $\to$ We effectively telling the Kubernetes system what e want our cluster's workload to look like
-    * *Consequence*. Kubernetes object is the cluster's desired state
-* *Working with objects*. Use the Kubernetes API
+    $\to$ It then ensures that the containers described in those PodSpecs are running and healthy
+    
+    >**NOTE**. The kubelet does not manage containers which were not created by Kubernetes
 
-**Types of objects**.
-* *Basic objects*. Pods, Service, Volumes, Namespace, etc.
-* *High-level objects (controllers)*. Deployments, Replication controllers, Replica sets, Stateful sets, Jobs, etc.
+**kube-proxy**. A network proxy running on each node in the cluster, implementing part of the Kubernetes Service concept
+* *Idea*. kube-proxy maintains network rules on nodes, which allow network communication to the Pods from network sessions inside or outside of the cluster
+* *Implementation*. Use the OS packet filtering layer if there is one and it is available
+
+    $\to$ Otherwise, kube-proxy forwards the traffic itself.
+
+**Container runtime**. The software responsible for running containers
+* *Supported container runtime*. `containerd`, CRI-O, and any other implementation of the Kubernetes CRI (Container Runtime Interface)
+
+### Add-ons
+**Add-ons**. Use Kubernetes resources (DaemonSet, Deployment, etc) to implement cluster features
+* *Add-on namespaces*. Since these are providing cluster-level features
+    
+    $\to$ Namespaced resources for addons belong within the kube-system namespace
+
+**DNS**. While the other addons are not strictly required, all Kubernetes clusters should have cluster DNS, as many examples rely on it
+* *Cluster DNS*. A DNS server, in addition to the other DNS server(s) in our environment, which serves DNS records for Kubernetes services
+
+>**NOTE**. Containers started by Kubernetes automatically include this DNS server in their DNS searches
+
+**Web UI (Dashboard)**. A general purpose, web-based UI for Kubernetes clusters
+* *Purposes*. Allow users to manage and troubleshoot applications running in the cluster, as well as the cluster itself
+
+**Container resource monitoring**. Record generic time-series metrics about containers in a central database, and provides a UI for browsing that data
+
+**Cluster-level logging**. Responsible for saving container logs to a central log store with search/browsing interface
+
+# Appendix
+## Concepts
+**Key-value database (or key–value store)**. Store data as a collection of key-value pairs in which a key serves as a unique identifier
+
+<div style="text-align:center">
+    <img src="https://d1.awsstatic.com/product-marketing/DynamoDB/PartitionKey.8dd0530a7f6d66d101f31de30db515564f4cf28a.png">
+    <figcaption>Example of data stored as key-value pairs in DynamoDB</figcaption>
+</div>
+
+* *Key-value database*. Consist of
+    * A data storage paradigm designed for storing, retrieving, and managing associative arrays, and
+    * A dictionary or hash table
+* *Dictionaries and keys*. 
+    * *Dictionaries*. Contain a collection of objects, or records, which in turn have many different fields within them, each containing data
+    * *Keys*. The records are stored and retrieved using a key that uniquely identifies the record, and is used to find the data within the database
+* *Key-value database versus relational database*. Key–value databases in very different from relational databases
+    * *Relational database*. Predefine the data structure in the database as a series of tables containing fields with well defined data types
+        * *Pros*. Exposing the data types to the database program allows it to apply a number of optimizations
+    * *Key–value database*. Treat the data as a single opaque collection, which may have different fields for every record
+        * *Pros*. 
+            * This offers considerable flexibility and more closely follows modern concepts like OOP
+            * Since optional values are not represented by placeholders or input parameters, as in most RDBs
+                
+                $\to$ Key–value databases often use far less memory to store the same database
+        * *Cons*. Performance, a lack of standardization and other issues 
+* *Historial development*. 
+    * Key-value database' drawbacks limited them to niche uses for many years
+    * The rapid move to cloud computing after 2010 has led to a renaissance as part of the broader NoSQL movement
