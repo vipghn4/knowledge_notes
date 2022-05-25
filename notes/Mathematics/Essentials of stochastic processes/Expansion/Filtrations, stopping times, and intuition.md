@@ -54,7 +54,7 @@ $\to$ If $\omega\in A$, all $\omega'$ indistinguishable from $\omega$ at time $n
 ## Stopping times w.r.t natural filtration
 **Idea of stopping time**. Stopping time is a decision we can make based on the information we have available at the time
 
-$\to$ If $T(\omega)=n$ and $\omega'\sim_n\omega$, we should also have $T(\omega')=n$
+$\to$ If $T(\omega)=n$ and $\omega'\sim_n\omega$, we should also have $T(\omega')=n$, i.e. $T=n$ is observable at everytime $n$
 * *Explain*. At time $n$, we cannot distinguish between $\omega$ and $\omega'$
 
 **Stopping time**.
