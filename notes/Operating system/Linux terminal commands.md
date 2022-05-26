@@ -5,35 +5,37 @@ tags: Operating system
 
 <!-- TOC titleSize:1 tabSpaces:2 depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 skip:0 title:1 charForUnorderedList:* -->
 # Table of Contents
-* [Basic commands](#basic-commands)
-    * [Basic commands](#basic-commands)
-    * [Utilities](#utilities)
-    * [Hot keys](#hot-keys)
-      * [Terminal](#terminal)
-* [Permissions](#permissions)
-    * [Users and groups](#users-and-groups)
-      * [Introduction](#introduction)
-      * [User](#user)
-      * [Group](#group)
-    * [Change modes](#change-modes)
-      * [`chmod`](#chmod)
-        * [Syntax](#syntax)
-      * [`chown`](#chown)
-      * [`chgrp`](#chgrp)
-    * [Common practices](#common-practices)
-* [Resource limitations](#resource-limitations)
-* [Files and directories](#files-and-directories)
-    * [File system](#file-system)
-      * [inode](#inode)
-      * [`ln` command](#ln-command)
-* [Packages](#packages)
-    * [Package management](#package-management)
-      * [`dpkg`](#dpkg)
-      * [`apt` and `apt-get`](#apt-and-apt-get)
-    * [C/C++ Builder](#cc-builder)
-      * [C compilation process](#c-compilation-process)
-    * [`tmux`](#tmux)
-* [Root directory structure](#root-directory-structure)
+- [Table of Contents](#table-of-contents)
+- [Basic commands](#basic-commands)
+    - [Basic commands](#basic-commands-1)
+    - [Utilities](#utilities)
+    - [Hot keys](#hot-keys)
+      - [Terminal](#terminal)
+- [Permissions](#permissions)
+    - [Users and groups](#users-and-groups)
+      - [Introduction](#introduction)
+      - [User](#user)
+      - [Group](#group)
+    - [Change modes](#change-modes)
+      - [`chmod`](#chmod)
+        - [Syntax](#syntax)
+      - [`chown`](#chown)
+      - [`chgrp`](#chgrp)
+    - [Common practices](#common-practices)
+- [Resource limitations](#resource-limitations)
+- [Files and directories](#files-and-directories)
+    - [File system](#file-system)
+      - [inode](#inode)
+      - [`ln` command](#ln-command)
+      - [`chroot` command](#chroot-command)
+- [Packages](#packages)
+    - [Package management](#package-management)
+      - [`dpkg`](#dpkg)
+      - [`apt` and `apt-get`](#apt-and-apt-get)
+    - [C/C++ Builder](#cc-builder)
+      - [C compilation process](#c-compilation-process)
+    - [`tmux`](#tmux)
+- [Root directory structure](#root-directory-structure)
 <!-- /TOC -->
 
 # Basic commands
@@ -72,6 +74,14 @@ tags: Operating system
 
     ```bash
     $ ps
+    ```
+
+* *Display process tree*.
+
+    ```bash
+    $ pstree <pid>
+    # or
+    $ pstree <username>
     ```
 
 * *Instructions about other commands*.
@@ -526,6 +536,66 @@ VAR_NAME=value command_to_execute
     ```bash
     $ find / -inum inode_number
     ```
+
+#### `chroot` command
+
+**Description**. Change the apparent root directory for the current running process and its children
+
+$\to$ A program that is run in such a modified environment cannot name, hence normally cannot access, files outside the designated directory tree
+* *`chroot` jail*. The modified environment
+
+<div style="text-align:center">
+    <img src="https://media.geeksforgeeks.org/wp-content/uploads/chroot-command.jpg">
+    <figcaption>Jailed directory with chroot</figcaption>
+</div>
+
+* *Example*.
+
+    ```bash
+    sudo chroot $HOME/jail /bin/bash
+    ```
+
+**Usage**. A `chroot` environment can be used to create and host a separate virtualized copy of the software system
+
+$\to$ This can be useful for
+* *Testing and development*. A test environment can be set up in the `chroot` for software, which would otherwise be too risky to deploy on a production system
+* *Dependency control*. Software can be developed, built and tested in a `chroot` populated only with its expected dependencies
+    * *Benefits*. Prevent some kinds of linkage skew, which can result from building projects with different sets of program libraries installed
+* *Compatibility*. Legacy software or software using a different ABI must sometimes be run in a `chroot`
+    * *Explain*. Their supporting libraries or data files may otherwise clash in name or linkage with those of the host system
+* *Recovery*. Should a system be rendered unbootable
+    
+    $\to$ A `chroot` can be used to move back into the damaged environment after bootstrapping from an alternate root file system
+* *Privilege separation*. Programs are allowed to carry open file descriptors into the `chroot`
+    * *Benefits*.
+        * Simplify jail design by making it unnecessary to leave working files inside the `chroot` directory
+        * Simplify the common arrangement of running the potentially vulnerable parts of a privileged program in a sandbox, in order to pre-emptively contain a security breach
+    
+    >**NOTE**. `chroot` is not necessarily enough to contain a process with root privileges
+
+**Example**. To have a functional chroot environment in Linux
+
+$\to$ The kernel virtual file systems and configuration files also have to be mounted/copied from host to `chroot`
+
+```bash
+# Mount Kernel Virtual File Systems
+TARGETDIR="/mnt/chroot"
+mount -t proc proc $TARGETDIR/proc
+mount -t sysfs sysfs $TARGETDIR/sys
+mount -t devtmpfs devtmpfs $TARGETDIR/dev
+mount -t tmpfs tmpfs $TARGETDIR/dev/shm
+mount -t devpts devpts $TARGETDIR/dev/pts
+
+# Copy /etc/hosts
+/bin/cp -f /etc/hosts $TARGETDIR/etc/
+
+# Copy /etc/resolv.conf 
+/bin/cp -f /etc/resolv.conf $TARGETDIR/etc/resolv.conf
+
+# Link /etc/mtab
+chroot $TARGETDIR rm /etc/mtab 2> /dev/null 
+chroot $TARGETDIR ln -s /proc/mounts /etc/mtab
+```
 
 # Packages
 ### Package management
