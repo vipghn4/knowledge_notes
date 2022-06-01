@@ -49,7 +49,18 @@
 
 # Conditional random field (CRF)
 ## Introduction
-**Conditional random field**: a class of statistical modeling method used in for structured prediction in pattern recognition
+**Conditional random fields (CRFs)**. A class of statistical modeling methods often applied in pattern recognition and machine learning and used for structured prediction
+* *Advantages over traditional classifier models*. 
+    * A traditional classifier predicts a label for a single sample without considering neighbouring samples
+    * A CRF can take context into account
+* *Idea*. The predictions are modelled as a graphical model, which represents the presence of dependencies between the predictions
+    
+    >**NOTE**. What kind of graph is used depends on the application
+
+* *Examples*. 
+    * In natural language processing, linear chain CRFs are popular, for which each prediction is dependent only on its immediate neighbours
+        * *Reference*. https://pages.cs.wisc.edu/~jerryzhu/cs838/CRF.pdf
+    * In image processing, the graph typically connects locations to nearby and/or similar locations to enforce that they receive similar predictions
 
 ## Description
 **Conditional random field**:
@@ -63,6 +74,22 @@
 * Interpretation: a CRF is an undirected graphical model (i.e. Bayesian network) whose nodes can be divided into exactly two disjoint sets $\textbf{X}$ and $\textbf{Y}$
     * Observed variables: $\textbf{X}$
     * Output variables: $\textbf{Y}$
+
+**Inference**. Basically the same as for an MRF and the same arguments hold
+
+>**NOTE**. For general graphs, the problem of exact inference in CRFs is intractable
+
+* *Feasibility of CRF inference*. There exist special cases for which exact inference is feasible
+    * If the graph is a chain or a tree, message passing algorithms yield exact solutions
+        
+        $\to$ The algorithms are analogous to the forward-backward and Viterbi algorithm for the case of HMMs
+    * If the CRF only contains pair-wise potentials and the energy is submodular, combinatorial min cut/max flow algorithms yield exact solutions
+    * If exact inference is impossible, several algorithms can be used to obtain approximate solutions
+
+Loopy belief propagation
+Alpha expansion
+Mean field inference
+Linear programming relaxations
 
 **Parameter learning**: $\theta$ is learned by maximizing $P(Y_i|X_i; \theta)$ (i.e. maximum likelihood learning)
 
