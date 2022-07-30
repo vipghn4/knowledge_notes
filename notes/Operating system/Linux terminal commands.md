@@ -91,12 +91,6 @@ tags: Operating system
     * `whatis command`. Display a brief description of what is the functionality of specific built-in Linux command
 
 ### Utilities
-**Pipeline and redirect**.
-* *Pipeline*. Pass output to another program or utility
-    * *Example*. `thing1 > thing2`
-* *Redirect*. Pass output to either a file or stream
-    * *Example*. `thing1 | thing2`
-
 **`grep` (Globally search for REgular expression and Print out) command**. Search a file for a particular pattern of characters, then display all lines containing the searched pattern
 
 ```bash=
@@ -145,6 +139,33 @@ xargs [options] [command [initial-arguments]]
     ```
 
 **`curl`**. Transfer data from or to a server, using one of supported protocols
+
+**`exec`**. 
+* *Syntax*.
+
+    ```bash
+    exec [-cl] [-a name] [command [arguments]]
+    ```
+
+    * *`command`*. If specified, it replaces the shell. No new process is created
+    * *`arguments`*. The arguments to `command`
+    * *`-l` option*. The shell places a dash at the beginning of the zeroth argument passed to command
+    * *`-c` option*. Cause `command` to be executed with an empty environment
+    * *`-a` option*. The shell passes `name` as the zeroth argument to the executed command
+* *Execution failure*. If `command` cannot  be  executed  for  some  reason, a non-interactive shell exits, unless the `execfail` shell option is enabled
+    
+    $\to$ In case of `execfail` enabled, it returns failure
+* *`exec` without `command`*. If `command` is not specified, any redirections take effect in the current shell, and the return status is `0`
+    
+    >**NOTE**. If there is a redirection error, the return status is `1`
+
+**`set -o`**. Set an option for the current shell, e.g. `set -o noclobber`
+
+**`tee`**. Read `stdin` and writes it to both `stdout` and one or more files, effectively duplicating its input
+
+$\to$ It is primarily used in conjunction with pipes and filters
+
+**`seq l h`**. Print out integers from `l` to `h` inclusively
 
 ### Hot keys
 #### Terminal

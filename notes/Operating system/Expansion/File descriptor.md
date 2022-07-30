@@ -64,7 +64,7 @@ $\to$ This device driver is written to an API provided by the kernel
     | --- | --- | --- | --- |
     | Redirect to a file | `> filename` | Take all output from `stdout` and place it into `filename` | `ls > filename` |
     | Read from a file | `< filename` | Copy all data from the file to the standard input of the program | `echo < filename` |
-    | Pipe | `program1 \| program2` | Take everything from `stdout` of `program1`, and pass it to `stdin` of `program2` | `ls \| more` |
+    | Pipe | `program1 | program2` | Take everything from `stdout` of `program1`, and pass it to `stdin` of `program2` | `ls | more` |
 
 # Appendix
 ## Concepts
